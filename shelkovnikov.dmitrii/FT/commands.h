@@ -7,5 +7,6 @@ using text_dict = std::map< std::string, std::string >;
 namespace dimkashelk
 {
   void load(text_dict &dict, const std::string &filename);
+  void analyze(frequency_dict &dict, const std::string &filename);
 }
 #endif
