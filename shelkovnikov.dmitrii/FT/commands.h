@@ -9,5 +9,6 @@ namespace dimkashelk
   void load(text_dict &dict, const std::string &filename);
   void analyze(frequency_dict &dict, const std::string &filename);
   void exportToFile(frequency_dict &dict, const std::string &dictname, const std::string &filename);
+  void exportWithText(frequency_dict &dict, const std::string &dictname, const std::string &filename);
 }
 #endif
