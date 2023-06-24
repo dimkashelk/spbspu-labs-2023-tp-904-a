@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include "parser.h"
 namespace
 {
   char toLower(char c)
@@ -33,5 +34,10 @@ void dimkashelk::analyze(frequency_dict &dict, text_dict &text, c_str filename)
   {
     load(text, filename);
   }
-  
+  Parser parser(text[filename]);
+  auto &dict_text = dict[filename];
+  while (parser.hasNext())
+  {
+    ++dict_text[parser()];
+  }
 }
