@@ -12,5 +12,6 @@ namespace dimkashelk
   void exportWithText(frequency_dict &dict, const std::string &dictname, const std::string &filename);
   void printWord(frequency_dict &dict, const std::string &dictname, const std::string &word, std::ostream &out);
   void print(frequency_dict &dict, const std::string &filename);
+  void deleteWord(frequency_dict &dict, const std::string &dictname, const std::string &word);
 }
 #endif
