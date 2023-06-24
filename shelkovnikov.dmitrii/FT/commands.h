@@ -2,6 +2,7 @@
 #define FT_COMMANDS_H
 #include <map>
 #include <string>
+#include <ostream>
 using frequency_dict = std::map< std::string, std::map< std::string, size_t > >;
 using text_dict = std::map< std::string, std::string >;
 using c_str = const std::string &;
@@ -20,5 +21,6 @@ namespace dimkashelk
   void getComplement(frequency_dict &dict, c_str newdata, c_str dict1, c_str dict2);
   void getIntersect(frequency_dict &dict, c_str newdata, c_str dict1, c_str dict2);
   void getUnion(frequency_dict &dict, c_str newdata, c_str dict1, c_str dict2);
+  void help(std::ostream &out);
 }
 #endif
