@@ -15,5 +15,7 @@ namespace dimkashelk
   void deleteWord(frequency_dict &dict, const std::string &dictname, const std::string &word);
   void deleteDict(frequency_dict &dict, const std::string &filename);
   void remove(text_dict &dict, const std::string &filename);
+  void top(frequency_dict, const std::string &dictname, size_t count, std::ostream &out);
+
 }
 #endif
