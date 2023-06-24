@@ -5,7 +5,7 @@ class Parser
 {
 public:
   explicit Parser(const std::string &data);
-
+  std::string operator()();
 private:
   std::string data_;
 };
