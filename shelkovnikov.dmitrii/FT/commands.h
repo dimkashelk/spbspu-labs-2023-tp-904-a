@@ -18,5 +18,6 @@ namespace dimkashelk
   void remove(text_dict &dict, c_str filename);
   void top(frequency_dict, c_str dictname, size_t count, std::ostream &out);
   void complement(frequency_dict &dict, c_str newdata, c_str dict1, c_str dict2);
+  void intersect(frequency_dict &dict, c_str newdata, c_str dict1, c_str dict2);
 }
 #endif
