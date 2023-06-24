@@ -4,18 +4,19 @@
 #include <string>
 using frequency_dict = std::map< std::string, std::map< std::string, size_t > >;
 using text_dict = std::map< std::string, std::string >;
+using c_str = const std::string &;
 namespace dimkashelk
 {
-  void load(text_dict &dict, const std::string &filename);
-  void analyze(frequency_dict &dict, const std::string &filename);
-  void exportToFile(frequency_dict &dict, const std::string &dictname, const std::string &filename);
-  void exportWithText(frequency_dict &dict, const std::string &dictname, const std::string &filename);
-  void printWord(frequency_dict &dict, const std::string &dictname, const std::string &word, std::ostream &out);
-  void print(frequency_dict &dict, const std::string &filename);
-  void deleteWord(frequency_dict &dict, const std::string &dictname, const std::string &word);
-  void deleteDict(frequency_dict &dict, const std::string &filename);
-  void remove(text_dict &dict, const std::string &filename);
-  void top(frequency_dict, const std::string &dictname, size_t count, std::ostream &out);
-
+  void load(text_dict &dict, c_str filename);
+  void analyze(frequency_dict &dict, c_str filename);
+  void exportToFile(frequency_dict &dict, c_str dictname, c_str filename);
+  void exportWithText(frequency_dict &dict, c_str dictname, c_str filename);
+  void printWord(frequency_dict &dict, c_str dictname, c_str word, std::ostream &out);
+  void print(frequency_dict &dict, c_str filename);
+  void deleteWord(frequency_dict &dict, c_str dictname, c_str word);
+  void deleteDict(frequency_dict &dict, c_str filename);
+  void remove(text_dict &dict, c_str filename);
+  void top(frequency_dict, c_str dictname, size_t count, std::ostream &out);
+  void complement(frequency_dict &dict, c_str newdata, c_str dict1, c_str dict2);
 }
 #endif
