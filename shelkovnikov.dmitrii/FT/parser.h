@@ -8,5 +8,6 @@ public:
   std::string operator()();
 private:
   std::string data_;
+  std::string skipSpaceInBeginEnd(const std::string &str);
 };
 #endif
