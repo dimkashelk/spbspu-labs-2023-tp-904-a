@@ -38,6 +38,6 @@ void dimkashelk::analyze(frequency_dict &dict, text_dict &text, c_str filename)
   auto &dict_text = dict[filename];
   while (parser.hasNext())
   {
-    ++dict_text[parser()];
+    ++dict_text[toLowerString(parser())];
   }
 }
