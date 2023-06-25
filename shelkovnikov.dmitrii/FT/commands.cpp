@@ -74,14 +74,14 @@ void dimkashelk::analyze(all_data &dict, c_s filename)
     ++dict_text[toLowerString(parser())];
   }
 }
-void dimkashelk::exportToFile(frequency_dict &dict, c_s dictname, c_s filename)
+void dimkashelk::exportToFile(all_data &dict, c_s dictname, c_s filename)
 {
   std::ofstream out(filename);
   if (!out)
   {
     throw std::runtime_error("Can't open file");
   }
-  exportFreqDict(out, dict, dictname);
+  exportFreqDict(out, dict.first, dictname);
 }
 void dimkashelk::exportWithText(frequency_dict &dict, text_dict &dictText, c_s dictname, c_s filename)
 {
