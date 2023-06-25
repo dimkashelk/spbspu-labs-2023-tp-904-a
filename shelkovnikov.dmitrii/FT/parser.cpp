@@ -1,6 +1,6 @@
 #include "parser.h"
 Parser::Parser(const std::string &data):
-  data_(skipSpaceInTheBegin(data))
+  data_(skipSpaceInBeginEnd(data))
 {}
 std::string Parser::operator()()
 {
@@ -15,7 +15,7 @@ std::string Parser::operator()()
   {
     res = data_.substr(0, space);
   }
-  data_ = skipSpaceInTheBegin(data_);
+  data_ = skipSpaceInBeginEnd(data_);
   return res;
 }
 std::string Parser::skipSpaceInBeginEnd(const std::string &str)

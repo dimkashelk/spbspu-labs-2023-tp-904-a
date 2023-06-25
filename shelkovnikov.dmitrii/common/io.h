@@ -1,6 +1,7 @@
 #ifndef SPBSPU_LABS_2023_TP_904_A_IO_H
 #define SPBSPU_LABS_2023_TP_904_A_IO_H
 #include <complex>
+#include <map>
 #include "data_struct.h"
 namespace dimkashelk
 {
@@ -34,6 +35,16 @@ namespace dimkashelk
     char fill_;
     std::streamsize precision_;
     std::basic_ios< char >::fmtflags fmt_;
+  };
+  class MapPair
+  {
+  public:
+    MapPair(const std::pair< const std::string, size_t > &data):
+      data_(data)
+    {}
+    friend std::ostream &operator<<(std::ostream &out, const MapPair &pair);
+  private:
+    std::pair< const std::string, size_t > data_;
   };
   std::istream &operator>>(std::istream &in, complex_type &c);
   std::istream &operator>>(std::istream &in, rational_number &c);

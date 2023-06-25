@@ -2,7 +2,9 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <iterator>
 #include "parser.h"
+#include "io.h"
 namespace
 {
   char toLower(char c)
@@ -13,6 +15,7 @@ namespace
   {
     std::string newStr;
     std::transform(str.begin(), str.end(), newStr.begin(), toLower);
+    return newStr;
   }
 }
 void dimkashelk::load(text_dict &dict, c_str filename)
@@ -40,4 +43,15 @@ void dimkashelk::analyze(frequency_dict &dict, text_dict &text, c_str filename)
   {
     ++dict_text[toLowerString(parser())];
   }
+}
+void dimkashelk::exportToFile(frequency_dict &dict, c_str dictname, c_str filename)
+{
+  std::ofstream out(filename);
+  if (!out)
+  {
+    throw std::runtime_error("Can't open file");
+  }
+  using pairIter = std::ostream_iterator< MapPair >;
+  auto &data = dict.at(dictname);
+  std::copy(data.begin(), data.end(), pairIter(out, "\n"));
 }
