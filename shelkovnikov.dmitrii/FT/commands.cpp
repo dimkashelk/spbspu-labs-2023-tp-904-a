@@ -123,3 +123,7 @@ void dimkashelk::deleteWord(all_data &dict, c_s dictname, c_s word)
 {
   dict.first.at(dictname).erase(word);
 }
+void dimkashelk::deleteDict(all_data &dict, c_s filename)
+{
+  dict.first.erase(filename);
+}
