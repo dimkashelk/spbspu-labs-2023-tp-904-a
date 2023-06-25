@@ -40,11 +40,11 @@ namespace dimkashelk
   {
   public:
     MapPair(const std::pair< const std::string, size_t > &data):
-      data_(data)
+      data_{data.first, data.second}
     {}
     friend std::ostream &operator<<(std::ostream &out, const MapPair &pair);
   private:
-    std::pair< const std::string, size_t > data_;
+    std::pair< std::string, size_t > data_;
   };
   std::istream &operator>>(std::istream &in, complex_type &c);
   std::istream &operator>>(std::istream &in, rational_number &c);
