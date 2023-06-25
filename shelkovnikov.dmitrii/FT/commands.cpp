@@ -95,5 +95,5 @@ void dimkashelk::exportWithText(all_data &dict, c_s dictname, c_s filename)
 }
 void dimkashelk::printWord(frequency_dict &dict, c_s dictname, c_s word, std::ostream &out)
 {
-
+  out << dict.at(dictname).at(word);
 }
