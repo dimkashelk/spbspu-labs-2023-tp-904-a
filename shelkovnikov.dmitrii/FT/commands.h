@@ -17,7 +17,7 @@ namespace dimkashelk
   std::ostream &print(all_data &dict, c_s filename, std::ostream &out);
   void deleteWord(all_data &dict, c_s dictname, c_s word);
   void deleteDict(all_data &dict, c_s filename);
-  void remove(text_dict &dict, c_s filename);
+  void remove(all_data &dict, c_s filename);
   void getTop(frequency_dict, c_s dictname, size_t count, std::ostream &out);
   void getComplement(frequency_dict &dict, c_s newdata, c_s dict1, c_s dict2);
   void getIntersect(frequency_dict &dict, c_s newdata, c_s dict1, c_s dict2);

@@ -127,3 +127,7 @@ void dimkashelk::deleteDict(all_data &dict, c_s filename)
 {
   dict.first.erase(filename);
 }
+void dimkashelk::remove(all_data &dict, c_s filename)
+{
+  dict.second.erase(filename);
+}
