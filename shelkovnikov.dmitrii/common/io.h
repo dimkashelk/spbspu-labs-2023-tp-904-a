@@ -43,6 +43,7 @@ namespace dimkashelk
       data_{data.first, data.second}
     {}
     friend std::ostream &operator<<(std::ostream &out, const MapPair &pair);
+    friend bool operator<(const MapPair &lnr, const MapPair &rnl);
   private:
     std::pair< std::string, size_t > data_;
   };
