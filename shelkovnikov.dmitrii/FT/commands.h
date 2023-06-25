@@ -5,10 +5,11 @@
 #include <ostream>
 using frequency_dict = std::map< std::string, std::map< std::string, size_t > >;
 using text_dict = std::map< std::string, std::string >;
+using all_data = std::pair< frequency_dict, text_dict >;
 using c_s = const std::string &;
 namespace dimkashelk
 {
-  void load(text_dict &dict, c_s filename);
+  void load(all_data &dict, c_s filename);
   void analyze(frequency_dict &dict, text_dict &text, c_s filename);
   void exportToFile(frequency_dict &dict, c_s dictname, c_s filename);
   void exportWithText(frequency_dict &dict, text_dict &dictText, c_s dictname, c_s filename);

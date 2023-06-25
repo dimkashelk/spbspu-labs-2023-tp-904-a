@@ -48,7 +48,7 @@ namespace
     return out;
   }
 }
-void dimkashelk::load(text_dict &dict, c_s filename)
+void dimkashelk::load(all_data &dict, c_s filename)
 {
   std::ifstream ifs(filename.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
   if (!ifs)
@@ -59,7 +59,7 @@ void dimkashelk::load(text_dict &dict, c_s filename)
   ifs.seekg(0, std::ios::beg);
   std::vector< char > bytes(fileSize);
   ifs.read(bytes.data(), fileSize);
-  dict[filename] = std::string(bytes.data(), fileSize);
+  dict.second[filename] = std::string(bytes.data(), fileSize);
 }
 void dimkashelk::analyze(frequency_dict &dict, text_dict &text, c_s filename)
 {
