@@ -26,6 +26,15 @@ namespace
     std::transform(str.begin(), str.end(), newStr.begin(), toLower);
     return newStr;
   }
+  std::ostream &outEmptyDictMessage(std::ostream &out)
+  {
+    std::ostream::sentry sentry(out);
+    if (!sentry)
+    {
+      return out;
+    }
+    return out << "<EMPTY>";
+  }
   std::ostream &exportText(std::ostream &out, text_dict &dict, std::string filename)
   {
     std::ostream::sentry sentry(out);
@@ -44,6 +53,10 @@ namespace
     }
     using pairIter = std::ostream_iterator< dimkashelk::MapPair >;
     auto &data = dict.at(filename);
+    if (data.size() == 0)
+    {
+      outEmptyDictMessage(out);
+    }
     std::copy(data.begin(), data.end(), pairIter(out, "\n"));
     return out;
   }
@@ -96,4 +109,12 @@ void dimkashelk::exportWithText(all_data &dict, c_s dictname, c_s filename)
 void dimkashelk::printWord(all_data &dict, c_s dictname, c_s word, std::ostream &out)
 {
   out << dict.first.at(dictname).at(word);
+}
+void dimkashelk::print(all_data &dict, c_s filename, std::ostream &out)
+{
+  std::ostream::sentry sentry(out);
+  if (!sentry)
+  {
+    return;
+  }
 }
