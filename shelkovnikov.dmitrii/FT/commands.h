@@ -12,7 +12,7 @@ namespace dimkashelk
   void load(all_data &dict, c_s filename);
   void analyze(all_data &dict, c_s filename);
   void exportToFile(all_data &dict, c_s dictname, c_s filename);
-  void exportWithText(frequency_dict &dict, text_dict &dictText, c_s dictname, c_s filename);
+  void exportWithText(all_data &dict, c_s dictname, c_s filename);
   void printWord(frequency_dict &dict, c_s dictname, c_s word, std::ostream &out);
   void print(frequency_dict &dict, c_s filename);
   void deleteWord(frequency_dict &dict, c_s dictname, c_s word);

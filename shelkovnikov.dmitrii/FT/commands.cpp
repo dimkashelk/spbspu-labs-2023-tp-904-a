@@ -83,15 +83,15 @@ void dimkashelk::exportToFile(all_data &dict, c_s dictname, c_s filename)
   }
   exportFreqDict(out, dict.first, dictname);
 }
-void dimkashelk::exportWithText(frequency_dict &dict, text_dict &dictText, c_s dictname, c_s filename)
+void dimkashelk::exportWithText(all_data &dict, c_s dictname, c_s filename)
 {
   std::ofstream out(filename);
   if (!out)
   {
     throw std::runtime_error("Can't open file");
   }
-  exportText(out, dictText, dictname) << outTwoEmptyLines;
-  exportFreqDict(out, dict, dictname);
+  exportText(out, dict.second, dictname) << outTwoEmptyLines;
+  exportFreqDict(out, dict.first, dictname);
 }
 void dimkashelk::printWord(frequency_dict &dict, c_s dictname, c_s word, std::ostream &out)
 {
