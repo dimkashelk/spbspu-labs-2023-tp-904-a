@@ -48,7 +48,7 @@ namespace
     return out;
   }
 }
-void dimkashelk::load(text_dict &dict, c_str filename)
+void dimkashelk::load(text_dict &dict, c_s filename)
 {
   std::ifstream ifs(filename.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
   if (!ifs)
@@ -61,7 +61,7 @@ void dimkashelk::load(text_dict &dict, c_str filename)
   ifs.read(bytes.data(), fileSize);
   dict[filename] = std::string(bytes.data(), fileSize);
 }
-void dimkashelk::analyze(frequency_dict &dict, text_dict &text, c_str filename)
+void dimkashelk::analyze(frequency_dict &dict, text_dict &text, c_s filename)
 {
   if (dict.find(filename) == dict.end())
   {
@@ -74,7 +74,7 @@ void dimkashelk::analyze(frequency_dict &dict, text_dict &text, c_str filename)
     ++dict_text[toLowerString(parser())];
   }
 }
-void dimkashelk::exportToFile(frequency_dict &dict, c_str dictname, c_str filename)
+void dimkashelk::exportToFile(frequency_dict &dict, c_s dictname, c_s filename)
 {
   std::ofstream out(filename);
   if (!out)
@@ -83,7 +83,7 @@ void dimkashelk::exportToFile(frequency_dict &dict, c_str dictname, c_str filena
   }
   exportFreqDict(out, dict, dictname);
 }
-void dimkashelk::exportWithText(frequency_dict &dict, text_dict &dictText, c_str dictname, c_str filename)
+void dimkashelk::exportWithText(frequency_dict &dict, text_dict &dictText, c_s dictname, c_s filename)
 {
   std::ofstream out(filename);
   if (!out)
@@ -92,4 +92,8 @@ void dimkashelk::exportWithText(frequency_dict &dict, text_dict &dictText, c_str
   }
   exportText(out, dictText, dictname) << outTwoEmptyLines;
   exportFreqDict(out, dict, dictname);
+}
+void dimkashelk::printWord(frequency_dict &dict, c_s dictname, c_s word, std::ostream &out)
+{
+
 }
