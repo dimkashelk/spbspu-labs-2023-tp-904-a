@@ -11,11 +11,41 @@ namespace
   {
     return static_cast< char >(std::tolower(c));
   }
+  std::ostream &outTwoEmptyLines(std::ostream &out)
+  {
+    std::ostream::sentry sentry(out);
+    if (!sentry)
+    {
+      return out;
+    }
+    return out << "\n\n";
+  }
   std::string toLowerString(const std::string &str)
   {
     std::string newStr;
     std::transform(str.begin(), str.end(), newStr.begin(), toLower);
     return newStr;
+  }
+  std::ostream &exportText(std::ostream &out, text_dict &dict, std::string filename)
+  {
+    std::ostream::sentry sentry(out);
+    if (!sentry)
+    {
+      return out;
+    }
+    return out << dict.at(filename);
+  }
+  std::ostream &exportFreqDict(std::ostream &out, frequency_dict &dict, const std::string &filename)
+  {
+    std::ostream::sentry sentry(out);
+    if (!sentry)
+    {
+      return out;
+    }
+    using pairIter = std::ostream_iterator< dimkashelk::MapPair >;
+    auto &data = dict.at(filename);
+    std::copy(data.begin(), data.end(), pairIter(out, "\n"));
+    return out;
   }
 }
 void dimkashelk::load(text_dict &dict, c_str filename)
@@ -51,7 +81,15 @@ void dimkashelk::exportToFile(frequency_dict &dict, c_str dictname, c_str filena
   {
     throw std::runtime_error("Can't open file");
   }
-  using pairIter = std::ostream_iterator< MapPair >;
-  auto &data = dict.at(dictname);
-  std::copy(data.begin(), data.end(), pairIter(out, "\n"));
+  exportFreqDict(out, dict, dictname);
+}
+void dimkashelk::exportWithText(frequency_dict &dict, text_dict &dictText, c_str dictname, c_str filename)
+{
+  std::ofstream out(filename);
+  if (!out)
+  {
+    throw std::runtime_error("Can't open file");
+  }
+  exportText(out, dictText, dictname) << outTwoEmptyLines;
+  exportFreqDict(out, dict, dictname);
 }
