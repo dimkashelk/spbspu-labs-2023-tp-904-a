@@ -55,7 +55,7 @@ namespace
     auto &data = dict.at(filename);
     if (data.size() == 0)
     {
-      return outEmptyDictMessage(out);
+      return outEmptyDictMessage(out) << "\n";
     }
     std::copy(data.begin(), data.end(), pairIter(out, "\n"));
     return out;
