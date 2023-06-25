@@ -61,14 +61,14 @@ void dimkashelk::load(all_data &dict, c_s filename)
   ifs.read(bytes.data(), fileSize);
   dict.second[filename] = std::string(bytes.data(), fileSize);
 }
-void dimkashelk::analyze(frequency_dict &dict, text_dict &text, c_s filename)
+void dimkashelk::analyze(all_data &dict, c_s filename)
 {
-  if (dict.find(filename) == dict.end())
+  if (dict.first.find(filename) == dict.first.end())
   {
-    load(text, filename);
+    load(dict, filename);
   }
-  Parser parser(text[filename]);
-  auto &dict_text = dict[filename];
+  Parser parser(dict.second[filename]);
+  auto &dict_text = dict.first[filename];
   while (parser.hasNext())
   {
     ++dict_text[toLowerString(parser())];
