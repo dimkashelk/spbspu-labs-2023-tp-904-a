@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <functional>
 #include "parser.h"
 #include "io.h"
 namespace
@@ -59,6 +60,10 @@ namespace
     }
     std::copy(data.begin(), data.end(), pairIter(out, "\n"));
     return out;
+  }
+  bool isGreaterCount(const std::pair< const std::string, size_t > &pair, size_t count)
+  {
+    return pair.second >= count;
   }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
@@ -130,4 +135,15 @@ void dimkashelk::deleteDict(all_data &dict, c_s filename)
 void dimkashelk::remove(all_data &dict, c_s filename)
 {
   dict.second.erase(filename);
+}
+void dimkashelk::getTop(all_data &dict, c_s dictname, size_t count, std::ostream &out)
+{
+  using namespace std::placeholders;
+  auto func = std::bind(isGreaterCount, _1, count);
+  std::vector< MapPair > data;
+  std::copy_if(dict.first[dictname].begin(), dict.first[dictname].end(), std::back_inserter(data), func);
+  std::sort(data.begin(), data.end());
+  std::reverse(data.begin(), data.end());
+  using pairIter = std::ostream_iterator< dimkashelk::MapPair >;
+  std::copy(data.begin(), data.end(), pairIter(out, "\n"));
 }
