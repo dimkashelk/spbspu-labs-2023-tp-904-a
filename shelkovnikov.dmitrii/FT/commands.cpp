@@ -126,6 +126,10 @@ namespace
     return out << "union <newdataset> <dictname-1> <dictname-2> - builds a dictionary "
                   "with a new name as a union of sets of two other dictionaries";
   }
+  std::ostream &outInfoAboutHelpCommand(std::ostream &out)
+  {
+    return out << "help - displays a list of available commands";
+  }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
 {
