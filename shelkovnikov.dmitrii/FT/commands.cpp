@@ -70,6 +70,13 @@ namespace
     return out << "load <dictname> <filename> - loads text from a file and stores it "
                   "in the dictionary <dictname> with the <filename> key";
   }
+  std::ostream &outInfoAboutAnalyzeCommand(std::ostream &out)
+  {
+    return out << "analyze <dictname> <filename> - analyzes text from a file stored in "
+                  "memory, if the file is not saved, then opens and saves the text, and "
+                  "then analyzes, saves the result in the dictionary <dictname> with the "
+                  "key <filename>";
+  }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
 {
