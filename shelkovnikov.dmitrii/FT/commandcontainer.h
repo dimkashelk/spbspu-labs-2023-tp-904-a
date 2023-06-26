@@ -15,6 +15,13 @@ namespace dimkashelk
   public:
     CommandContainer();
   private:
+    std::map< std::string, func_with_name > dictWithName_;
+    std::map< std::string, func_with_2_name > dictWith2Name_;
+    std::map< std::string, func_with_3_name > dictWith3Name_;
+    std::map< std::string, func_with_size_t > dictWithSizeT_;
+    std::map< std::string, func_with_2_name_ostream > dictWith2NameOstream_;
+    std::map< std::string, func_with_1_name_ostream > dictWith1NameOstream_;
+    std::map< std::string, func_with_ostream > dictWithOstream_;
     std::map< std::string, func_with_name > initializeName();
     std::map< std::string, func_with_2_name > initialize2Name();
     std::map< std::string, func_with_3_name > initialize3Name();
