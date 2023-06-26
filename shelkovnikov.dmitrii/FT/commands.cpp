@@ -121,6 +121,11 @@ namespace
     return out << "intersect <newdataset> <dictname-1> <dictname-2> - builds a dictionary "
                   "with a new name as the intersection of sets of two other dictionaries";
   }
+  std::ostream &outInfoAboutGetUnionCommand(std::ostream &out)
+  {
+    return out << "union <newdataset> <dictname-1> <dictname-2> - builds a dictionary "
+                  "with a new name as a union of sets of two other dictionaries";
+  }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
 {
