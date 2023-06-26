@@ -20,3 +20,12 @@ std::map< std::string, dimkashelk::func_with_2_name > con::initialize2Name()
   res["deleteWord"] = deleteWord;
   return res;
 }
+std::map< std::string, dimkashelk::func_with_3_name > con::initialize3Name()
+{
+  std::map< std::string, func_with_3_name > res;
+  res["complement"] = getComplement;
+  res["intersect"] = getIntersect;
+  res["union"] = getUnion;
+  return res;
+}
+
