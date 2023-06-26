@@ -46,3 +46,9 @@ std::map< std::string, dimkashelk::func_with_1_name_ostream > con::initialize1Na
   res["print"] = print;
   return res;
 }
+std::map< std::string, dimkashelk::func_with_ostream > con::initializeOstream()
+{
+  std::map< std::string, func_with_ostream > res;
+  res["help"] = help;
+  return res;
+}
