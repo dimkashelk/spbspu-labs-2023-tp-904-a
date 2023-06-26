@@ -87,6 +87,10 @@ namespace
     return out << "exportWithText <dictname> <output filename> - exports text and "
                   "frequency dictionary data to <output filename>";
   }
+  std::ostream &outInfoAboutPrintWordCommand(std::ostream &out)
+  {
+    return out << "printWord <dictname> <word> - outputs the number of times the word was used in the text";
+  }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
 {
