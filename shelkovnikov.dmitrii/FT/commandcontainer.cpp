@@ -40,4 +40,9 @@ std::map< std::string, dimkashelk::func_with_2_name_ostream > con::initialize2Na
   res["printWord"] = printWord;
   return res;
 }
-
+std::map< std::string, dimkashelk::func_with_1_name_ostream > con::initialize1NameOstream()
+{
+  std::map< std::string, func_with_1_name_ostream > res;
+  res["print"] = print;
+  return res;
+}
