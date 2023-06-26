@@ -91,6 +91,10 @@ namespace
   {
     return out << "printWord <dictname> <word> - outputs the number of times the word was used in the text";
   }
+  std::ostream &outInfoAboutPrintCommand(std::ostream &out)
+  {
+    return out << "print <dictname> - outputs a frequency analysis dictionary";
+  }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
 {
