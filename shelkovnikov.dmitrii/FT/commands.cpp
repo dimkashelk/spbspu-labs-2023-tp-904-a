@@ -95,6 +95,10 @@ namespace
   {
     return out << "print <dictname> - outputs a frequency analysis dictionary";
   }
+  std::ostream &outInfoAboutDeleteWordCommand(std::ostream &out)
+  {
+    return out << "deleteWord <dictname> <word> - deletes a word from the dictionary";
+  }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
 {
