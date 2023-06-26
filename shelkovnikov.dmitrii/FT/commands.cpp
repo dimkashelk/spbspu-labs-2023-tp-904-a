@@ -103,6 +103,10 @@ namespace
   {
     return out << "delete <dictname> - deletes the frequency dictionary";
   }
+  std::ostream &outInfoAboutRemoveCommand(std::ostream &out)
+  {
+    return out << "remove <dictname> - deletes the downloaded text";
+  }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
 {
