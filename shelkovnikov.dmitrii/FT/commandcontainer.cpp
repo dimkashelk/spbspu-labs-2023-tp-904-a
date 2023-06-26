@@ -34,4 +34,10 @@ std::map< std::string, dimkashelk::func_with_size_t > con::initializeSizeT()
   res["top"] = getTop;
   return res;
 }
+std::map< std::string, dimkashelk::func_with_2_name_ostream > con::initialize2NameOstream()
+{
+  std::map< std::string, func_with_2_name_ostream > res;
+  res["printWord"] = printWord;
+  return res;
+}
 
