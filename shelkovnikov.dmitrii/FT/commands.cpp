@@ -263,5 +263,18 @@ void dimkashelk::getUnion(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
 }
 void dimkashelk::help(std::ostream &out)
 {
-
+  outInfoAboutLoadCommand(out) << "\n";
+  outInfoAboutAnalyzeCommand(out) << "\n";
+  outInfoAboutExportToFileCommand(out) << "\n";
+  outInfoAboutExportWithTextCommand(out) << "\n";
+  outInfoAboutPrintWordCommand(out) << "\n";
+  outInfoAboutPrintCommand(out) << "\n";
+  outInfoAboutDeleteWordCommand(out) << "\n";
+  outInfoAboutDeleteDictCommand(out) << "\n";
+  outInfoAboutRemoveCommand(out) << "\n";
+  outInfoAboutGetTopCommand(out) << "\n";
+  outInfoAboutGetComplementCommand(out) << "\n";
+  outInfoAboutGetIntersectCommand(out) << "\n";
+  outInfoAboutGetUnionCommand(out) << "\n";
+  outInfoAboutHelpCommand(out) << "\n";
 }
