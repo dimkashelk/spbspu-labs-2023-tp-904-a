@@ -167,3 +167,16 @@ void dimkashelk::getComplement(frequency_dict &dict, c_s newdata, c_s dict1, c_s
     }
   }
 }
+void dimkashelk::getIntersect(frequency_dict &dict, c_s newdata, c_s dict1, c_s dict2)
+{
+  dict[newdata] = dict[dict1];
+  for (auto &item: dict[dict2])
+  {
+    auto res = dict[newdata].find(item.first);
+    if (res == dict[newdata].end())
+    {
+      continue;
+    }
+    res->second = std::min(res->second, item.second);
+  }
+}
