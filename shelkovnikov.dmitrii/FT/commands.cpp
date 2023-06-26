@@ -65,6 +65,11 @@ namespace
   {
     return pair.second >= count;
   }
+  std::ostream &outInfoAboutLoadCommand(std::ostream &out)
+  {
+    return out << "load <dictname> <filename> - loads text from a file and stores it "
+                  "in the dictionary <dictname> with the <filename> key";
+  }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
 {
@@ -195,4 +200,8 @@ void dimkashelk::getUnion(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
       res->second += item.second;
     }
   }
+}
+void dimkashelk::help(std::ostream &out)
+{
+
 }
