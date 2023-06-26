@@ -4,6 +4,7 @@
 namespace dimkashelk
 {
   using func_with_name = void(*)(all_data &, c_s);
+  using func_with_2_name = void(*)(all_data &, c_s, c_s);
   class CommandContainer
   {
   public:
