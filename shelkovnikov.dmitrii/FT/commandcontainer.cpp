@@ -12,3 +12,11 @@ std::map< std::string, dimkashelk::func_with_name > con::initializeName()
   res["remove"] = remove;
   return res;
 }
+std::map< std::string, dimkashelk::func_with_2_name > con::initialize2Name()
+{
+  std::map< std::string, func_with_2_name > res;
+  res["export"] = exportToFile;
+  res["exportWithText"] = exportWithText;
+  res["deleteWord"] = deleteWord;
+  return res;
+}
