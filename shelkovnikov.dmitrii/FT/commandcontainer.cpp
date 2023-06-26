@@ -1,7 +1,14 @@
 #include "commandcontainer.h"
 #include "commands.h"
 using con = dimkashelk::CommandContainer;
-con::CommandContainer()
+con::CommandContainer():
+  dictWithName_(initializeName()),
+  dictWith2Name_(initialize2Name()),
+  dictWith3Name_(initialize3Name()),
+  dictWithSizeT_(initializeSizeT()),
+  dictWith2NameOstream_(initialize2NameOstream()),
+  dictWith1NameOstream_(initialize1NameOstream()),
+  dictWithOstream_(initializeOstream())
 {}
 std::map< std::string, dimkashelk::func_with_name > con::initializeName()
 {
