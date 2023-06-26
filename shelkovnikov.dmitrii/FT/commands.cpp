@@ -111,6 +111,11 @@ namespace
   {
     return out << "top <dictname> <count> - outputs <count> of the most common words";
   }
+  std::ostream &outInfoAboutGetComplementCommand(std::ostream &out)
+  {
+    return out << "complement <newdataset> <dictname-1> <dictname-2> - builds a dictionary "
+                  "with a new name as a subtraction of the sets of two other dictionaries";
+  }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
 {
