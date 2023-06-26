@@ -79,8 +79,13 @@ namespace
   }
   std::ostream &outInfoAboutExportToFileCommand(std::ostream &out)
   {
-    return out << " export <dictname> <output filename> - exports frequency dictionary "
+    return out << "export <dictname> <output filename> - exports frequency dictionary "
                   "data for a specific file in <output filename>";
+  }
+  std::ostream &outInfoAboutExportWithTextCommand(std::ostream &out)
+  {
+    return out << "exportWithText <dictname> <output filename> - exports text and "
+                  "frequency dictionary data to <output filename>";
   }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
