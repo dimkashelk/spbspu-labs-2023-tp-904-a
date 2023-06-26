@@ -13,8 +13,8 @@ namespace dimkashelk
   void analyze(all_data &dict, c_s filename);
   void exportToFile(all_data &dict, c_s dictname, c_s filename);
   void exportWithText(all_data &dict, c_s dictname, c_s filename);
-  std::ostream &printWord(all_data &dict, c_s dictname, c_s word, std::ostream &out);
-  std::ostream &print(all_data &dict, c_s filename, std::ostream &out);
+  void printWord(all_data &dict, c_s dictname, c_s word, std::ostream &out);
+  void print(all_data &dict, c_s filename, std::ostream &out);
   void deleteWord(all_data &dict, c_s dictname, c_s word);
   void deleteDict(all_data &dict, c_s filename);
   void remove(all_data &dict, c_s filename);

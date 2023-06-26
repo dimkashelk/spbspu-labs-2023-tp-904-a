@@ -176,18 +176,18 @@ void dimkashelk::exportWithText(all_data &dict, c_s dictname, c_s filename)
   exportText(out, dict.second, dictname) << outTwoEmptyLines;
   exportFreqDict(out, dict.first, dictname);
 }
-std::ostream &dimkashelk::printWord(all_data &dict, c_s dictname, c_s word, std::ostream &out)
+void dimkashelk::printWord(all_data &dict, c_s dictname, c_s word, std::ostream &out)
 {
-  return out << dict.first.at(dictname).at(word);
+  out << dict.first.at(dictname).at(word) << "\n";
 }
-std::ostream &dimkashelk::print(all_data &dict, c_s filename, std::ostream &out)
+void dimkashelk::print(all_data &dict, c_s filename, std::ostream &out)
 {
   std::ostream::sentry sentry(out);
   if (!sentry)
   {
-    return out;
+    return;
   }
-  return exportFreqDict(out, dict.first, filename);
+  exportFreqDict(out, dict.first, filename) << "\n";
 }
 void dimkashelk::deleteWord(all_data &dict, c_s dictname, c_s word)
 {
