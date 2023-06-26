@@ -147,19 +147,19 @@ void dimkashelk::getTop(all_data &dict, c_s dictname, size_t count, std::ostream
   using pairIter = std::ostream_iterator< dimkashelk::MapPair >;
   std::copy(data.begin(), data.end(), pairIter(out, "\n"));
 }
-void dimkashelk::getComplement(frequency_dict &dict, c_s newdata, c_s dict1, c_s dict2)
+void dimkashelk::getComplement(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
 {
-  dict[newdata] = dict[dict1];
-  for (auto &item: dict[dict2])
+  dict.first[newdata] = dict.first[dict1];
+  for (auto &item: dict.first[dict2])
   {
-    auto res = dict[newdata].find(item.first);
-    if (res == dict[newdata].end())
+    auto res = dict.first[newdata].find(item.first);
+    if (res == dict.first[newdata].end())
     {
       continue;
     }
     if (res->second >= item.second)
     {
-      dict[newdata].erase(res);
+      dict.first[newdata].erase(res);
     }
     else
     {
