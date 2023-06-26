@@ -77,6 +77,11 @@ namespace
                   "then analyzes, saves the result in the dictionary <dictname> with the "
                   "key <filename>";
   }
+  std::ostream &outInfoAboutExportToFileCommand(std::ostream &out)
+  {
+    return out << " export <dictname> <output filename> - exports frequency dictionary "
+                  "data for a specific file in <output filename>";
+  }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
 {
