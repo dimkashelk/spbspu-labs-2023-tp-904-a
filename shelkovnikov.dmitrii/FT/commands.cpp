@@ -107,6 +107,10 @@ namespace
   {
     return out << "remove <dictname> - deletes the downloaded text";
   }
+  std::ostream &outInfoAboutGetTopCommand(std::ostream &out)
+  {
+    return out << "top <dictname> <count> - outputs <count> of the most common words";
+  }
 }
 void dimkashelk::load(all_data &dict, c_s filename)
 {
