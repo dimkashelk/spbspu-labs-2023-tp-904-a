@@ -180,3 +180,19 @@ void dimkashelk::getIntersect(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
     res->second = std::min(res->second, item.second);
   }
 }
+void dimkashelk::getUnion(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
+{
+  dict.first[newdata] = dict.first[dict1];
+  for (auto &item: dict.first[dict2])
+  {
+    auto res = dict.first[newdata].find(item.first);
+    if (res == dict.first[newdata].end())
+    {
+      dict.first[newdata][item.first] = item.second;
+    }
+    else
+    {
+      res->second += item.second;
+    }
+  }
+}
