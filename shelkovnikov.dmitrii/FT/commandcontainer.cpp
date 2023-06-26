@@ -28,4 +28,10 @@ std::map< std::string, dimkashelk::func_with_3_name > con::initialize3Name()
   res["union"] = getUnion;
   return res;
 }
+std::map< std::string, dimkashelk::func_with_size_t > con::initializeSizeT()
+{
+  std::map< std::string, func_with_size_t > res;
+  res["top"] = getTop;
+  return res;
+}
 
