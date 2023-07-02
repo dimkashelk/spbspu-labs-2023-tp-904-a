@@ -38,6 +38,7 @@ namespace dimkashelk
     std::map< std::string, func_with_1_name_ostream > initialize1NameOstream();
     std::map< std::string, func_with_ostream > initializeOstream();
     std::string inputString();
+    std::pair< std::string, std::string > input2String();
   };
 }
 #endif

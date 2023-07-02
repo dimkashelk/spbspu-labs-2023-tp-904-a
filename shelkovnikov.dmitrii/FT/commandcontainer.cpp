@@ -75,8 +75,16 @@ void con::doCommand(const std::string &command)
   }
   catch (const std::out_of_range &e)
   {}
+  try
+  {
+    auto comm = dictWithName_.at(command);
+    auto p = input2String();
+    comm(data_, f);
+  }
+  catch (const std::out_of_range &e)
+  {}
 }
-std::string dimkashelk::CommandContainer::inputString()
+std::string con::inputString()
 {
   std::istream::sentry sentry(in_);
   std::string res;
@@ -89,4 +97,8 @@ std::string dimkashelk::CommandContainer::inputString()
   {
     throw std::logic_error("Cannot input");
   }
+}
+std::pair< std::string, std::string > con::input2String()
+{
+  return {inputString(), inputString()};
 }
