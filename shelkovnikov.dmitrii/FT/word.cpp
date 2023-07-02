@@ -1,5 +1,4 @@
 #include "word.h"
-#include <iostream>
 #include <algorithm>
 namespace
 {
