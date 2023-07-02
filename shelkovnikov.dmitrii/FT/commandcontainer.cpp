@@ -70,11 +70,11 @@ void con::doCommand(const std::string &command)
   try
   {
     auto comm = dictWithName_.at(command);
-
+    auto f = inputString();
+    comm(data_, f);
   }
-  catch (...)
+  catch (const std::out_of_range &e)
   {}
-
 }
 std::string dimkashelk::CommandContainer::inputString()
 {
