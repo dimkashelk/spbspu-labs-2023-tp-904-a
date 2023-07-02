@@ -98,6 +98,14 @@ void con::doCommand(const std::string &command)
   }
   catch (const std::out_of_range &e)
   {}
+  try
+  {
+    auto comm = dictWith2NameOstream_.at(command);
+    auto p = input2String();
+    comm(data_, p.first, p.second, out_);
+  }
+  catch (const std::out_of_range &e)
+  {}
 }
 std::string con::inputString()
 {
