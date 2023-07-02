@@ -9,9 +9,14 @@ std::ostream &outErrorFile(std::ostream &out)
 {
   return out << "Can't open file";
 }
-int main()
+void skipCommand(std::istream &in)
 {
   constexpr auto max_size = std::numeric_limits< std::streamsize >::max();
+  in.clear();
+  in.ignore(max_size, '\n');
+}
+int main()
+{
   dimkashelk::CommandContainer commandContainer(std::cin, std::cout);
   while (std::cin)
   {
@@ -24,14 +29,12 @@ int main()
     catch (const std::logic_error &e)
     {
       outInvalidCommand(std::cout) << "\n";
-      std::cin.clear();
-      std::cin.ignore(max_size, '\n');
+      skipCommand(std::cin);
     }
     catch (const std::runtime_error &e)
     {
       outErrorFile(std::cout) << "\n";
-      std::cin.clear();
-      std::cin.ignore(max_size, '\n');
+      skipCommand(std::cin);
     }
   }
   return 0;
