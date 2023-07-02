@@ -153,23 +153,6 @@ namespace dimkashelk
     out << ":key3 " << std::quoted(src.key3, '"') << ":)";
     return out;
   }
-  std::ostream &operator<<(std::ostream &out, const MapPair &pair)
-  {
-    std::ostream::sentry sentry(out);
-    if (!sentry)
-    {
-      return out;
-    }
-    return out << pair.data_.first << ": " << pair.data_.second;
-  }
-  bool operator<(const MapPair &lnr, const MapPair &rnl)
-  {
-    auto &l_sec = lnr.data_.second;
-    auto &r_sec = rnl.data_.second;
-    auto &l_fir = rnl.data_.first;
-    auto &r_fir = rnl.data_.first;
-    return l_sec < r_sec || (l_sec == r_sec && l_fir < r_fir);
-  }
   iofmtguard::iofmtguard(std::basic_ios< char > &s):
     s_(s),
     fill_(s.fill()),

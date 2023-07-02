@@ -36,17 +36,6 @@ namespace dimkashelk
     std::streamsize precision_;
     std::basic_ios< char >::fmtflags fmt_;
   };
-  class MapPair
-  {
-  public:
-    MapPair(const std::pair< const std::string, size_t > &data):
-      data_{data.first, data.second}
-    {}
-    friend std::ostream &operator<<(std::ostream &out, const MapPair &pair);
-    friend bool operator<(const MapPair &lnr, const MapPair &rnl);
-  private:
-    std::pair< std::string, size_t > data_;
-  };
   std::istream &operator>>(std::istream &in, complex_type &c);
   std::istream &operator>>(std::istream &in, rational_number &c);
   std::istream &operator>>(std::istream &in, DelimiterIO &&dest);
