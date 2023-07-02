@@ -91,6 +91,13 @@ void con::doCommand(const std::string &command)
   }
   catch (const std::out_of_range &e)
   {}
+  try
+  {
+    auto comm = dictWithSizeT_.at(command);
+    comm(data_, inputString(), inputSizeT(), out_);
+  }
+  catch (const std::out_of_range &e)
+  {}
 }
 std::string con::inputString()
 {
