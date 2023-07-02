@@ -20,3 +20,7 @@ bool dimkashelk::Word::operator<(const dimkashelk::Word &rhs) const
 {
   return data_ < rhs.data_;
 }
+std::ostream &dimkashelk::operator<<(std::ostream &os, const dimkashelk::Word &word)
+{
+  return os << word.data_;
+}
