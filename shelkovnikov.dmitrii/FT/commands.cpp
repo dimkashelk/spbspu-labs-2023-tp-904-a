@@ -61,7 +61,7 @@ namespace
     std::copy(data.begin(), data.end(), pairIter(out, "\n"));
     return out;
   }
-  bool isGreaterCount(const std::pair< const std::string, size_t > &pair, size_t count)
+  bool isGreaterCount(const std::pair< const dimkashelk::MapPair, size_t > &pair, size_t count)
   {
     return pair.second >= count;
   }
