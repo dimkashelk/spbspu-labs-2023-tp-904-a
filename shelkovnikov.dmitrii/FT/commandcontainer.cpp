@@ -102,3 +102,7 @@ std::pair< std::string, std::string > con::input2String()
 {
   return {inputString(), inputString()};
 }
+std::tuple< std::string, std::string, std::string > con::input3String()
+{
+  return std::tuple< std::string, std::string, std::string >(inputString(), inputString(), inputString());
+}
