@@ -83,6 +83,14 @@ void con::doCommand(const std::string &command)
   }
   catch (const std::out_of_range &e)
   {}
+  try
+  {
+    auto comm = dictWith3Name_.at(command);
+    auto p = input3String();
+    comm(data_, std::get< 0 >(p), std::get< 1 >(p), std::get< 2 >(p));
+  }
+  catch (const std::out_of_range &e)
+  {}
 }
 std::string con::inputString()
 {
