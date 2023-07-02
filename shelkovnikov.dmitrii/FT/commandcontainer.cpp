@@ -65,8 +65,6 @@ std::map< std::string, dimkashelk::func_with_ostream > con::initializeOstream()
 }
 void con::doCommand(const std::string &command)
 {
-  iofmtguard in_guard(in_);
-  iofmtguard out_guard(out_);
   try
   {
     auto comm = dictWithName_.at(command);
