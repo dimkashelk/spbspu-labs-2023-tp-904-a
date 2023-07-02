@@ -154,7 +154,8 @@ void dimkashelk::analyze(all_data &dict, c_s filename)
   auto &dict_text = dict.first[filename];
   while (parser.hasNext())
   {
-    ++dict_text[toLowerString(parser())];
+    Word w(parser());
+    ++dict_text[w];
   }
 }
 void dimkashelk::exportToFile(all_data &dict, c_s dictname, c_s filename)
@@ -178,7 +179,8 @@ void dimkashelk::exportWithText(all_data &dict, c_s dictname, c_s filename)
 }
 void dimkashelk::printWord(all_data &dict, c_s dictname, c_s word, std::ostream &out)
 {
-  out << dict.first.at(dictname).at(word) << "\n";
+  Word w(word);
+  out << dict.first.at(dictname).at(w) << "\n";
 }
 void dimkashelk::print(all_data &dict, c_s filename, std::ostream &out)
 {
@@ -191,7 +193,8 @@ void dimkashelk::print(all_data &dict, c_s filename, std::ostream &out)
 }
 void dimkashelk::deleteWord(all_data &dict, c_s dictname, c_s word)
 {
-  dict.first.at(dictname).erase(word);
+  Word w(word);
+  dict.first.at(dictname).erase(w);
 }
 void dimkashelk::deleteDict(all_data &dict, c_s filename)
 {

@@ -3,7 +3,8 @@
 #include <map>
 #include <string>
 #include <ostream>
-using frequency_dict = std::map< std::string, std::map< std::string, size_t > >;
+#include "word.h"
+using frequency_dict = std::map< std::string, std::map< dimkashelk::Word, size_t > >;
 using text_dict = std::map< std::string, std::string >;
 using all_data = std::pair< frequency_dict, text_dict >;
 using c_s = const std::string &;
