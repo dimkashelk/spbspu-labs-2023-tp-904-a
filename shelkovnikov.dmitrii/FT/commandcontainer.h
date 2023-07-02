@@ -15,6 +15,7 @@ namespace dimkashelk
   public:
     CommandContainer();
   private:
+    all_data data_;
     std::map< std::string, func_with_name > dictWithName_;
     std::map< std::string, func_with_2_name > dictWith2Name_;
     std::map< std::string, func_with_3_name > dictWith3Name_;

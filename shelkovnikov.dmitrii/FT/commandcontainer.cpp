@@ -2,6 +2,7 @@
 #include "commands.h"
 using con = dimkashelk::CommandContainer;
 con::CommandContainer():
+  data_(),
   dictWithName_(initializeName()),
   dictWith2Name_(initialize2Name()),
   dictWith3Name_(initialize3Name()),
