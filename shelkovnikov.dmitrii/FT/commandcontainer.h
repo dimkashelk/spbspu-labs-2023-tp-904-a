@@ -19,9 +19,7 @@ namespace dimkashelk
     void doCommand(const std::string &command);
   private:
     std::istream &in_;
-    iofmtguard in_guard_;
     std::ostream &out_;
-    iofmtguard out_guard_;
     all_data data_;
     std::map< std::string, func_with_name > dictWithName_;
     std::map< std::string, func_with_2_name > dictWith2Name_;

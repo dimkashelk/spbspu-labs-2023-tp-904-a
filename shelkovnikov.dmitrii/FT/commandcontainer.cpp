@@ -4,9 +4,7 @@
 using con = dimkashelk::CommandContainer;
 con::CommandContainer(std::istream &in, std::ostream &out):
   in_(in),
-  in_guard_(in_),
   out_(out),
-  out_guard_(out_),
   data_(),
   dictWithName_(initializeName()),
   dictWith2Name_(initialize2Name()),
@@ -67,6 +65,8 @@ std::map< std::string, dimkashelk::func_with_ostream > con::initializeOstream()
 }
 void con::doCommand(const std::string &command)
 {
+  iofmtguard in_guard(in_);
+  iofmtguard out_guard(out_);
   try
   {
     auto comm = dictWithName_.at(command);
