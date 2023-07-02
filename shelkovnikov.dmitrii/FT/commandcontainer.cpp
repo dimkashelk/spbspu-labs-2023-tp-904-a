@@ -114,3 +114,17 @@ std::tuple< std::string, std::string, std::string > con::input3String()
 {
   return std::tuple< std::string, std::string, std::string >(inputString(), inputString(), inputString());
 }
+size_t dimkashelk::CommandContainer::inputSizeT()
+{
+  std::istream::sentry sentry(in_);
+  size_t res;
+  if (sentry)
+  {
+    in_ >> res;
+    return res;
+  }
+  else
+  {
+    throw std::logic_error("Cannot input");
+  }
+}
