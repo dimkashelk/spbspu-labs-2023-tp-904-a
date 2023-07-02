@@ -77,9 +77,9 @@ void con::doCommand(const std::string &command)
   {}
   try
   {
-    auto comm = dictWithName_.at(command);
+    auto comm = dictWith2Name_.at(command);
     auto p = input2String();
-    comm(data_, f);
+    comm(data_, p.first, p.second);
   }
   catch (const std::out_of_range &e)
   {}
