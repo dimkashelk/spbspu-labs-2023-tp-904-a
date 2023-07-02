@@ -1,6 +1,8 @@
 #ifndef FT_COMMANDCONTAINER_H
 #define FT_COMMANDCONTAINER_H
+#include <iostream>
 #include "commands.h"
+#include "io.h"
 namespace dimkashelk
 {
   using func_with_name = void(*)(all_data &, c_s);
@@ -13,8 +15,13 @@ namespace dimkashelk
   class CommandContainer
   {
   public:
-    CommandContainer();
+    CommandContainer(std::istream &in, std::ostream &out);
+    void doCommand(const std::string &command);
   private:
+    std::istream &in_;
+    iofmtguard in_guard_;
+    std::ostream &out_;
+    iofmtguard out_guard_;
     all_data data_;
     std::map< std::string, func_with_name > dictWithName_;
     std::map< std::string, func_with_2_name > dictWith2Name_;
@@ -30,6 +37,7 @@ namespace dimkashelk
     std::map< std::string, func_with_2_name_ostream > initialize2NameOstream();
     std::map< std::string, func_with_1_name_ostream > initialize1NameOstream();
     std::map< std::string, func_with_ostream > initializeOstream();
+    std::string inputString();
   };
 }
 #endif
