@@ -106,6 +106,13 @@ void con::doCommand(const std::string &command)
   }
   catch (const std::out_of_range &e)
   {}
+  try
+  {
+    auto comm = dictWith1NameOstream_.at(command);
+    comm(data_, inputString(), out_);
+  }
+  catch (const std::out_of_range &e)
+  {}
 }
 std::string con::inputString()
 {
