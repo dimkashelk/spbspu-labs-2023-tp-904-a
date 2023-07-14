@@ -63,39 +63,3 @@ void con::doCommand(const std::string &command)
   catch (const std::out_of_range &e)
   {}
 }
-std::string inputString(std::istream &in_)
-{
-  std::istream::sentry sentry(in_);
-  std::string res;
-  if (sentry)
-  {
-    in_ >> res;
-    return res;
-  }
-  else
-  {
-    throw std::logic_error("Cannot input");
-  }
-}
-std::pair< std::string, std::string > input2String(std::istream &in_)
-{
-  return {inputString(in_), inputString(in_)};
-}
-std::tuple< std::string, std::string, std::string > input3String(std::istream &in_)
-{
-  return std::tuple< std::string, std::string, std::string >(inputString(in_), inputString(in_), inputString(in_));
-}
-size_t inputSizeT(std::istream &in_)
-{
-  std::istream::sentry sentry(in_);
-  size_t res;
-  if (sentry)
-  {
-    in_ >> res;
-    return res;
-  }
-  else
-  {
-    throw std::logic_error("Cannot input");
-  }
-}
