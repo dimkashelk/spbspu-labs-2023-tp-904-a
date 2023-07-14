@@ -211,8 +211,10 @@ void exportToFile(all_data &dict, std::istream &in)
   }
   exportFreqDict(out, dict.first, dictname);
 }
-void exportWithText(all_data &dict, c_s dictname, c_s filename)
+void exportWithText(all_data &dict, std::istream &in)
 {
+  std::string dictname = inputString(in);
+  std::string filename = inputString(in);
   std::ofstream out(filename);
   if (!out)
   {
