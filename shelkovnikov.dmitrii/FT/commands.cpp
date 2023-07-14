@@ -167,9 +167,8 @@ namespace
     }
   }
 }
-void load(all_data &dict, std::istream &in)
+void load(all_data &dict, const std::string &filename)
 {
-  std::string filename = inputString(in);
   std::ifstream ifs(filename.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
   if (!ifs)
   {
@@ -181,8 +180,14 @@ void load(all_data &dict, std::istream &in)
   ifs.read(bytes.data(), fileSize);
   dict.second[filename] = std::string(bytes.data(), fileSize);
 }
-void analyze(all_data &dict, c_s filename)
+void load(all_data &dict, std::istream &in)
 {
+  std::string filename = inputString(in);
+  load(dict, filename);
+}
+void analyze(all_data &dict, std::istream &in)
+{
+  std::string filename = inputString(in);
   if (dict.first.find(filename) == dict.first.end())
   {
     load(dict, filename);
