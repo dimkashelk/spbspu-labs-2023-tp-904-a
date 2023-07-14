@@ -239,12 +239,14 @@ void deleteWord(all_data &dict, std::istream &in)
   dimkashelk::Word w(word);
   dict.first.at(dictname).erase(w);
 }
-void deleteDict(all_data &dict, c_s filename)
+void deleteDict(all_data &dict, std::istream &in)
 {
+  std::string filename = inputString(in);
   dict.first.erase(filename);
 }
-void remove(all_data &dict, c_s filename)
+void remove(all_data &dict, std::istream &in)
 {
+  std::string filename = inputString(in);
   dict.second.erase(filename);
 }
 void getTop(all_data &dict, c_s dictname, size_t count, std::ostream &out)
