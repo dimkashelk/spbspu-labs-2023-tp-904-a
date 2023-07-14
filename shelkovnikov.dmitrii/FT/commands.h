@@ -5,9 +5,8 @@
 #include <ostream>
 #include "word.h"
 using frequency_dict = std::map< std::string, std::map< dimkashelk::Word, size_t > >;
-using text_dict = std::map< std::string, std::string >;
-using all_data = std::pair< frequency_dict, text_dict >;
-using c_s = const std::string &;
+using dict_with_text = std::map< std::string, std::string >;
+using all_data = std::pair< frequency_dict, dict_with_text >;
 void load(all_data &dict, std::istream &in);
 void analyze(all_data &dict, std::istream &in);
 void exportToFile(all_data &dict, std::istream &in);

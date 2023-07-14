@@ -36,7 +36,7 @@ namespace
     }
     return out << "<EMPTY>";
   }
-  std::ostream &exportText(std::ostream &out, text_dict &dict, std::string filename)
+  std::ostream &exportText(std::ostream &out, dict_with_text &dict, std::string filename)
   {
     std::ostream::sentry sentry(out);
     if (!sentry)
