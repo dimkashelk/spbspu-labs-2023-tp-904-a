@@ -3,13 +3,9 @@
 #include <vector>
 #include <limits>
 #include <iterator>
+#include <io.h>
 #include "polygon.h"
 #include "command_dict.h"
-std::ostream &outInvalidCommandMessage(std::ostream &out)
-{
-  out << "<INVALID COMMAND>";
-  return out;
-}
 std::string inputCommand(std::istream &in)
 {
   std::string res;
@@ -67,7 +63,7 @@ int main(int argc, char *argv[])
     }
     catch (const std::logic_error &e)
     {
-      outInvalidCommandMessage(std::cout) << '\n';
+      dimkashelk::outInvalidCommand(std::cout) << "\n";
       std::cin.ignore(max_size, '\n');
       std::cin.clear();
     }
