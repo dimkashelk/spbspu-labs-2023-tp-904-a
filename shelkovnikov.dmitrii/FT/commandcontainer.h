@@ -3,9 +3,9 @@
 #include <iostream>
 #include "commands.h"
 #include "io.h"
-using func_with_istream = void(*)(all_data &, std::istream &);
+using func_with_istream = void(*)(frequency_text_pair &, std::istream &);
 using func_with_ostream = void(*)(std::ostream &);
-using func_with_iostream = void(*)(all_data &, std::istream &, std::ostream &);
+using func_with_iostream = void(*)(frequency_text_pair &, std::istream &, std::ostream &);
 namespace dimkashelk
 {
   class CommandContainer
@@ -16,7 +16,7 @@ namespace dimkashelk
   private:
     std::istream &in_;
     std::ostream &out_;
-    all_data data_;
+    frequency_text_pair data_;
     std::map< std::string, func_with_istream > dictWithIstream_;
     std::map< std::string, func_with_ostream > dictWithOstream_;
     std::map< std::string, func_with_iostream > dictWithIOstream_;

@@ -159,7 +159,7 @@ namespace
     }
   }
 }
-void load(all_data &dict, const std::string &filename)
+void load(frequency_text_pair &dict, const std::string &filename)
 {
   std::ifstream ifs(filename.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
   if (!ifs)
@@ -172,12 +172,12 @@ void load(all_data &dict, const std::string &filename)
   ifs.read(bytes.data(), fileSize);
   dict.second[filename] = std::string(bytes.data(), fileSize);
 }
-void load(all_data &dict, std::istream &in)
+void load(frequency_text_pair &dict, std::istream &in)
 {
   std::string filename = inputString(in);
   load(dict, filename);
 }
-void analyze(all_data &dict, std::istream &in)
+void analyze(frequency_text_pair &dict, std::istream &in)
 {
   std::string filename = inputString(in);
   if (dict.first.find(filename) == dict.first.end())
@@ -192,7 +192,7 @@ void analyze(all_data &dict, std::istream &in)
     ++dict_text[w];
   }
 }
-void exportToFile(all_data &dict, std::istream &in)
+void exportToFile(frequency_text_pair &dict, std::istream &in)
 {
   std::string dictname = inputString(in);
   std::string filename = inputString(in);
@@ -203,7 +203,7 @@ void exportToFile(all_data &dict, std::istream &in)
   }
   exportFreqDict(out, dict.first, dictname);
 }
-void exportWithText(all_data &dict, std::istream &in)
+void exportWithText(frequency_text_pair &dict, std::istream &in)
 {
   std::string dictname = inputString(in);
   std::string filename = inputString(in);
@@ -215,14 +215,14 @@ void exportWithText(all_data &dict, std::istream &in)
   exportText(out, dict.second, dictname) << outTwoEmptyLines;
   exportFreqDict(out, dict.first, dictname);
 }
-void printWord(all_data &dict, std::istream &in, std::ostream &out)
+void printWord(frequency_text_pair &dict, std::istream &in, std::ostream &out)
 {
   std::string dictname = inputString(in);
   std::string word = inputString(in);
   dimkashelk::Word w(word);
   out << dict.first.at(dictname).at(w) << "\n";
 }
-void print(all_data &dict, std::istream &in, std::ostream &out)
+void print(frequency_text_pair &dict, std::istream &in, std::ostream &out)
 {
   std::string filename = inputString(in);
   std::ostream::sentry sentry(out);
@@ -232,24 +232,24 @@ void print(all_data &dict, std::istream &in, std::ostream &out)
   }
   exportFreqDict(out, dict.first, filename) << "\n";
 }
-void deleteWord(all_data &dict, std::istream &in)
+void deleteWord(frequency_text_pair &dict, std::istream &in)
 {
   std::string dictname = inputString(in);
   std::string word = inputString(in);
   dimkashelk::Word w(word);
   dict.first.at(dictname).erase(w);
 }
-void deleteDict(all_data &dict, std::istream &in)
+void deleteDict(frequency_text_pair &dict, std::istream &in)
 {
   std::string filename = inputString(in);
   dict.first.erase(filename);
 }
-void remove(all_data &dict, std::istream &in)
+void remove(frequency_text_pair &dict, std::istream &in)
 {
   std::string filename = inputString(in);
   dict.second.erase(filename);
 }
-void getTop(all_data &dict, std::istream &in, std::ostream &out)
+void getTop(frequency_text_pair &dict, std::istream &in, std::ostream &out)
 {
   std::string dictname = inputString(in);
   size_t count = inputSizeT(in);
@@ -262,7 +262,7 @@ void getTop(all_data &dict, std::istream &in, std::ostream &out)
   using pairIter = std::ostream_iterator< dimkashelk::MapPair >;
   std::copy(data.begin(), data.end(), pairIter(out, "\n"));
 }
-void getComplement(all_data &dict, std::istream &in)
+void getComplement(frequency_text_pair &dict, std::istream &in)
 {
   std::string newdata = inputString(in);
   std::string dict1 = inputString(in);
@@ -285,7 +285,7 @@ void getComplement(all_data &dict, std::istream &in)
     }
   }
 }
-void getIntersect(all_data &dict, std::istream &in)
+void getIntersect(frequency_text_pair &dict, std::istream &in)
 {
   std::string newdata = inputString(in);
   std::string dict1 = inputString(in);
@@ -301,7 +301,7 @@ void getIntersect(all_data &dict, std::istream &in)
     res->second = std::min(res->second, item.second);
   }
 }
-void getUnion(all_data &dict, std::istream &in)
+void getUnion(frequency_text_pair &dict, std::istream &in)
 {
   std::string newdata = inputString(in);
   std::string dict1 = inputString(in);
