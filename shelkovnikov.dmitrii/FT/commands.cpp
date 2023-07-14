@@ -131,7 +131,7 @@ namespace
     return out << "help - displays a list of available commands";
   }
 }
-void dimkashelk::load(all_data &dict, c_s filename)
+void load(all_data &dict, c_s filename)
 {
   std::ifstream ifs(filename.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
   if (!ifs)
@@ -144,7 +144,7 @@ void dimkashelk::load(all_data &dict, c_s filename)
   ifs.read(bytes.data(), fileSize);
   dict.second[filename] = std::string(bytes.data(), fileSize);
 }
-void dimkashelk::analyze(all_data &dict, c_s filename)
+void analyze(all_data &dict, c_s filename)
 {
   if (dict.first.find(filename) == dict.first.end())
   {
@@ -154,11 +154,11 @@ void dimkashelk::analyze(all_data &dict, c_s filename)
   auto &dict_text = dict.first[filename];
   while (parser.hasNext())
   {
-    Word w(parser());
+    dimkashelk::Word w(parser());
     ++dict_text[w];
   }
 }
-void dimkashelk::exportToFile(all_data &dict, c_s dictname, c_s filename)
+void exportToFile(all_data &dict, c_s dictname, c_s filename)
 {
   std::ofstream out(filename);
   if (!out)
@@ -167,7 +167,7 @@ void dimkashelk::exportToFile(all_data &dict, c_s dictname, c_s filename)
   }
   exportFreqDict(out, dict.first, dictname);
 }
-void dimkashelk::exportWithText(all_data &dict, c_s dictname, c_s filename)
+void exportWithText(all_data &dict, c_s dictname, c_s filename)
 {
   std::ofstream out(filename);
   if (!out)
@@ -177,12 +177,12 @@ void dimkashelk::exportWithText(all_data &dict, c_s dictname, c_s filename)
   exportText(out, dict.second, dictname) << outTwoEmptyLines;
   exportFreqDict(out, dict.first, dictname);
 }
-void dimkashelk::printWord(all_data &dict, c_s dictname, c_s word, std::ostream &out)
+void printWord(all_data &dict, c_s dictname, c_s word, std::ostream &out)
 {
-  Word w(word);
+  dimkashelk::Word w(word);
   out << dict.first.at(dictname).at(w) << "\n";
 }
-void dimkashelk::print(all_data &dict, c_s filename, std::ostream &out)
+void print(all_data &dict, c_s filename, std::ostream &out)
 {
   std::ostream::sentry sentry(out);
   if (!sentry)
@@ -191,31 +191,31 @@ void dimkashelk::print(all_data &dict, c_s filename, std::ostream &out)
   }
   exportFreqDict(out, dict.first, filename) << "\n";
 }
-void dimkashelk::deleteWord(all_data &dict, c_s dictname, c_s word)
+void deleteWord(all_data &dict, c_s dictname, c_s word)
 {
-  Word w(word);
+  dimkashelk::Word w(word);
   dict.first.at(dictname).erase(w);
 }
-void dimkashelk::deleteDict(all_data &dict, c_s filename)
+void deleteDict(all_data &dict, c_s filename)
 {
   dict.first.erase(filename);
 }
-void dimkashelk::remove(all_data &dict, c_s filename)
+void remove(all_data &dict, c_s filename)
 {
   dict.second.erase(filename);
 }
-void dimkashelk::getTop(all_data &dict, c_s dictname, size_t count, std::ostream &out)
+void getTop(all_data &dict, c_s dictname, size_t count, std::ostream &out)
 {
   using namespace std::placeholders;
   auto func = std::bind(isGreaterCount, _1, count);
-  std::vector< MapPair > data;
+  std::vector< dimkashelk::MapPair > data;
   std::copy_if(dict.first[dictname].begin(), dict.first[dictname].end(), std::back_inserter(data), func);
   std::sort(data.begin(), data.end());
   std::reverse(data.begin(), data.end());
   using pairIter = std::ostream_iterator< dimkashelk::MapPair >;
   std::copy(data.begin(), data.end(), pairIter(out, "\n"));
 }
-void dimkashelk::getComplement(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
+void getComplement(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
 {
   dict.first[newdata] = dict.first[dict1];
   for (auto &item: dict.first[dict2])
@@ -235,7 +235,7 @@ void dimkashelk::getComplement(all_data &dict, c_s newdata, c_s dict1, c_s dict2
     }
   }
 }
-void dimkashelk::getIntersect(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
+void getIntersect(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
 {
   dict.first[newdata] = dict.first[dict1];
   for (auto &item: dict.first[dict2])
@@ -248,7 +248,7 @@ void dimkashelk::getIntersect(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
     res->second = std::min(res->second, item.second);
   }
 }
-void dimkashelk::getUnion(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
+void getUnion(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
 {
   dict.first[newdata] = dict.first[dict1];
   for (auto &item: dict.first[dict2])
@@ -264,7 +264,7 @@ void dimkashelk::getUnion(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
     }
   }
 }
-void dimkashelk::help(std::ostream &out)
+void help(std::ostream &out)
 {
   outInfoAboutLoadCommand(out) << "\n";
   outInfoAboutAnalyzeCommand(out) << "\n";
