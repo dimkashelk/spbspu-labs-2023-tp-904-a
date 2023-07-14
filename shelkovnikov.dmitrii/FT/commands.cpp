@@ -285,8 +285,11 @@ void getComplement(all_data &dict, std::istream &in)
     }
   }
 }
-void getIntersect(all_data &dict, c_s newdata, c_s dict1, c_s dict2)
+void getIntersect(all_data &dict, std::istream &in)
 {
+  std::string newdata = inputString(in);
+  std::string dict1 = inputString(in);
+  std::string dict2 = inputString(in);
   dict.first[newdata] = dict.first[dict1];
   for (auto &item: dict.first[dict2])
   {
