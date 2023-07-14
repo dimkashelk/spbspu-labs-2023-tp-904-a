@@ -223,8 +223,10 @@ void exportWithText(all_data &dict, std::istream &in)
   exportText(out, dict.second, dictname) << outTwoEmptyLines;
   exportFreqDict(out, dict.first, dictname);
 }
-void printWord(all_data &dict, c_s dictname, c_s word, std::ostream &out)
+void printWord(all_data &dict, std::istream &in, std::ostream &out)
 {
+  std::string dictname = inputString(in);
+  std::string word = inputString(in);
   dimkashelk::Word w(word);
   out << dict.first.at(dictname).at(w) << "\n";
 }
