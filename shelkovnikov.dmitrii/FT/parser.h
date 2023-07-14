@@ -6,7 +6,7 @@ class Parser
 public:
   explicit Parser(const std::string &data);
   std::string operator()();
-  bool hasNext();
+  bool hasNext() const;
 private:
   std::string data_;
   std::string skipSpaceInBeginEnd(const std::string &str);

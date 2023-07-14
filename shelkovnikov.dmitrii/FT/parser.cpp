@@ -30,7 +30,7 @@ std::string Parser::skipSpaceInBeginEnd(const std::string &str)
   const auto strRange = strEnd - strBegin + 1;
   return str.substr(strBegin, strRange);
 }
-bool Parser::hasNext()
+bool Parser::hasNext() const
 {
   return data_ != "";
 }
