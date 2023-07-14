@@ -20,13 +20,6 @@ namespace dimkashelk
     std::map< std::string, func_with_istream > dictWithIstream_;
     std::map< std::string, func_with_ostream > dictWithOstream_;
     std::map< std::string, func_with_iostream > dictWithIOstream_;
-    std::map< std::string, func_with_istream > initializeIstream();
-    std::map< std::string, func_with_ostream > initializeOstream();
-    std::map< std::string, func_with_iostream > initializeIOstream();
-    std::string inputString();
-    std::pair< std::string, std::string > input2String();
-    std::tuple< std::string, std::string, std::string > input3String();
-    size_t inputSizeT();
   };
 }
 #endif

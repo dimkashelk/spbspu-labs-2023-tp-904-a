@@ -1,16 +1,7 @@
 #include "commandcontainer.h"
 #include <iostream>
 #include "commands.h"
-using con = dimkashelk::CommandContainer;
-con::CommandContainer(std::istream &in, std::ostream &out):
-  in_(in),
-  out_(out),
-  data_(),
-  dictWithIstream_(initializeIstream()),
-  dictWithOstream_(initializeOstream()),
-  dictWithIOstream_(initializeIOstream())
-{}
-std::map< std::string, func_with_istream > con::initializeIstream()
+std::map< std::string, func_with_istream > initializeIstream()
 {
   std::map< std::string, func_with_istream > res;
   res["load"] = load;
@@ -25,7 +16,7 @@ std::map< std::string, func_with_istream > con::initializeIstream()
   res["union"] = getUnion;
   return res;
 }
-std::map< std::string, func_with_iostream > con::initializeIOstream()
+std::map< std::string, func_with_iostream > initializeIOstream()
 {
   std::map< std::string, func_with_iostream > res;
   res["printWord"] = printWord;
@@ -33,12 +24,21 @@ std::map< std::string, func_with_iostream > con::initializeIOstream()
   res["top"] = getTop;
   return res;
 }
-std::map< std::string, func_with_ostream > con::initializeOstream()
+std::map< std::string, func_with_ostream > initializeOstream()
 {
   std::map< std::string, func_with_ostream > res;
   res["help"] = help;
   return res;
 }
+using con = dimkashelk::CommandContainer;
+con::CommandContainer(std::istream &in, std::ostream &out):
+  in_(in),
+  out_(out),
+  data_(),
+  dictWithIstream_(initializeIstream()),
+  dictWithOstream_(initializeOstream()),
+  dictWithIOstream_(initializeIOstream())
+{}
 void con::doCommand(const std::string &command)
 {
   try
@@ -63,7 +63,7 @@ void con::doCommand(const std::string &command)
   catch (const std::out_of_range &e)
   {}
 }
-std::string con::inputString()
+std::string inputString(std::istream &in_)
 {
   std::istream::sentry sentry(in_);
   std::string res;
@@ -77,15 +77,15 @@ std::string con::inputString()
     throw std::logic_error("Cannot input");
   }
 }
-std::pair< std::string, std::string > con::input2String()
+std::pair< std::string, std::string > input2String(std::istream &in_)
 {
-  return {inputString(), inputString()};
+  return {inputString(in_), inputString(in_)};
 }
-std::tuple< std::string, std::string, std::string > con::input3String()
+std::tuple< std::string, std::string, std::string > input3String(std::istream &in_)
 {
-  return std::tuple< std::string, std::string, std::string >(inputString(), inputString(), inputString());
+  return std::tuple< std::string, std::string, std::string >(inputString(in_), inputString(in_), inputString(in_));
 }
-size_t dimkashelk::CommandContainer::inputSizeT()
+size_t inputSizeT(std::istream &in_)
 {
   std::istream::sentry sentry(in_);
   size_t res;
