@@ -130,13 +130,13 @@ namespace
   {
     return out << "help - displays a list of available commands";
   }
-  std::string inputString(std::istream &in_)
+  std::string inputString(std::istream &in)
   {
-    std::istream::sentry sentry(in_);
+    std::istream::sentry sentry(in);
     std::string res;
     if (sentry)
     {
-      in_ >> res;
+      in >> res;
       return res;
     }
     else
@@ -167,8 +167,9 @@ namespace
     }
   }
 }
-void load(all_data &dict, c_s filename)
+void load(all_data &dict, std::istream &in)
 {
+  std::string filename = inputString(in);
   std::ifstream ifs(filename.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
   if (!ifs)
   {
