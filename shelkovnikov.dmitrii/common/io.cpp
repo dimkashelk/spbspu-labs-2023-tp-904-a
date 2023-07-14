@@ -165,4 +165,8 @@ namespace dimkashelk
     s_.precision(precision_);
     s_.flags(fmt_);
   }
+  std::ostream &outInvalidCommand(std::ostream &out)
+  {
+    return out << "<INVALID COMMAND>";
+  }
 }

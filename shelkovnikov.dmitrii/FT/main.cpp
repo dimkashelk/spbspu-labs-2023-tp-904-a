@@ -1,10 +1,7 @@
 #include <iostream>
 #include <limits>
 #include "commandcontainer.h"
-std::ostream &outInvalidCommand(std::ostream &out)
-{
-  return out << "<INVALID COMMAND>";
-}
+#include "io.h"
 std::ostream &outErrorFile(std::ostream &out)
 {
   return out << "Can't open file";
@@ -28,7 +25,7 @@ int main()
     }
     catch (const std::logic_error &e)
     {
-      outInvalidCommand(std::cout) << "\n";
+      dimkashelk::outInvalidCommand(std::cout) << "\n";
       skipCommand(std::cin);
     }
     catch (const std::runtime_error &e)
