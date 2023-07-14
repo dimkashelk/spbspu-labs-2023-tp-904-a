@@ -249,8 +249,10 @@ void remove(all_data &dict, std::istream &in)
   std::string filename = inputString(in);
   dict.second.erase(filename);
 }
-void getTop(all_data &dict, c_s dictname, size_t count, std::ostream &out)
+void getTop(all_data &dict, std::istream &in, std::ostream &out)
 {
+  std::string dictname = inputString(in);
+  size_t count = inputSizeT(in);
   using namespace std::placeholders;
   auto func = std::bind(isGreaterCount, _1, count);
   std::vector< dimkashelk::MapPair > data;
