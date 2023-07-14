@@ -144,14 +144,6 @@ namespace
       throw std::logic_error("Cannot input");
     }
   }
-  std::pair< std::string, std::string > input2String(std::istream &in_)
-  {
-    return {inputString(in_), inputString(in_)};
-  }
-  std::tuple< std::string, std::string, std::string > input3String(std::istream &in_)
-  {
-    return std::tuple< std::string, std::string, std::string >(inputString(in_), inputString(in_), inputString(in_));
-  }
   size_t inputSizeT(std::istream &in_)
   {
     std::istream::sentry sentry(in_);
@@ -230,8 +222,9 @@ void printWord(all_data &dict, std::istream &in, std::ostream &out)
   dimkashelk::Word w(word);
   out << dict.first.at(dictname).at(w) << "\n";
 }
-void print(all_data &dict, c_s filename, std::ostream &out)
+void print(all_data &dict, std::istream &in, std::ostream &out)
 {
+  std::string filename = inputString(in);
   std::ostream::sentry sentry(out);
   if (!sentry)
   {
