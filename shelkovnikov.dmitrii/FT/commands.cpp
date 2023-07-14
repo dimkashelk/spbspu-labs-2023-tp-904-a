@@ -232,8 +232,10 @@ void print(all_data &dict, std::istream &in, std::ostream &out)
   }
   exportFreqDict(out, dict.first, filename) << "\n";
 }
-void deleteWord(all_data &dict, c_s dictname, c_s word)
+void deleteWord(all_data &dict, std::istream &in)
 {
+  std::string dictname = inputString(in);
+  std::string word = inputString(in);
   dimkashelk::Word w(word);
   dict.first.at(dictname).erase(w);
 }
