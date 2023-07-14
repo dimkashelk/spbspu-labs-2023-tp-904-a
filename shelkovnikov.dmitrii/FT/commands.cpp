@@ -200,8 +200,10 @@ void analyze(all_data &dict, std::istream &in)
     ++dict_text[w];
   }
 }
-void exportToFile(all_data &dict, c_s dictname, c_s filename)
+void exportToFile(all_data &dict, std::istream &in)
 {
+  std::string dictname = inputString(in);
+  std::string filename = inputString(in);
   std::ofstream out(filename);
   if (!out)
   {
