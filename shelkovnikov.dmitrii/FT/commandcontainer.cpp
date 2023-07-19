@@ -1,34 +1,37 @@
 #include "commandcontainer.h"
 #include <iostream>
 #include "commands.h"
-std::map< std::string, func_with_istream > initializeIstream()
+namespace
 {
-  std::map< std::string, func_with_istream > res;
-  res["load"] = load;
-  res["analyze"] = analyze;
-  res["export"] = exportToFile;
-  res["exportWithText"] = exportWithText;
-  res["deleteWord"] = deleteWord;
-  res["delete"] = deleteDict;
-  res["remove"] = remove;
-  res["intersect"] = getIntersect;
-  res["complement"] = getComplement;
-  res["union"] = getUnion;
-  return res;
-}
-std::map< std::string, func_with_iostream > initializeIOstream()
-{
-  std::map< std::string, func_with_iostream > res;
-  res["printWord"] = printWord;
-  res["print"] = print;
-  res["top"] = getTop;
-  return res;
-}
-std::map< std::string, func_with_ostream > initializeOstream()
-{
-  std::map< std::string, func_with_ostream > res;
-  res["help"] = help;
-  return res;
+  std::map< std::string, func_with_istream > initializeIstream()
+  {
+    std::map< std::string, func_with_istream > res;
+    res["load"] = load;
+    res["analyze"] = analyze;
+    res["export"] = exportToFile;
+    res["exportWithText"] = exportWithText;
+    res["deleteWord"] = deleteWord;
+    res["delete"] = deleteDict;
+    res["remove"] = remove;
+    res["intersect"] = getIntersect;
+    res["complement"] = getComplement;
+    res["union"] = getUnion;
+    return res;
+  }
+  std::map< std::string, func_with_iostream > initializeIOstream()
+  {
+    std::map< std::string, func_with_iostream > res;
+    res["printWord"] = printWord;
+    res["print"] = print;
+    res["top"] = getTop;
+    return res;
+  }
+  std::map< std::string, func_with_ostream > initializeOstream()
+  {
+    std::map< std::string, func_with_ostream > res;
+    res["help"] = help;
+    return res;
+  }
 }
 using con = dimkashelk::CommandContainer;
 con::CommandContainer(std::istream &in, std::ostream &out):
