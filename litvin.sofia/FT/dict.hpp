@@ -3,16 +3,14 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <unordered_map>
 namespace litvin
 {
   using translations = std::vector< std::string >;
-  struct dict_t
+  using dict_t = std::map< std::string, translations >;
+  struct dicts_list_t
   {
-    std::map< std::string, translations > dict;
-  };
-  struct list_of_dicts_t
-  {
-    std::map< std::string, dict_t > dict_list;
+    std::unordered_map< std::string, dict_t > dict_list;
   };
 }
 #endif
