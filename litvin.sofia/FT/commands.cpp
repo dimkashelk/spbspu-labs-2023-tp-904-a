@@ -117,3 +117,23 @@ void litvin::editWordTranslation(dicts_list_t & list, const std::string & dict_n
     out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
+void litvin::addWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word,
+                                const std::string & new_translation, std::ostream & out)
+{
+  if (findDict(list, dict_name))
+  {
+    translations * trans_v = findWordTranslation(list, dict_name, word);
+    if (trans_v != nullptr)
+    {
+      trans_v->push_back(new_translation);
+    }
+    else
+    {
+      out << "Word " << word << " does not belongs to " << dict_name << " dictionary\n";
+    }
+  }
+  else
+  {
+    out << "A dictionary " << dict_name << " does not exists\n";
+  }
+}

@@ -16,5 +16,7 @@ namespace litvin
                           std::ostream & out);
   void editWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word,
                            size_t num_of_translation, const std::string & new_translation, std::ostream & out);
+  void addWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word,
+                          const std::string & new_translation, std::ostream & out);
 }
 #endif
