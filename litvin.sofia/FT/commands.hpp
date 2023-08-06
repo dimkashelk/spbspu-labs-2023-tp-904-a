@@ -6,13 +6,15 @@
 #include "dict.hpp"
 namespace litvin
 {
+  bool findDict(const dicts_list_t & list, const std::string & dict_name);
+  translations* findWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word);
   void createNewDict(dicts_list_t & list, const std::string & dict_name, std::ostream & out);
   void deleteDict(dicts_list_t & list, const std::string & dict_name, std::ostream & out);
   void insertWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word,
                              const std::string & trans, std::ostream & out);
   void removeWordFromDict(dicts_list_t & list, const std::string & dict_name, const std::string & word,
                           std::ostream & out);
-  bool findDict(const dicts_list_t & list, const std::string & dict_name);
-  translations* findWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word);
+  void editWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word,
+                           size_t num_of_translation, const std::string & new_translation, std::ostream & out);
 }
 #endif

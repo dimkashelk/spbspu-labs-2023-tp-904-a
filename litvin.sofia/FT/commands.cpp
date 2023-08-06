@@ -27,7 +27,7 @@ void litvin::createNewDict(dicts_list_t & list, const std::string & dict_name, s
 {
   if (findDict(list, dict_name))
   {
-    out << "A dictionary with this name already exists\n";
+    out << "A dictionary " << dict_name << " already exists\n";
   }
   else
   {
@@ -45,7 +45,7 @@ void litvin::deleteDict(dicts_list_t & list, const std::string & dict_name, std:
   }
   else
   {
-    out << "A dictionary with this name does not exists\n";
+    out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
 void litvin::insertWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word,
@@ -68,7 +68,7 @@ void litvin::insertWordTranslation(dicts_list_t & list, const std::string & dict
   }
   else
   {
-    out << "A dictionary with this name does not exists\n";
+    out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
 void litvin::removeWordFromDict(dicts_list_t & list, const std::string & dict_name, const std::string & word,
@@ -77,15 +77,43 @@ void litvin::removeWordFromDict(dicts_list_t & list, const std::string & dict_na
   if (findDict(list, dict_name))
   {
     translations * trans_v = findWordTranslation(list, dict_name, word);
-    if(trans_v != nullptr){
+    if (trans_v != nullptr)
+    {
       list.dict_list[dict_name].erase(word);
     }
-    else{
+    else
+    {
       out << "There is no " << word << " translation in " << dict_name << "dictionary\n";
     }
   }
   else
   {
-    out << "A dictionary with this name does not exists\n";
+    out << "A dictionary " << dict_name << " does not exists\n";
+  }
+}
+void litvin::editWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word,
+                                 size_t num_of_translation, const std::string & new_translation, std::ostream & out)
+{
+  if (findDict(list, dict_name))
+  {
+    translations * trans_v = findWordTranslation(list, dict_name, word);
+    if (trans_v != nullptr)
+    {
+      try
+      {
+        trans_v->at(num_of_translation - 1) = new_translation;
+      } catch (const std::out_of_range &)
+      {
+        out << "There is no translation in " << dict_name << " with number " << num_of_translation << '\n';
+      }
+    }
+    else
+    {
+      out << "Word " << word << " does not belongs to " << dict_name << " dictionary\n";
+    }
+  }
+  else
+  {
+    out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
