@@ -1,4 +1,5 @@
 #include "commands.hpp"
+#include <algorithm>
 #include "dict.hpp"
 bool litvin::findDict(const dicts_list_t & list, const std::string & dict_name)
 {
@@ -157,6 +158,29 @@ void litvin::eraseWordTranslation(dicts_list_t & list, const std::string & dict_
     else
     {
       out << "Word " << word << " does not belongs to " << dict_name << " dictionary\n";
+    }
+  }
+  else
+  {
+    out << "A dictionary " << dict_name << " does not exists\n";
+  }
+}
+void litvin::printDict(dicts_list_t & list, const std::string & dict_name, std::ostream & out)
+{
+  if (findDict(list, dict_name))
+  {
+    const dict_t & dictionary = list.dict_list[dict_name];
+    for (const auto & entry: dictionary)
+    {
+      const std::string & word = entry.first;
+      const translations & transList = entry.second;
+      out << word << ':' << "\n";
+      size_t translationNumber = 1;
+      for (const std::string & translation: transList)
+      {
+        out << "  " << translationNumber << ". " << translation << "\n";
+        translationNumber++;
+      }
     }
   }
   else
