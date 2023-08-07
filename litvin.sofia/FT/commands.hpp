@@ -23,5 +23,7 @@ namespace litvin
   void printDict(dicts_list_t & list, const std::string & dict_name, std::ostream & out);
   void printDictByLetter(dicts_list_t & list, const std::string & dict_name, char letter, std::ostream & out);
   void searchWord(dicts_list_t & list, const std::string & word, std::ostream & out);
+  void unionDictionaries(dicts_list_t & list, const std::string & dict1, const std::string & dict2,
+                             const std::string & dict3, std::ostream & out);
 }
 #endif

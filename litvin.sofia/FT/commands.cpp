@@ -173,13 +173,13 @@ void litvin::printDict(dicts_list_t & list, const std::string & dict_name, std::
     for (const auto & entry: dictionary)
     {
       const std::string & word = entry.first;
-      const translations & transList = entry.second;
+      const translations & trans_list = entry.second;
       out << word << ":\n";
-      size_t translationNumber = 1;
-      for (const std::string & translation: transList)
+      size_t translation_number = 1;
+      for (const std::string & translation: trans_list)
       {
-        out << "  " << translationNumber << ". " << translation << "\n";
-        translationNumber++;
+        out << "  " << translation_number << ". " << translation << "\n";
+        translation_number++;
       }
     }
   }
@@ -196,15 +196,15 @@ void litvin::printDictByLetter(dicts_list_t & list, const std::string & dict_nam
     for (const auto & entry: dictionary)
     {
       const std::string & word = entry.first;
-      const translations & transList = entry.second;
+      const translations & trans_list = entry.second;
       if (word.front() == letter)
       {
         out << word << ":\n";
-        size_t translationNumber = 1;
-        for (const std::string & translation: transList)
+        size_t translation_number = 1;
+        for (const std::string & translation: trans_list)
         {
-          out << "  " << translationNumber << ". " << translation << "\n";
-          translationNumber++;
+          out << "  " << translation_number << ". " << translation << "\n";
+          translation_number++;
         }
       }
     }
@@ -224,18 +224,47 @@ void litvin::searchWord(dicts_list_t & list, const std::string & word, std::ostr
     if (dictionary.count(word))
     {
       quantity++;
-      const translations & transList = dictionary.at(word);
+      const translations & trans_list = dictionary.at(word);
       out << "The word '" << word << "' is found in the dictionary '" << dict_name << ":\n";
-      size_t translationNumber = 1;
-      for (const std::string & translation: transList)
+      size_t translation_number = 1;
+      for (const std::string & translation: trans_list)
       {
-        out << translationNumber << ". " << translation << "\n";
-        translationNumber++;
+        out << translation_number << ". " << translation << "\n";
+        translation_number++;
       }
     }
   }
   if (quantity == 0)
   {
     out << word << " is not found\n";
+  }
+}
+void litvin::unionDictionaries(dicts_list_t & list, const std::string & dict1, const std::string & dict2,
+                                   const std::string & dict3, std::ostream & out)
+{
+  if (findDict(list, dict1))
+  {
+    if (findDict(list, dict2))
+    {
+      const dict_t & dictionary1 = list.dict_list[dict1];
+      const dict_t & dictionary2 = list.dict_list[dict2];
+      createNewDict(list, dict3, out);
+      for (const auto & element: list.dict_list[dict1])
+      {
+        list.dict_list[dict3].insert(element);
+      }
+      for (const auto & element: list.dict_list[dict2])
+      {
+        list.dict_list[dict3].insert(element);
+      }
+    }
+    else
+    {
+      out << "A dictionary " << dict2 << " does not exists\n";
+    }
+  }
+  else
+  {
+    out << "A dictionary " << dict1 << " does not exists\n";
   }
 }
