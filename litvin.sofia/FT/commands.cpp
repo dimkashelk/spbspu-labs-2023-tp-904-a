@@ -174,12 +174,38 @@ void litvin::printDict(dicts_list_t & list, const std::string & dict_name, std::
     {
       const std::string & word = entry.first;
       const translations & transList = entry.second;
-      out << word << ':' << "\n";
+      out << word << ":\n";
       size_t translationNumber = 1;
       for (const std::string & translation: transList)
       {
         out << "  " << translationNumber << ". " << translation << "\n";
         translationNumber++;
+      }
+    }
+  }
+  else
+  {
+    out << "A dictionary " << dict_name << " does not exists\n";
+  }
+}
+void litvin::printDictByLetter(dicts_list_t & list, const std::string & dict_name, char letter, std::ostream & out)
+{
+  if (findDict(list, dict_name))
+  {
+    const dict_t & dictionary = list.dict_list[dict_name];
+    for (const auto & entry: dictionary)
+    {
+      const std::string & word = entry.first;
+      const translations & transList = entry.second;
+      if (word.front() == letter)
+      {
+        out << word << ":\n";
+        size_t translationNumber = 1;
+        for (const std::string & translation: transList)
+        {
+          out << "  " << translationNumber << ". " << translation << "\n";
+          translationNumber++;
+        }
       }
     }
   }

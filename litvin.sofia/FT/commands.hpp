@@ -21,5 +21,6 @@ namespace litvin
   void eraseWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word,
                             size_t num_of_translation, std::ostream & out);
   void printDict(dicts_list_t & list, const std::string & dict_name, std::ostream & out);
+  void printDictByLetter(dicts_list_t & list, const std::string & dict_name, char letter, std::ostream & out);
 }
 #endif
