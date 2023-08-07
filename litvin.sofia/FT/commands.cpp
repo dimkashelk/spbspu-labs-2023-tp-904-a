@@ -214,3 +214,28 @@ void litvin::printDictByLetter(dicts_list_t & list, const std::string & dict_nam
     out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
+void litvin::searchWord(dicts_list_t & list, const std::string & word, std::ostream & out)
+{
+  size_t quantity = 0;
+  for (const auto & dict: list.dict_list)
+  {
+    const std::string & dict_name = dict.first;
+    const dict_t & dictionary = dict.second;
+    if (dictionary.count(word))
+    {
+      quantity++;
+      const translations & transList = dictionary.at(word);
+      out << "The word '" << word << "' is found in the dictionary '" << dict_name << ":\n";
+      size_t translationNumber = 1;
+      for (const std::string & translation: transList)
+      {
+        out << translationNumber << ". " << translation << "\n";
+        translationNumber++;
+      }
+    }
+  }
+  if (quantity == 0)
+  {
+    out << word << " is not found\n";
+  }
+}
