@@ -14,6 +14,8 @@ litvin::command_dict_t::command_dict_t()
   dict3.insert({"PRINTL", printDictByLetter});
   dict4.insert({"EDIT", editWordTranslation});
   dict5.insert({"ERASE", eraseWordTranslation});
+  dict6.insert({"HELP", help});
+  dict7.insert({"MAN", man});
 }
 litvin::command_descriptors litvin::createCommandDescriptorsDict()
 {
