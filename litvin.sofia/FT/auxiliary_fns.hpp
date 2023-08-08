@@ -24,5 +24,8 @@ namespace litvin
     std::map< std::string, signature_type_4 > dict4;
     std::map< std::string, signature_type_5 > dict5;
   };
+  using command_descriptors = std::map<std::string, std::string>;
+  command_descriptors createCommandDescriptorsDict();
+  void man(const command_descriptors & cmd_desc, const std::string & command, std::ostream & out);
 }
 #endif
