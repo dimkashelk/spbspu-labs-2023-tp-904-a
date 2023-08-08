@@ -1,6 +1,5 @@
 #include "commands.hpp"
 #include <algorithm>
-#include "dict.hpp"
 bool litvin::findDict(const dicts_list_t & list, const std::string & dict_name)
 {
   try
@@ -188,7 +187,8 @@ void litvin::printDict(dicts_list_t & list, const std::string & dict_name, std::
     out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
-void litvin::printDictByLetter(dicts_list_t & list, const std::string & dict_name, char letter, std::ostream & out)
+void litvin::printDictByLetter(dicts_list_t & list, const std::string & dict_name, const std::string & letter,
+                               std::ostream & out)
 {
   if (findDict(list, dict_name))
   {
@@ -197,7 +197,7 @@ void litvin::printDictByLetter(dicts_list_t & list, const std::string & dict_nam
     {
       const std::string & word = entry.first;
       const translations & trans_list = entry.second;
-      if (word.front() == letter)
+      if (word.front() == letter.front())
       {
         out << word << ":\n";
         size_t translation_number = 1;
