@@ -46,3 +46,10 @@ void litvin::man(const command_descriptors & cmd_desc, const std::string & comma
     out << "This command does not exists, see 'help'\n";
   }
 }
+void litvin::help(const command_descriptors & cmd_desc, std::ostream & out)
+{
+  for (const auto & desc: cmd_desc)
+  {
+    out << desc.first << " " << desc.second << '\n';
+  }
+}

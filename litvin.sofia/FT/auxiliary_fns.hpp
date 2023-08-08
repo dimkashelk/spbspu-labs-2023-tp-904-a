@@ -27,5 +27,6 @@ namespace litvin
   using command_descriptors = std::map<std::string, std::string>;
   command_descriptors createCommandDescriptorsDict();
   void man(const command_descriptors & cmd_desc, const std::string & command, std::ostream & out);
+  void help(const command_descriptors & cmd_desc, std::ostream & out);
 }
 #endif
