@@ -240,17 +240,66 @@ void litvin::searchWord(dicts_list_t & list, const std::string & word, std::ostr
   }
 }
 void litvin::unionDictionaries(dicts_list_t & list, const std::string & dict1, const std::string & dict2,
+                               const std::string & dict3, std::ostream & out)
+{
+  if (findDict(list, dict1))
+  {
+    if (findDict(list, dict2))
+    {
+      createNewDict(list, dict3, out);
+      dict_t & dictionary1 = list.dict_list[dict1];
+      dict_t & dictionary2 = list.dict_list[dict2];
+      dict_t & dictionary3 = list.dict_list[dict3];
+      for (const auto & element: dictionary1)
+      {
+        dictionary3.insert(element);
+      }
+      for (const auto & element: dictionary2)
+      {
+        dictionary3.insert(element);
+      }
+    }
+    else
+    {
+      out << "A dictionary " << dict2 << " does not exists\n";
+    }
+  }
+  else
+  {
+    out << "A dictionary " << dict1 << " does not exists\n";
+  }
+}
+void litvin::intersectDictionaries(dicts_list_t & list, const std::string & dict1, const std::string & dict2,
                                    const std::string & dict3, std::ostream & out)
 {
   if (findDict(list, dict1))
   {
     if (findDict(list, dict2))
     {
-      const dict_t & dictionary1 = list.dict_list[dict1];
-      const dict_t & dictionary2 = list.dict_list[dict2];
       createNewDict(list, dict3, out);
-      for (const auto & element: list.dict_list[dict1])
+      dict_t & dictionary1 = list.dict_list[dict1];
+      dict_t & dictionary2 = list.dict_list[dict2];
+      dict_t & dictionary3 = list.dict_list[dict3];
+      for (const auto & element: dictionary1)
       {
+        const std::string & word = element.first;
+        const translations & trans_list_1 = element.second;
+        if (dictionary2.count(word))
+        {
+          const translations & trans_list_2 = dictionary2.at(word);
+          translations intersection;
+          for (const auto & translation: trans_list_1)
+          {
+            if (std::find(trans_list_2.begin(), trans_list_2.end(), translation) != trans_list_2.end())
+            {
+              intersection.push_back(translation);
+            }
+          }
+          if (!intersection.empty())
+          {
+            dictionary3[word] = intersection;
+          }
+        }
         list.dict_list[dict3].insert(element);
       }
       for (const auto & element: list.dict_list[dict2])
