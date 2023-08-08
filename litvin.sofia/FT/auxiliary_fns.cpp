@@ -55,3 +55,50 @@ void litvin::help(const command_descriptors & cmd_desc, std::ostream & out)
     out << desc.first << " " << desc.second << '\n';
   }
 }
+void litvin::command_dict_t::executeCommand(const std::string & command, dicts_list_t & list, const std::string & str,
+                                            std::ostream & out)
+{
+  signature_type_1 function = dict1.at(command);
+  function(list, str, out);
+}
+void litvin::command_dict_t::executeCommand(const std::string & command, dicts_list_t & list, const std::string & dict,
+                                            const std::string & str1,
+                                            const std::string & str2, std::ostream & out)
+{
+  signature_type_2 function = dict2.at(command);
+  function(list, dict, str1, str2, out);
+}
+void litvin::command_dict_t::executeCommand(const std::string & command, dicts_list_t & list, const std::string & dict,
+                                            const std::string & str,
+                                            std::ostream & out)
+{
+  signature_type_3 function = dict3.at(command);
+  function(list, dict, str, out);
+}
+void litvin::command_dict_t::executeCommand(const std::string & command, dicts_list_t & list, const std::string & dict,
+                                            const std::string & word, size_t num,
+                                            const std::string & trans, std::ostream & out)
+{
+  signature_type_4 function = dict4.at(command);
+  function(list, dict, word, num, trans, out);
+}
+void litvin::command_dict_t::executeCommand(const std::string & command, dicts_list_t & list, const std::string & dict,
+                                            const std::string & word, size_t num,
+                                            std::ostream & out)
+{
+  signature_type_5 function = dict5.at(command);
+  function(list, dict, word, num, out);
+}
+void litvin::command_dict_t::executeCommand(const std::string & command, const command_descriptors & cmd_desc,
+                                            std::ostream & out)
+{
+  signature_type_6 function = dict6.at(command);
+  function(cmd_desc, out);
+}
+void litvin::command_dict_t::executeCommand(const std::string & command, const command_descriptors & cmd_desc,
+                                            const std::string & cmd,
+                                            std::ostream & out)
+{
+  signature_type_7 function = dict7.at(command);
+  function(cmd_desc, cmd, out);
+}

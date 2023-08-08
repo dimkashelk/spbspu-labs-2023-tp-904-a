@@ -32,14 +32,14 @@ namespace litvin
     std::map< std::string, signature_type_5 > dict5;
     std::map< std::string, signature_type_6 > dict6;
     std::map< std::string, signature_type_7 > dict7;
-    void executeCommand(const std::string & command, const std::string & str, std::ostream & out);
-    void executeCommand(const std::string & command, const std::string & dict, const std::string & str1,
+    void executeCommand(const std::string & command, dicts_list_t & list, const std::string & str, std::ostream & out);
+    void executeCommand(const std::string & command, dicts_list_t & list, const std::string & dict, const std::string & str1,
                         const std::string & str2, std::ostream & out);
-    void executeCommand(const std::string & command, const std::string & dict, const std::string & str,
+    void executeCommand(const std::string & command, dicts_list_t & list, const std::string & dict, const std::string & str,
                         std::ostream & out);
-    void executeCommand(const std::string & command, const std::string & dict, const std::string & word, size_t num,
+    void executeCommand(const std::string & command, dicts_list_t & list, const std::string & dict, const std::string & word, size_t num,
                         const std::string & trans, std::ostream & out);
-    void executeCommand(const std::string & command, const std::string & dict, const std::string & word, size_t num,
+    void executeCommand(const std::string & command, dicts_list_t & list, const std::string & dict, const std::string & word, size_t num,
                         std::ostream & out);
     void executeCommand(const std::string & command, const command_descriptors & cmd_desc, std::ostream & out);
     void executeCommand(const std::string & command, const command_descriptors & cmd_desc, const std::string & cmd,
