@@ -300,11 +300,37 @@ void litvin::intersectDictionaries(dicts_list_t & list, const std::string & dict
             dictionary3[word] = intersection;
           }
         }
-        list.dict_list[dict3].insert(element);
       }
-      for (const auto & element: list.dict_list[dict2])
+    }
+    else
+    {
+      out << "A dictionary " << dict2 << " does not exists\n";
+    }
+  }
+  else
+  {
+    out << "A dictionary " << dict1 << " does not exists\n";
+  }
+}
+void litvin::subtractDictionaries(dicts_list_t & list, const std::string & dict1, const std::string & dict2,
+                                  const std::string & dict3, std::ostream & out)
+{
+  if (findDict(list, dict1))
+  {
+    if (findDict(list, dict2))
+    {
+      createNewDict(list, dict3, out);
+      dict_t & dictionary1 = list.dict_list[dict1];
+      dict_t & dictionary2 = list.dict_list[dict2];
+      dict_t & dictionary3 = list.dict_list[dict3];
+      for (const auto & entry: dictionary1)
       {
-        list.dict_list[dict3].insert(element);
+        const std::string & word = entry.first;
+        if (dictionary2.count(word) == 0)
+        {
+          const translations & trans_list_1 = entry.second;
+          dictionary3[word] = trans_list_1;
+        }
       }
     }
     else
