@@ -40,6 +40,10 @@ void litvin::deleteDict(dicts_list_t & list, std::ostream & out, std::istream & 
 {
   std::string dict_name = " ";
   in >> dict_name;
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   if (findDict(list, dict_name))
   {
     list.dict_list.erase(dict_name);
@@ -58,6 +62,10 @@ void litvin::insertWordTranslation(dicts_list_t & list, std::ostream & out, std:
   in >> word;
   std::string trans = " ";
   getline(in, trans);
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   if (findDict(list, dict_name))
   {
     translations * trans_v = findWordTranslation(list, dict_name, word);
@@ -84,6 +92,10 @@ void litvin::removeWordFromDict(dicts_list_t & list, std::ostream & out, std::is
   in >> dict_name;
   std::string word = " ";
   in >> word;
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   if (findDict(list, dict_name))
   {
     translations * trans_v = findWordTranslation(list, dict_name, word);
@@ -93,7 +105,7 @@ void litvin::removeWordFromDict(dicts_list_t & list, std::ostream & out, std::is
     }
     else
     {
-      out << "There is no " << word << " translation in " << dict_name << "dictionary\n";
+      out << "There is no " << word << " translation in " << dict_name << " dictionary\n";
     }
   }
   else
@@ -111,6 +123,10 @@ void litvin::editWordTranslation(dicts_list_t & list, std::ostream & out, std::i
   in >> num_of_translation;
   std::string new_translation = " ";
   getline(in, new_translation);
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   if (findDict(list, dict_name))
   {
     translations * trans_v = findWordTranslation(list, dict_name, word);
@@ -142,6 +158,10 @@ void litvin::addWordTranslation(dicts_list_t & list, std::ostream & out, std::is
   in >> word;
   std::string new_translation = " ";
   getline(in, new_translation);
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   if (findDict(list, dict_name))
   {
     translations * trans_v = findWordTranslation(list, dict_name, word);
@@ -167,6 +187,10 @@ void litvin::eraseWordTranslation(dicts_list_t & list, std::ostream & out, std::
   in >> word;
   size_t num_of_translation = 0;
   in >> num_of_translation;
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   if (findDict(list, dict_name))
   {
     translations * trans_v = findWordTranslation(list, dict_name, word);
@@ -195,6 +219,10 @@ void litvin::printDict(dicts_list_t & list, std::ostream & out, std::istream & i
 {
   std::string dict_name = " ";
   in >> dict_name;
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   if (findDict(list, dict_name))
   {
     const dict_t & dictionary = list.dict_list[dict_name];
@@ -220,8 +248,12 @@ void litvin::printDictByLetter(dicts_list_t & list, std::ostream & out, std::ist
 {
   std::string dict_name = " ";
   in >> dict_name;
-  std::string letter = " ";
+  char letter = ' ';
   in >> letter;
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   if (findDict(list, dict_name))
   {
     const dict_t & dictionary = list.dict_list[dict_name];
@@ -229,7 +261,7 @@ void litvin::printDictByLetter(dicts_list_t & list, std::ostream & out, std::ist
     {
       const std::string & word = entry.first;
       const translations & trans_list = entry.second;
-      if (word.front() == letter.front())
+      if (word.front() == letter)
       {
         out << word << ":\n";
         size_t translation_number = 1;
@@ -250,6 +282,10 @@ void litvin::searchWord(dicts_list_t & list, std::ostream & out, std::istream & 
 {
   std::string word = " ";
   in >> word;
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   size_t quantity = 0;
   for (const auto & dict: list.dict_list)
   {
@@ -281,6 +317,10 @@ void litvin::unionDictionaries(dicts_list_t & list, std::ostream & out, std::ist
   in >> dict1;
   in >> dict2;
   in >> dict3;
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   if (findDict(list, dict1))
   {
     if (findDict(list, dict2))
@@ -316,6 +356,10 @@ void litvin::intersectDictionaries(dicts_list_t & list, std::ostream & out, std:
   in >> dict1;
   in >> dict2;
   in >> dict3;
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   if (findDict(list, dict1))
   {
     if (findDict(list, dict2))
@@ -364,6 +408,10 @@ void litvin::subtractDictionaries(dicts_list_t & list, std::ostream & out, std::
   in >> dict1;
   in >> dict2;
   in >> dict3;
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   if (findDict(list, dict1))
   {
     if (findDict(list, dict2))

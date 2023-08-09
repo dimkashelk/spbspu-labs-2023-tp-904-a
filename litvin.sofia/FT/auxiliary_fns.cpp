@@ -1,40 +1,40 @@
 #include "auxiliary_fns.hpp"
 litvin::command_dict_t::command_dict_t()
 {
-  dict1.insert({"SEARCH", searchWord});
-  dict1.insert({"PRINT", printDict});
-  dict1.insert({"DELETE", deleteDict});
-  dict3.insert({"NEW", createNewDict});
-  dict1.insert({"INSERT", insertWordTranslation});
-  dict1.insert({"ADD", addWordTranslation});
-  dict1.insert({"INTERSECT", intersectDictionaries});
-  dict1.insert({"UNION", unionDictionaries});
-  dict1.insert({"DIFFERENCE", subtractDictionaries});
-  dict1.insert({"REMOVE", removeWordFromDict});
-  dict1.insert({"PRINTL", printDictByLetter});
-  dict1.insert({"EDIT", editWordTranslation});
-  dict1.insert({"ERASE", eraseWordTranslation});
-  dict2.insert({"HELP", help});
-  dict2.insert({"MAN", man});
+  dict1.insert({"search", searchWord});
+  dict1.insert({"print", printDict});
+  dict1.insert({"delete", deleteDict});
+  dict3.insert({"new", createNewDict});
+  dict1.insert({"insert", insertWordTranslation});
+  dict1.insert({"add", addWordTranslation});
+  dict1.insert({"intersect", intersectDictionaries});
+  dict1.insert({"union", unionDictionaries});
+  dict1.insert({"difference", subtractDictionaries});
+  dict1.insert({"remove", removeWordFromDict});
+  dict1.insert({"printl", printDictByLetter});
+  dict1.insert({"edit", editWordTranslation});
+  dict1.insert({"erase", eraseWordTranslation});
+  dict2.insert({"help", help});
+  dict2.insert({"man", man});
 }
 litvin::command_descriptors litvin::createCommandDescriptorsDict()
 {
   command_descriptors dict;
-  dict.insert({"SEARCH", "Searches word translation in all available dictionaries"});
-  dict.insert({"PRINT", "Prints all dictionary with its words and their translations"});
-  dict.insert({"DELETE", "Deletes dictionary with name, equal to argument"});
-  dict.insert({"NEW", "Creates new empty dictionary with name, equal to argument"});
-  dict.insert({"INSERT", "Inserts the word to the dict with translation"});
-  dict.insert({"ADD", "Adds new translation to the word"});
-  dict.insert({"INTERSECT", "Creates a dict, which is intersection of two already existing dicts"});
-  dict.insert({"UNION", "Creates a dict, which is union of two already existing dicts"});
-  dict.insert({"DIFFERENCE", "Creates a dict, which is subtraction of two already existing dicts"});
-  dict.insert({"REMOVE", "Removes the word from dictionary with its translation list"});
-  dict.insert({"PRINTL", "Prints words and their translations from dict starting by the letter-parameter"});
-  dict.insert({"EDIT", "Edits the word translation by number-parameter"});
-  dict.insert({"ERASE", "Erases the word translation by number-parameter"});
-  dict.insert({"MAN", "Gives info about requested command"});
-  dict.insert({"HELP", "Gives info about all available commands"});
+  dict.insert({"search", ": searches word translation in all available dictionaries"});
+  dict.insert({"print", ": prints all dictionary with its words and their translations"});
+  dict.insert({"delete", ": deletes dictionary with name, equal to argument"});
+  dict.insert({"new", ": creates new empty dictionary with name, equal to argument"});
+  dict.insert({"insert", ": inserts the word to the dict with translation"});
+  dict.insert({"add", ": adds new translation to the word"});
+  dict.insert({"intersect", ": creates a dict, which is intersection of two already existing dicts"});
+  dict.insert({"union", ": creates a dict, which is union of two already existing dicts"});
+  dict.insert({"difference", ": creates a dict, which is subtraction of two already existing dicts"});
+  dict.insert({"remove", ": removes the word from dictionary with its translation list"});
+  dict.insert({"printl", ": prints words and their translations from dict starting by the letter-parameter"});
+  dict.insert({"edit", ": edits the word translation by number-parameter"});
+  dict.insert({"erase", ": erases the word translation by number-parameter"});
+  dict.insert({"man", ": gives info about requested command"});
+  dict.insert({"help", ": gives info about all available commands"});
   return dict;
 }
 void litvin::man(const command_descriptors & cmd_desc, std::ostream & out, std::istream & in)
@@ -47,14 +47,14 @@ void litvin::man(const command_descriptors & cmd_desc, std::ostream & out, std::
   }
   catch (const std::out_of_range &)
   {
-    out << "This command does not exists, see 'HELP'\n";
+    out << "This command does not exists, see 'help'\n";
   }
 }
 void litvin::help(const command_descriptors & cmd_desc, std::ostream & out, std::istream & in)
 {
   for (const auto & desc: cmd_desc)
   {
-    out << desc.first << " " << desc.second << '\n';
+    out << desc.first << desc.second << '\n';
   }
 }
 void litvin::command_dict_t::executeCommand(const std::string & command, dicts_list_t & list, std::ostream & out,
@@ -94,15 +94,13 @@ void litvin::runCommand(const command_dict_t & cmd_d, dicts_list_t & list, const
     cmd_d.executeCommand(cmd, list, out, in);
     return;
   } catch (const std::out_of_range &)
-  {
-  }
+  {}
   try
   {
     cmd_d.executeCommand(cmd, desc_d, out, in);
     return;
   } catch (const std::out_of_range &)
-  {
-  }
+  {}
   std::string dict_name = " ";
   in >> dict_name;
   cmd_d.executeCommand(cmd, list, dict_name, out);
