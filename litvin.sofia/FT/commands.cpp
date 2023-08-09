@@ -60,9 +60,13 @@ void litvin::insertWordTranslation(dicts_list_t & list, std::ostream & out, std:
   in >> dict_name;
   std::string word = " ";
   in >> word;
+  if (!in)
+  {
+    throw std::invalid_argument("invalid command");
+  }
   std::string trans = " ";
   getline(in, trans);
-  if (!in)
+  if (trans == "")
   {
     throw std::invalid_argument("invalid command");
   }
@@ -314,9 +318,7 @@ void litvin::unionDictionaries(dicts_list_t & list, std::ostream & out, std::ist
   std::string dict1 = " ";
   std::string dict2 = " ";
   std::string dict3 = " ";
-  in >> dict1;
-  in >> dict2;
-  in >> dict3;
+  in >> dict1 >> dict2 >> dict3;
   if (!in)
   {
     throw std::invalid_argument("invalid command");
@@ -331,11 +333,21 @@ void litvin::unionDictionaries(dicts_list_t & list, std::ostream & out, std::ist
       dict_t & dictionary3 = list.dict_list[dict3];
       for (const auto & element: dictionary1)
       {
-        dictionary3.insert(element);
+        const std::string & word = element.first;
+        const translations & trans_list = element.second;
+        dictionary3[word] = trans_list;
       }
       for (const auto & element: dictionary2)
       {
-        dictionary3.insert(element);
+        const std::string & word = element.first;
+        const translations & trans_list = element.second;
+        for (const auto & trans: trans_list)
+        {
+          if (std::find(dictionary3[word].begin(), dictionary3[word].end(), trans) == dictionary3[word].end())
+          {
+            dictionary3[word].push_back(trans);
+          }
+        }
       }
     }
     else
@@ -353,9 +365,7 @@ void litvin::intersectDictionaries(dicts_list_t & list, std::ostream & out, std:
   std::string dict1 = " ";
   std::string dict2 = " ";
   std::string dict3 = " ";
-  in >> dict1;
-  in >> dict2;
-  in >> dict3;
+  in >> dict1 >> dict2 >> dict3;
   if (!in)
   {
     throw std::invalid_argument("invalid command");
