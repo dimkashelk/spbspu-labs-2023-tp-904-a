@@ -64,8 +64,7 @@ void litvin::command_dict_t::executeCommand(const std::string & command, dicts_l
   function(list, out, in);
 }
 void litvin::command_dict_t::executeCommand(const std::string & command, const command_descriptors & cmd_desc,
-                                            std::ostream & out,
-                                            std::istream & in) const
+                                            std::ostream & out, std::istream & in) const
 {
   signature_type_2 function = dict2.at(command);
   function(cmd_desc, out, in);
@@ -101,7 +100,13 @@ void litvin::runCommand(const command_dict_t & cmd_d, dicts_list_t & list, const
     return;
   } catch (const std::out_of_range &)
   {}
-  std::string dict_name = " ";
-  in >> dict_name;
-  cmd_d.executeCommand(cmd, list, dict_name, out);
+  if (cmd == "new")
+  {
+    std::string dict_name = " ";
+    in >> dict_name;
+    cmd_d.executeCommand(cmd, list, dict_name, out);
+  }
+  else{
+    throw std::invalid_argument("invalid command");
+  }
 }

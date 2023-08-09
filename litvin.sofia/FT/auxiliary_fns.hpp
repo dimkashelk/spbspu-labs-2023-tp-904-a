@@ -24,9 +24,7 @@ namespace litvin
                         std::istream & in) const;
   };
   std::string inputCommand(std::istream & in);
-  void
-  runCommand(const command_dict_t & cmd_d, dicts_list_t & list, const command_descriptors & desc_d,
-             const std::string & cmd,
-             std::ostream & out, std::istream & in);
+  void runCommand(const command_dict_t & cmd_d, dicts_list_t & list, const command_descriptors & desc_d,
+                  const std::string & cmd, std::ostream & out, std::istream & in);
 }
 #endif
