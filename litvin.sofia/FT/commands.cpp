@@ -36,8 +36,10 @@ void litvin::createNewDict(dicts_list_t & list, const std::string & dict_name, s
     out << "Created new dictionary: " << dict_name << '\n';
   }
 }
-void litvin::deleteDict(dicts_list_t & list, const std::string & dict_name, std::ostream & out)
+void litvin::deleteDict(dicts_list_t & list, std::ostream & out, std::istream & in)
 {
+  std::string dict_name = " ";
+  in >> dict_name;
   if (findDict(list, dict_name))
   {
     list.dict_list.erase(dict_name);
@@ -48,9 +50,14 @@ void litvin::deleteDict(dicts_list_t & list, const std::string & dict_name, std:
     out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
-void litvin::insertWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word,
-                                   const std::string & trans, std::ostream & out)
+void litvin::insertWordTranslation(dicts_list_t & list, std::ostream & out, std::istream & in)
 {
+  std::string dict_name = " ";
+  in >> dict_name;
+  std::string word = " ";
+  in >> word;
+  std::string trans = " ";
+  getline(in, trans);
   if (findDict(list, dict_name))
   {
     translations * trans_v = findWordTranslation(list, dict_name, word);
@@ -71,9 +78,12 @@ void litvin::insertWordTranslation(dicts_list_t & list, const std::string & dict
     out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
-void litvin::removeWordFromDict(dicts_list_t & list, const std::string & dict_name, const std::string & word,
-                                std::ostream & out)
+void litvin::removeWordFromDict(dicts_list_t & list, std::ostream & out, std::istream & in)
 {
+  std::string dict_name = " ";
+  in >> dict_name;
+  std::string word = " ";
+  in >> word;
   if (findDict(list, dict_name))
   {
     translations * trans_v = findWordTranslation(list, dict_name, word);
@@ -91,9 +101,16 @@ void litvin::removeWordFromDict(dicts_list_t & list, const std::string & dict_na
     out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
-void litvin::editWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word,
-                                 size_t num_of_translation, const std::string & new_translation, std::ostream & out)
+void litvin::editWordTranslation(dicts_list_t & list, std::ostream & out, std::istream & in)
 {
+  std::string dict_name = " ";
+  in >> dict_name;
+  std::string word = " ";
+  in >> word;
+  size_t num_of_translation = 0;
+  in >> num_of_translation;
+  std::string new_translation = " ";
+  getline(in, new_translation);
   if (findDict(list, dict_name))
   {
     translations * trans_v = findWordTranslation(list, dict_name, word);
@@ -117,9 +134,14 @@ void litvin::editWordTranslation(dicts_list_t & list, const std::string & dict_n
     out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
-void litvin::addWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word,
-                                const std::string & new_translation, std::ostream & out)
+void litvin::addWordTranslation(dicts_list_t & list, std::ostream & out, std::istream & in)
 {
+  std::string dict_name = " ";
+  in >> dict_name;
+  std::string word = " ";
+  in >> word;
+  std::string new_translation = " ";
+  getline(in, new_translation);
   if (findDict(list, dict_name))
   {
     translations * trans_v = findWordTranslation(list, dict_name, word);
@@ -137,9 +159,14 @@ void litvin::addWordTranslation(dicts_list_t & list, const std::string & dict_na
     out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
-void litvin::eraseWordTranslation(dicts_list_t & list, const std::string & dict_name, const std::string & word,
-                                  size_t num_of_translation, std::ostream & out)
+void litvin::eraseWordTranslation(dicts_list_t & list, std::ostream & out, std::istream & in)
 {
+  std::string dict_name = " ";
+  in >> dict_name;
+  std::string word = " ";
+  in >> word;
+  size_t num_of_translation = 0;
+  in >> num_of_translation;
   if (findDict(list, dict_name))
   {
     translations * trans_v = findWordTranslation(list, dict_name, word);
@@ -164,8 +191,10 @@ void litvin::eraseWordTranslation(dicts_list_t & list, const std::string & dict_
     out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
-void litvin::printDict(dicts_list_t & list, const std::string & dict_name, std::ostream & out)
+void litvin::printDict(dicts_list_t & list, std::ostream & out, std::istream & in)
 {
+  std::string dict_name = " ";
+  in >> dict_name;
   if (findDict(list, dict_name))
   {
     const dict_t & dictionary = list.dict_list[dict_name];
@@ -187,9 +216,12 @@ void litvin::printDict(dicts_list_t & list, const std::string & dict_name, std::
     out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
-void litvin::printDictByLetter(dicts_list_t & list, const std::string & dict_name, const std::string & letter,
-                               std::ostream & out)
+void litvin::printDictByLetter(dicts_list_t & list, std::ostream & out, std::istream & in)
 {
+  std::string dict_name = " ";
+  in >> dict_name;
+  std::string letter = " ";
+  in >> letter;
   if (findDict(list, dict_name))
   {
     const dict_t & dictionary = list.dict_list[dict_name];
@@ -214,8 +246,10 @@ void litvin::printDictByLetter(dicts_list_t & list, const std::string & dict_nam
     out << "A dictionary " << dict_name << " does not exists\n";
   }
 }
-void litvin::searchWord(dicts_list_t & list, const std::string & word, std::ostream & out)
+void litvin::searchWord(dicts_list_t & list, std::ostream & out, std::istream & in)
 {
+  std::string word = " ";
+  in >> word;
   size_t quantity = 0;
   for (const auto & dict: list.dict_list)
   {
@@ -239,9 +273,14 @@ void litvin::searchWord(dicts_list_t & list, const std::string & word, std::ostr
     out << word << " is not found\n";
   }
 }
-void litvin::unionDictionaries(dicts_list_t & list, const std::string & dict1, const std::string & dict2,
-                               const std::string & dict3, std::ostream & out)
+void litvin::unionDictionaries(dicts_list_t & list, std::ostream & out, std::istream & in)
 {
+  std::string dict1 = " ";
+  std::string dict2 = " ";
+  std::string dict3 = " ";
+  in >> dict1;
+  in >> dict2;
+  in >> dict3;
   if (findDict(list, dict1))
   {
     if (findDict(list, dict2))
@@ -269,9 +308,14 @@ void litvin::unionDictionaries(dicts_list_t & list, const std::string & dict1, c
     out << "A dictionary " << dict1 << " does not exists\n";
   }
 }
-void litvin::intersectDictionaries(dicts_list_t & list, const std::string & dict1, const std::string & dict2,
-                                   const std::string & dict3, std::ostream & out)
+void litvin::intersectDictionaries(dicts_list_t & list, std::ostream & out, std::istream & in)
 {
+  std::string dict1 = " ";
+  std::string dict2 = " ";
+  std::string dict3 = " ";
+  in >> dict1;
+  in >> dict2;
+  in >> dict3;
   if (findDict(list, dict1))
   {
     if (findDict(list, dict2))
@@ -312,9 +356,14 @@ void litvin::intersectDictionaries(dicts_list_t & list, const std::string & dict
     out << "A dictionary " << dict1 << " does not exists\n";
   }
 }
-void litvin::subtractDictionaries(dicts_list_t & list, const std::string & dict1, const std::string & dict2,
-                                  const std::string & dict3, std::ostream & out)
+void litvin::subtractDictionaries(dicts_list_t & list, std::ostream & out, std::istream & in)
 {
+  std::string dict1 = " ";
+  std::string dict2 = " ";
+  std::string dict3 = " ";
+  in >> dict1;
+  in >> dict2;
+  in >> dict3;
   if (findDict(list, dict1))
   {
     if (findDict(list, dict2))
