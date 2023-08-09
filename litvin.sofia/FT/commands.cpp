@@ -261,12 +261,14 @@ void litvin::printDictByLetter(dicts_list_t & list, std::ostream & out, std::ist
   if (findDict(list, dict_name))
   {
     const dict_t & dictionary = list.dict_list[dict_name];
+    size_t quantity_of_words = 0;
     for (const auto & entry: dictionary)
     {
       const std::string & word = entry.first;
       const translations & trans_list = entry.second;
       if (word.front() == letter)
       {
+        quantity_of_words++;
         out << word << ":\n";
         size_t translation_number = 1;
         for (const std::string & translation: trans_list)
@@ -275,6 +277,10 @@ void litvin::printDictByLetter(dicts_list_t & list, std::ostream & out, std::ist
           translation_number++;
         }
       }
+    }
+    if (!quantity_of_words)
+    {
+      out << "No words found for this letter\n";
     }
   }
   else
@@ -299,11 +305,11 @@ void litvin::searchWord(dicts_list_t & list, std::ostream & out, std::istream & 
     {
       quantity++;
       const translations & trans_list = dictionary.at(word);
-      out << "The word '" << word << "' is found in the dictionary '" << dict_name << ":\n";
+      out << dict_name << ":\n";
       size_t translation_number = 1;
       for (const std::string & translation: trans_list)
       {
-        out << translation_number << ". " << translation << "\n";
+        out << "  " << translation_number << ". " << translation << "\n";
         translation_number++;
       }
     }
@@ -381,33 +387,32 @@ void litvin::intersectDictionaries(dicts_list_t & list, std::ostream & out, std:
       for (const auto & element: dictionary1)
       {
         const std::string & word = element.first;
-        const translations & trans_list_1 = element.second;
+        const translations & translist1 = element.second;
         if (dictionary2.count(word))
         {
-          const translations & trans_list_2 = dictionary2.at(word);
-          translations intersection;
-          for (const auto & translation: trans_list_1)
+          const translations & translist2 = dictionary2.at(word);
+          translations combinedtranslations;
+          combinedtranslations.insert(combinedtranslations.end(), translist1.begin(), translist1.end());
+          for (const auto & translation: translist2)
           {
-            if (std::find(trans_list_2.begin(), trans_list_2.end(), translation) != trans_list_2.end())
+            if (std::find(combinedtranslations.begin(), combinedtranslations.end(), translation) ==
+                combinedtranslations.end())
             {
-              intersection.push_back(translation);
+              combinedtranslations.push_back(translation);
             }
           }
-          if (!intersection.empty())
-          {
-            dictionary3[word] = intersection;
-          }
+          dictionary3[word] = combinedtranslations;
         }
       }
     }
     else
     {
-      out << "A dictionary " << dict2 << " does not exists\n";
+      out << "A dictionary " << dict2 << " does not exist\n";
     }
   }
   else
   {
-    out << "A dictionary " << dict1 << " does not exists\n";
+    out << "A dictionary " << dict1 << " does not exist\n";
   }
 }
 void litvin::subtractDictionaries(dicts_list_t & list, std::ostream & out, std::istream & in)
@@ -415,9 +420,7 @@ void litvin::subtractDictionaries(dicts_list_t & list, std::ostream & out, std::
   std::string dict1 = " ";
   std::string dict2 = " ";
   std::string dict3 = " ";
-  in >> dict1;
-  in >> dict2;
-  in >> dict3;
+  in >> dict1 >> dict2 >> dict3;
   if (!in)
   {
     throw std::invalid_argument("invalid command");

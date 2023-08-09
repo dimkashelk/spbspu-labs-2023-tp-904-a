@@ -93,15 +93,13 @@ void litvin::runCommand(const command_dict_t & cmd_d, dicts_list_t & list, const
     cmd_d.executeCommand(cmd, list, out, in);
     return;
   } catch (const std::out_of_range &)
-  {
-  }
+  {}
   try
   {
     cmd_d.executeCommand(cmd, desc_d, out, in);
     return;
   } catch (const std::out_of_range &)
-  {
-  }
+  {}
   if (cmd == "new")
   {
     std::string dict_name = " ";
