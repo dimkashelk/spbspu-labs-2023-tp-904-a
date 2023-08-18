@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iterator>
+#include <algorithm>
 #include "Polygon.h"
 
 int main()
