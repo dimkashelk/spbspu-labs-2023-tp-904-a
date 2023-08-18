@@ -1,5 +1,6 @@
 #ifndef GITLABPROG_POLYGON_H
 #define GITLABPROG_POLYGON_H
+#include <iostream>
 #include <vector>
 
 namespace skalisusov
@@ -11,7 +12,11 @@ namespace skalisusov
   };
   struct Polygon
   {
-    std::vector<Point> polygon_;
+    std::vector< Point > polygon;
+  };
+  struct DelimiterIO
+  {
+    char delim;
   };
 }
 #endif //GITLABPROG_POLYGON_H
