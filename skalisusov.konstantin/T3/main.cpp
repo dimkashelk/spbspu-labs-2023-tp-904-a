@@ -12,10 +12,8 @@ int main()
     if(!std::cin)
     {
       std::cin.clear();
-      std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
+      std::cin.ignore( max_size, '\n');
     }
   }
-
-  std::cout << "skalisusov.konstantin/T3\n";
   return 0;
 }
