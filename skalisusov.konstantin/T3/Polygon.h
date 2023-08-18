@@ -18,5 +18,10 @@ namespace skalisusov
   {
     char delim;
   };
+  double getArea(const Polygon &polygon);
+  bool operator ==(const Point &lhs, const Point &rhs);
+  std::istream &operator>>(std::istream &in, Point &point);
+  std::istream &operator>>(std::istream &in, Polygon &polygon);
+  std::istream &operator>>(std::istream &in, DelimiterIO &&dest);
 }
 #endif //GITLABPROG_POLYGON_H
