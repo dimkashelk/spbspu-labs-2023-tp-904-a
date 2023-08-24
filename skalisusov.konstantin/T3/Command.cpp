@@ -139,3 +139,13 @@ void skalisusov::countOdd(const std::vector<Polygon> &dest, std::ostream &out)
   std::size_t count = polygon.size();
   out << count;
 }
+void skalisusov::countVertex(const std::vector<Polygon> &dest, std::size_t vertex, std::ostream &out)
+{
+  using namespace std::placeholders;
+  auto numVertex = std::bind(isNumVertex,_1,vertex);
+  std::vector< Polygon > polygon;
+  std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon),numVertex);
+  std::size_t shapesThisVertex = polygon.size();
+  out << shapesThisVertex;
+}
+
