@@ -65,3 +65,18 @@ void skalisusov::areaNumOfVertex(const std::vector< Polygon > &dest, std::size_t
   auto areaSum = std::accumulate(std::begin(areaShapes),std::end(areaShapes),0.0);
   out << std::setprecision(1) << areaSum;
 }
+void skalisusov::maxArea(const std::vector<Polygon> &dest, std::ostream &out)
+{
+  if(dest.empty())
+  {
+    // тут должен быть обработчик ошибки
+  }
+  std::vector< Polygon > polygon(dest.size());
+  std::copy(std::begin(dest),std::end(dest),std::begin(polygon));
+  std::vector< double > area(polygon.size());
+  std::transform(std::begin(polygon),std::end(polygon),std::begin(area), getArea);
+  auto compar = [&](double a, double b){return a < b;};
+  std::sort(std::begin(area),std::end(area),compar);
+  double maxArea = area[area.size() - 1];
+  out << std::setprecision(1) << maxArea;
+}
