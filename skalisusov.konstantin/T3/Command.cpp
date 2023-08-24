@@ -80,3 +80,18 @@ void skalisusov::maxArea(const std::vector<Polygon> &dest, std::ostream &out)
   double maxArea = area[area.size() - 1];
   out << std::setprecision(1) << maxArea;
 }
+void skalisusov::maxVertex(const std::vector<Polygon> &dest, std::ostream &out)
+{
+  if(dest.empty())
+  {
+    // тут должен быть обработчик ошибки
+  }
+  std::vector< Polygon > polgon(dest.size());
+  std::copy(std::begin(dest),std::end(dest),std::begin(polgon));
+  auto compare = [&](Polygon lhs, Polygon rhs)
+    {return lhs.polygon.size() < rhs.polygon.size();};
+  std::sort(std::begin(polgon),std::end(polgon),compare);
+  auto end = polgon[polgon.size()-1];
+  std::size_t maxVertex = end.polygon.size();
+  out << maxVertex;
+}
