@@ -37,3 +37,16 @@ void skalisusov::areaOdd(const std::vector<Polygon> &dest, std::ostream &out)
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector), 0.0);
   out << std::setprecision(1) << areaSum;
 }
+void skalisusov::areaMean(const std::vector<Polygon> &dest, std::ostream &out)
+{
+  if(dest.empty())
+  {
+    // какой то обработчик ошибок, пока что не придумал ,)
+  }
+  std::size_t count = dest.size();
+  std::vector< double > areaVector(dest.size());
+  std::transform(std::begin(dest),std::end(dest),std::begin(areaVector), getArea);
+  auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector),0.0);
+  areaSum = areaSum / count;
+  out << std::setprecision(1) << areaSum;
+}
