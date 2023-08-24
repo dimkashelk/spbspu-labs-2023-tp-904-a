@@ -149,7 +149,13 @@ void skalisusov::countVertex(const std::vector<Polygon> &dest, std::size_t verte
   out << shapesThisVertex;
 }
 
-
+void skalisusov::rects(const std::vector<Polygon> &dest, std::ostream &out)
+{
+  std::vector< Polygon > polygon;
+  std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isRects);
+  std::size_t countRects = polygon.size();
+  out << countRects;
+}
 bool skalisusov::isRects(const skalisusov::Polygon &poly)
 {
   if(poly.polygon.size() == 4)
