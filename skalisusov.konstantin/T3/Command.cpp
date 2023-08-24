@@ -125,3 +125,17 @@ void skalisusov::minVertex(const std::vector<Polygon> &dest, std::ostream &out)
   std::size_t minVertex = min.polygon.size();
   out << minVertex;
 }
+void skalisusov::countEven(const std::vector<Polygon> &dest, std::ostream &out)
+{
+  std::vector< Polygon > polygon;
+  std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isEven);
+  std::size_t count = polygon.size();
+  out << count;
+}
+void skalisusov::countOdd(const std::vector<Polygon> &dest, std::ostream &out)
+{
+  std::vector< Polygon > polygon;
+  std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isOdd);
+  std::size_t count = polygon.size();
+  out << count;
+}
