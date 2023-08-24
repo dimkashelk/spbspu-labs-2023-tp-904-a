@@ -149,3 +149,22 @@ void skalisusov::countVertex(const std::vector<Polygon> &dest, std::size_t verte
   out << shapesThisVertex;
 }
 
+
+bool skalisusov::isRects(const skalisusov::Polygon &poly)
+{
+  if(poly.polygon.size() == 4)
+  {
+    std::vector< Point > rect(poly.polygon.size());
+    std::copy(std::begin(poly.polygon),std::end(poly.polygon),std::begin(rect));
+    Point a = rect[0];
+    Point b = rect[1];
+    Point c = rect[2];
+    Point d = rect[3];
+    std::size_t ab = std::sqrt(pow((b.x - a.x),2)+pow((b.y - a.y),2));
+    std::size_t cd = std::sqrt(pow((d.x - c.x),2)+pow((d.y - c.y),2));
+    std::size_t ac = std::sqrt(pow((c.x - a.x),2)+pow((c.y - a.y),2));
+    std::size_t bd = std::sqrt(pow((d.x - b.x),2)+pow((d.y - b.y),2));
+    return (ab == cd && ac == bd);
+  }
+  return false;
+}
