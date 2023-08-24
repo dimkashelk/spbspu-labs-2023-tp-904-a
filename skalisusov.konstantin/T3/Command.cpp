@@ -18,3 +18,13 @@ bool skalisusov::isOdd(const skalisusov::Polygon &poly)
 {
   return (poly.polygon.size() % 2 != 0);
 }
+void skalisusov::areaEven(const std::vector<Polygon> &dest, std::ostream &out)
+{
+  std::vector< Polygon > evePoly;
+  std::copy_if(dest.begin(), dest.end(),std::back_inserter(evePoly), isEven);
+  std::vector< double > areaVector;
+  std::transform(std::begin(evePoly),std::end(evePoly),std::back_inserter(areaVector), getArea);
+  auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector), 0.0);
+  out << std::setprecision(1) << areaSum;
+}
+
