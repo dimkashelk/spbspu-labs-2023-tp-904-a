@@ -50,3 +50,18 @@ void skalisusov::areaMean(const std::vector<Polygon> &dest, std::ostream &out)
   areaSum = areaSum / count;
   out << std::setprecision(1) << areaSum;
 }
+void skalisusov::areaNumOfVertex(const std::vector< Polygon > &dest, std::size_t vertex, std::ostream &out)
+{
+  if( vertex < 3)
+  {
+    throw std::invalid_argument("Invalied parameter");
+  }
+  std::vector< Polygon > polygonOfVertex;
+  using namespace std::placeholders;
+  auto redactor = std::bind(isNumVertex, _1 , vertex);
+  std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygonOfVertex),redactor);
+  std::vector< double > areaShapes(polygonOfVertex.size());
+  std::transform(std::begin(polygonOfVertex),std::end(polygonOfVertex),std::begin(areaShapes), getArea);
+  auto areaSum = std::accumulate(std::begin(areaShapes),std::end(areaShapes),0.0);
+  out << std::setprecision(1) << areaSum;
+}
