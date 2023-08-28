@@ -93,7 +93,7 @@ void skalisusov::maxVertex(const std::vector<Polygon> &dest, std::ostream &out)
   std::sort(std::begin(polgon),std::end(polgon),compare);
   auto end = polgon[polgon.size()-1];
   std::size_t maxVertex = end.polygon.size();
-  out << maxVertex << '\n'
+  out << maxVertex << '\n';
 }
 void skalisusov::minArea(const std::vector<Polygon> &dest, std::ostream &out)
 {
@@ -130,7 +130,7 @@ void skalisusov::countEven(const std::vector<Polygon> &dest, std::ostream &out)
   std::vector< Polygon > polygon;
   std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isEven);
   std::size_t count = polygon.size();
-  out << count << '\n'
+  out << count << '\n';
 }
 void skalisusov::countOdd(const std::vector<Polygon> &dest, std::ostream &out)
 {
