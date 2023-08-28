@@ -1,11 +1,10 @@
-#include "Command.h"
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
 #include <numeric>
 #include <functional>
 #include <cmath>
-
+#include "Command.h"
 bool skalisusov::isNumVertex(const skalisusov::Polygon &polygon, std::size_t count)
 {
   return (polygon.polygon.size() == count);

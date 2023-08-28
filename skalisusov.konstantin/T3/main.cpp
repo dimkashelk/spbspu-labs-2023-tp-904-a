@@ -4,9 +4,17 @@
 #include <fstream>
 #include "Polygon.h"
 #include "Command.h"
+#include <sstream>
 int main(int argc, char ** argv)
 {
   using namespace skalisusov;
+  /*
+  std::stringstream input(
+    "3 (0;0) (1;2) (3;-2)"
+    "4 (0;1) (2;0) (-1;2) (4;3)"
+    "6 (1;1) (2;0) (-2;-1) (2;-1) (1;2) (1;0)"
+  );
+  */
   if(argc != 2)
   {
     std::cerr << "Not enough CL parameters\n";
@@ -31,7 +39,7 @@ int main(int argc, char ** argv)
       input.ignore(max,'\n');
     }
   }
-  input.close();
+ // input.close();
   auto mapCommand = command();
    while(!std::cin.eof())
    {
