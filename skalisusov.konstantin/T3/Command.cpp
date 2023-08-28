@@ -195,11 +195,9 @@ skalisusov::commandPolygon skalisusov::command()
   mapCommand.const_ver.insert({"COUNT NUM", countVertex});
   return mapCommand;
 }
-
-void skalisusov::realizationCommandPolygon(std::istream &in, std::ostream &out,const std::vector< Polygon > &dest
+void skalisusov::realizationCommandPolygon(std::ostream &out,const std::vector< Polygon > &dest
                                            ,const skalisusov::commandPolygon &commands,std::string &command)
 {
-
   using namespace std::placeholders;
   try
   {

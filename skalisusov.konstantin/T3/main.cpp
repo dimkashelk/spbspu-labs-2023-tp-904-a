@@ -46,7 +46,7 @@ int main(int argc, char ** argv)
      try
      {
        std::string com = listenCommand(std::cin);
-       realizationCommandPolygon(std::cin,std::cout,polygon,mapCommand,com);
+       realizationCommandPolygon(std::cout,polygon,mapCommand,com);
      }
      catch(std::logic_error &e)
      {
