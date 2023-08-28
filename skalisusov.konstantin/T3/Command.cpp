@@ -25,7 +25,7 @@ void skalisusov::areaEven(const std::vector<Polygon> &dest, std::ostream &out)
   std::vector< double > areaVector;
   std::transform(std::begin(evePoly),std::end(evePoly),std::back_inserter(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector), 0.0);
-  out << std::setprecision(1) << areaSum;
+  out << std::setprecision(1) << areaSum << '\n';
 }
 
 void skalisusov::areaOdd(const std::vector<Polygon> &dest, std::ostream &out)
@@ -35,7 +35,7 @@ void skalisusov::areaOdd(const std::vector<Polygon> &dest, std::ostream &out)
   std::vector< double > areaVector(evePoly.size());
   std::transform(std::begin(evePoly),std::end(evePoly),std::begin(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector), 0.0);
-  out << std::setprecision(1) << areaSum;
+  out << std::setprecision(1) << areaSum << '\n';
 }
 void skalisusov::areaMean(const std::vector<Polygon> &dest, std::ostream &out)
 {
@@ -48,7 +48,7 @@ void skalisusov::areaMean(const std::vector<Polygon> &dest, std::ostream &out)
   std::transform(std::begin(dest),std::end(dest),std::begin(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector),0.0);
   areaSum = areaSum / count;
-  out << std::setprecision(1) << areaSum;
+  out << std::setprecision(1) << areaSum << '\n';
 }
 void skalisusov::areaNumOfVertex(const std::vector< Polygon > &dest, std::size_t vertex, std::ostream &out)
 {
@@ -78,7 +78,7 @@ void skalisusov::maxArea(const std::vector<Polygon> &dest, std::ostream &out)
   auto compar = [&](double a, double b){return a < b;};
   std::sort(std::begin(area),std::end(area),compar);
   double maxArea = area[area.size() - 1];
-  out << std::setprecision(1) << maxArea;
+  out << std::setprecision(1) << maxArea << '\n';
 }
 void skalisusov::maxVertex(const std::vector<Polygon> &dest, std::ostream &out)
 {
@@ -93,7 +93,7 @@ void skalisusov::maxVertex(const std::vector<Polygon> &dest, std::ostream &out)
   std::sort(std::begin(polgon),std::end(polgon),compare);
   auto end = polgon[polgon.size()-1];
   std::size_t maxVertex = end.polygon.size();
-  out << maxVertex;
+  out << maxVertex << '\n'
 }
 void skalisusov::minArea(const std::vector<Polygon> &dest, std::ostream &out)
 {
@@ -108,7 +108,7 @@ void skalisusov::minArea(const std::vector<Polygon> &dest, std::ostream &out)
   auto compar = [&](double a, double b){return a < b;};
   std::sort(std::begin(area),std::end(area),compar);
   double minArea = area[0];
-  out << std::setprecision(1) << minArea;
+  out << std::setprecision(1) << minArea << '\n';
 }
 void skalisusov::minVertex(const std::vector<Polygon> &dest, std::ostream &out)
 {
@@ -123,21 +123,21 @@ void skalisusov::minVertex(const std::vector<Polygon> &dest, std::ostream &out)
   std::sort(std::begin(polgon),std::end(polgon),compare);
   auto min = polgon[0];
   std::size_t minVertex = min.polygon.size();
-  out << minVertex;
+  out << minVertex << '\n';
 }
 void skalisusov::countEven(const std::vector<Polygon> &dest, std::ostream &out)
 {
   std::vector< Polygon > polygon;
   std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isEven);
   std::size_t count = polygon.size();
-  out << count;
+  out << count << '\n'
 }
 void skalisusov::countOdd(const std::vector<Polygon> &dest, std::ostream &out)
 {
   std::vector< Polygon > polygon;
   std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isOdd);
   std::size_t count = polygon.size();
-  out << count;
+  out << count << '\n';
 }
 void skalisusov::countVertex(const std::vector<Polygon> &dest, std::size_t vertex, std::ostream &out)
 {
@@ -146,7 +146,7 @@ void skalisusov::countVertex(const std::vector<Polygon> &dest, std::size_t verte
   std::vector< Polygon > polygon;
   std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon),numVertex);
   std::size_t shapesThisVertex = polygon.size();
-  out << shapesThisVertex;
+  out << shapesThisVertex << '\n';
 }
 
 void skalisusov::rects(const std::vector<Polygon> &dest, std::ostream &out)
@@ -154,7 +154,7 @@ void skalisusov::rects(const std::vector<Polygon> &dest, std::ostream &out)
   std::vector< Polygon > polygon;
   std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isRects);
   std::size_t countRects = polygon.size();
-  out << countRects;
+  out << countRects << '\n';
 }
 bool skalisusov::isRects(const skalisusov::Polygon &poly)
 {
@@ -173,4 +173,69 @@ bool skalisusov::isRects(const skalisusov::Polygon &poly)
     return (ab == cd && ac == bd);
   }
   return false;
+}
+
+void skalisusov::errorMessage(std::ostream &out)
+{
+  out << "<INVALID COMMAND>\n";
+}
+skalisusov::commandPolygon skalisusov::command()
+{
+  skalisusov::commandPolygon mapCommand{};
+  mapCommand.const_area.insert({"AREA EVEN", areaEven});
+  mapCommand.const_area.insert({"AREA ODD", areaOdd});
+  mapCommand.const_area.insert({"AREA MEAN", areaMean});
+  mapCommand.const_area.insert({"MAX AREA", maxArea});
+  mapCommand.const_area.insert({"MAX VERTEXES", maxVertex});
+  mapCommand.const_area.insert({"MIN AREA", minArea});
+  mapCommand.const_area.insert({"MIN VERTEX", minVertex});
+  mapCommand.const_area.insert({"COUNT EVEN", countEven});
+  mapCommand.const_area.insert({"COUNT ODD", countOdd});
+  mapCommand.const_area.insert({"RECTS", rects});
+  mapCommand.const_ver.insert({"AREA NUM", areaNumOfVertex});
+  mapCommand.const_ver.insert({"COUNT NUM", countVertex});
+  return mapCommand;
+}
+
+void skalisusov::realizationCommandPolygon(std::istream &in, std::ostream &out,const std::vector< Polygon > &dest
+                                           ,const skalisusov::commandPolygon &commands,std::string &command)
+{
+
+  using namespace std::placeholders;
+  try
+  {
+    auto polygon = std::bind(commands.const_area.at(command), _1, std::ref(out));
+    polygon(dest);
+    return;
+  }
+  catch (const std::out_of_range & e)
+  {}
+  std::size_t space = command.find(' ');
+  std::size_t num = std::stoull(command.substr(space));
+  auto vertexes = std::bind(commands.const_ver.at(command.substr(0, space) + " NUM"),
+                            _1,num,std::ref(out));
+  vertexes(dest);
+}
+
+std::string skalisusov::listenCommand(std::istream &in)
+{
+  std::string comand = "0";
+  in >> comand;
+  if(!in)
+  {
+    throw std::logic_error("not input");
+  }
+  if(comand == "RECTS")
+  {
+    return comand;
+  }
+  std::string param = "0";
+  in >> param;
+  if(!in)
+  {
+    throw std::logic_error("not param");
+  }
+  comand += " ";
+  comand += param;
+  return comand;
 }
