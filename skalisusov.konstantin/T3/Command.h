@@ -35,5 +35,9 @@ namespace skalisusov
     std::map< std::string, cmd_const_vertex > const_ver;
     std::map< std::string, cmd_area > area;
   };
+  commandPolygon command();
+  void realizationCommandPolygon(std::istream &in, std::ostream &out,const std::vector< Polygon > &dest,
+                                 const commandPolygon  &mapCommand,std::string &command);
+  std::string listenCommand(std::istream &in);
 }
 #endif //GITLABPROG_COMMAND_H
