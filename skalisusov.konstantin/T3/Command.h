@@ -37,7 +37,7 @@ namespace skalisusov
     std::map< std::string, cmd_area > area;
   };
   commandPolygon command();
-  void realizationCommandPolygon(std::ostream &out,const std::vector< Polygon > &dest,
+  void realizationCommandPolygon(std::istream &in,std::ostream &out, std::vector< Polygon > &dest,
                                  const commandPolygon  &mapCommand,std::string &command);
   std::string listenCommand(std::istream &in);
 }

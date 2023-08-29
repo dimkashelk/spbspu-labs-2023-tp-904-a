@@ -40,7 +40,7 @@ void skalisusov::areaMean(const std::vector<Polygon> &dest, std::ostream &out)
 {
   if(dest.empty())
   {
-    // какой то обработчик ошибок, пока что не придумал ,)
+    throw std::logic_error("Polygon is empty");
   }
   std::size_t count = dest.size();
   std::vector< double > areaVector(dest.size());
@@ -53,7 +53,7 @@ void skalisusov::areaNumOfVertex(const std::vector< Polygon > &dest, std::size_t
 {
   if( vertex < 3)
   {
-    throw std::invalid_argument("Invalied parameter");
+    throw std::logic_error("Invalied parameter");
   }
   std::vector< Polygon > polygonOfVertex;
   using namespace std::placeholders;
@@ -68,7 +68,7 @@ void skalisusov::maxArea(const std::vector<Polygon> &dest, std::ostream &out)
 {
   if(dest.empty())
   {
-    // тут должен быть обработчик ошибки
+    throw std::logic_error("Polygon is empty");
   }
   std::vector< Polygon > polygon(dest.size());
   std::copy(std::begin(dest),std::end(dest),std::begin(polygon));
@@ -83,7 +83,7 @@ void skalisusov::maxVertex(const std::vector<Polygon> &dest, std::ostream &out)
 {
   if(dest.empty())
   {
-    // тут должен быть обработчик ошибки
+    throw std::logic_error("Polygon is empty");
   }
   std::vector< Polygon > polgon(dest.size());
   std::copy(std::begin(dest),std::end(dest),std::begin(polgon));
@@ -98,7 +98,7 @@ void skalisusov::minArea(const std::vector<Polygon> &dest, std::ostream &out)
 {
   if(dest.empty())
   {
-    // тут должен быть обработчик ошибки
+    throw std::logic_error("Polygon is empty");
   }
   std::vector< Polygon > polygon(dest.size());
   std::copy(std::begin(dest),std::end(dest),std::begin(polygon));
@@ -113,7 +113,7 @@ void skalisusov::minVertex(const std::vector<Polygon> &dest, std::ostream &out)
 {
   if(dest.empty())
   {
-    // тут должен быть обработчик ошибки
+    throw std::logic_error("Polygon is empty");
   }
   std::vector< Polygon > polgon(dest.size());
   std::copy(std::begin(dest),std::end(dest),std::begin(polgon));
@@ -187,18 +187,27 @@ skalisusov::commandPolygon skalisusov::command()
   mapCommand.const_area.insert({"MAX AREA", maxArea});
   mapCommand.const_area.insert({"MAX VERTEXES", maxVertex});
   mapCommand.const_area.insert({"MIN AREA", minArea});
-  mapCommand.const_area.insert({"MIN VERTEX", minVertex});
+  mapCommand.const_area.insert({"MIN VERTEXES", minVertex});
   mapCommand.const_area.insert({"COUNT EVEN", countEven});
   mapCommand.const_area.insert({"COUNT ODD", countOdd});
   mapCommand.const_area.insert({"RECTS", rects});
   mapCommand.const_ver.insert({"AREA NUM", areaNumOfVertex});
   mapCommand.const_ver.insert({"COUNT NUM", countVertex});
+  mapCommand.area.insert({"RMECHO", rmecho});
   return mapCommand;
 }
-void skalisusov::realizationCommandPolygon(std::ostream &out,const std::vector< Polygon > &dest
+void skalisusov::realizationCommandPolygon(std::istream &in,std::ostream &out, std::vector< Polygon > &dest
                                            ,const skalisusov::commandPolygon &commands,std::string &command)
 {
   using namespace std::placeholders;
+  try
+  {
+    auto polygon = std::bind(commands.area.at(command), _1,std::ref(in),std::ref(out));
+    polygon(dest);
+    return;
+  }
+  catch (const std::out_of_range & e)
+  {}
   try
   {
     auto polygon = std::bind(commands.const_area.at(command), _1, std::ref(out));
