@@ -174,6 +174,10 @@ bool skalisusov::isRects(const skalisusov::Polygon &poly)
   return false;
 }
 
+void skalisusov::rmecho(std::vector<Polygon> &dest, std::istream &in, std::ostream &out)
+{
+  out << "<INVALID COMMAND>\n";
+}
 void skalisusov::errorMessage(std::ostream &out)
 {
   out << "<INVALID COMMAND>\n";
