@@ -176,6 +176,12 @@ bool skalisusov::isRects(const skalisusov::Polygon &poly)
 
 void skalisusov::rmecho(std::vector<Polygon> &dest, std::istream &in, std::ostream &out)
 {
+  std::size_t siziyVolk = 0;
+  in >> siziyVolk;
+  if(siziyVolk == dest.size())
+  {
+    out << " I MASTER SCAM\n";
+  }
   out << "<INVALID COMMAND>\n";
 }
 void skalisusov::errorMessage(std::ostream &out)
