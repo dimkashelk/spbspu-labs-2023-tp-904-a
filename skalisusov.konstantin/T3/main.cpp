@@ -4,18 +4,9 @@
 #include <fstream>
 #include "Polygon.h"
 #include "Command.h"
-#include <sstream>
 int main(int argc, char ** argv)
 {
   using namespace skalisusov;
-  /*
-  std::stringstream input(
-   "4 (0;0) (1;0) (1;1) (0;1)"
-   "3 (0;0) (1;1) (0;1)"
-   "4 (1;1) (0;2) (1;3) (2;2)"
-   "4(-2;1) (2;3) (3;1) (-1;-1)"
-  );
-  */
   if(argc != 2)
   {
     std::cerr << "Not enough CL parameters\n";
