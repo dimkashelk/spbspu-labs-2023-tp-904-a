@@ -4,6 +4,7 @@
 #include <numeric>
 #include <functional>
 #include <cmath>
+#include <vector>
 #include "Command.h"
 bool skalisusov::isNumVertex(const skalisusov::Polygon &polygon, std::size_t count)
 {
@@ -173,17 +174,6 @@ bool skalisusov::isRects(const skalisusov::Polygon &poly)
   }
   return false;
 }
-
-void skalisusov::rmecho(std::vector<Polygon> &dest, std::istream &in, std::ostream &out)
-{
-  std::size_t siziyVolk = 0;
-  in >> siziyVolk;
-  if(siziyVolk == dest.size())
-  {
-    out << " I MASTER SCAM\n";
-  }
-  out << "<INVALID COMMAND>\n";
-}
 void skalisusov::errorMessage(std::ostream &out)
 {
   out << "<INVALID COMMAND>\n";
@@ -241,7 +231,7 @@ std::string skalisusov::listenCommand(std::istream &in)
   {
     throw std::logic_error("not input");
   }
-  if(comand == "RECTS")
+  if(comand == "RECTS" || comand == "RMECHO")
   {
     return comand;
   }
@@ -255,3 +245,17 @@ std::string skalisusov::listenCommand(std::istream &in)
   comand += param;
   return comand;
 }
+
+void skalisusov::rmecho(std::vector< Polygon > &dest, std::istream &in, std::ostream &out)
+{
+  Polygon shape;
+  in >> shape;
+  if(shape.polygon.size() < 3)
+  {
+    throw std::logic_error("Invalid parameters");
+  }
+  std::size_t count = 0;
+  count = function_for_rmecho(dest,shape);
+  out << count;
+}
+

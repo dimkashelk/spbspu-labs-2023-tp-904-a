@@ -20,6 +20,7 @@ namespace skalisusov
   void rects(const std::vector< Polygon > &dest, std::ostream &out);
   void errorMessage(std::ostream & out);
   void rmecho(std::vector< Polygon > &dest,std::istream &in, std::ostream &out);
+  int function_for_rmecho(std::vector< Polygon > &poly,Polygon &rhs);
   bool isNumVertex(const Polygon &polygon, std::size_t count);
   bool isEven(const Polygon &poly);
   bool isOdd(const Polygon &poly);
