@@ -4,7 +4,10 @@
 #include <algorithm>
 #include <numeric>
 
-
+bool skalisusov::operator==(const skalisusov::Polygon &lhs, const skalisusov::Polygon &rhs)
+{
+  return std::equal(lhs.polygon.begin(),lhs.polygon.end(),rhs.polygon.begin());
+}
 bool skalisusov::operator ==(const Point &lhs, const Point &rhs)
 {
   return (lhs.x == rhs.x) && (lhs.y == rhs.y);
