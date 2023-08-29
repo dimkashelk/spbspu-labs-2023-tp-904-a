@@ -222,7 +222,6 @@ void skalisusov::realizationCommandPolygon(std::istream &in,std::ostream &out, s
                             _1,num,std::ref(out));
   vertexes(dest);
 }
-
 std::string skalisusov::listenCommand(std::istream &in)
 {
   std::string comand = "0";
@@ -245,7 +244,6 @@ std::string skalisusov::listenCommand(std::istream &in)
   comand += param;
   return comand;
 }
-
 void skalisusov::rmecho(std::vector< Polygon > &dest, std::istream &in, std::ostream &out)
 {
   Polygon shape;
@@ -258,4 +256,25 @@ void skalisusov::rmecho(std::vector< Polygon > &dest, std::istream &in, std::ost
   count = function_for_rmecho(dest,shape);
   out << count;
 }
-
+int skalisusov::function_for_rmecho(std::vector< Polygon > &poly, skalisusov::Polygon &rhs)
+{
+  std::size_t count = 0;
+  std::vector< Polygon > data(poly.size());
+  std::copy(std::begin(poly),std::end(poly),std::begin(data));
+  auto it_1 = std::adjacent_find(data.begin(),data.end());
+  while( it_1 != data.end())
+  {
+    auto next = std::adjacent_find(it_1++,data.end());
+    if(next != data.end() && next->polygon == it_1->polygon && next->polygon == rhs.polygon)
+    {
+      data.erase(it_1,next+1);
+      count++;
+    }
+    else
+    {
+      it_1 = next;
+    }
+  }
+  poly = data;
+  return count;
+}
