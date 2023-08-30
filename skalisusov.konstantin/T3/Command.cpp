@@ -190,7 +190,7 @@ skalisusov::commandPolygon skalisusov::command()
   mapCommand.const_area.insert({"RECTS", rects});
   mapCommand.const_ver.insert({"AREA NUM", areaNumOfVertex});
   mapCommand.const_ver.insert({"COUNT NUM", countVertex});
-  mapCommand.area.insert({"RMECHO", rmecho});
+  mapCommand.area.insert({"LESSAREA", rmecho});
   return mapCommand;
 }
 void skalisusov::realizationCommandPolygon(std::istream &in,std::ostream &out, std::vector< Polygon > &dest
@@ -227,7 +227,7 @@ std::string skalisusov::listenCommand(std::istream &in)
   {
     throw std::logic_error("not input");
   }
-  if(comand == "RECTS" || comand == "RMECHO")
+  if(comand == "RECTS" || comand == "LESSAREA")
   {
     return comand;
   }
