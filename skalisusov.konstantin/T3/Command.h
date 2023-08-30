@@ -1,6 +1,7 @@
 #ifndef GITLABPROG_COMMAND_H
 #define GITLABPROG_COMMAND_H
 #include <map>
+#include <functional>
 #include "Polygon.h"
 namespace skalisusov
 {
