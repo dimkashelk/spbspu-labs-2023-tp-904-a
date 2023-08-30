@@ -8,15 +8,15 @@
 #include "Command.h"
 bool skalisusov::isNumVertex(const skalisusov::Polygon &polygon, std::size_t count)
 {
-  return (polygon.polygon.size() == count);
+  return (polygon.shape.size() == count);
 }
 bool skalisusov::isEven(const skalisusov::Polygon &poly)
 {
-  return (poly.polygon.size() % 2 == 0);
+  return (poly.shape.size() % 2 == 0);
 }
 bool skalisusov::isOdd(const skalisusov::Polygon &poly)
 {
-  return (poly.polygon.size() % 2 != 0);
+  return (poly.shape.size() % 2 != 0);
 }
 void skalisusov::areaEven(const std::vector<Polygon> &dest, std::ostream &out)
 {
@@ -90,10 +90,10 @@ void skalisusov::maxVertex(const std::vector< Polygon > &dest, std::ostream &out
   std::copy(std::begin(dest),std::end(dest),std::begin(polgon));
   std::sort(std::begin(polgon),std::end(polgon),skalisusov::comparator);
   auto end = polgon[polgon.size()-1];
-  size_t maxVertex = end.polygon.size();
+  size_t maxVertex = end.shape.size();
   out << maxVertex << '\n';
 }
-void skalisusov::minArea(const std::vector<Polygon> &dest, std::ostream &out)
+void skalisusov::minArea(const std::vector< Polygon > &dest, std::ostream &out)
 {
   if(dest.empty())
   {
@@ -116,27 +116,27 @@ void skalisusov::minVertex(const std::vector<Polygon> &dest, std::ostream &out)
   std::vector< Polygon > polgon(dest.size());
   std::copy(std::begin(dest),std::end(dest),std::begin(polgon));
   auto compare = [&](Polygon lhs, Polygon rhs)
-  {return lhs.polygon.size() < rhs.polygon.size();};
+  {return lhs.shape.size() < rhs.shape.size();};
   std::sort(std::begin(polgon),std::end(polgon),compare);
   auto min = polgon[0];
-  std::size_t minVertex = min.polygon.size();
+  std::size_t minVertex = min.shape.size();
   out << minVertex << '\n';
 }
-void skalisusov::countEven(const std::vector<Polygon> &dest, std::ostream &out)
+void skalisusov::countEven(const std::vector <Polygon > &dest, std::ostream &out)
 {
   std::vector< Polygon > polygon;
   std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isEven);
   size_t count = polygon.size();
   out << count << '\n';
 }
-void skalisusov::countOdd(const std::vector<Polygon> &dest, std::ostream &out)
+void skalisusov::countOdd(const std::vector< Polygon > &dest, std::ostream &out)
 {
   std::vector< Polygon > polygon;
   std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isOdd);
   size_t count = polygon.size();
   out << count << '\n';
 }
-void skalisusov::countVertex(const std::vector<Polygon> &dest, size_t vertex, std::ostream &out)
+void skalisusov::countVertex(const std::vector< Polygon > &dest, size_t vertex, std::ostream &out)
 {
   using namespace std::placeholders;
   auto numVertex = std::bind(isNumVertex,_1,vertex);
@@ -153,12 +153,12 @@ void skalisusov::rects(const std::vector<Polygon> &dest, std::ostream &out)
   std::size_t countRects = polygon.size();
   out << countRects << '\n';
 }
-bool skalisusov::isRects(const skalisusov::Polygon &poly)
+bool skalisusov::isRects(const Polygon &poly)
 {
-  if(poly.polygon.size() == 4)
+  if(poly.shape.size() == 4)
   {
-    std::vector< Point > rect(poly.polygon.size());
-    std::copy(std::begin(poly.polygon),std::end(poly.polygon),std::begin(rect));
+    std::vector< Point > rect(poly.shape.size());
+    std::copy(std::begin(poly.shape),std::end(poly.shape),std::begin(rect));
     Point a = rect[0];
     Point b = rect[1];
     Point c = rect[2];
@@ -190,7 +190,7 @@ skalisusov::commandPolygon skalisusov::command()
   mapCommand.const_area.insert({"RECTS", rects});
   mapCommand.const_ver.insert({"AREA NUM", areaNumOfVertex});
   mapCommand.const_ver.insert({"COUNT NUM", countVertex});
-  mapCommand.area.insert({"LESSAREA", rmecho});
+  mapCommand.area.insert({"RMECHO", rmecho});
   return mapCommand;
 }
 void skalisusov::realizationCommandPolygon(std::istream &in,std::ostream &out, std::vector< Polygon > &dest
@@ -227,7 +227,7 @@ std::string skalisusov::listenCommand(std::istream &in)
   {
     throw std::logic_error("not input");
   }
-  if(comand == "RECTS" || comand == "LESSAREA")
+  if(comand == "RECTS" || comand == "RMECHO")
   {
     return comand;
   }
@@ -245,7 +245,7 @@ void skalisusov::rmecho(std::vector< Polygon > &dest, std::istream &in, std::ost
 {
   Polygon shape;
   in >> shape;
-  if(shape.polygon.size() < 3)
+  if(shape.shape.size() < 3)
   {
     throw std::logic_error("Invalid parameters");
   }
@@ -262,7 +262,7 @@ size_t skalisusov::function_for_rmecho(std::vector< Polygon > &poly, skalisusov:
   while( it_1 != data.end())
   {
     auto next = std::adjacent_find(it_1++,data.end());
-    if(next != data.end() && next->polygon == it_1->polygon && next->polygon == rhs.polygon)
+    if(next != data.end() && next->shape == it_1->shape && next->shape == rhs.shape)
     {
       data.erase(it_1,next+1);
       count++;

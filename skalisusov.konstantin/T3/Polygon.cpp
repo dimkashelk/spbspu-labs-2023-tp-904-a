@@ -6,7 +6,7 @@
 
 bool skalisusov::operator==(const skalisusov::Polygon &lhs, const skalisusov::Polygon &rhs)
 {
-  return std::equal(lhs.polygon.begin(),lhs.polygon.end(),rhs.polygon.begin());
+  return std::equal(lhs.shape.begin(),lhs.shape.end(),rhs.shape.begin());
 }
 bool skalisusov::operator ==(const Point &lhs, const Point &rhs)
 {
@@ -14,7 +14,7 @@ bool skalisusov::operator ==(const Point &lhs, const Point &rhs)
 }
 bool skalisusov::comparator(const skalisusov::Polygon &lhs, const skalisusov::Polygon &rhs)
 {
-  return (lhs.polygon.size() < rhs.polygon.size());
+  return (lhs.shape.size() < rhs.shape.size());
 }
 double skalisusov::getArea(const Polygon &dest)
 {
@@ -23,10 +23,10 @@ double skalisusov::getArea(const Polygon &dest)
   {
     return a.x * b.y - a.y * b.x;
   };
-  std::vector< int > arr(dest.polygon.size());
-  std::transform(dest.polygon.begin(), --dest.polygon.end(), ++dest.polygon.begin(), std::back_inserter(arr), getPoint);
+  std::vector< int > arr(dest.shape.size());
+  std::transform(dest.shape.begin(), --dest.shape.end(), ++dest.shape.begin(), std::back_inserter(arr), getPoint);
   area = std::accumulate(arr.begin(), arr.end(), 0.0);
-  area += (--dest.polygon.end())->x * dest.polygon.begin()->y - dest.polygon.begin()->x * (--dest.polygon.end())->y;
+  area += (--dest.shape.end())->x * dest.shape.begin()->y - dest.shape.begin()->x * (--dest.shape.end())->y;
   return std::abs(area * 0.5);
 }
 std::istream &skalisusov::operator>>(std::istream &in, Point &point)
@@ -47,20 +47,20 @@ std::istream &skalisusov::operator>>(std::istream &in, Polygon &polygon)
   {
     return in;
   }
-  std::size_t count = 0;
+  size_t count = 0;
   in >> count;
   if(count < 3)
   {
     in.setstate(std::ios::failbit);
     return in;
   }
-  skalisusov::Polygon input;
-  std::copy_n(std::istream_iterator< Point >(in), count, std::back_inserter(input.polygon));
+  Polygon input;
+  std::copy_n(std::istream_iterator< Point >(in), count, std::back_inserter(input.shape));
   if(!in)
   {
     return in;
   }
-  polygon.polygon.swap(input.polygon);
+  polygon = input;
   return in;
 }
 std::istream &skalisusov::operator>>(std::istream &in, DelimiterIO &&dest)

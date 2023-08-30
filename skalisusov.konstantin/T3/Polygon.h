@@ -12,7 +12,7 @@ namespace skalisusov
   };
   struct Polygon
   {
-    std::vector< Point > polygon;
+    std::vector< Point > shape;
   };
   struct DelimiterIO
   {

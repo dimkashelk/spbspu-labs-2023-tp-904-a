@@ -4,16 +4,17 @@
 #include <fstream>
 #include "Polygon.h"
 #include "Command.h"
-//#include <sstream>
+#include <sstream>
+
 int main(int argc, char ** argv)
 {
-  using namespace skalisusov;
   /*
   std::stringstream input(
     "3 (0;0) (2;0) (0;2)"
     "8 (0;2) (0;4) (2;6) (4;6) (6;4) (6;2) (4;0) (2;0)"
     "3 (0;0) (2;0) (0;2)"
     );
+
   */
   if(argc < 2)
   {
@@ -28,11 +29,11 @@ int main(int argc, char ** argv)
    }
 
    auto max = std::numeric_limits< std::streamsize>::max();
-   std::vector< Polygon > polygon;
+   std::vector< skalisusov::Polygon > data;
    while(!input.eof())
    {
-     std::copy(std::istream_iterator< Polygon >(input),
-       std::istream_iterator< Polygon >(),std::back_inserter(polygon));
+     std::copy(std::istream_iterator< skalisusov::Polygon >(input),
+       std::istream_iterator< skalisusov::Polygon >(),std::back_inserter(data));
      if(input.fail())
      {
        input.clear();
@@ -40,13 +41,13 @@ int main(int argc, char ** argv)
      }
    }
    input.close();
-   auto mapCommand = command();
+   auto mapCommand = skalisusov::command();
    while(!std::cin.eof())
    {
      try
      {
-       std::string com = listenCommand(std::cin);
-       realizationCommandPolygon(std::cin,std::cout,polygon,mapCommand,com);
+       std::string com = skalisusov::listenCommand(std::cin);
+       realizationCommandPolygon(std::cin,std::cout,data,mapCommand,com);
      }
      catch(std::logic_error &e)
      {
