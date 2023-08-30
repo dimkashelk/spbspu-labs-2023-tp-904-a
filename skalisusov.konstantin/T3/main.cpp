@@ -2,20 +2,19 @@
 #include <iterator>
 #include <algorithm>
 #include <fstream>
-#include "Polygon.h"
 #include "Command.h"
 #include <sstream>
 
 int main(int argc, char ** argv)
 {
-  /*
+
   std::stringstream input(
     "3 (0;0) (2;0) (0;2)"
     "8 (0;2) (0;4) (2;6) (4;6) (6;4) (6;2) (4;0) (2;0)"
     "3 (0;0) (2;0) (0;2)"
     );
 
-  */
+  /*
   if(argc < 2)
   {
     std::cerr << "Not enough CL parameters\n";
@@ -27,7 +26,7 @@ int main(int argc, char ** argv)
    std::cerr << "Not open file\n";
    return 1;
    }
-
+   */
    auto max = std::numeric_limits< std::streamsize>::max();
    std::vector< skalisusov::Polygon > data;
    while(!input.eof())
@@ -40,8 +39,9 @@ int main(int argc, char ** argv)
        input.ignore(max,'\n');
      }
    }
-   input.close();
+  // input.close();
    auto mapCommand = skalisusov::command();
+
    while(!std::cin.eof())
    {
      try

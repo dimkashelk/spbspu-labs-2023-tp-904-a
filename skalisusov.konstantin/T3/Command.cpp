@@ -6,51 +6,51 @@
 #include <cmath>
 #include <vector>
 #include "Command.h"
-bool skalisusov::isNumVertex(const skalisusov::Polygon &polygon, std::size_t count)
+bool skalisusov::isNumVertex(const skalisusov::Polygon &rhs, size_t count)
 {
-  return (polygon.shape.size() == count);
+  return (rhs.shape.size() == count);
 }
-bool skalisusov::isEven(const skalisusov::Polygon &poly)
+bool skalisusov::isEven(const skalisusov::Polygon &rhs)
 {
-  return (poly.shape.size() % 2 == 0);
+  return (rhs.shape.size() % 2 == 0);
 }
-bool skalisusov::isOdd(const skalisusov::Polygon &poly)
+bool skalisusov::isOdd(const skalisusov::Polygon &rhs)
 {
-  return (poly.shape.size() % 2 != 0);
+  return (rhs.shape.size() % 2 != 0);
 }
-void skalisusov::areaEven(const std::vector<Polygon> &dest, std::ostream &out)
+void skalisusov::areaEven(const std::vector<Polygon> &rhs, std::ostream &out)
 {
   std::vector< Polygon > evePoly;
-  std::copy_if(dest.begin(), dest.end(),std::back_inserter(evePoly), isEven);
+  std::copy_if(rhs.begin(), rhs.end(),std::back_inserter(evePoly), isEven);
   std::vector< double > areaVector;
   std::transform(std::begin(evePoly),std::end(evePoly),std::back_inserter(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector), 0.0);
   out << std::setprecision(1) << areaSum << '\n';
 }
 
-void skalisusov::areaOdd(const std::vector<Polygon> &dest, std::ostream &out)
+void skalisusov::areaOdd(const std::vector<Polygon> &rhs, std::ostream &out)
 {
   std::vector< Polygon > evePoly;
-  std::copy_if(dest.begin(), dest.end(),std::back_inserter(evePoly), isOdd);
+  std::copy_if(rhs.begin(), rhs.end(),std::back_inserter(evePoly), isOdd);
   std::vector< double > areaVector(evePoly.size());
   std::transform(std::begin(evePoly),std::end(evePoly),std::begin(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector), 0.0);
   out << std::setprecision(1) << areaSum << '\n';
 }
-void skalisusov::areaMean(const std::vector<Polygon> &dest, std::ostream &out)
+void skalisusov::areaMean(const std::vector<Polygon> &rhs, std::ostream &out)
 {
-  if(dest.empty())
+  if(rhs.empty())
   {
     throw std::logic_error("Polygon is empty");
   }
-  size_t count = dest.size();
-  std::vector< double > areaVector(dest.size());
-  std::transform(std::begin(dest),std::end(dest),std::begin(areaVector), getArea);
+  size_t count = rhs.size();
+  std::vector< double > areaVector(rhs.size());
+  std::transform(std::begin(rhs),std::end(rhs),std::begin(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector),0.0);
   areaSum = areaSum / count;
   out << std::setprecision(1) << areaSum << '\n';
 }
-void skalisusov::areaNumOfVertex(const std::vector< Polygon > &dest, size_t vertex, std::ostream &out)
+void skalisusov::areaNumOfVertex(const std::vector< Polygon > &rhs, size_t vertex, std::ostream &out)
 {
   if( vertex < 3)
   {
@@ -59,20 +59,20 @@ void skalisusov::areaNumOfVertex(const std::vector< Polygon > &dest, size_t vert
   std::vector< Polygon > polygonOfVertex;
   using namespace std::placeholders;
   auto redactor = std::bind(isNumVertex, _1 , vertex);
-  std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygonOfVertex),redactor);
+  std::copy_if(std::begin(rhs),std::end(rhs),std::back_inserter(polygonOfVertex),redactor);
   std::vector< double > areaShapes(polygonOfVertex.size());
   std::transform(std::begin(polygonOfVertex),std::end(polygonOfVertex),std::begin(areaShapes), getArea);
   auto areaSum = std::accumulate(std::begin(areaShapes),std::end(areaShapes),0.0);
   out << std::setprecision(1) << areaSum;
 }
-void skalisusov::maxArea(const std::vector<Polygon> &dest, std::ostream &out)
+void skalisusov::maxArea(const std::vector<Polygon> &rhs, std::ostream &out)
 {
-  if(dest.empty())
+  if(rhs.empty())
   {
     throw std::logic_error("Polygon is empty");
   }
-  std::vector< Polygon > polygon(dest.size());
-  std::copy(std::begin(dest),std::end(dest),std::begin(polygon));
+  std::vector< Polygon > polygon(rhs.size());
+  std::copy(std::begin(rhs),std::end(rhs),std::begin(polygon));
   std::vector< double > area(polygon.size());
   std::transform(std::begin(polygon),std::end(polygon),std::begin(area), getArea);
   auto compar = [&](double a, double b){return a < b;};
@@ -80,41 +80,41 @@ void skalisusov::maxArea(const std::vector<Polygon> &dest, std::ostream &out)
   double maxArea = area[area.size() - 1];
   out << std::setprecision(1) << maxArea << '\n';
 }
-void skalisusov::maxVertex(const std::vector< Polygon > &dest, std::ostream &out)
+void skalisusov::maxVertex(const std::vector< Polygon > &rhs, std::ostream &out)
 {
-  if(dest.empty())
+  if(rhs.empty())
   {
     throw std::logic_error("Polygon is empty");
   }
-  std::vector< Polygon > polgon(dest.size());
-  std::copy(std::begin(dest),std::end(dest),std::begin(polgon));
-  std::sort(std::begin(polgon),std::end(polgon),skalisusov::comparator);
+  std::vector< Polygon > polgon(rhs.size());
+  std::copy(std::begin(rhs),std::end(rhs),std::begin(polgon));
+  std::sort(std::begin(polgon),std::end(polgon),comparator);
   auto end = polgon[polgon.size()-1];
   size_t maxVertex = end.shape.size();
   out << maxVertex << '\n';
 }
-void skalisusov::minArea(const std::vector< Polygon > &dest, std::ostream &out)
+void skalisusov::minArea(const std::vector< Polygon > &rhs, std::ostream &out)
 {
-  if(dest.empty())
+  if(rhs.empty())
   {
     throw std::logic_error("Polygon is empty");
   }
-  std::vector< Polygon > polygon(dest.size());
-  std::copy(std::begin(dest),std::end(dest),std::begin(polygon));
+  std::vector< Polygon > polygon(rhs.size());
+  std::copy(std::begin(rhs),std::end(rhs),std::begin(polygon));
   std::vector< double > area(polygon.size());
   std::transform(std::begin(polygon),std::end(polygon),std::begin(area), getArea);
   std::sort(std::begin(area),std::end(area));
   double minArea = area[0];
   out << std::setprecision(1) << minArea << '\n';
 }
-void skalisusov::minVertex(const std::vector<Polygon> &dest, std::ostream &out)
+void skalisusov::minVertex(const std::vector<Polygon> &rhs, std::ostream &out)
 {
-  if(dest.empty())
+  if(rhs.empty())
   {
     throw std::logic_error("Polygon is empty");
   }
-  std::vector< Polygon > polgon(dest.size());
-  std::copy(std::begin(dest),std::end(dest),std::begin(polgon));
+  std::vector< Polygon > polgon(rhs.size());
+  std::copy(std::begin(rhs),std::end(rhs),std::begin(polgon));
   auto compare = [&](Polygon lhs, Polygon rhs)
   {return lhs.shape.size() < rhs.shape.size();};
   std::sort(std::begin(polgon),std::end(polgon),compare);
@@ -122,43 +122,43 @@ void skalisusov::minVertex(const std::vector<Polygon> &dest, std::ostream &out)
   std::size_t minVertex = min.shape.size();
   out << minVertex << '\n';
 }
-void skalisusov::countEven(const std::vector <Polygon > &dest, std::ostream &out)
+void skalisusov::countEven(const std::vector <Polygon > &rhs, std::ostream &out)
 {
   std::vector< Polygon > polygon;
-  std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isEven);
+  std::copy_if(std::begin(rhs),std::end(rhs),std::back_inserter(polygon), isEven);
   size_t count = polygon.size();
   out << count << '\n';
 }
-void skalisusov::countOdd(const std::vector< Polygon > &dest, std::ostream &out)
+void skalisusov::countOdd(const std::vector< Polygon > &rhs, std::ostream &out)
 {
   std::vector< Polygon > polygon;
-  std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isOdd);
+  std::copy_if(std::begin(rhs),std::end(rhs),std::back_inserter(polygon), isOdd);
   size_t count = polygon.size();
   out << count << '\n';
 }
-void skalisusov::countVertex(const std::vector< Polygon > &dest, size_t vertex, std::ostream &out)
+void skalisusov::countVertex(const std::vector< Polygon > &rhs, size_t vertex, std::ostream &out)
 {
   using namespace std::placeholders;
   auto numVertex = std::bind(isNumVertex,_1,vertex);
   std::vector< Polygon > polygon;
-  std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon),numVertex);
+  std::copy_if(std::begin(rhs),std::end(rhs),std::back_inserter(polygon),numVertex);
   size_t shapesThisVertex = polygon.size();
   out << shapesThisVertex << '\n';
 }
 
-void skalisusov::rects(const std::vector<Polygon> &dest, std::ostream &out)
+void skalisusov::rects(const std::vector<Polygon> &rhs, std::ostream &out)
 {
   std::vector< Polygon > polygon;
-  std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isRects);
+  std::copy_if(std::begin(rhs),std::end(rhs),std::back_inserter(polygon), isRects);
   std::size_t countRects = polygon.size();
   out << countRects << '\n';
 }
-bool skalisusov::isRects(const Polygon &poly)
+bool skalisusov::isRects(const Polygon &rhs)
 {
-  if(poly.shape.size() == 4)
+  if(rhs.shape.size() == 4)
   {
-    std::vector< Point > rect(poly.shape.size());
-    std::copy(std::begin(poly.shape),std::end(poly.shape),std::begin(rect));
+    std::vector< Point > rect(rhs.shape.size());
+    std::copy(std::begin(rhs.shape),std::end(rhs.shape),std::begin(rect));
     Point a = rect[0];
     Point b = rect[1];
     Point c = rect[2];
@@ -193,14 +193,14 @@ skalisusov::commandPolygon skalisusov::command()
   mapCommand.area.insert({"RMECHO", rmecho});
   return mapCommand;
 }
-void skalisusov::realizationCommandPolygon(std::istream &in,std::ostream &out, std::vector< Polygon > &dest
+void skalisusov::realizationCommandPolygon(std::istream &in,std::ostream &out, std::vector< Polygon > &rhs
                                            ,const skalisusov::commandPolygon &commands,std::string &command)
 {
   using namespace std::placeholders;
   try
   {
     auto polygon = std::bind(commands.area.at(command), _1,std::ref(in),std::ref(out));
-    polygon(dest);
+    polygon(rhs);
     return;
   }
   catch (const std::out_of_range & e)
@@ -208,7 +208,7 @@ void skalisusov::realizationCommandPolygon(std::istream &in,std::ostream &out, s
   try
   {
     auto polygon = std::bind(commands.const_area.at(command), _1, std::ref(out));
-    polygon(dest);
+    polygon(rhs);
     return;
   }
   catch (const std::out_of_range & e)
@@ -217,7 +217,7 @@ void skalisusov::realizationCommandPolygon(std::istream &in,std::ostream &out, s
   std::size_t num = std::stoull(command.substr(space));
   auto vertexes = std::bind(commands.const_ver.at(command.substr(0, space) + " NUM"),
                             _1,num,std::ref(out));
-  vertexes(dest);
+  vertexes(rhs);
 }
 std::string skalisusov::listenCommand(std::istream &in)
 {
@@ -241,7 +241,7 @@ std::string skalisusov::listenCommand(std::istream &in)
   comand += param;
   return comand;
 }
-void skalisusov::rmecho(std::vector< Polygon > &dest, std::istream &in, std::ostream &out)
+void skalisusov::rmecho(std::vector< Polygon > &rhs, std::istream &in, std::ostream &out)
 {
   Polygon shape;
   in >> shape;
@@ -250,19 +250,19 @@ void skalisusov::rmecho(std::vector< Polygon > &dest, std::istream &in, std::ost
     throw std::logic_error("Invalid parameters");
   }
   size_t count = 0;
-  count = function_for_rmecho(dest,shape);
+  count = function_for_rmecho(rhs,shape);
   out << count;
 }
-size_t skalisusov::function_for_rmecho(std::vector< Polygon > &poly, skalisusov::Polygon &rhs)
+size_t skalisusov::function_for_rmecho(std::vector< Polygon > &rhs, skalisusov::Polygon &lhs)
 {
   size_t count = 0;
-  std::vector< Polygon > data(poly.size());
-  std::copy(std::begin(poly),std::end(poly),std::begin(data));
+  std::vector< Polygon > data(rhs.size());
+  std::copy(std::begin(rhs),std::end(rhs),std::begin(data));
   auto it_1 = std::adjacent_find(data.begin(),data.end());
   while( it_1 != data.end())
   {
     auto next = std::adjacent_find(it_1++,data.end());
-    if(next != data.end() && next->shape == it_1->shape && next->shape == rhs.shape)
+    if(next != data.end() && next->shape == it_1->shape && next->shape == lhs.shape)
     {
       data.erase(it_1,next+1);
       count++;
@@ -272,6 +272,6 @@ size_t skalisusov::function_for_rmecho(std::vector< Polygon > &poly, skalisusov:
       it_1 = next;
     }
   }
-  poly = data;
+  rhs = data;
   return count;
 }

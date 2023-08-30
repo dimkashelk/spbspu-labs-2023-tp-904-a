@@ -40,7 +40,7 @@ std::istream &skalisusov::operator>>(std::istream &in, Point &point)
   >> DelimiterIO{';'} >> point.y >> DelimiterIO{')'};
   return in;
 }
-std::istream &skalisusov::operator>>(std::istream &in, Polygon &polygon)
+std::istream &skalisusov::operator>>(std::istream &in, Polygon &rhs)
 {
   std::istream::sentry CheckSentry(in);
   if(!CheckSentry)
@@ -60,7 +60,7 @@ std::istream &skalisusov::operator>>(std::istream &in, Polygon &polygon)
   {
     return in;
   }
-  polygon = input;
+  rhs = input;
   return in;
 }
 std::istream &skalisusov::operator>>(std::istream &in, DelimiterIO &&dest)
