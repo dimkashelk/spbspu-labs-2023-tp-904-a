@@ -1,8 +1,6 @@
 #ifndef GITLABPROG_COMMAND_H
 #define GITLABPROG_COMMAND_H
-#include <iostream>
 #include <map>
-#include <functional>
 #include "Polygon.h"
 namespace skalisusov
 {
@@ -20,7 +18,9 @@ namespace skalisusov
   void rects(const std::vector< Polygon > &dest, std::ostream &out);
   void errorMessage(std::ostream & out);
   void rmecho(std::vector< Polygon > &dest,std::istream &in, std::ostream &out);
-  int function_for_rmecho(std::vector< Polygon > &poly,Polygon &rhs);
+
+  size_t function_for_rmecho(std::vector< Polygon > &poly,Polygon &rhs);
+
   bool isNumVertex(const Polygon &polygon, std::size_t count);
   bool isEven(const Polygon &poly);
   bool isOdd(const Polygon &poly);

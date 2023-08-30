@@ -12,6 +12,10 @@ bool skalisusov::operator ==(const Point &lhs, const Point &rhs)
 {
   return (lhs.x == rhs.x) && (lhs.y == rhs.y);
 }
+bool skalisusov::comparator(const skalisusov::Polygon &lhs, const skalisusov::Polygon &rhs)
+{
+  return (lhs.polygon.size() < rhs.polygon.size());
+}
 double skalisusov::getArea(const Polygon &dest)
 {
   double area;

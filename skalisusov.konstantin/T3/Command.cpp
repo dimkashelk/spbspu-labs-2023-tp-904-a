@@ -43,14 +43,14 @@ void skalisusov::areaMean(const std::vector<Polygon> &dest, std::ostream &out)
   {
     throw std::logic_error("Polygon is empty");
   }
-  std::size_t count = dest.size();
+  size_t count = dest.size();
   std::vector< double > areaVector(dest.size());
   std::transform(std::begin(dest),std::end(dest),std::begin(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector),0.0);
   areaSum = areaSum / count;
   out << std::setprecision(1) << areaSum << '\n';
 }
-void skalisusov::areaNumOfVertex(const std::vector< Polygon > &dest, std::size_t vertex, std::ostream &out)
+void skalisusov::areaNumOfVertex(const std::vector< Polygon > &dest, size_t vertex, std::ostream &out)
 {
   if( vertex < 3)
   {
@@ -80,7 +80,7 @@ void skalisusov::maxArea(const std::vector<Polygon> &dest, std::ostream &out)
   double maxArea = area[area.size() - 1];
   out << std::setprecision(1) << maxArea << '\n';
 }
-void skalisusov::maxVertex(const std::vector<Polygon> &dest, std::ostream &out)
+void skalisusov::maxVertex(const std::vector< Polygon > &dest, std::ostream &out)
 {
   if(dest.empty())
   {
@@ -88,11 +88,9 @@ void skalisusov::maxVertex(const std::vector<Polygon> &dest, std::ostream &out)
   }
   std::vector< Polygon > polgon(dest.size());
   std::copy(std::begin(dest),std::end(dest),std::begin(polgon));
-  auto compare = [&](Polygon lhs, Polygon rhs)
-    {return lhs.polygon.size() < rhs.polygon.size();};
-  std::sort(std::begin(polgon),std::end(polgon),compare);
+  std::sort(std::begin(polgon),std::end(polgon),skalisusov::comparator);
   auto end = polgon[polgon.size()-1];
-  std::size_t maxVertex = end.polygon.size();
+  size_t maxVertex = end.polygon.size();
   out << maxVertex << '\n';
 }
 void skalisusov::minArea(const std::vector<Polygon> &dest, std::ostream &out)
@@ -105,8 +103,7 @@ void skalisusov::minArea(const std::vector<Polygon> &dest, std::ostream &out)
   std::copy(std::begin(dest),std::end(dest),std::begin(polygon));
   std::vector< double > area(polygon.size());
   std::transform(std::begin(polygon),std::end(polygon),std::begin(area), getArea);
-  auto compar = [&](double a, double b){return a < b;};
-  std::sort(std::begin(area),std::end(area),compar);
+  std::sort(std::begin(area),std::end(area));
   double minArea = area[0];
   out << std::setprecision(1) << minArea << '\n';
 }
@@ -129,23 +126,23 @@ void skalisusov::countEven(const std::vector<Polygon> &dest, std::ostream &out)
 {
   std::vector< Polygon > polygon;
   std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isEven);
-  std::size_t count = polygon.size();
+  size_t count = polygon.size();
   out << count << '\n';
 }
 void skalisusov::countOdd(const std::vector<Polygon> &dest, std::ostream &out)
 {
   std::vector< Polygon > polygon;
   std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon), isOdd);
-  std::size_t count = polygon.size();
+  size_t count = polygon.size();
   out << count << '\n';
 }
-void skalisusov::countVertex(const std::vector<Polygon> &dest, std::size_t vertex, std::ostream &out)
+void skalisusov::countVertex(const std::vector<Polygon> &dest, size_t vertex, std::ostream &out)
 {
   using namespace std::placeholders;
   auto numVertex = std::bind(isNumVertex,_1,vertex);
   std::vector< Polygon > polygon;
   std::copy_if(std::begin(dest),std::end(dest),std::back_inserter(polygon),numVertex);
-  std::size_t shapesThisVertex = polygon.size();
+  size_t shapesThisVertex = polygon.size();
   out << shapesThisVertex << '\n';
 }
 
@@ -252,13 +249,13 @@ void skalisusov::rmecho(std::vector< Polygon > &dest, std::istream &in, std::ost
   {
     throw std::logic_error("Invalid parameters");
   }
-  std::size_t count = 0;
+  size_t count = 0;
   count = function_for_rmecho(dest,shape);
   out << count;
 }
-int skalisusov::function_for_rmecho(std::vector< Polygon > &poly, skalisusov::Polygon &rhs)
+size_t skalisusov::function_for_rmecho(std::vector< Polygon > &poly, skalisusov::Polygon &rhs)
 {
-  std::size_t count = 0;
+  size_t count = 0;
   std::vector< Polygon > data(poly.size());
   std::copy(std::begin(poly),std::end(poly),std::begin(data));
   auto it_1 = std::adjacent_find(data.begin(),data.end());
