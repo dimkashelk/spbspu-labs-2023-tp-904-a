@@ -21,7 +21,7 @@ bool skalisusov::isOdd(const skalisusov::Polygon &rhs)
 void skalisusov::areaEven(const std::vector<Polygon> &rhs, std::ostream &out)
 {
   std::vector< Polygon > evePoly;
-  std::copy_if(rhs.begin(), rhs.end(),std::back_inserter(evePoly), isEven);
+  std::copy_if(std::begin(rhs), std::end(rhs),std::back_inserter(evePoly), isEven);
   std::vector< double > areaVector;
   std::transform(std::begin(evePoly),std::end(evePoly),std::back_inserter(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector), 0.0);
@@ -31,13 +31,13 @@ void skalisusov::areaEven(const std::vector<Polygon> &rhs, std::ostream &out)
 void skalisusov::areaOdd(const std::vector<Polygon> &rhs, std::ostream &out)
 {
   std::vector< Polygon > evePoly;
-  std::copy_if(rhs.begin(), rhs.end(),std::back_inserter(evePoly), isOdd);
+  std::copy_if(std::begin(rhs), std::end(rhs),std::back_inserter(evePoly), isOdd);
   std::vector< double > areaVector(evePoly.size());
   std::transform(std::begin(evePoly),std::end(evePoly),std::begin(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector), 0.0);
   out << std::setprecision(1) << areaSum << '\n';
 }
-void skalisusov::areaMean(const std::vector<Polygon> &rhs, std::ostream &out)
+void skalisusov::areaMean(const std::vector< Polygon > &rhs, std::ostream &out)
 {
   if(rhs.empty())
   {
@@ -47,8 +47,7 @@ void skalisusov::areaMean(const std::vector<Polygon> &rhs, std::ostream &out)
   std::vector< double > areaVector(rhs.size());
   std::transform(std::begin(rhs),std::end(rhs),std::begin(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector),0.0);
-  areaSum = areaSum / count;
-  out << std::setprecision(1) << areaSum << '\n';
+  out << std::setprecision(1) << areaSum / count << '\n';
 }
 void skalisusov::areaNumOfVertex(const std::vector< Polygon > &rhs, size_t vertex, std::ostream &out)
 {
@@ -163,10 +162,10 @@ bool skalisusov::isRects(const Polygon &rhs)
     Point b = rect[1];
     Point c = rect[2];
     Point d = rect[3];
-    std::size_t ab = std::sqrt(pow((b.x - a.x),2)+pow((b.y - a.y),2));
-    std::size_t cd = std::sqrt(pow((d.x - c.x),2)+pow((d.y - c.y),2));
-    std::size_t ac = std::sqrt(pow((c.x - a.x),2)+pow((c.y - a.y),2));
-    std::size_t bd = std::sqrt(pow((d.x - b.x),2)+pow((d.y - b.y),2));
+    size_t ab = std::sqrt(pow((b.x - a.x),2)+pow((b.y - a.y),2));
+    size_t cd = std::sqrt(pow((d.x - c.x),2)+pow((d.y - c.y),2));
+    size_t ac = std::sqrt(pow((c.x - a.x),2)+pow((c.y - a.y),2));
+    size_t bd = std::sqrt(pow((d.x - b.x),2)+pow((d.y - b.y),2));
     return (ab == cd && ac == bd);
   }
   return false;
