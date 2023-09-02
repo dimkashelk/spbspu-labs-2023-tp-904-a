@@ -35,14 +35,20 @@ int main(int argc, char ** argv)
 
    while(!std::cin.eof())
    {
+     try
+     {
        std::string com = skalisusov::listenCommand(std::cin);
        realizationCommandPolygon(std::cin,std::cout,data,mapCommand,com);
-       if(std::cin.fail())
-       {
-         skalisusov::errorMessage(std::cout);
-         std::cin.ignore(max, '\n');
-       }
-
+     }
+     catch(std::logic_error &e)
+     {
+       skalisusov::errorMessage(std::cout);
+       std::cin.ignore(max, '\n');
+     }
+     catch (const std::runtime_error & e)
+     {
+       break;
+     }
    }
   return 0;
 }
