@@ -54,13 +54,13 @@ std::istream &skalisusov::operator>>(std::istream &in, Polygon &rhs)
     in.setstate(std::ios::failbit);
     return in;
   }
-  Polygon input;
-  std::copy_n(std::istream_iterator< Point >(in), count, std::back_inserter(input.shape));
+  std::vector< Point > input;
+  std::copy_n(std::istream_iterator< Point >(in), count, std::back_inserter(input));
   if(!in)
   {
     return in;
   }
-  rhs = input;
+  rhs.shape = input;
   return in;
 }
 std::istream &skalisusov::operator>>(std::istream &in, DelimiterIO &&dest)
