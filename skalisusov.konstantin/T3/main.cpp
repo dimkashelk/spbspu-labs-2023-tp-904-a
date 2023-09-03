@@ -35,6 +35,10 @@ int main(int argc, char ** argv)
 
    while(!std::cin.eof())
    {
+     if(std::cin.eof())
+     {
+       break;
+     }
      try
      {
        std::string com = skalisusov::listenCommand(std::cin);
@@ -45,10 +49,12 @@ int main(int argc, char ** argv)
        skalisusov::errorMessage(std::cout);
        std::cin.ignore(max, '\n');
      }
+     /*
      catch (const std::runtime_error & e)
      {
        break;
      }
+     */
    }
   return 0;
 }
