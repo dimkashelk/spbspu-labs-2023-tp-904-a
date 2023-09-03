@@ -49,12 +49,10 @@ int main(int argc, char ** argv)
        skalisusov::errorMessage(std::cout);
        std::cin.ignore(max, '\n');
      }
-     /*
      catch (const std::runtime_error & e)
      {
        break;
      }
-     */
    }
   return 0;
 }
