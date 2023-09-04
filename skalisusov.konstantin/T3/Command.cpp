@@ -25,7 +25,7 @@ void skalisusov::areaEven(const std::vector<Polygon> &rhs, std::ostream &out)
   std::vector< double > areaVector;
   std::transform(std::begin(evePoly),std::end(evePoly),std::back_inserter(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector), 0.0);
-  out << std::fixed << std::setprecision(1) << areaSum << '\n';
+  out << std::scientific << std::fixed << std::setprecision(1) << areaSum << '\n';
 }
 
 void skalisusov::areaOdd(const std::vector<Polygon> &rhs, std::ostream &out)
@@ -35,7 +35,7 @@ void skalisusov::areaOdd(const std::vector<Polygon> &rhs, std::ostream &out)
   std::vector< double > areaVector(evePoly.size());
   std::transform(std::begin(evePoly),std::end(evePoly),std::begin(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector), 0.0);
-  out << std::fixed << std::setprecision(1) << areaSum << '\n';
+  out << std::scientific << std::fixed << std::setprecision(1) << areaSum << '\n';
 }
 void skalisusov::areaMean(const std::vector< Polygon > &rhs, std::ostream &out)
 {
@@ -47,7 +47,7 @@ void skalisusov::areaMean(const std::vector< Polygon > &rhs, std::ostream &out)
   std::vector< double > areaVector(rhs.size());
   std::transform(std::begin(rhs),std::end(rhs),std::begin(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector),0.0);
-  out << std::setprecision(1) << areaSum / count << '\n';
+  out << std::scientific << std::setprecision(1) << areaSum / count << '\n';
 }
 void skalisusov::areaNumOfVertex(const std::vector< Polygon > &rhs, size_t vertex, std::ostream &out)
 {
@@ -62,7 +62,7 @@ void skalisusov::areaNumOfVertex(const std::vector< Polygon > &rhs, size_t verte
   std::vector< double > areaShapes(polygonOfVertex.size());
   std::transform(std::begin(polygonOfVertex),std::end(polygonOfVertex),std::begin(areaShapes), getArea);
   auto areaSum = std::accumulate(std::begin(areaShapes),std::end(areaShapes),0.0);
-  out << std::setprecision(1) << areaSum << '\n';
+  out << std::fixed << std::setprecision(1) << areaSum << '\n';
 }
 void skalisusov::maxArea(const std::vector<Polygon> &rhs, std::ostream &out)
 {
@@ -77,7 +77,7 @@ void skalisusov::maxArea(const std::vector<Polygon> &rhs, std::ostream &out)
   auto compar = [&](double a, double b){return a < b;};
   std::sort(std::begin(area),std::end(area),compar);
   double maxArea = area[area.size() - 1];
-  out << std::setprecision(1) << maxArea << '\n';
+  out << std::scientific << std::fixed << std::setprecision(1) << maxArea << '\n';
 }
 void skalisusov::maxVertex(const std::vector< Polygon > &rhs, std::ostream &out)
 {
@@ -104,7 +104,7 @@ void skalisusov::minArea(const std::vector< Polygon > &rhs, std::ostream &out)
   std::transform(std::begin(polygon),std::end(polygon),std::begin(area), getArea);
   std::sort(std::begin(area),std::end(area));
   double minArea = area[0];
-  out << std::setprecision(1) << minArea << '\n';
+  out << std::scientific << std::fixed << std::setprecision(1) << minArea << '\n';
 }
 void skalisusov::minVertex(const std::vector<Polygon> &rhs, std::ostream &out)
 {
