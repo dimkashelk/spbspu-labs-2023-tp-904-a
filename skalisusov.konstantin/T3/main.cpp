@@ -35,10 +35,6 @@ int main(int argc, char ** argv)
 
    while(!std::cin.eof())
    {
-     if(std::cin.eof())
-     {
-       break;
-     }
      try
      {
        std::string com = skalisusov::listenCommand(std::cin);

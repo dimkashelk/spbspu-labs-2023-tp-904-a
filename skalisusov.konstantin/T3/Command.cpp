@@ -62,7 +62,7 @@ void skalisusov::areaNumOfVertex(const std::vector< Polygon > &rhs, size_t verte
   std::vector< double > areaShapes(polygonOfVertex.size());
   std::transform(std::begin(polygonOfVertex),std::end(polygonOfVertex),std::begin(areaShapes), getArea);
   auto areaSum = std::accumulate(std::begin(areaShapes),std::end(areaShapes),0.0);
-  out << std::setprecision(1) << areaSum;
+  out << std::setprecision(1) << areaSum << '\n';
 }
 void skalisusov::maxArea(const std::vector<Polygon> &rhs, std::ostream &out)
 {
@@ -224,7 +224,7 @@ std::string skalisusov::listenCommand(std::istream &in)
   in >> comand;
   if(!in)
   {
-    throw std::logic_error("not input");
+    throw std::runtime_error("eof");
   }
   if(comand == "RECTS" || comand == "RMECHO")
   {
