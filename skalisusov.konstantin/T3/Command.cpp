@@ -25,7 +25,7 @@ void skalisusov::areaEven(const std::vector<Polygon> &rhs, std::ostream &out)
   std::vector< double > areaVector;
   std::transform(std::begin(evePoly),std::end(evePoly),std::back_inserter(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector), 0.0);
-  out << std::setprecision(1) << areaSum << '\n';
+  out << std::fixed << std::setprecision(1) << areaSum << '\n';
 }
 
 void skalisusov::areaOdd(const std::vector<Polygon> &rhs, std::ostream &out)
@@ -35,7 +35,7 @@ void skalisusov::areaOdd(const std::vector<Polygon> &rhs, std::ostream &out)
   std::vector< double > areaVector(evePoly.size());
   std::transform(std::begin(evePoly),std::end(evePoly),std::begin(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector), 0.0);
-  out << std::setprecision(1) << areaSum << '\n';
+  out << std::fixed << std::setprecision(1) << areaSum << '\n';
 }
 void skalisusov::areaMean(const std::vector< Polygon > &rhs, std::ostream &out)
 {
@@ -138,6 +138,10 @@ void skalisusov::countOdd(const std::vector< Polygon > &rhs, std::ostream &out)
 void skalisusov::countVertex(const std::vector< Polygon > &rhs, size_t vertex, std::ostream &out)
 {
   using namespace std::placeholders;
+  if (vertex < 3)
+  {
+    throw std::logic_error("");
+  }
   auto numVertex = std::bind(isNumVertex,_1,vertex);
   std::vector< Polygon > polygon;
   std::copy_if(std::begin(rhs),std::end(rhs),std::back_inserter(polygon),numVertex);
