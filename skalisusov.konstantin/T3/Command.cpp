@@ -152,6 +152,10 @@ void skalisusov::countVertex(const std::vector< Polygon > &rhs, size_t vertex, s
 void skalisusov::rects(const std::vector<Polygon> &rhs, std::ostream &out)
 {
   std::vector< Polygon > polygon;
+  if (rhs.empty())
+  {
+    throw std::logic_error("empty");
+  }
   std::copy_if(std::begin(rhs),std::end(rhs),std::back_inserter(polygon), isRects);
   std::size_t countRects = polygon.size();
   out << countRects << '\n';
