@@ -47,7 +47,7 @@ void skalisusov::areaMean(const std::vector< Polygon > &rhs, std::ostream &out)
   std::vector< double > areaVector(rhs.size());
   std::transform(std::begin(rhs),std::end(rhs),std::begin(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector),std::end(areaVector),0.0);
-  out << std::scientific << std::setprecision(1) << areaSum / count << '\n';
+  out << std::scientific << std::fixed << std::setprecision(1) << areaSum / count << '\n';
 }
 void skalisusov::areaNumOfVertex(const std::vector< Polygon > &rhs, size_t vertex, std::ostream &out)
 {
