@@ -6,13 +6,13 @@
 #include <sstream>
 int main(int argc, char ** argv)
 {
-  if(argc < 2)
+  if (argc < 2)
   {
     std::cerr << "Not enough CL parameters\n";
     return 1;
   }
   std::ifstream input(argv[1]);
-   if(!input)
+   if (!input)
    {
    std::cerr << "Not open file\n";
    return 1;
@@ -23,7 +23,7 @@ int main(int argc, char ** argv)
    {
      std::copy(std::istream_iterator< skalisusov::Polygon >(input),
        std::istream_iterator< skalisusov::Polygon >(),std::back_inserter(data));
-     if(input.fail())
+     if (input.fail())
      {
        input.clear();
        input.ignore(max,'\n');
@@ -38,7 +38,7 @@ int main(int argc, char ** argv)
        std::string com = skalisusov::listenCommand(std::cin);
        realizationCommandPolygon(std::cin,std::cout,data,mapCommand,com);
      }
-     catch (const std::runtime_error &e)
+     catch(const std::runtime_error &e)
      {
        break;
      }
