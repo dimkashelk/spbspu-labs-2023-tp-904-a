@@ -39,4 +39,4 @@ namespace skalisusov
                                  const commandPolygon  &mapCommand,std::string &command);
   std::string listenCommand(std::istream &in);
 }
-#endif //GITLABPROG_COMMAND_H
+#endif

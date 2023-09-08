@@ -18,6 +18,15 @@ namespace skalisusov
   {
     char delim;
   };
+  class iofmtguard {
+  public:
+    iofmtguard(std::basic_ios< char > & s);
+    ~iofmtguard();
+  private:
+    std::basic_ios< char > & s_;
+    char fill_;
+    std::basic_ios< char >::fmtflags fmt_;
+  };
   double getArea(const Polygon &polygon);
   bool operator ==(const Point &lhs, const Point &rhs);
   bool operator ==(const Polygon &lhs, const Polygon &rhs);
@@ -26,4 +35,4 @@ namespace skalisusov
   std::istream &operator>>(std::istream &in, Polygon &polygon);
   std::istream &operator>>(std::istream &in, DelimiterIO &&dest);
 }
-#endif //GITLABPROG_POLYGON_H
+#endif

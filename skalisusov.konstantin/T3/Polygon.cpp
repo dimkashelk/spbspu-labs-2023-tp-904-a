@@ -24,7 +24,8 @@ double skalisusov::getArea(const Polygon &dest)
     return a.x * b.y - a.y * b.x;
   };
   std::vector< int > arr(dest.shape.size());
-  std::transform(dest.shape.begin(), --dest.shape.end(), ++dest.shape.begin(), std::back_inserter(arr), getPoint);
+  std::transform(dest.shape.begin(), --dest.shape.end(), ++dest.shape.begin(),
+  std::back_inserter(arr), getPoint);
   area = std::accumulate(arr.begin(), arr.end(), 0.0);
   area += (--dest.shape.end())->x * dest.shape.begin()->y - dest.shape.begin()->x * (--dest.shape.end())->y;
   return std::abs(area * 0.5);
@@ -77,4 +78,15 @@ std::istream &skalisusov::operator>>(std::istream &in, DelimiterIO &&dest)
     in.setstate(std::ios::failbit);
   }
   return in;
+}
+skalisusov::iofmtguard::iofmtguard(std::basic_ios< char > & s):
+  s_(s),
+  fill_(s.fill()),
+  fmt_(s.flags())
+{}
+
+skalisusov::iofmtguard::~iofmtguard()
+{
+  s_.fill(fill_);
+  s_.flags(fmt_);
 }

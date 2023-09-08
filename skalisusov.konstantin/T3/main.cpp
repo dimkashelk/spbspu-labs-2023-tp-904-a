@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <fstream>
 #include "Command.h"
-#include <sstream>
 int main(int argc, char ** argv)
 {
   if (argc < 2)
@@ -19,7 +18,7 @@ int main(int argc, char ** argv)
    }
    auto max = std::numeric_limits< std::streamsize>::max();
    std::vector< skalisusov::Polygon > data;
-   while(!input.eof())
+   while (!input.eof())
    {
      std::copy(std::istream_iterator< skalisusov::Polygon >(input),
        std::istream_iterator< skalisusov::Polygon >(),std::back_inserter(data));
@@ -31,7 +30,7 @@ int main(int argc, char ** argv)
    }
    input.close();
    auto mapCommand = skalisusov::command();
-   while(!std::cin.eof())
+   while (!std::cin.eof())
    {
      try
      {
