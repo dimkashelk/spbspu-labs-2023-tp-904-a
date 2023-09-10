@@ -35,7 +35,7 @@ int main(int argc, char ** argv)
      try
      {
        std::string com = skalisusov::listenCommand(std::cin);
-       realizationCommandPolygon(std::cin,std::cout,data,mapCommand,com);
+       CommandPolygon(std::cin,std::cout,data,mapCommand,com);
      }
      catch(const std::runtime_error &e)
      {

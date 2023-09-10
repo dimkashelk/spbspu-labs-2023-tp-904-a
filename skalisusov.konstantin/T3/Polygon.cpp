@@ -1,9 +1,8 @@
 #include "Polygon.h"
+#include <algorithm>
 #include <iostream>
 #include <iterator>
-#include <algorithm>
 #include <numeric>
-
 bool skalisusov::operator==(const skalisusov::Polygon &lhs, const skalisusov::Polygon &rhs)
 {
   return std::equal(lhs.shape.begin(),lhs.shape.end(),rhs.shape.begin());
