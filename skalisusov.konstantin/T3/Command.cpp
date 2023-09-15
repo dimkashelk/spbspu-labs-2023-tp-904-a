@@ -288,7 +288,7 @@ std::string skalisusov::listenCommand(std::istream &in)
 {
   std::string comand = "0";
   in >> comand;
-  if (!in)
+  if (in.eof())
   {
     throw std::runtime_error("eof");
   }

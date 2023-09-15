@@ -3,7 +3,7 @@
 #include <iostream>
 #include <iterator>
 #include <numeric>
-bool skalisusov::operator==(const skalisusov::Polygon &lhs, const skalisusov::Polygon &rhs)
+bool skalisusov::operator ==(const skalisusov::Polygon &lhs, const skalisusov::Polygon &rhs)
 {
   return std::equal(lhs.shape.begin(),lhs.shape.end(),rhs.shape.begin());
 }
