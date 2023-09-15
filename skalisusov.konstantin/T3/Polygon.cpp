@@ -36,8 +36,8 @@ std::istream &skalisusov::operator>>(std::istream &in, Point &point)
   {
     return in;
   }
-  in >> DelimiterIO{'('} >> point.x
-  >> DelimiterIO{';'} >> point.y >> DelimiterIO{')'};
+  in >> DelimiterIO{ '(' } >> point.x
+  >> DelimiterIO{ ';' } >> point.y >> DelimiterIO{ ')' };
   return in;
 }
 std::istream &skalisusov::operator>>(std::istream &in, Polygon &rhs)
