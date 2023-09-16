@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iterator>
+#include <algorithm>
 #include <fstream>
 #include "Command.h"
 int main(int argc, char ** argv)
