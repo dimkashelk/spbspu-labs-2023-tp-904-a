@@ -1,6 +1,5 @@
 #include <iostream>
 #include <iterator>
-#include <algorithm>
 #include <fstream>
 #include "Command.h"
 int main(int argc, char ** argv)
@@ -41,7 +40,7 @@ int main(int argc, char ** argv)
     {
       break;
     }
-    catch(std::logic_error &e)
+    catch(const std::logic_error &e)
     {
       skalisusov::errorMessage(std::cout);
       std::cin.ignore(max, '\n');
