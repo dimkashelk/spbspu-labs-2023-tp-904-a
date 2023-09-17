@@ -18,11 +18,6 @@ litvin::CommandDicts::CommandDicts()
   dict3.insert({"COUNT", printNumOfPolygonsWithNumOfVertexes});
   dict3.insert({"AREA", printAreaIfNumberOfVertexesIs});
 }
-std::ostream & litvin::printInvalidCommand(std::ostream & out)
-{
-  out << "<INVALID COMMAND>";
-  return out;
-}
 std::string litvin::inputCommand(std::istream & in)
 {
   std::string command_name = " ";
