@@ -1,6 +1,6 @@
 #include <iostream>
 #include <limits>
-#include <helpers.hpp>
+#include <iostructures.hpp>
 #include "auxiliary_fns.hpp"
 #include "dict.hpp"
 int main()
@@ -21,7 +21,7 @@ int main()
     }
     catch (const std::logic_error &)
     {
-      litvin::printInvalidCommand(out);
+      litvin::printInvalidCommand(std::cout);
       std::cout << '\n';
       if (!std::cin)
       {
