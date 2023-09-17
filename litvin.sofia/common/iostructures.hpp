@@ -28,5 +28,6 @@ namespace litvin
   std::istream & operator>>(std::istream & in, StringIO && dest);
   std::istream & operator>>(std::istream & in, LabelIO && dest);
   std::istream & operator>>(std::istream & in, RationalIO && dest);
+  std::ostream & printInvalidCommand(std::ostream & out);
 }
 #endif

@@ -4,6 +4,7 @@
 #include <iterator>
 #include <vector>
 #include <algorithm>
+#include <iostructures.hpp>
 #include "polygon.hpp"
 #include "helpers.hpp"
 int main(int argc, char * argv[])
