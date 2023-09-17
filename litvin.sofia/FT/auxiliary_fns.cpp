@@ -1,5 +1,5 @@
 #include "auxiliary_fns.hpp"
-litvin::command_dict_t::command_dict_t()
+litvin::CommandDict::CommandDict()
 {
   dict1.insert({"search", searchWord});
   dict1.insert({"print", printDict});
@@ -57,20 +57,26 @@ void litvin::help(const command_descriptors & cmd_desc, std::ostream & out, std:
     out << desc.first << ": " << desc.second << '\n';
   }
 }
-void litvin::command_dict_t::executeCommand(const std::string & command, dicts_list_t & list, std::ostream & out,
-                                            std::istream & in) const
+void litvin::CommandDict::executeCommand(const std::string & command,
+                                         dicts_list_t & list,
+                                         std::ostream & out,
+                                         std::istream & in) const
 {
   signature_type_1 function = dict1.at(command);
   function(list, out, in);
 }
-void litvin::command_dict_t::executeCommand(const std::string & command, const command_descriptors & cmd_desc,
-                                            std::ostream & out, std::istream & in) const
+void litvin::CommandDict::executeCommand(const std::string & command,
+                                         const command_descriptors & cmd_desc,
+                                         std::ostream & out,
+                                         std::istream & in) const
 {
   signature_type_2 function = dict2.at(command);
   function(cmd_desc, out, in);
 }
-void litvin::command_dict_t::executeCommand(const std::string & command, dicts_list_t & list, const std::string & dict,
-                                            std::ostream & out) const
+void litvin::CommandDict::executeCommand(const std::string & command,
+                                         dicts_list_t & list,
+                                         const std::string & dict,
+                                         std::ostream & out) const
 {
   signature_type_3 function = dict3.at(command);
   function(list, dict, out);
@@ -85,8 +91,12 @@ std::string litvin::inputCommand(std::istream & in)
   }
   return command_name;
 }
-void litvin::runCommand(const command_dict_t & cmd_d, dicts_list_t & list, const command_descriptors & desc_d,
-                        const std::string & cmd, std::ostream & out, std::istream & in)
+void litvin::runCommand(const CommandDict & cmd_d,
+    dicts_list_t & list,
+    const command_descriptors & desc_d,
+    const std::string & cmd,
+    std::ostream & out,
+    std::istream & in)
 {
   try
   {

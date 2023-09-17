@@ -11,8 +11,9 @@ bool litvin::findDict(const dicts_list_t & list, const std::string & dict_name)
   }
   return true;
 }
-litvin::translations * litvin::findWordTranslation(dicts_list_t & list, const std::string & dict_name,
-                                                   const std::string & word)
+litvin::translations * litvin::findWordTranslation(dicts_list_t & list,
+    const std::string & dict_name,
+    const std::string & word)
 {
   dict_t & dictionary = list.dict_list[dict_name];
   try
@@ -391,17 +392,17 @@ void litvin::intersectDictionaries(dicts_list_t & list, std::ostream & out, std:
         if (dictionary2.count(word))
         {
           const translations & translist2 = dictionary2.at(word);
-          translations combinedtranslations;
-          combinedtranslations.insert(combinedtranslations.end(), translist1.begin(), translist1.end());
+          translations combined_translations;
+          combined_translations.insert(combined_translations.end(), translist1.begin(), translist1.end());
           for (const auto & translation: translist2)
           {
-            if (std::find(combinedtranslations.begin(), combinedtranslations.end(), translation) ==
-                combinedtranslations.end())
+            if (std::find(combined_translations.begin(), combined_translations.end(), translation) ==
+                combined_translations.end())
             {
-              combinedtranslations.push_back(translation);
+              combined_translations.push_back(translation);
             }
           }
-          dictionary3[word] = combinedtranslations;
+          dictionary3[word] = combined_translations;
         }
       }
     }
