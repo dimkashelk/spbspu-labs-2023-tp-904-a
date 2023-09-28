@@ -18,7 +18,7 @@ namespace zhukova
   }
   bool isOddVertexes(const Polygon & src)
   {
-    return size(src.points) % 2 == 1;
+    return src.points.size() % 2 == 1;
   }
   bool isEvenVertexes(const Polygon & src)
   {
@@ -26,7 +26,7 @@ namespace zhukova
   }
   size_t getAmountOfVertexes(const Polygon & src)
   {
-    return size(src.points);
+    return src.points.size();
   }
   bool isAmountOfVertexes(const Polygon & src, size_t amount)
   {

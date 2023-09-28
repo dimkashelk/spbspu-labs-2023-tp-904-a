@@ -89,7 +89,7 @@ namespace zhukova
       return out;
     }
     iofmtguard fmtguard(out);
-    out << size(src.points) << ' ' << src.points;
+    out << src.points.size() << ' ' << src.points;
     return out;
   }
   iofmtguard::iofmtguard(std::basic_ios< char > & s):

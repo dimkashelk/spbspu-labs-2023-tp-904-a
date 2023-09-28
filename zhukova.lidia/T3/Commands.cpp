@@ -57,7 +57,6 @@ namespace zhukova
       src.end(),
       std::back_inserter(vertexesAmounts),
       getAmountOfVertexes);
-    size_t max = 0;
     if (isMax)
     {
       out << *std::max_element(vertexesAmounts.begin(), vertexesAmounts.end()) << '\n';
@@ -83,7 +82,6 @@ namespace zhukova
       src.end(),
       std::back_inserter(areas),
       getArea);
-    size_t max = 0;
     if (isMax)
     {
       out << *std::max_element(areas.begin(), areas.end()) << '\n';

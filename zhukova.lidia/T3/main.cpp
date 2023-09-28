@@ -14,6 +14,9 @@ std::ostream &outInvalidCommand(std::ostream &out)
 }
 int main(int argc, char * argv[])
 {
+  if (argc < 2) {
+    return 1;
+  }
   std::ifstream inFile(argv[1]);
   if (!inFile.is_open())
   {
