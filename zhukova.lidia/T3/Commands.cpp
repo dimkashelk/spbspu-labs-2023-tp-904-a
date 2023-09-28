@@ -35,7 +35,7 @@ namespace zhukova
       getArea);
     iofmtguard fmtguard(out);
     double result = std::accumulate(areas.begin(), areas.end(), 0);
-    out << result / src.points.size() << '\n';
+    out << result / src.size() << '\n';
   }
   void getSumAreaVertexes(const std::vector< Polygon > & src, size_t vertexes, std::ostream & out)
   {
