@@ -39,7 +39,7 @@ namespace zhukova
   }
   void getSumAreaVertexes(const std::vector< Polygon > & src, size_t vertexes, std::ostream & out)
   {
-    if (amount < 3)
+    if (vertexes < 3)
     {
       throw std::logic_error("<INVALID COMMAND>");
     }
