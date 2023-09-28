@@ -11,7 +11,7 @@ namespace zhukova
       std::back_inserter(areas),
       std::bind(getAreaIf, _1, isOddVertexes));
     iofmtguard fmtguard(out);
-    out << std::accumulate(areas.begin(), areas.end(), 0) << '\n';
+    out << std::accumulate(areas.begin(), areas.end(), 0.0) << '\n';
   }
   void getSumAreaEven(const std::vector< Polygon > & src, std::ostream & out)
   {
@@ -22,7 +22,7 @@ namespace zhukova
       src.end(),
       std::back_inserter(areas),
       std::bind(getAreaIf, _1, isEvenVertexes));
-    out << std::accumulate(areas.begin(), areas.end(), 0) << '\n';
+    out << std::accumulate(areas.begin(), areas.end(), 0.0) << '\n';
   }
   void getAreaMean(const std::vector< Polygon > & src, std::ostream & out)
   {
@@ -34,7 +34,7 @@ namespace zhukova
       std::back_inserter(areas),
       getArea);
     iofmtguard fmtguard(out);
-    double result = std::accumulate(areas.begin(), areas.end(), 0);
+    double result = std::accumulate(areas.begin(), areas.end(), 0.0);
     out << result / src.size() << '\n';
   }
   void getSumAreaVertexes(const std::vector< Polygon > & src, size_t vertexes, std::ostream & out)
@@ -46,7 +46,7 @@ namespace zhukova
       src.end(),
       std::back_inserter(areas),
       std::bind(getAreaIfVertexes, _1, vertexes, isAmountOfVertexes));
-    double result = std::accumulate(areas.begin(), areas.end(), 0);
+    double result = std::accumulate(areas.begin(), areas.end(), 0.0);
     out << result << '\n';
   }
   void getMaxMinVertexes(const std::vector< Polygon > & src, bool isMax, std::ostream & out)
@@ -82,6 +82,7 @@ namespace zhukova
       src.end(),
       std::back_inserter(areas),
       getArea);
+    out << std::fixed << std::setprecision(1);
     if (isMax)
     {
       out << *std::max_element(areas.begin(), areas.end()) << '\n';
@@ -120,6 +121,9 @@ namespace zhukova
   }
   void countExactVertexes(const std::vector< Polygon > & src, size_t amount, std::ostream & out)
   {
+    if (amount < 3) {
+      throw std::logic_error("<INVALID COMMAND>");
+    }
     using namespace std::placeholders;
     out << std::count_if(src.begin(), src.end(), std::bind(isAmountOfVertexes, _1, amount)) << '\n';
   }

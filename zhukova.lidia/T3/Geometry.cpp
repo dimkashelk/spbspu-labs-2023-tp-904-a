@@ -45,7 +45,7 @@ namespace zhukova
       ++src.points.begin(),
       std::back_inserter(sumStages),
       shoelaceAlgorithm);
-    return abs(std::accumulate(sumStages.begin(), sumStages.end(), 0) / 2);
+    return abs(std::accumulate(sumStages.begin(), sumStages.end(), 0.0) / 2);
   }
   double getAreaIf(const Polygon & src, bool (* pred)(const Polygon &))
   {
