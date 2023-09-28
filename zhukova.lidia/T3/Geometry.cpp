@@ -32,19 +32,20 @@ namespace zhukova
   {
     return amount == getAmountOfVertexes(src);
   };
-  double shoelaceAlgorithm(const Point & p1, const Point & p2)
+  int shoelaceAlgorithm(const Point & p1, const Point & p2)
   {
     return p1.x * p2.y - p1.y * p2.x;
   }
   double getArea(const Polygon & src)
   {
-    std::vector< double > sumStages;
+    std::vector< int > sumStages;
     std::transform(
       src.points.begin(),
       --src.points.end(),
       ++src.points.begin(),
       std::back_inserter(sumStages),
       shoelaceAlgorithm);
+    sumStages.push_back(shoelaceAlgorithm(src.points.end(), src.points.begin()));
     return abs(std::accumulate(sumStages.begin(), sumStages.end(), 0.0) / 2.0);
   }
   double getAreaIf(const Polygon & src, bool (* pred)(const Polygon &))

@@ -27,7 +27,7 @@ namespace zhukova
   bool isEvenVertexes(const Polygon & src);
   size_t getAmountOfVertexes(const Polygon & src);
   bool isAmountOfVertexes(const Polygon & src, size_t amount);
-  double shoelaceAlgorithm(const Point & p1, const Point & p2);
+  int shoelaceAlgorithm(const Point & p1, const Point & p2);
   double getArea(const Polygon & src);
   double getAreaIf(const Polygon & src, bool (* pred)(const Polygon &));
   double getAreaIfVertexes(const Polygon & src, size_t amount, bool (* pred)(const Polygon &, size_t amount));
