@@ -27,7 +27,6 @@ namespace zhukova
       throw std::logic_error("<INVALID COMMAND>");
     }
     try
-    }
     {
       cs.dict.at(command)(src, out);
       return;
