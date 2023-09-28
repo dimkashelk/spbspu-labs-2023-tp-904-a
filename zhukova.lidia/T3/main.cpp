@@ -2,8 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <iterator>
-#include <algorithm>
-#include <list>
 #include <limits>
 #include "Geometry.h"
 #include "CommandSystem.h"
@@ -35,10 +33,6 @@ int main(int argc, char * argv[])
     }
   }
   inFile.close();
-  std::copy(
-    dataVector.begin(),
-    dataVector.end(),
-    std::ostream_iterator< zhukova::Polygon >(std::cout, "\n"));
   std::cout << std::fixed << std::setprecision(1);
   zhukova::CommandSystem commands = zhukova::makeCommandSystem();
   while (!std::cin.eof())
@@ -53,6 +47,7 @@ int main(int argc, char * argv[])
     }
     catch (std::logic_error & e){
       outInvalidCommand(std::cout);
+      std::cin.clear();
       std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
     }
     if (!std::cin) {
@@ -60,9 +55,5 @@ int main(int argc, char * argv[])
       std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
     }
   }
-  std::copy(
-    dataVector.begin(),
-    dataVector.end(),
-    std::ostream_iterator< zhukova::Polygon >(std::cout, "\n"));
   return 0;
 }
