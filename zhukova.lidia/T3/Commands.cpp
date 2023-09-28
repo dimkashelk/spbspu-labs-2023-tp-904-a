@@ -68,10 +68,18 @@ namespace zhukova
   }
   void getMaxVertexes(const std::vector< Polygon > & src, std::ostream & out)
   {
+    if (src.size() == 0)
+    {
+      throw std::logic_error("<INVALID COMMAND>");
+    }
     getMaxMinVertexes(src, true, out);
   }
   void getMinVertexes(const std::vector< Polygon > & src, std::ostream & out)
   {
+    if (src.size() == 0)
+    {
+      throw std::logic_error("<INVALID COMMAND>");
+    }
     getMaxMinVertexes(src, false, out);
   }
   void getMaxMinArea(const std::vector< Polygon > & src, bool isMax, std::ostream & out)
@@ -94,10 +102,18 @@ namespace zhukova
   }
   void getMaxArea(const std::vector< Polygon > & src, std::ostream & out)
   {
+    if (src.size() == 0)
+    {
+      throw std::logic_error("<INVALID COMMAND>");
+    }
     getMaxMinArea(src, true, out);
   }
   void getMinArea(const std::vector< Polygon > & src, std::ostream & out)
   {
+    if (src.size() == 0)
+    {
+      throw std::logic_error("<INVALID COMMAND>");
+    }
     getMaxMinArea(src, false, out);
   }
   void countEvenOddVertexes(const std::vector< Polygon > & src, bool isEven, std::ostream & out)

@@ -22,10 +22,6 @@ namespace zhukova
   void doCommand(std::vector< Polygon > & src, const CommandSystem & cs, const std::string & command,
                  std::istream & in, std::ostream & out)
   {
-    if (src.size() == 0)
-    {
-      throw std::logic_error("<INVALID COMMAND>");
-    }
     try
     {
       cs.dict.at(command)(src, out);
