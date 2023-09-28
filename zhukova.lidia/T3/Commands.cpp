@@ -138,9 +138,6 @@ namespace zhukova
     auto samePol = std::find_if(copySrc.begin(),
                                 copySrc.end(),
                                   comparator);
-    auto samePol1 = std::find_if(copySrc.begin(),
-                   copySrc.end(),
-                   comparator);
     size_t count = 0;
     while (samePol != copySrc.end()) {
       count++;
