@@ -2,6 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include <iterator>
+#include <algorithm>
+#include <list>
+#include <limits>
 #include "Geometry.h"
 #include "CommandSystem.h"
 #include "DataIO.h"
@@ -11,13 +14,11 @@ std::ostream &outInvalidCommand(std::ostream &out)
 }
 int main(int argc, char * argv[])
 {
-  //std::ifstream inFile(argv[1]);
-  std::ifstream inFile;
-  inFile.open("C:\\Users\\LIDIYA\\CLionProjects\\T3\\tests.txt");
+  std::ifstream inFile(argv[1]);
   if (!inFile.is_open())
   {
     std::cerr << "file was not opened\n";
-    return 2;
+    return 1;
   }
   std::vector< zhukova::Polygon > dataVector;
   using in_iter = std::istream_iterator< zhukova::Polygon >;

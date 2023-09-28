@@ -5,6 +5,8 @@
 #include <iomanip>
 #include <iostream>
 #include <iterator>
+#include <limits>
+#include <algorithm>
 #include "Geometry.h"
 namespace zhukova
 {

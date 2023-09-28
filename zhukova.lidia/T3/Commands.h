@@ -5,6 +5,8 @@
 #include <functional>
 #include <iterator>
 #include <list>
+#include <algorithm>
+#include <limits>
 #include "Geometry.h"
 #include "DataIO.h"
 namespace zhukova

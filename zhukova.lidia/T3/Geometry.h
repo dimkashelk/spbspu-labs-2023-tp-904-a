@@ -3,6 +3,8 @@
 #include <complex>
 #include <vector>
 #include <numeric>
+#include <vector>
+#include <algorithm>
 namespace zhukova
 {
   struct Point
