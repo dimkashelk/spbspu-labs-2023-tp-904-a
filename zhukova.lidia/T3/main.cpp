@@ -6,10 +6,6 @@
 #include "Geometry.h"
 #include "CommandSystem.h"
 #include "DataIO.h"
-std::ostream &outInvalidCommand(std::ostream &out)
-{
-  return out << "<INVALID COMMAND>\n";
-}
 int main(int argc, char * argv[])
 {
   if (argc < 2) {
@@ -46,7 +42,7 @@ int main(int argc, char * argv[])
       break;
     }
     catch (std::logic_error & e){
-      outInvalidCommand(std::cout);
+      std::cout << e.what();
       std::cin.clear();
       std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
     }

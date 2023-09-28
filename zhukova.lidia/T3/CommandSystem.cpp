@@ -44,31 +44,30 @@ namespace zhukova
     } catch (std::out_of_range & e)
     {
     }
-    std::istringstream iss(command);
-    std::string word;
-    iss >> word;
-    size_t number;
-    iss >> number;
-    cs.dictNumber.at(word)(src, number, out);
+    try
+    {
+      std::istringstream iss(command);
+      std::string word;
+      iss >> word;
+      size_t number;
+      iss >> number;
+      cs.dictNumber.at(word)(src, number, out);
+    } catch (std::out_of_range & e)
+    {
+      throw std::logic_error("<INVALID COMMAND>");
+    }
+
   }
   std::string inputCommand(std::istream & in)
   {
     std::string firstPart;
     in >> firstPart;
-    if (!in)
-    {
-      throw std::logic_error("Wrong command\n");
-    }
     if ((firstPart == "LESSAREA") || (firstPart == "ECHO"))
     {
       return firstPart;
     }
     std::string secondPart;
     in >> secondPart;
-    //if (!in)
-    //{
-    //  throw std::logic_error("Wrong command\n");
-    //}
     return firstPart + " " + secondPart;
   }
 }
