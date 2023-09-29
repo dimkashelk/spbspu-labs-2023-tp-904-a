@@ -49,10 +49,6 @@ namespace zhukova
       using in_iter = std::istream_iterator< zhukova::Point >;
       Polygon input;
       std::copy_n(in_iter(in), amount, std::back_inserter(input.points));
-<<<<<<< HEAD
-=======
-      in >> DelimiterIO('\n');
->>>>>>> 29cfb6615d33aa121d4a00d2fdf51586b4d4a415
       if (in)
       {
         std::swap(input, dest);
