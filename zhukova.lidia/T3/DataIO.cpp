@@ -41,9 +41,7 @@ namespace zhukova
     }
     dest.points.clear();
     size_t amount = 0;
-    if (!(in >> amount)) {
-      return in;
-    }
+    in >> amount;
     if (in && amount >= 3)
     {
       using in_iter = std::istream_iterator< zhukova::Point >;
@@ -51,7 +49,10 @@ namespace zhukova
       std::copy_n(in_iter(in), amount, std::back_inserter(input.points));
       if (in)
       {
-        std::swap(input, dest);
+        std::copy_n(in_iter(in), 1, std::back_inserter(input.points));
+        if (!in) {
+          std::swap(input, dest);
+        }
       }
     }
     else
