@@ -46,11 +46,9 @@ namespace zhukova
     {
       using in_iter = std::istream_iterator< zhukova::Point >;
       Polygon input;
-      std::string points;
-      std::getline(in, points, '\n');
-      std::istringstream iss(points);
-      std::copy(in_iter(iss), in_iter(), std::back_inserter(input.points));
-      if ((iss) && (amount == input.points.size()))
+      std::copy_n(in_iter(in), amount, std::back_inserter(input.points));
+      //лишняя точка не воспринимается концом фигуры
+      if (in)
       {
         std::swap(input, dest);
       }
