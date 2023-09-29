@@ -30,7 +30,6 @@ int main(int argc, char * argv[])
         inFile.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
       }
     } catch (const std::logic_error & e) {
-
     }
   }
   inFile.close();
