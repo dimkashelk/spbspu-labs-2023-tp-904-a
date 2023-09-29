@@ -34,7 +34,7 @@ int main(int argc, char * argv[])
     }
   }
   inFile.close();
-  std::cout << dataVector.size() << std::fixed << std::setprecision(1);
+  std::cout << std::fixed << std::setprecision(1);
   zhukova::CommandSystem commands = zhukova::makeCommandSystem();
   while (!std::cin.eof())
   {
