@@ -26,6 +26,10 @@ namespace zhukova
   }
   void getAreaMean(const std::vector< Polygon > & src, std::ostream & out)
   {
+    if (src.size() == 0)
+    {
+      throw std::logic_error("<INVALID COMMAND>");
+    }
     using namespace std::placeholders;
     std::vector< double > areas;
     std::transform(

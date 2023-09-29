@@ -23,7 +23,13 @@ namespace zhukova
     {
       return in;
     }
-    in >> DelimiterIO{'('} >> dest.x >> DelimiterIO{';'} >> dest.y >> DelimiterIO{')'};
+    int x = 0;
+    int y = 0;
+    in >> DelimiterIO{'('} >> x >> DelimiterIO{';'} >> y >> DelimiterIO{')'};
+    if (in) {
+      dest.x = x;
+      dest.y = y;
+    }
     return in;
   }
   std::istream & operator>>(std::istream & in, Polygon & dest)
@@ -33,19 +39,17 @@ namespace zhukova
     {
       return in;
     }
-    Polygon input;
+    dest.points.clear();
     size_t amount = 0;
     in >> amount;
     if (in && amount >= 3)
     {
       using in_iter = std::istream_iterator< zhukova::Point >;
-      std::string polygon;
-      std::getline(in, polygon, '\n');
-      std::istringstream iss(polygon);
-      std::copy(in_iter(iss), in_iter(), std::back_inserter(input.points));
-      if ((in) && (input.points.size() == amount))
+      Polygon input;
+      std::copy_n(in_iter(in), amount, std::back_inserter(input.points));
+      if (in)
       {
-        dest = input;
+        std::swap(input, dest);
       }
     }
     else
@@ -54,6 +58,7 @@ namespace zhukova
     }
     return in;
   }
+
   std::ostream & operator<<(std::ostream & out, const Point & src)
   {
     std::ostream::sentry sentry(out);

@@ -22,15 +22,19 @@ int main(int argc, char * argv[])
   using in_iter = std::istream_iterator< zhukova::Polygon >;
   while (!inFile.eof())
   {
-    std::copy(in_iter(inFile), in_iter(), std::back_inserter(dataVector));
-    if (!inFile)
-    {
-      inFile.clear();
-      inFile.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
+    try {
+      std::copy(in_iter(inFile), in_iter(), std::back_inserter(dataVector));
+      if (!inFile)
+      {
+        inFile.clear();
+        inFile.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
+      }
+    } catch (const std::logic_error & e) {
+
     }
   }
   inFile.close();
-  std::cout << std::fixed << std::setprecision(1);
+  std::cout << dataVector.size() << std::fixed << std::setprecision(1);
   zhukova::CommandSystem commands = zhukova::makeCommandSystem();
   while (!std::cin.eof())
   {
