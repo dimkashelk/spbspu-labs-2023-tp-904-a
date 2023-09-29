@@ -141,7 +141,8 @@ namespace zhukova
   }
   void countExactVertexes(const std::vector< Polygon > & src, size_t amount, std::ostream & out)
   {
-    if (amount < 3) {
+    if (amount < 3)
+    {
       throw std::logic_error("<INVALID COMMAND>");
     }
     using namespace std::placeholders;
@@ -161,9 +162,10 @@ namespace zhukova
     auto comparator = std::bind(PolygonComparator(), _1, pol);
     auto samePol = std::find_if(copySrc.begin(),
                                 copySrc.end(),
-                                  comparator);
+                                comparator);
     size_t count = 0;
-    while (samePol != copySrc.end()) {
+    while (samePol != copySrc.end())
+    {
       count++;
       copySrc.insert(samePol, pol);
       samePol = std::find_if((++samePol), copySrc.end(), comparator);;

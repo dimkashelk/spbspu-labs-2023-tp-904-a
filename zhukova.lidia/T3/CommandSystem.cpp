@@ -35,6 +35,10 @@ namespace zhukova
       {
         Polygon pol;
         in >> pol;
+        if (pol.points.size() < 3)
+        {
+          throw std::logic_error("<INVALID COMMAND>");
+        }
         if (in)
         {
           cs.dictPolygon.at(command)(src, pol, out);
@@ -56,7 +60,6 @@ namespace zhukova
     {
       throw std::logic_error("<INVALID COMMAND>");
     }
-
   }
   std::string inputCommand(std::istream & in)
   {

@@ -8,7 +8,8 @@
 #include "DataIO.h"
 int main(int argc, char * argv[])
 {
-  if (argc < 2) {
+  if (argc < 2)
+  {
     return 1;
   }
   std::ifstream inFile(argv[1]);
@@ -33,21 +34,25 @@ int main(int argc, char * argv[])
   zhukova::CommandSystem commands = zhukova::makeCommandSystem();
   while (!std::cin.eof())
   {
-    try {
+    try
+    {
       std::string comm = zhukova::inputCommand(std::cin);
       zhukova::doCommand(dataVector, commands,
                          comm, std::cin, std::cout);
     }
-    catch (std::runtime_error & e) {
+    catch (std::runtime_error & e)
+    {
       break;
     }
-    catch (std::logic_error & e){
-      if (!std::cin.eof()) {
+    catch (std::logic_error & e)
+    {
+      if (!std::cin.eof())
+      {
         std::cout << e.what() << "\n";
       }
-      std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
     }
-    if (!std::cin) {
+    if (!std::cin)
+    {
       std::cin.clear();
       std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
     }

@@ -24,10 +24,6 @@ namespace zhukova
       return in;
     }
     in >> DelimiterIO{'('} >> dest.x >> DelimiterIO{';'} >> dest.y >> DelimiterIO{')'};
-    if (!in)
-    {
-      throw std::runtime_error("");
-    }
     return in;
   }
   std::istream & operator>>(std::istream & in, Polygon & dest)
@@ -40,17 +36,16 @@ namespace zhukova
     Polygon input;
     size_t amount = 0;
     in >> amount;
-    if (in && amount >= 3) {
+    if (in && amount >= 3)
+    {
       using in_iter = std::istream_iterator< zhukova::Point >;
-      try {
-        std::copy_n(in_iter(in), amount, std::back_inserter(input.points));
-        if (in)
-        {
-          dest = input;
-        }
-      }
-      catch (const std::runtime_error & e) {
-        in.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
+      std::string polygon;
+      std::getline(in, polygon, '\n');
+      std::istringstream iss(polygon);
+      std::copy(in_iter(iss), in_iter(), std::back_inserter(input.points));
+      if ((in) && (input.points.size() == amount))
+      {
+        dest = input;
       }
     }
     else
