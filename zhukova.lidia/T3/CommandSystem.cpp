@@ -33,11 +33,8 @@ namespace zhukova
     {
       if ((command == "LESSAREA") || (command == "ECHO"))
       {
-        std::istringstream iss(command);
-        std::string word;
-        iss >> word;
         Polygon pol;
-        iss >> pol;
+        in >> pol;
         if (pol.points.size() < 3)
         {
           throw std::logic_error("<INVALID COMMAND>");
@@ -68,8 +65,12 @@ namespace zhukova
   {
     std::string firstPart;
     in >> firstPart;
+    if ((firstPart == "LESSAREA") || (firstPart == "ECHO"))
+    {
+      return firstPart;
+    }
     std::string secondPart;
-    std::getline(in, secondPart, '\n');
+    in >> secondPart;
     return firstPart + " " + secondPart;
   }
 }
