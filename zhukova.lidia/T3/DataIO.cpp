@@ -41,7 +41,7 @@ namespace zhukova
     }
     dest.points.clear();
     size_t amount = 0;
-    if (in >> amount) {
+    if (!(in >> amount)) {
       return in;
     }
     if (in && amount >= 3)
