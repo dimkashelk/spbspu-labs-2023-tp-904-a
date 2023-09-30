@@ -40,8 +40,7 @@ int main(int argc, char * argv[])
     try
     {
       std::string comm = zhukova::inputCommand(std::cin);
-      zhukova::doCommand(dataVector, commands,
-                         comm, std::cin, std::cout);
+      zhukova::doCommand(dataVector, commands,comm, std::cout);
     }
     catch (std::runtime_error & e)
     {

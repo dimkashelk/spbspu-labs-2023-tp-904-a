@@ -18,7 +18,7 @@ namespace zhukova
   };
   CommandSystem makeCommandSystem();
   void doCommand(std::vector< Polygon > & src, const CommandSystem & cs,
-                 const std::string & command, std::istream & in,
+                 const std::string & command,
                  std::ostream & out);
   std::string inputCommand(std::istream &in);
 }

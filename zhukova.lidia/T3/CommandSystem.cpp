@@ -20,7 +20,7 @@ namespace zhukova
     return commands;
   }
   void doCommand(std::vector< Polygon > & src, const CommandSystem & cs, const std::string & command,
-                 std::istream & in, std::ostream & out)
+                 std::ostream & out)
   {
     try
     {
@@ -31,20 +31,20 @@ namespace zhukova
     }
     try
     {
-      if ((command == "LESSAREA") || (command == "ECHO"))
+      std::istringstream iss(command+'\0');
+      std::string word;
+      iss >> word;
+      if ((word == "LESSAREA") || (word == "ECHO"))
       {
-        std::string strPol;
-        std::getline(in, strPol, '\n');
-        std::istringstream iss(strPol+'\0');
         Polygon pol;
         iss >> pol;
         if ((pol.points.size() < 3) || ((!iss.eof()) && (iss.peek() != '\0')))
         {
           throw std::logic_error("<INVALID COMMAND>");
         }
-        if (in)
+        if (iss)
         {
-          cs.dictPolygon.at(command)(src, pol, out);
+          cs.dictPolygon.at(word)(src, pol, out);
         }
         return;
       }
@@ -53,7 +53,7 @@ namespace zhukova
     }
     try
     {
-      std::istringstream iss(command);
+      std::istringstream iss(command+'\0');
       std::string word;
       iss >> word;
       size_t number;
@@ -66,14 +66,8 @@ namespace zhukova
   }
   std::string inputCommand(std::istream & in)
   {
-    std::string firstPart;
-    in >> firstPart;
-    if ((firstPart == "LESSAREA") || (firstPart == "ECHO"))
-    {
-      return firstPart;
-    }
-    std::string secondPart;
-    in >> secondPart;
-    return firstPart + " " + secondPart;
+    std::string command;
+    std::getline(in, command, '\n');
+    return command;
   }
 }
