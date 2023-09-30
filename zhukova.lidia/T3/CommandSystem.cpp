@@ -33,14 +33,13 @@ namespace zhukova
     {
       if ((command == "LESSAREA") || (command == "ECHO"))
       {
+        std::string strPol;
+        std::getline(in, strPol, '\n');
+        std::istringstream iss(strPol);
         Polygon pol;
-        in >> pol;
-        if (pol.points.size() < 3)
+        iss >> pol;
+        if ((pol.points.size() < 3) || (!iss.eof()))
         {
-          throw std::logic_error("<INVALID COMMAND>");
-        }
-        if ((!in.eof()) && (in.peek() == ' ')) {
-          std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
           throw std::logic_error("<INVALID COMMAND>");
         }
         if (in)

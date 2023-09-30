@@ -49,10 +49,7 @@ int main(int argc, char * argv[])
     }
     catch (std::logic_error & e)
     {
-      if (!std::cin.eof())
-      {
-        std::cout << e.what() << "\n";
-      }
+      std::cout << e.what() << "\n";
     }
     if (!std::cin)
     {
