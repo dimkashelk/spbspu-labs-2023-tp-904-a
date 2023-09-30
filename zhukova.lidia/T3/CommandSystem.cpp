@@ -35,10 +35,10 @@ namespace zhukova
       {
         std::string strPol;
         std::getline(in, strPol, '\n');
-        std::istringstream iss(strPol);
+        std::istringstream iss(strPol+'\0');
         Polygon pol;
         iss >> pol;
-        if ((pol.points.size() < 3) || (!iss.eof()))
+        if ((pol.points.size() < 3) || ((!iss.eof()) && (iss.peek() != '\0')))
         {
           throw std::logic_error("<INVALID COMMAND>");
         }
