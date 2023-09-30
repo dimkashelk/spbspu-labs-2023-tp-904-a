@@ -39,6 +39,10 @@ namespace zhukova
         {
           throw std::logic_error("<INVALID COMMAND>");
         }
+        if ((!in.eof()) && (in.peek() != '\n')) {
+          std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
+          throw std::logic_error("<INVALID COMMAND>");
+        }
         if (in)
         {
           cs.dictPolygon.at(command)(src, pol, out);
