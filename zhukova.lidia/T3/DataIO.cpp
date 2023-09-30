@@ -26,7 +26,8 @@ namespace zhukova
     int x = 0;
     int y = 0;
     in >> DelimiterIO{'('} >> x >> DelimiterIO{';'} >> y >> DelimiterIO{')'};
-    if (in) {
+    if (in)
+    {
       dest.x = x;
       dest.y = y;
     }
@@ -47,7 +48,6 @@ namespace zhukova
       using in_iter = std::istream_iterator< zhukova::Point >;
       Polygon input;
       std::copy_n(in_iter(in), amount, std::back_inserter(input.points));
-      //лишняя точка не воспринимается концом фигуры
       if (in)
       {
         std::swap(input, dest);
@@ -59,7 +59,6 @@ namespace zhukova
     }
     return in;
   }
-
   std::ostream & operator<<(std::ostream & out, const Point & src)
   {
     std::ostream::sentry sentry(out);

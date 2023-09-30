@@ -22,14 +22,16 @@ int main(int argc, char * argv[])
   using in_iter = std::istream_iterator< zhukova::Polygon >;
   while (!inFile.eof())
   {
-    try {
+    try
+    {
       std::copy(in_iter(inFile), in_iter(), std::back_inserter(dataVector));
       if (!inFile)
       {
         inFile.clear();
         inFile.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
       }
-    } catch (const std::logic_error & e) {
+    } catch (const std::logic_error & e)
+    {
     }
   }
   inFile.close();
@@ -40,7 +42,7 @@ int main(int argc, char * argv[])
     try
     {
       std::string comm = zhukova::inputCommand(std::cin);
-      zhukova::doCommand(dataVector, commands,comm, std::cout);
+      zhukova::doCommand(dataVector, commands, comm, std::cout);
     }
     catch (std::runtime_error & e)
     {
@@ -48,7 +50,8 @@ int main(int argc, char * argv[])
     }
     catch (std::logic_error & e)
     {
-      if (!std::cin.eof()){
+      if (!std::cin.eof())
+      {
         std::cout << e.what() << "\n";
       }
     }

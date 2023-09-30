@@ -31,7 +31,7 @@ namespace zhukova
     }
     try
     {
-      std::istringstream iss(command+'\0');
+      std::istringstream iss(command + '\0');
       std::string word;
       iss >> word;
       if ((word == "LESSAREA") || (word == "ECHO"))
@@ -53,7 +53,7 @@ namespace zhukova
     }
     try
     {
-      std::istringstream iss(command+'\0');
+      std::istringstream iss(command + '\0');
       std::string word;
       iss >> word;
       size_t number;

@@ -31,7 +31,7 @@ namespace zhukova
   bool isAmountOfVertexes(const Polygon & src, size_t amount)
   {
     return amount == getAmountOfVertexes(src);
-  };
+  }
   int shoelaceAlgorithm(const Point & p1, const Point & p2)
   {
     return p1.x * p2.y - p1.y * p2.x;
