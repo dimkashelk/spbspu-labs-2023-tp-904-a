@@ -39,7 +39,7 @@ namespace zhukova
         {
           throw std::logic_error("<INVALID COMMAND>");
         }
-        if ((!in.eof()) && (in.peek() != '\n')) {
+        if ((!in.eof()) && (in.peek() == ' ')) {
           std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
           throw std::logic_error("<INVALID COMMAND>");
         }
