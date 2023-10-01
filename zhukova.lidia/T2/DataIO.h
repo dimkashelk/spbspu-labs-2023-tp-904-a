@@ -8,10 +8,6 @@
 #include "DataStruct.h"
 namespace zhukova
 {
-  struct DelimiterIO
-  {
-    char value;
-  };
   struct LabelIO
   {
     std::string value;
@@ -28,7 +24,6 @@ namespace zhukova
   {
     std::string & value;
   };
-  std::istream & operator>>(std::istream & in, DelimiterIO && dest);
   std::istream & operator>>(std::istream & in, ComplexIO && dest);
   std::istream & operator>>(std::istream & in, RationalIO && dest);
   std::istream & operator>>(std::istream & in, StringIO && dest);
