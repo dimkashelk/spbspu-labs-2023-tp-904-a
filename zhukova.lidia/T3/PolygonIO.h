@@ -1,5 +1,5 @@
-#ifndef T2_DATAIO_H
-#define T2_DATAIO_H
+#ifndef T3_POLYGONIO_H
+#define T3_POLYGONIO_H
 #include <string>
 #include <complex>
 #include <iomanip>
@@ -16,4 +16,4 @@ namespace zhukova
   std::ostream & operator<<(std::ostream & out, const std::vector< Point > & src);
   std::ostream & operator<<(std::ostream & out, const Polygon & dest);
 }
-#endif //T2_DATAIO_H
+#endif

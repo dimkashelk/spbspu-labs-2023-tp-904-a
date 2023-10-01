@@ -1,5 +1,5 @@
-#ifndef T2_DATASTRUCT_H
-#define T2_DATASTRUCT_H
+#ifndef T3_GEOMETRY_H
+#define T3_GEOMETRY_H
 #include <complex>
 #include <vector>
 #include <numeric>
@@ -33,4 +33,4 @@ namespace zhukova
   double getAreaIfVertexes(const Polygon & src, size_t amount, bool (* pred)(const Polygon &, size_t amount));
   bool isLessArea(const Polygon & src, double area);
 }
-#endif //T2_DATASTRUCT_H
+#endif

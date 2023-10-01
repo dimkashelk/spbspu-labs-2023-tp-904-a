@@ -22,4 +22,4 @@ namespace zhukova
                  std::ostream & out);
   std::string inputCommand(std::istream & in);
 }
-#endif //T3_COMMANDSYSTEM_H
+#endif
