@@ -2,8 +2,8 @@
 #include <iostream>
 #include <deque>
 #include <iterator>
+#include <DataIO.h>
 #include "DataStruct.h"
-#include "DataIO.h"
 int main()
 {
   std::deque< zhukova::DataStruct > dataVector;

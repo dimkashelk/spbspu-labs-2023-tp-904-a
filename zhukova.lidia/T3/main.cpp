@@ -5,7 +5,7 @@
 #include <limits>
 #include "Geometry.h"
 #include "CommandSystem.h"
-#include "DataIO.h"
+#include "PolygonIO.h"
 int main(int argc, char * argv[])
 {
   if (argc < 2)
