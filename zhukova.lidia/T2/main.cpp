@@ -2,7 +2,7 @@
 #include <iostream>
 #include <deque>
 #include <iterator>
-#include <DataIO.h>
+#include "DataIO.h"
 #include "DataStruct.h"
 int main()
 {
