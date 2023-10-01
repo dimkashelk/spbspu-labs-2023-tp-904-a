@@ -3,9 +3,9 @@
 #include <iostream>
 namespace zhukova
 {
-	struct DelimiterIO
-	{
-		char value;
-	};
+  struct DelimiterIO
+  {
+	char value;
+  };
 }
 #endif
