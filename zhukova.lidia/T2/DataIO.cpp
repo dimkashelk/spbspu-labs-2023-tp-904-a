@@ -135,5 +135,4 @@ namespace zhukova
     out << ":)";
     return out;
   }
-  
 }
