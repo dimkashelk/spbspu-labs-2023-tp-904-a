@@ -1,17 +1,19 @@
 #include "DelimiterIO.h"
 namespace zhukova
 {
-  iofmtguard::iofmtguard(std::basic_ios< char >& s) :
-    s_(s),
-    fill_(s.fill()),
-    precision_(s.precision()),
-    fmt_(s.flags())
+  std::istream & operator>>(std::istream & in, DelimiterIO && dest)
   {
-  }
-  iofmtguard::~iofmtguard()
-  {
-    s_.fill(fill_);
-    s_.precision(precision_);
-    s_.flags(fmt_);
+    std::istream::sentry sentry(in);
+    if (!sentry)
+    {
+      return in;
+    }
+    char c = '\0';
+    in >> c;
+    if (in && (c != dest.value))
+    {
+      in.setstate(std::ios::failbit);
+    }
+    return in;
   }
 }
