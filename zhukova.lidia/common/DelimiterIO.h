@@ -5,7 +5,7 @@ namespace zhukova
 {
   struct DelimiterIO
   {
-	char value;
+    char value;
   };
 }
 #endif
