@@ -7,7 +7,7 @@
 #include <list>
 #include <algorithm>
 #include <limits>
-#include <DataIO.h>
+#include <IOfmtguard.h>
 #include "Geometry.h"
 #include "PolygonIO.h"
 namespace zhukova
