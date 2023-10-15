@@ -4,8 +4,8 @@
 #include <string>
 #include <algorithm>
 #include <iomanip>
-#include <iofmtguard.h>
-#include <StructTypes.h>
+#include <iofmtguard.hpp>
+#include <StructTypes.hpp>
 namespace skalisusov
 {
   struct DataStruct

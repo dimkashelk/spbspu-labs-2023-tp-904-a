@@ -2,8 +2,8 @@
 #define GITLABPROG_POLYGON_HPP
 #include <vector>
 #include <iostream>
-#include <StructTypes.h>
-#include <iofmtguard.h>
+#include <StructTypes.hpp>
+#include <iofmtguard.hpp>
 namespace skalisusov
 {
   struct Point
