@@ -1,5 +1,5 @@
-#ifndef SPBSPU_LABS_2023_TP_904_A_STRUCTTYPES_H
-#define SPBSPU_LABS_2023_TP_904_A_STRUCTTYPES_H
+#ifndef STRUCTTYPES_HPP
+#define STRUCTTYPES_HPP
 #include <iostream>
 #include <sstream>
 #include <string>

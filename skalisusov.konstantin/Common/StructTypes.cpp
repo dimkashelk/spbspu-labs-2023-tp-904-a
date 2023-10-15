@@ -1,4 +1,4 @@
-#include "StructTypes.h"
+#include "StructTypes.hpp"
 namespace skalisusov
 {
   std::istream &operator>>(std::istream &in, DelimiterIO &&dest)
