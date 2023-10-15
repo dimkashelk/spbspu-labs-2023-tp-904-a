@@ -1,5 +1,5 @@
 #include <iomanip>
-
+#include "StructTypes.hpp"
 std::istream & skalisusov::operator>>(std::istream &in, LabelIO &&dest)
 {
   std::istream::sentry sentry(in);
