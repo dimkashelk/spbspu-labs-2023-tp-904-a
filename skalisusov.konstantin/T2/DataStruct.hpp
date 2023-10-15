@@ -1,11 +1,7 @@
-#ifndef SPBSPU_LABS_2023_TP_904_A_DATASTRUCT_HPP
-#define SPBSPU_LABS_2023_TP_904_A_DATASTRUCT_HPP
+#ifndef SPBSPU_LABS_2023_TP_904_A_DATASTRUCT_H
+#define SPBSPU_LABS_2023_TP_904_A_DATASTRUCT_H
 #include <iostream>
-#include <string>
-#include <algorithm>
-#include <iomanip>
-#include <iofmtguard.hpp>
-#include <StructTypes.hpp>
+
 namespace skalisusov
 {
   struct DataStruct
@@ -14,9 +10,8 @@ namespace skalisusov
     double key2;
     std::string key3;
   };
-  std::istream &operator>>(std::istream &in, DataStruct &dest);
-  std::ostream &operator<<(std::ostream &out, DataStruct &src);
-  bool comparate(DataStruct &firDs, DataStruct &secDs);
-
+  std::istream & operator>>(std::istream &in, DataStruct &dest);
+  std::ostream & operator<<(std::ostream &out, const DataStruct &dest);
+  bool comparator(const DataStruct &firDs, const DataStruct &secDs);
 }
 #endif
