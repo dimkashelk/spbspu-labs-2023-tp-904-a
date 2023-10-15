@@ -30,7 +30,7 @@ namespace skalisusov
   public:
     command();
     void CommandPolygon(std::istream &in,std::ostream &out, std::vector< Polygon > &rhs,
-                        std::string &command);
+      std::string &command);
     std::string listenCommand(std::istream &in);
   private:
     using cmd_const_area = std::function< void (const std::vector< Polygon > &, std::ostream &)>;
