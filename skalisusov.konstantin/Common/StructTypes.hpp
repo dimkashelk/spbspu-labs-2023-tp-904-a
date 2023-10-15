@@ -40,4 +40,4 @@ namespace skalisusov
   std::istream &operator>>(std::istream &in, StringIO &&dest);
 }
 
-#endif //SPBSPU_LABS_2023_TP_904_A_STRUCTTYPES_H
+#endif

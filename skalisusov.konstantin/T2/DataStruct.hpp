@@ -1,5 +1,5 @@
-#ifndef SPBSPU_LABS_2023_TP_904_A_DATASTRUCT_H
-#define SPBSPU_LABS_2023_TP_904_A_DATASTRUCT_H
+#ifndef SPBSPU_LABS_2023_TP_904_A_DATASTRUCT_HPP
+#define SPBSPU_LABS_2023_TP_904_A_DATASTRUCT_HPP
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -19,4 +19,4 @@ namespace skalisusov
   bool comparate(DataStruct &firDs, DataStruct &secDs);
 
 }
-#endif //SPBSPU_LABS_2023_TP_904_A_DATASTRUCT_H
+#endif
