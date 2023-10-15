@@ -37,11 +37,11 @@ int main(int argc, char ** argv)
       std::string com = skalisusov::listenCommand(std::cin);
       CommandPolygon(std::cin,std::cout,data,mapCommand,com);
     }
-    catch(const std::runtime_error &e)
+    catch (const std::runtime_error &e)
     {
       break;
     }
-    catch(const std::logic_error &e)
+    catch (const std::logic_error &e)
     {
       skalisusov::errorMessage(std::cout);
       std::cin.ignore(max, '\n');
