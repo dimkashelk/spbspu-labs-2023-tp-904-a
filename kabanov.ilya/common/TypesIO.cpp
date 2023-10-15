@@ -117,5 +117,5 @@ std::istream& kabanov::operator>>(std::istream& in, kabanov::StringIO&& dest)
     return in;
   }
 
-  return std::getline(in >> kabanov::DelimiterIO{ '"' }, dest.ref, '"');
+  return std::getline(in >> DelimiterIO{ '"' }, dest.ref, '"');
 }
