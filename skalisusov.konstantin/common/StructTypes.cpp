@@ -1,94 +1,91 @@
-#include "StructTypes.hpp"
-namespace skalisusov
+#include "StructTypes.h"
+#include <iomanip>
+
+std::istream & skalisusov::operator>>(std::istream &in, LabelIO &&dest)
 {
-  std::istream &operator>>(std::istream &in, DelimiterIO &&dest)
+  std::istream::sentry sentry(in);
+  if (!sentry)
   {
-    std::istream::sentry sentry(in);
-    if (!sentry)
-    {
-      return in;
-    }
-    char c = '0';
-    in >> c;
-    if (in && (c != dest.exp))
-    {
-      in.setstate(std::ios::failbit);
-    }
     return in;
   }
-  std::istream &operator>>(std::istream &in, CoverIO &&dest)
+  std::string str;
+  str = "";
+  std::getline(in, str, 'y');
+  str += 'y';
+  if (in && (str != dest.label))
   {
-    std::istream::sentry CheckSentry(in);
-    if(!CheckSentry)
-    {
-      return in;
-    }
-    std::string cover = "";
-    if((in >> StringIO{cover}) && (cover != dest.cover_))
-    {
-      in.setstate(std::ios::failbit);
-    }
+    in.setstate(std::ios::failbit);
+  }
+  return in;
+}
+std::istream & skalisusov::operator>>(std::istream &in, DelimiterIO &&dest)
+{
+  std::istream::sentry sentry(in);
+  if (!sentry)
+  {
     return in;
   }
-  std::istream &operator>>(std::istream &in, DoubleLiteralFormatIO &&dest)
+  char delim = '0';
+  in >> delim;
+  if (in && (delim != dest.exp))
   {
-    std::istream::sentry CheckSentry(in);
-    if (!CheckSentry)
-    {
-      return in;
-    }
-    return in >> dest.dublit_ >> DelimiterIO{ 'd' };
+    in.setstate(std::ios::failbit);
   }
-  std::istream &operator>>(std::istream &in, DoubleSciencificFormatI &&dest)
+  return in;
+}
+std::istream & skalisusov::operator>>(std::istream &in, StringIO &&dest)
+{
+  std::istream::sentry sentry(in);
+  if (!sentry)
   {
-    std::istream::sentry CheckSentry(in);
-    if(!CheckSentry)
-    {
-      return in;
-    }
-    return in >> std::scientific >> dest.dubscienI_;
+    return in;
   }
-  std::ostream &operator<<(std::ostream &out, DoubleSciencificFormatO dest)
+  return std::getline(in >> DelimiterIO{ '"' },dest.str,'"');
+}
+std::istream & skalisusov::operator>>(std::istream &in, DoubleLiteralFormatIO &&dest)
+{
+  std::istream::sentry sentry(in);
+  if (!sentry)
   {
-    std::ostream::sentry CheckSentry(out);
-    if(!CheckSentry)
-    {
-      return out;
-    }
-    double number = dest.dubscienO_;
-    int tenDegree = 0;
-    if(number < 1)
-    {
-      while(number < 10)
-      {
-        if(number > 1)
-        {
-          break;
-        }
-        else
-        {
-          number *= 10;
-          tenDegree --;
-        }
-      }
-    }
-    else
-    {
-      while(number > 10)
-      {
-        number /=10;
-        tenDegree ++;
-      }
-    }
-    return out << std::fixed << std::setprecision(1)  << number << (tenDegree > 0 ? "e+" : "e") << tenDegree;
+    return in;
   }
-  std::istream &operator>>(std::istream &in, skalisusov::StringIO &&dest)
+  return in >> dest.dublit >> DelimiterIO{ 'd' };
+}
+std::istream & skalisusov::operator>>(std::istream &in, DoubleSciencificFormatI &&dest)
+{
+  std::istream::sentry sentry(in);
+  if (!sentry)
   {
-    std::istream::sentry CheckSentry(in);
-    if(!CheckSentry)
-    {
-      return in;
-    }
-    return std::getline(in >> DelimiterIO{'"'},dest.str_,'"');
+    return in;
   }
+  in >> std::scientific >> dest.dubscienI;
+  if (dest.dubscienI == 0)
+  {
+    in.setstate(std::ios::failbit);
+  }
+  return in;
+}
+std::ostream & skalisusov::operator<<(std::ostream &out, const DoubleSciencificFormatO &&dest)
+{
+  std::ostream::sentry sentry(out);
+  if (!sentry)
+  {
+    return out;
+  }
+  double number = dest.dubscienO;
+  int tenDegree = 0;
+  while (number < 1 || number >= 10)
+  {
+    if (number <= 1)
+    {
+      number *= 10;
+      tenDegree --;
+    }
+    else if (number >= 1)
+    {
+      number /= 10;
+      tenDegree ++;
+    }
+  }
+  return out << std::fixed << std::setprecision(1)  << number << (tenDegree > 0 ? "e+" : "e") << tenDegree;
 }

@@ -1,43 +1,39 @@
 #ifndef STRUCTTYPES_HPP
 #define STRUCTTYPES_HPP
 #include <iostream>
-#include <sstream>
 #include <string>
-#include <cassert>
-#include <iomanip>
 
 namespace skalisusov
 {
-  struct CoverIO
+  struct LabelIO
   {
-    std::string cover_;
+    std::string label;
   };
   struct DelimiterIO
   {
     char exp;
   };
+  struct StringIO
+  {
+    std::string &str;
+  };
   struct DoubleLiteralFormatIO
   {
-    double &dublit_;
+    double &dublit;
   };
   struct DoubleSciencificFormatI
   {
-    double &dubscienI_;
+    double &dubscienI;
   };
   struct DoubleSciencificFormatO
   {
-    const double &dubscienO_;
+    const double dubscienO;
   };
-  struct StringIO
-  {
-    std::string &str_;
-  };
-  std::istream &operator>>(std::istream &in, CoverIO &&dest);
-  std::istream &operator>>(std::istream &in, DelimiterIO &&dest);
-  std::istream &operator>>(std::istream &in, DoubleLiteralFormatIO &&dest);
-  std::istream &operator>>(std::istream &in, DoubleSciencificFormatI &&dest);
-  std::ostream &operator<<(std::ostream &out, const DoubleSciencificFormatO dest);
-  std::istream &operator>>(std::istream &in, StringIO &&dest);
+  std::istream & operator>>(std::istream &in, LabelIO &&dest);
+  std::istream & operator>>(std::istream &in, DelimiterIO &&dest);
+  std::istream & operator>>(std::istream &in, DoubleLiteralFormatIO &&dest);
+  std::istream & operator>>(std::istream &in, DoubleSciencificFormatI &&dest);
+  std::ostream & operator<<(std::ostream &out, const DoubleSciencificFormatO &&dest);
+  std::istream & operator>>(std::istream &in, StringIO &&dest);
 }
-
 #endif
