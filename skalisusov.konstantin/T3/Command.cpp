@@ -1,4 +1,4 @@
-#include "Command.h"
+#include "Command.hpp"
 #include <algorithm>
 #include <cmath>
 #include <functional>
@@ -282,34 +282,6 @@ void skalisusov::command::CommandPolygon(std::istream &in, std::ostream &out, st
                             _1,num,std::ref(out));
   vertexes(rhs);
 }
-  /*
-void skalisusov::CommandPolygon(std::istream &in,std::ostream &out, std::vector< Polygon > &rhs,
-const skalisusov::command &commands,std::string &command)
-{
-  using namespace std::placeholders;
-  try
-  {
-    auto polygon = std::bind(commands.area.at(command), _1,std::ref(in),std::ref(out));
-    polygon(rhs);
-    return;
-  }
-  catch (const std::out_of_range & e)
-  {}
-  try
-  {
-    auto polygon = std::bind(commands.const_area.at(command), _1, std::ref(out));
-    polygon(rhs);
-    return;
-  }
-  catch (const std::out_of_range & e)
-  {}
-  std::size_t space = command.find(' ');
-  std::size_t num = std::stoull(command.substr(space));
-  auto vertexes = std::bind(commands.const_ver.at(command.substr(0, space) + " NUM"),
-    _1,num,std::ref(out));
-  vertexes(rhs);
-}
-   */
 std::string skalisusov::command::listenCommand(std::istream &in)
 {
   std::string comand = "0";

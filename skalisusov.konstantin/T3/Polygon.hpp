@@ -1,5 +1,5 @@
-#ifndef GITLABPROG_POLYGON_H
-#define GITLABPROG_POLYGON_H
+#ifndef GITLABPROG_POLYGON_HPP
+#define GITLABPROG_POLYGON_HPP
 #include <vector>
 #include <iostream>
 namespace skalisusov

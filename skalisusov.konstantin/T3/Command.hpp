@@ -1,8 +1,8 @@
-#ifndef GITLABPROG_COMMAND_H
-#define GITLABPROG_COMMAND_H
+#ifndef GITLABPROG_COMMAND_HPP
+#define GITLABPROG_COMMAND_HPP
 #include <functional>
 #include <map>
-#include "Polygon.h"
+#include "Polygon.hpp"
 namespace skalisusov
 {
   bool isOdd(const Polygon &rhs);
@@ -41,12 +41,5 @@ namespace skalisusov
     std::map< std::string, cmd_area > area;
   };
   size_t function_for_rmecho(std::vector< Polygon > &rhs,Polygon &lhs);
-  using cmd_const_area = std::function< void (const std::vector< Polygon > &, std::ostream &)>;
-  using cmd_const_vertex = std::function< void (const std::vector< Polygon > &, std::size_t &, std::ostream &)>;
-  using cmd_area = std::function< void (std::vector< Polygon > &, std::istream &, std::ostream &)>;
-    std::map< std::string, cmd_const_area > const_area;
-    std::map< std::string, cmd_const_vertex > const_ver;
-    std::map< std::string, cmd_area > area;
-
 }
 #endif

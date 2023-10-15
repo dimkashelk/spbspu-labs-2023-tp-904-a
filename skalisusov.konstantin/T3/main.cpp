@@ -2,7 +2,7 @@
 #include <iterator>
 #include <algorithm>
 #include <fstream>
-#include "Command.h"
+#include "Command.hpp"
 int main(int argc, char ** argv)
 {
   if (argc < 2)
