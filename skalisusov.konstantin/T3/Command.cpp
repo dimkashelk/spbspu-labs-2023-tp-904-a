@@ -240,26 +240,51 @@ size_t skalisusov::function_for_rmecho(std::vector< Polygon > &rhs, skalisusov::
   return count;
 }
 
-skalisusov::commandPolygon skalisusov::command()
+ skalisusov::command::command()
 {
-  skalisusov::commandPolygon mapCommand{};
-  mapCommand.const_area.insert({"AREA EVEN", areaEven});
-  mapCommand.const_area.insert({"AREA ODD", areaOdd});
-  mapCommand.const_area.insert({"AREA MEAN", areaMean});
-  mapCommand.const_area.insert({"MAX AREA", maxArea});
-  mapCommand.const_area.insert({"MAX VERTEXES", maxVertex});
-  mapCommand.const_area.insert({"MIN AREA", minArea});
-  mapCommand.const_area.insert({"MIN VERTEXES", minVertex});
-  mapCommand.const_area.insert({"COUNT EVEN", countEven});
-  mapCommand.const_area.insert({"COUNT ODD", countOdd});
-  mapCommand.const_area.insert({"RECTS", rects});
-  mapCommand.const_ver.insert({"AREA NUM", areaNumOfVertex});
-  mapCommand.const_ver.insert({"COUNT NUM", countVertex});
-  mapCommand.area.insert({"RMECHO", rmecho});
-  return mapCommand;
+  const_area.insert({"AREA EVEN", areaEven});
+  const_area.insert({"AREA ODD", areaOdd});
+  const_area.insert({"AREA MEAN", areaMean});
+  const_area.insert({"MAX AREA", maxArea});
+  const_area.insert({"MAX VERTEXES", maxVertex});
+  const_area.insert({"MIN AREA", minArea});
+  const_area.insert({"MIN VERTEXES", minVertex});
+  const_area.insert({"COUNT EVEN", countEven});
+  const_area.insert({"COUNT ODD", countOdd});
+  const_area.insert({"RECTS", rects});
+  const_ver.insert({"AREA NUM", areaNumOfVertex});
+  const_ver.insert({"COUNT NUM", countVertex});
+  area.insert({"RMECHO", rmecho});
 }
+void skalisusov::command::CommandPolygon(std::istream &in, std::ostream &out, std::vector<Polygon> &rhs,
+  const skalisusov::command &mapCommand, std::string &command)
+{
+  using namespace std::placeholders;
+  try
+  {
+    auto polygon = std::bind(area.at(command), _1,std::ref(in),std::ref(out));
+    polygon(rhs);
+    return;
+  }
+  catch (const std::out_of_range & e)
+  {}
+  try
+  {
+    auto polygon = std::bind(const_area.at(command), _1, std::ref(out));
+    polygon(rhs);
+    return;
+  }
+  catch (const std::out_of_range & e)
+  {}
+  std::size_t space = command.find(' ');
+  std::size_t num = std::stoull(command.substr(space));
+  auto vertexes = std::bind(const_ver.at(command.substr(0, space) + " NUM"),
+                            _1,num,std::ref(out));
+  vertexes(rhs);
+}
+  /*
 void skalisusov::CommandPolygon(std::istream &in,std::ostream &out, std::vector< Polygon > &rhs,
-const skalisusov::commandPolygon &commands,std::string &command)
+const skalisusov::command &commands,std::string &command)
 {
   using namespace std::placeholders;
   try
@@ -284,7 +309,8 @@ const skalisusov::commandPolygon &commands,std::string &command)
     _1,num,std::ref(out));
   vertexes(rhs);
 }
-std::string skalisusov::listenCommand(std::istream &in)
+   */
+std::string skalisusov::command::listenCommand(std::istream &in)
 {
   std::string comand = "0";
   in >> comand;

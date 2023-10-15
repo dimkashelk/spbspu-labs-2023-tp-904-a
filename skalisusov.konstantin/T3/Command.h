@@ -24,19 +24,29 @@ namespace skalisusov
   void areaNumOfVertex(const std::vector< Polygon > &rhs,size_t vertex ,std::ostream &out);
   void countVertex(const std::vector< Polygon > &rhs, std::size_t vertex, std::ostream  &out);
   void rmecho(std::vector< Polygon > &rhs,std::istream &in, std::ostream &out);
-  size_t function_for_rmecho(std::vector< Polygon > &rhs,Polygon &lhs);
-  using cmd_const_area = std::function< void (const std::vector< Polygon > &, std::ostream &)>;
-  using cmd_const_vertex = std::function< void (const std::vector< Polygon > &, std::size_t &, std::ostream &)>;
-  using cmd_area = std::function< void (std::vector< Polygon > &, std::istream &, std::ostream &)>;
-  struct commandPolygon
+
+  class command
   {
+  public:
+    command();
+    void CommandPolygon(std::istream &in,std::ostream &out, std::vector< Polygon > &rhs,
+                        const command  &mapCommand,std::string &command);
+    std::string listenCommand(std::istream &in);
+  private:
+    using cmd_const_area = std::function< void (const std::vector< Polygon > &, std::ostream &)>;
+    using cmd_const_vertex = std::function< void (const std::vector< Polygon > &, std::size_t &, std::ostream &)>;
+    using cmd_area = std::function< void (std::vector< Polygon > &, std::istream &, std::ostream &)>;
     std::map< std::string, cmd_const_area > const_area;
     std::map< std::string, cmd_const_vertex > const_ver;
     std::map< std::string, cmd_area > area;
   };
-  commandPolygon command();
-  void CommandPolygon(std::istream &in,std::ostream &out, std::vector< Polygon > &rhs,
-  const commandPolygon  &mapCommand,std::string &command);
-  std::string listenCommand(std::istream &in);
+  size_t function_for_rmecho(std::vector< Polygon > &rhs,Polygon &lhs);
+  using cmd_const_area = std::function< void (const std::vector< Polygon > &, std::ostream &)>;
+  using cmd_const_vertex = std::function< void (const std::vector< Polygon > &, std::size_t &, std::ostream &)>;
+  using cmd_area = std::function< void (std::vector< Polygon > &, std::istream &, std::ostream &)>;
+    std::map< std::string, cmd_const_area > const_area;
+    std::map< std::string, cmd_const_vertex > const_ver;
+    std::map< std::string, cmd_area > area;
+
 }
 #endif
