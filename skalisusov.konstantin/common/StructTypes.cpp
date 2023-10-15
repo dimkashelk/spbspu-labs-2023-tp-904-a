@@ -1,4 +1,3 @@
-#include "StructTypes.h"
 #include <iomanip>
 
 std::istream & skalisusov::operator>>(std::istream &in, LabelIO &&dest)
