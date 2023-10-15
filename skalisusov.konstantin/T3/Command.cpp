@@ -257,7 +257,7 @@ size_t skalisusov::function_for_rmecho(std::vector< Polygon > &rhs, skalisusov::
   area.insert({"RMECHO", rmecho});
 }
 void skalisusov::command::CommandPolygon(std::istream &in, std::ostream &out, std::vector<Polygon> &rhs,
-  const skalisusov::command &mapCommand, std::string &command)
+                                         std::string &command)
 {
   using namespace std::placeholders;
   try
