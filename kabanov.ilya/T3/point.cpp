@@ -1,8 +1,7 @@
 #include "point.hpp"
 
 #include <istream>
-
-#include "io.hpp"
+#include <TypesIO.hpp>
 
 std::istream& kabanov::operator>>(std::istream& in, Point& point)
 {

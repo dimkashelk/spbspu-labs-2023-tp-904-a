@@ -1,7 +1,7 @@
 #include "DataStruct.hpp"
 
-#include "TypesIO.hpp"
-#include "FormatGuardIO.hpp"
+#include <TypesIO.hpp>
+#include <FormatGuardIO.hpp>
 
 std::istream& kabanov::operator>>(std::istream& in, kabanov::DataStruct& dest)
 {

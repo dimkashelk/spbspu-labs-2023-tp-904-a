@@ -38,8 +38,7 @@ int main(int argc, char* argv[])
   {
     try
     {
-      auto inputCommand = commandContainer.InputCommand(std::cin);
-      commandContainer.doCommand(inputCommand, data, std::cout, std::cin);
+      commandContainer.doCommand(commandContainer.InputCommand(std::cin), data, std::cout, std::cin);
       std::cout << '\n';
     }
     catch (const std::logic_error& e)

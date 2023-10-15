@@ -40,37 +40,3 @@ std::istream& kabanov::operator>>(std::istream& in, Polygon& pol)
   }
   return in;
 }
-
-double kabanov::getArea(const Polygon& pol)
-{
-  const std::vector< Point >& points = pol.points;
-  const size_t& n = points.size();
-
-  if (n < 3)
-  {
-    return 0.0;
-  }
-
-  double area = 0.0;
-
-  Polygon temp;
-  for (size_t i = 0; i < n - 2; i += 2)
-  {
-    area += getTriangleArea(points[i], points[i + 1], points[i + 2]);
-    temp.points.push_back(points[i]);
-  }
-
-  if (isEven(pol))
-  {
-    area += getTriangleArea(points[n - 2], points[n - 1], points[0]);
-    temp.points.push_back(points[n - 2]);
-  }
-  else
-  {
-    temp.points.push_back(points[n - 1]);
-  }
-
-  area += getArea(temp);
-
-  return area;
-}

@@ -5,36 +5,35 @@
 #include <functional>
 #include <ostream>
 #include <cmath>
+#include <FormatGuardIO.hpp>
 
-#include "io.hpp"
-#include "FormatGuardIO.hpp"
 
-bool kabanov::isEven(const kabanov::Polygon& pol)
+bool isEven(const kabanov::Polygon& pol)
 {
   return pol.points.size() % 2 == 0;
 }
 
-bool kabanov::isOdd(const kabanov::Polygon& pol)
+bool isOdd(const kabanov::Polygon& pol)
 {
   return !isEven(pol);
 }
 
-bool kabanov::isEqualNum(const kabanov::Polygon& pol, size_t num)
+bool isEqualNum(const kabanov::Polygon& pol, size_t num)
 {
   return pol.points.size() == num;
 }
 
-bool kabanov::isEqualPoint(const kabanov::Point& p1, const kabanov::Point& p2)
+bool isEqualPoint(const kabanov::Point& p1, const kabanov::Point& p2)
 {
   return p1.x == p2.x && p1.y == p2.y;
 }
 
-bool kabanov::isLessVertex(const kabanov::Polygon& lnr, const kabanov::Polygon& rnl)
+bool isLessVertex(const kabanov::Polygon& lnr, const kabanov::Polygon& rnl)
 {
   return lnr.points.size() < rnl.points.size();
 }
 
-bool kabanov::isRightAngle(
+bool isRightAngle(
   const kabanov::Point& a,
   const kabanov::Point& b,
   const kabanov::Point& c)
@@ -51,7 +50,7 @@ bool hasRightAngles(std::vector< kabanov::Point > points, size_t idx)
   return isRightAngle(a, b, c);
 }
 
-bool kabanov::checkRightAngles(const kabanov::Polygon& pol)
+bool checkRightAngles(const kabanov::Polygon& pol)
 {
   for (std::size_t i = 0; i < pol.points.size(); ++i)
   {
@@ -63,12 +62,12 @@ bool kabanov::checkRightAngles(const kabanov::Polygon& pol)
   return false;
 }
 
-size_t kabanov::countRightShapes(const polygons& data)
+size_t countRightShapes(const kabanov::polygons& data)
 {
   return std::count_if(data.begin(), data.end(), checkRightAngles);
 }
 
-double kabanov::getTriangleArea(
+double getTriangleArea(
   const kabanov::Point& a,
   const kabanov::Point& b,
   const kabanov::Point& c)
@@ -81,21 +80,55 @@ double kabanov::getTriangleArea(
   return std::sqrt(p * (p - ab) * (p - bc) * (p - ac));
 };
 
-bool kabanov::compareAreas(const kabanov::Polygon& lnr, const kabanov::Polygon& rnl)
+double getArea(const kabanov::Polygon& pol)
 {
-  return fabs(kabanov::getArea(lnr) - kabanov::getArea(rnl)) >= std::numeric_limits< double >::epsilon()
-    && kabanov::getArea(lnr) < kabanov::getArea(rnl);
+  const std::vector< kabanov::Point >& points = pol.points;
+  const size_t& n = points.size();
+
+  if (n < 3)
+  {
+    return 0.0;
+  }
+
+  double area = 0.0;
+
+  kabanov::Polygon temp;
+  for (size_t i = 0; i < n - 2; i += 2)
+  {
+    area += getTriangleArea(points[i], points[i + 1], points[i + 2]);
+    temp.points.push_back(points[i]);
+  }
+
+  if (isEven(pol))
+  {
+    area += getTriangleArea(points[n - 2], points[n - 1], points[0]);
+    temp.points.push_back(points[n - 2]);
+  }
+  else
+  {
+    temp.points.push_back(points[n - 1]);
+  }
+
+  area += getArea(temp);
+
+  return area;
+}
+
+bool compareAreas(const kabanov::Polygon& lnr, const kabanov::Polygon& rnl)
+{
+  return fabs(getArea(lnr) - getArea(rnl)) >= std::numeric_limits< double >::epsilon()
+    && getArea(lnr) < getArea(rnl);
 }
 
 void printArea(const kabanov::polygons& pol, std::ostream& out)
 {
   std::vector< double > filtered_area(pol.size());
-  std::transform(pol.begin(), pol.end(), std::back_inserter(filtered_area), kabanov::getArea);
+  std::transform(pol.begin(), pol.end(), std::back_inserter(filtered_area), getArea);
   kabanov::FormatGuardIO iofmtguard(out);
   out << std::fixed << std::setprecision(1) << std::accumulate(filtered_area.begin(), filtered_area.end(), 0.0);
 }
 
-void kabanov::printAreaEven(const std::vector< kabanov::Polygon >& pol, std::ostream& out)
+void kabanov::printAreaEven(const polygons& pol, std::ostream& out)
 {
   std::vector< kabanov::Polygon > filtered;
   std::copy_if(pol.begin(), pol.end(), std::back_inserter(filtered), isEven);

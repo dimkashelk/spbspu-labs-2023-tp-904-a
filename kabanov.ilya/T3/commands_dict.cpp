@@ -41,16 +41,14 @@ void kabanov::CommandContainer::doCommand(std::string command, const std::vector
     return;
   }
   catch (const std::out_of_range& e)
-  {
-  }
+  {}
   try
   {
     simple_commands.at(command)(data, out);
     return;
   }
   catch (const std::out_of_range& e)
-  {
-  }
+  {}
   auto spaceIndex = command.find(' ');
   auto index = std::stoull(command.substr(spaceIndex));
   sized_commands.at(command.substr(0, spaceIndex))(data, out, index);

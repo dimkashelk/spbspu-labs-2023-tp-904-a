@@ -13,8 +13,6 @@ namespace kabanov
     std::vector< Point > points;
   };
 
-  double getArea(const Polygon& polygon);
-
   std::istream& operator>>(std::istream& in, Polygon& polygon);
 }
 #endif

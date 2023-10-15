@@ -1,4 +1,4 @@
-#include "io.hpp"
+#include "TypesIO.hpp"
 
 #include <iomanip>
 #include <bitset>
@@ -104,7 +104,7 @@ std::istream& kabanov::operator>>(std::istream& in, kabanov::CharIO&& dest)
   {
     return in;
   }
-  in >> kabanov::DelimiterIO{ '\'' } >> dest.ref >> kabanov::DelimiterIO{ '\'' };
+  in >> DelimiterIO{ '\'' } >> dest.ref >> DelimiterIO{ '\'' };
 
   return in;
 }

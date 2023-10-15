@@ -10,7 +10,6 @@ namespace kabanov
     int x;
     int y;
   };
-
   std::istream& operator>>(std::istream& in, Point& point);
 }
 #endif

@@ -9,16 +9,6 @@
 namespace kabanov
 {
   using polygons = std::vector< kabanov::Polygon >;
-  bool isEven(const kabanov::Polygon& pol);
-  bool isOdd(const kabanov::Polygon& pol);
-  bool isEqualNum(const kabanov::Polygon& pol, size_t num);
-  bool isEqualPoint(const kabanov::Point& p1, const kabanov::Point& p2);
-  bool isLessVertex(const kabanov::Polygon& lnr, const kabanov::Polygon& rnl);
-  bool isRightAngle(const kabanov::Point& a, const kabanov::Point& b, const kabanov::Point& c);
-  bool checkRightAngles(const kabanov::Polygon& p);
-  size_t countRightShapes(const polygons& data);
-  double getTriangleArea(const kabanov::Point& a, const kabanov::Point& b, const kabanov::Point& c);
-  bool compareAreas(const kabanov::Polygon& lnr, const kabanov::Polygon& rnl);
   void printAreaEven(const polygons& polygon, std::ostream& out);
   void printAreaOdd(const polygons& polygon, std::ostream& out);
   void printAreaMean(const polygons& polygon, std::ostream& out);
