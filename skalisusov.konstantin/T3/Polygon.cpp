@@ -78,6 +78,7 @@ std::istream &skalisusov::operator>>(std::istream &in, DelimiterIO &&dest)
   }
   return in;
 }
+/*
 skalisusov::iofmtguard::iofmtguard(std::basic_ios< char > & s):
   s_(s),
   fill_(s.fill()),
@@ -89,3 +90,4 @@ skalisusov::iofmtguard::~iofmtguard()
   s_.fill(fill_);
   s_.flags(fmt_);
 }
+*/
