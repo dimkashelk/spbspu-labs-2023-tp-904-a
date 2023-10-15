@@ -35,7 +35,7 @@ int main(int argc, char ** argv)
     try
     {
       std::string com = mapCommand.listenCommand(std::cin);
-      mapCommand.CommandPolygon(std::cin,std::cout,data,mapCommand,com);
+      mapCommand.CommandPolygon(std::cin,std::cout,data,com);
     }
     catch (const std::runtime_error &e)
     {
