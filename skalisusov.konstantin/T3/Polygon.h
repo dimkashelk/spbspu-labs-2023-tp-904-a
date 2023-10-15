@@ -2,7 +2,7 @@
 #define GITLABPROG_POLYGON_H
 #include <vector>
 #include <iostream>
-
+#include <StructTypes.h>
 namespace skalisusov
 {
   struct Point
