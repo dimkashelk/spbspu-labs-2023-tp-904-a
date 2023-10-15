@@ -63,31 +63,3 @@ std::istream &skalisusov::operator>>(std::istream &in, Polygon &rhs)
   rhs.shape = input;
   return in;
 }
-std::istream &skalisusov::operator>>(std::istream &in, DelimiterIO &&dest)
-{
-  std::istream::sentry CheckSentry(in);
-  if (!CheckSentry)
-  {
-    return in;
-  }
-  char c = '0';
-  in >> c;
-  if (in && (c != dest.delim))
-  {
-    in.setstate(std::ios::failbit);
-  }
-  return in;
-}
-/*
-skalisusov::iofmtguard::iofmtguard(std::basic_ios< char > & s):
-  s_(s),
-  fill_(s.fill()),
-  fmt_(s.flags())
-{}
-
-skalisusov::iofmtguard::~iofmtguard()
-{
-  s_.fill(fill_);
-  s_.flags(fmt_);
-}
-*/
