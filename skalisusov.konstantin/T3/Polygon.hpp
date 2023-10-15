@@ -2,6 +2,8 @@
 #define GITLABPROG_POLYGON_HPP
 #include <vector>
 #include <iostream>
+#include <StructTypes.h>
+#include <iofmtguard.h>
 namespace skalisusov
 {
   struct Point
@@ -13,6 +15,7 @@ namespace skalisusov
   {
     std::vector< Point > shape;
   };
+  /*
   struct DelimiterIO
   {
     char delim;
@@ -28,12 +31,13 @@ namespace skalisusov
     std::streamsize precision_;
     std::basic_ios< char >::fmtflags fmt_;
   };
+  */
   double getArea(const Polygon &polygon);
   bool operator ==(const Point &lhs, const Point &rhs);
   bool operator ==(const Polygon &lhs, const Polygon &rhs);
   bool comparator(const Polygon &lhs, const Polygon &rhs);
   std::istream &operator>>(std::istream &in, Point &point);
   std::istream &operator>>(std::istream &in, Polygon &polygon);
-  std::istream &operator>>(std::istream &in, DelimiterIO &&dest);
+ // std::istream &operator>>(std::istream &in, DelimiterIO &&dest);
 }
 #endif

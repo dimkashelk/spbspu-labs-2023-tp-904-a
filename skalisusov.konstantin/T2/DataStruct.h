@@ -6,10 +6,9 @@
 #include <iomanip>
 #include "iofmtguard.h"
 #include "StructTypes.h"
-#include <iostream>
 namespace skalisusov
 {
-  struct DataStruct:
+  struct DataStruct
   {
     double key1;
     double key2;
