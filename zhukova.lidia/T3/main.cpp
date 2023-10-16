@@ -34,6 +34,7 @@ int main(int argc, char * argv[])
     {
     }
   }
+  std::copy(dataVector.begin(), dataVector.end(), std::ostream_iterator< zhukova::Polygon >(std::cout, "\n"));
   inFile.close();
   std::cout << std::fixed << std::setprecision(1);
   zhukova::CommandSystem commands = zhukova::makeCommandSystem();
@@ -42,7 +43,7 @@ int main(int argc, char * argv[])
     try
     {
       std::string comm = zhukova::inputCommand(std::cin);
-      zhukova::doCommand(dataVector, commands, comm, std::cout);
+      zhukova::doCommand(dataVector, commands, comm, std::cin, std::cout);
     }
     catch (std::runtime_error & e)
     {

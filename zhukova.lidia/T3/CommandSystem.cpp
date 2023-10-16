@@ -20,44 +20,41 @@ namespace zhukova
     return commands;
   }
   void doCommand(std::vector< Polygon > & src, const CommandSystem & cs, const std::string & command,
-                 std::ostream & out)
+                 std::istream & in, std::ostream & out)
   {
     try
     {
-      cs.dict.at(command)(src, out);
+      if (in)
+      {
+        cs.dict.at(command)(src, out);
+      }
       return;
     } catch (std::out_of_range & e)
     {
     }
     try
     {
-      std::istringstream iss(command + '\0');
-      std::string word;
-      iss >> word;
-      if ((word == "LESSAREA") || (word == "ECHO"))
+      if ((command == "LESSAREA") || (command == "ECHO"))
       {
         Polygon pol;
-        iss >> pol;
-        if ((pol.points.size() < 3) || ((!iss.eof()) && (iss.peek() != '\0')))
+        in >> pol;
+        in >> std::noskipws >> DelimiterIO{'\n'} >> std::skipws;
+        if (in)
         {
-          throw std::logic_error("<INVALID COMMAND>");
+          cs.dictPolygon.at(command)(src, pol, out);
+          return;
         }
-        if (iss)
-        {
-          cs.dictPolygon.at(word)(src, pol, out);
-        }
-        return;
+        in.setstate(std::ios::failbit);
+        throw std::logic_error("<INVALID COMMAND>");
       }
     } catch (std::out_of_range & e)
     {
     }
     try
     {
-      std::istringstream iss(command + '\0');
-      std::string word;
-      iss >> word;
-      size_t number;
-      iss >> number;
+      size_t endOfWord = command.find(' ');
+      std::string word = command.substr(0, endOfWord);
+      size_t number = std::stoull(command.substr(endOfWord));
       cs.dictNumber.at(word)(src, number, out);
     } catch (std::out_of_range & e)
     {
@@ -67,7 +64,17 @@ namespace zhukova
   std::string inputCommand(std::istream & in)
   {
     std::string command;
-    std::getline(in, command, '\n');
+    in >> command;
+    if ((command == "AREA") || (command == "COUNT") || (command == "MAX") || (command == "MIN"))
+    {
+      std::string parameter;
+      in >> parameter;
+      if (!in)
+      {
+        throw std::logic_error("<INVALID COMMAND>");
+      }
+      command = command + " " + parameter;
+    }
     return command;
   }
 }
