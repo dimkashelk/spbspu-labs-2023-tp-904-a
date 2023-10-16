@@ -65,37 +65,4 @@ namespace zhukova
     }
     return in;
   }
-  std::ostream & operator<<(std::ostream & out, const Point & src)
-  {
-    std::ostream::sentry sentry(out);
-    if (!sentry)
-    {
-      return out;
-    }
-    iofmtguard fmtguard(out);
-    out << '(' << src.x << ';' << src.y << ')';
-    return out;
-  }
-  std::ostream & operator<<(std::ostream & out, const std::vector< Point > & src)
-  {
-    std::ostream::sentry sentry(out);
-    if (!sentry)
-    {
-      return out;
-    }
-    iofmtguard fmtguard(out);
-    std::copy(src.begin(), src.end(), std::ostream_iterator< Point >(std::cout, " "));
-    return out;
-  }
-  std::ostream & operator<<(std::ostream & out, const Polygon & src)
-  {
-    std::ostream::sentry sentry(out);
-    if (!sentry)
-    {
-      return out;
-    }
-    iofmtguard fmtguard(out);
-    out << src.points.size() << ' ' << src.points;
-    return out;
-  }
 }

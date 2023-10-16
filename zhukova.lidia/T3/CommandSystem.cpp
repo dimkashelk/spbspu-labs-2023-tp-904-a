@@ -29,7 +29,8 @@ namespace zhukova
         cs.dict.at(command)(src, out);
       }
       return;
-    } catch (std::out_of_range & e)
+    }
+    catch (const std::out_of_range & e)
     {
     }
     try
@@ -47,7 +48,8 @@ namespace zhukova
         in.setstate(std::ios::failbit);
         throw std::logic_error("<INVALID COMMAND>");
       }
-    } catch (std::out_of_range & e)
+    }
+    catch (const std::out_of_range & e)
     {
     }
     try
@@ -56,7 +58,8 @@ namespace zhukova
       std::string word = command.substr(0, endOfWord);
       size_t number = std::stoull(command.substr(endOfWord));
       cs.dictNumber.at(word)(src, number, out);
-    } catch (std::out_of_range & e)
+    }
+    catch (const std::out_of_range & e)
     {
       throw std::logic_error("<INVALID COMMAND>");
     }

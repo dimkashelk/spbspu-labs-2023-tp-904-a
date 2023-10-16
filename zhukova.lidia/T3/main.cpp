@@ -34,7 +34,6 @@ int main(int argc, char * argv[])
     {
     }
   }
-  std::copy(dataVector.begin(), dataVector.end(), std::ostream_iterator< zhukova::Polygon >(std::cout, "\n"));
   inFile.close();
   std::cout << std::fixed << std::setprecision(1);
   zhukova::CommandSystem commands = zhukova::makeCommandSystem();
