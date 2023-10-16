@@ -61,6 +61,11 @@ namespace zhukova
     }
     catch (const std::out_of_range & e)
     {
+      in >> std::noskipws >> DelimiterIO{'\n'} >> std::skipws;
+      if (!in) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
+      }
       throw std::logic_error("<INVALID COMMAND>");
     }
   }
