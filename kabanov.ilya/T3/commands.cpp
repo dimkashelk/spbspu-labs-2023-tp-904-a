@@ -7,7 +7,6 @@
 #include <cmath>
 #include <FormatGuardIO.hpp>
 
-
 bool isEven(const kabanov::Polygon& pol)
 {
   return pol.points.size() % 2 == 0;
