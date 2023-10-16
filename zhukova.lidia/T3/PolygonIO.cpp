@@ -50,9 +50,13 @@ namespace zhukova
       {
         in.clear();
       }
-      if (in)
+      in >> std::noskipws >> DelimiterIO{'\n'} >> std::skipws;
+      if ((in) || (in.eof()))
       {
-        if (input.points.size() >= 3) {
+        if (!in) {
+          in.clear();
+        }
+        if (input.points.size() == amount) {
           std::swap(input, dest);
           return in;
         }
