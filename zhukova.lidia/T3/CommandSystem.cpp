@@ -39,7 +39,6 @@ namespace zhukova
       {
         Polygon pol;
         in >> pol;
-        in >> std::noskipws >> DelimiterIO{'\n'} >> std::skipws;
         if (in)
         {
           cs.dictPolygon.at(command)(src, pol, out);
@@ -61,10 +60,14 @@ namespace zhukova
     }
     catch (const std::out_of_range & e)
     {
-      in >> std::noskipws >> DelimiterIO{'\n'} >> std::skipws;
-      if (!in) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
+      if ((command != "LESSAREA") && (command != "ECHO"))
+      {
+        in >> std::noskipws >> DelimiterIO{'\n'} >> std::skipws;
+        if (!in)
+        {
+          std::cin.clear();
+          std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
+        }
       }
       throw std::logic_error("<INVALID COMMAND>");
     }
