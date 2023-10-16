@@ -72,7 +72,7 @@ namespace zhukova
     {
       return out;
     }
-    //iofmtguard fmtguard(out);
+    iofmtguard fmtguard(out);
     out << '(' << src.x << ';' << src.y << ')';
     return out;
   }
@@ -83,7 +83,7 @@ namespace zhukova
     {
       return out;
     }
-    //iofmtguard fmtguard(out);
+    iofmtguard fmtguard(out);
     std::copy(src.begin(), src.end(), std::ostream_iterator< Point >(std::cout, " "));
     return out;
   }
@@ -94,8 +94,8 @@ namespace zhukova
     {
       return out;
     }
-    //iofmtguard fmtguard(out);
-    out << size(src.points) << ' ' << src.points;
+    iofmtguard fmtguard(out);
+    out << src.points.size() << ' ' << src.points;
     return out;
   }
 }
