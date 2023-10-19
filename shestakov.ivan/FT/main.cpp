@@ -19,6 +19,7 @@ int main()
     {
       printError(std::cout);
       skipUntilNewLine(std::cin);
+      std::cout << '\n';
     }
   }
   return 0;

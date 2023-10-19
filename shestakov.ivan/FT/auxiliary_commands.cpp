@@ -5,7 +5,7 @@ namespace shestakov
 {
   void printError(std::ostream &out)
   {
-    out << "<INVALID COMMAND>\n";
+    out << "<INVALID COMMAND>";
   }
   void skipUntilNewLine(std::istream &in)
   {
