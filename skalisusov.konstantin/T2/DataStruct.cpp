@@ -1,5 +1,6 @@
 #include "DataStruct.hpp"
 #include <StructTypes.hpp>
+#include <iomanip>
 namespace skalisusov
 {
   std::istream &operator>>(std::istream &in, DataStruct &dest)
@@ -12,7 +13,6 @@ namespace skalisusov
     DataStruct input;
     {
       using sep = DelimiterIO;
-      using cover = LabelIO;
       using dubsci = DoubleSciencificFormatI;
       using dublit = DoubleLiteralFormatIO;
       using str = StringIO;

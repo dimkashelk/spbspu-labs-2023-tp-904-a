@@ -2,7 +2,7 @@
 #define STRUCTTYPES_HPP
 #include <iostream>
 #include <string>
-
+#include <iofmtguard>
 namespace skalisusov
 {
   struct LabelIO
