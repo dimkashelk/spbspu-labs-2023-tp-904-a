@@ -24,15 +24,15 @@ namespace skalisusov
         in >> keyNum;
         if(keyNum == "key1")
         {
-          in >> dublit {input.key1_} >> sep{':'};
+          in >> dublit {input.key1} >> sep{':'};
         }
         else if(keyNum == "key2" )
         {
-          in >> dubsci{input.key2_} >> sep{':'};
+          in >> dubsci{input.key2} >> sep{':'};
         }
         else if(keyNum == "key3" )
         {
-          in >> str{input.key3_} >> sep{':'};
+          in >> str{input.key3} >> sep{':'};
         }
       }
       in >> sep{')'};
@@ -52,25 +52,25 @@ namespace skalisusov
     }
     iofmtguard iofmtguard(out);
     out << "(";
-    out << ":key1 " << std::fixed << std::setprecision(1) << dest.key1_ << 'd';
-    out << ":key2 " << DoubleSciencificFormatO{dest.key2_};
+    out << ":key1 " << std::fixed << std::setprecision(1) << dest.key1 << 'd';
+    out << ":key2 " << DoubleSciencificFormatO{dest.key2};
     out << ":key3 " << '"' << dest.key3_ << '"';
     out << ":)";
     return out;
   }
   bool comparate(DataStruct &firDs, DataStruct &secDs)
   {
-    if(firDs.key1_ != secDs.key1_)
+    if(firDs.key1 != secDs.key1)
     {
-      return firDs.key1_ < secDs.key1_;
+      return firDs.key1 < secDs.key1;
     }
-    if(firDs.key1_ == secDs.key1_ && firDs.key2_ != secDs.key2_)
+    if(firDs.key1 == secDs.key1 && firDs.key2 != secDs.key2)
     {
-      return firDs.key2_ < secDs.key2_;
+      return firDs.key2 < secDs.key2;
     }
     else
     {
-      return  firDs.key3_.length() < secDs.key3_.length();
+      return  firDs.key3.length() < secDs.key3.length();
     }
   }
 }
