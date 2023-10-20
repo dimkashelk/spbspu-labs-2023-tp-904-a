@@ -12,7 +12,7 @@ namespace skalisusov
     DataStruct input;
     {
       using sep = DelimiterIO;
-      using cover = CoverIO;
+      using cover = LabelIO;
       using dubsci = DoubleSciencificFormatI;
       using dublit = DoubleLiteralFormatIO;
       using str = StringIO;
@@ -54,7 +54,7 @@ namespace skalisusov
     out << "(";
     out << ":key1 " << std::fixed << std::setprecision(1) << dest.key1 << 'd';
     out << ":key2 " << DoubleSciencificFormatO{dest.key2};
-    out << ":key3 " << '"' << dest.key3_ << '"';
+    out << ":key3 " << '"' << dest.key3 << '"';
     out << ":)";
     return out;
   }
