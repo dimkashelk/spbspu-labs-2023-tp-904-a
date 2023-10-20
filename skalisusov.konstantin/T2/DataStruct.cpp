@@ -1,9 +1,8 @@
 #include "DataStruct.hpp"
 #include <StructTypes.hpp>
 #include <iomanip>
-namespace skalisusov
-{
-  std::istream &operator>>(std::istream &in, DataStruct &dest)
+
+  std::istream & skalisusov::operator>>(std::istream &in, DataStruct &dest)
   {
     std::istream::sentry CheckSentry(in);
     if(!CheckSentry)
@@ -43,7 +42,7 @@ namespace skalisusov
     }
     return in;
   }
-  std::ostream &operator<<(std::ostream &out, const DataStruct &dest)
+  std::ostream & skalisusov::operator<<(std::ostream &out, const DataStruct &dest)
   {
     std::ostream::sentry CheckSentry(out);
     if(!CheckSentry)
@@ -58,7 +57,7 @@ namespace skalisusov
     out << ":)";
     return out;
   }
-  bool comparate(DataStruct &firDs, DataStruct &secDs)
+  bool comparate(skalisusov::DataStruct &firDs, skalisusov::DataStruct &secDs)
   {
     if(firDs.key1 != secDs.key1)
     {
@@ -73,4 +72,4 @@ namespace skalisusov
       return  firDs.key3.length() < secDs.key3.length();
     }
   }
-}
+
