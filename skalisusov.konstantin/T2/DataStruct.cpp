@@ -1,4 +1,5 @@
-#include "DataStruct.h"
+#include "DataStruct.hpp"
+#include <StructTypes.hpp>
 namespace skalisusov
 {
   std::istream &operator>>(std::istream &in, DataStruct &dest)
@@ -72,6 +73,4 @@ namespace skalisusov
       return  firDs.key3_.length() < secDs.key3_.length();
     }
   }
-
-
 }
