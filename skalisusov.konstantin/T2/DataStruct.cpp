@@ -57,7 +57,7 @@
     out << ":)";
     return out;
   }
-  bool comparate(skalisusov::DataStruct &firDs, skalisusov::DataStruct &secDs)
+  bool skalisusov::comparator(const DataStruct &firDs,const DataStruct &secDs)
   {
     if(firDs.key1 != secDs.key1)
     {
