@@ -9,13 +9,12 @@
 
 int main(int argc, char* argv[])
 {
-  /*if (argc != 2)
+  if (argc != 2)
   {
     std::cerr << "Wrong amount of arguments\n";
     return 1;
   }
-  std::ifstream in(argv[1]);*/
-  std::ifstream in("RIGHTSHAPES.txt");
+  std::ifstream in(argv[1]);
   if (!in)
   {
     std::cerr << "File didn't open\n";
