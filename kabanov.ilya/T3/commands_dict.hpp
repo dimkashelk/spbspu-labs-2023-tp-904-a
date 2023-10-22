@@ -22,7 +22,7 @@ namespace kabanov
     CommandContainer();
     void doCommand(std::string command, const std::vector< kabanov::Polygon >& data, std::ostream& out,
       std::istream& in);
-    std::string InputCommand(std::istream& in);
+    std::string inputCommand(std::istream& in);
   private:
     simpleCommandsStorage simple_commands;
     sizedCommandsStorage sized_commands;

@@ -9,12 +9,13 @@
 
 int main(int argc, char* argv[])
 {
-  if (argc != 2)
+  /*if (argc != 2)
   {
     std::cerr << "Wrong amount of arguments\n";
     return 1;
   }
-  std::ifstream in(argv[1]);
+  std::ifstream in(argv[1]);*/
+  std::ifstream in("RIGHTSHAPES.txt");
   if (!in)
   {
     std::cerr << "File didn't open\n";
@@ -38,7 +39,7 @@ int main(int argc, char* argv[])
   {
     try
     {
-      commandContainer.doCommand(commandContainer.InputCommand(std::cin), data, std::cout, std::cin);
+      commandContainer.doCommand(commandContainer.inputCommand(std::cin), data, std::cout, std::cin);
       std::cout << '\n';
     }
     catch (const std::logic_error& e)

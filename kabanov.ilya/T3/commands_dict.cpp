@@ -10,7 +10,7 @@ kabanov::CommandContainer::CommandContainer():
   complex_commands(complexCommands())
 {}
 
-std::string kabanov::CommandContainer::InputCommand(std::istream& in)
+std::string kabanov::CommandContainer::inputCommand(std::istream& in)
 {
   std::string res;
   in >> res;
