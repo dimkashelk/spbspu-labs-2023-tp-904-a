@@ -7,14 +7,14 @@
 #include "Encoding.h"
 namespace zhukova{
   struct NameIO {
-	std::string name = "";
-  };
+    std::string name = "";
+  }
   bool checkBit(char bit);
   std::istream& operator>>(std::istream& in, NameIO& dest);
-  std::istream & operator>>(std::istream & in, EncodingNode & dest);
-  std::istream & operator>>(std::istream & in, Encoding & dest);
-  std::ostream & operator<<(std::ostream & out, const EncodingNode & src);
+  std::istream& operator>>(std::istream & in, EncodingNode & dest);
+  std::istream& operator>>(std::istream & in, Encoding & dest);
+  std::ostream& operator<<(std::ostream & out, const EncodingNode & src);
   std::ostream& operator<<(std::ostream& out, const std::vector<EncodingNode>& src);
-  std::ostream & operator<<(std::ostream & out, const Encoding & src);
+  std::ostream& operator<<(std::ostream & out, const Encoding & src);
 }
 #endif

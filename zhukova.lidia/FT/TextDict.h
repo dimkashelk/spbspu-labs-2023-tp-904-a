@@ -17,4 +17,4 @@ namespace zhukova
   };
   TextNode getTextNode(const TextDict& src, std::string& textName);
 }
-#endif //FT_TEXTDICT_H
+#endif

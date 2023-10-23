@@ -41,9 +41,11 @@ namespace zhukova
     char codedByte = 0b00000000;
     using namespace std::placeholders;
     try {
-        std::for_each(text.text.begin(), text.text.end(), std::bind(codeChar, encoding, _1, std::ref(codedText), std::ref(currentByteLeft), std::ref(codedByte)));
+        std::for_each(text.text.begin(), text.text.end(), 
+            std::bind(codeChar, encoding, _1, std::ref(codedText), std::ref(currentByteLeft), std::ref(codedByte)));
         std::vector<bool> lastBits(currentByteLeft, false);
-        std::for_each(lastBits.begin(), lastBits.end(), std::bind(addCharCode, std::ref(codedText), std::ref(currentByteLeft), std::ref(codedByte), _1));
+        std::for_each(lastBits.begin(), lastBits.end(), 
+            std::bind(addCharCode, std::ref(codedText), std::ref(currentByteLeft), std::ref(codedByte), _1));
     }
     catch (const std::invalid_argument& e) {
         throw std::invalid_argument("< " + encodingName + " IS INCORRECT>");
@@ -57,8 +59,8 @@ namespace zhukova
   bool isBitOnPlace(const EncodingNode & node, std::vector<bool>& codedSymbol) {
       return (codedSymbol[codedSymbol.size() - 1] == node.code[codedSymbol.size() - 1]);
   }
-  void decodeChar(const std::vector< EncodingNode >& encoding, std::vector< EncodingNode >::const_iterator& dest, std::string& decodedText, 
-      char symbol, size_t& bitNumberInSymbol, std::vector<bool> & codedSymbol) {
+  void decodeChar(const std::vector< EncodingNode >& encoding, std::vector< EncodingNode >::const_iterator& dest, 
+      std::string& decodedText, char symbol, size_t& bitNumberInSymbol, std::vector<bool> & codedSymbol) {
       using namespace std::placeholders;
       bitNumberInSymbol = 0;
       while ((bitNumberInSymbol < 8) && (*dest).code.size() > codedSymbol.size()) {

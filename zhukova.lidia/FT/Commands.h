@@ -31,11 +31,12 @@ namespace zhukova
   void decode(TextDict & srcTexts, EncodingDict & srcEncoding,
               std::istream & in, std::ostream & out);
   std::string readName(NameIO& src);
-  void concatText(const TextDict& srcTexts, TextNode& lhs, std::string& rhs, std::string& encodingName, bool isExactEncoding);
+  void concatText(const TextDict& srcTexts, TextNode& lhs, std::string& rhs, 
+                  std::string& encodingName, bool isExactEncoding);
   void concatenate(TextDict& srcTexts, std::istream& in, std::ostream& out);
   void saveText(TextDict & srcTexts, std::istream & in, std::ostream & out);
   std::string weightFile(std::string& filename);
   void weight(std::istream & in, std::ostream & out);
   void compare(TextDict & srcTexts, EncodingDict & srcEncoding, std::istream & in, std::ostream & out);
 }
-#endif //FT_COMMANDS_H
+#endif
