@@ -86,7 +86,7 @@ namespace zhukova
     using namespace std::placeholders;
     try {
       std::for_each(text.begin(), text.end(),
-                    std::bind(decodeChar, std::ref(encoding.list), std::ref(dest), 
+                    std::bind(decodeChar, std::ref(encoding.list), std::ref(dest),
                     std::ref(decodedText), _1, std::ref(currentBitRead), std::ref(codedSymbol)));
       TextNode newText = TextNode();
       newText.text = decodedText;
