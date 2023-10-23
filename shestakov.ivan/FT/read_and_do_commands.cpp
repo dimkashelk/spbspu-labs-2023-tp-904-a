@@ -10,43 +10,35 @@ namespace shestakov
   using const_dicts_cmds = std::function< void(const my_map &, std::istream &, std::ostream &) >;
   using dict_cmds = std::function< void(Dictionary &, std::istream &, std::ostream &) >;
   using const_dict_cmds = std::function< void(const Dictionary &, std::istream &, std::ostream &) >;
-  std::map< std::string, dicts_cmds > dicts_cmds_
-    {
-      {"add_dictionary", addDictionary},
-      {"delete_dictionary", deleteDictionary},
-      {"intersections_dictionary", createIntersectionDict},
-      {"read_file", readFile}
-    };
-  std::map< std::string, const_dicts_cmds > const_dicts_cmds_
-    {
-      {"search_dictionary", searchDictionary},
-      {"count_intersections", countIntersection}
-    };
-  std::map< std::string, dict_cmds > dict_cmds_
-    {
-      {"add_word", addWord},
-      {"delete_word", deleteWord}
-    };
-  std::map< std::string, const_dict_cmds > const_dict_cmds_
-    {
-      {"search_word", searchWord},
-      {"count_words", countWords},
-      {"count_words_frequency", countWordsWithFreq},
-      {"three_most_common", printThreeMostCommonWords},
-      {"save_dictionary", saveDictionary}
-    };
   void doDictsCmds(my_map &dictionaries, const std::string &cmd, std::istream &in, std::ostream &out)
   {
+    std::map< std::string, dicts_cmds > dicts_cmds_
+      {
+        {"add_dictionary", addDictionary},
+        {"delete_dictionary", deleteDictionary},
+        {"intersections_dictionary", createIntersectionDict},
+        {"read_file", readFile}
+      };
     auto toexecute = dicts_cmds_.at(cmd);
     toexecute(dictionaries, in, out);
   }
   void doConstDictsCmds(const my_map &dictionaries, const std::string &cmd, std::istream &in, std::ostream &out)
   {
+    std::map< std::string, const_dicts_cmds > const_dicts_cmds_
+      {
+        {"search_dictionary", searchDictionary},
+        {"count_intersections", countIntersection}
+      };
     auto toexecute = const_dicts_cmds_.at(cmd);
     toexecute(dictionaries, in, out);
   }
   void doDictCmds(my_map &dictionaries, const std::string &cmd, std::istream &in, std::ostream &out)
   {
+    std::map< std::string, dict_cmds > dict_cmds_
+      {
+        {"add_word", addWord},
+        {"delete_word", deleteWord}
+      };
     std::string dict = "";
     if (dict_cmds_.find(cmd) != dict_cmds_.end())
     {
@@ -63,6 +55,14 @@ namespace shestakov
   }
   void doConstDictCmds(const my_map &dictionaries, const std::string &cmd, std::istream &in, std::ostream &out)
   {
+    std::map< std::string, const_dict_cmds > const_dict_cmds_
+      {
+        {"search_word", searchWord},
+        {"count_words", countWords},
+        {"count_words_frequency", countWordsWithFreq},
+        {"three_most_common", printThreeMostCommonWords},
+        {"save_dictionary", saveDictionary}
+      };
     std::string dict = "";
     if (const_dict_cmds_.find(cmd) != const_dict_cmds_.end())
     {
