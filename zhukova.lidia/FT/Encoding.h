@@ -14,18 +14,16 @@ namespace zhukova
     char symbol = '\0';
     size_t probability = 0;
     std::vector< bool > code;
-  };
+  }
   struct Encoding
   {
     std::vector< EncodingNode > list;
     size_t sumAmount = 0;
-  };
-
+  }
   struct EncodingDict
   {
     std::map< std::string, Encoding > dict;
-  };
-  
+  }
   const Encoding& checkIfEncodingExists(const EncodingDict& src, const std::string& encodingName);
   bool encodingProbabilityComparator(const EncodingNode& lhs, const EncodingNode& rhs);
   bool isSameSymbol(const EncodingNode& src, const char& character);

@@ -37,7 +37,7 @@ namespace zhukova
     std::copy(in_iter(inFile), in_iter(), std::back_inserter(newText.text));
     newText.isCoded = false;
     srcTexts.dict.insert(std::make_pair(text, newText));
-    out << "text was loaded successfully\n";   
+    out << "text was loaded successfully\n";
   }
   void loadEncoding(EncodingDict& srcEncodings, std::istream& in, std::ostream& out)
   {
@@ -80,8 +80,7 @@ namespace zhukova
     outText << encoding->second;
     out << "encoding was saved successfully\n";
   }
-  bool wasCoded(const std::pair< std::string, TextNode >& src, std::string encoding,
-      bool exactEncoding)
+  bool wasCoded(const std::pair< std::string, TextNode >& src, std::string encoding, bool exactEncoding)
   {
     if (src.second.isCoded)
     {
@@ -103,8 +102,7 @@ namespace zhukova
     }
     return src.first;
   };
-  void codedWith(TextDict & srcTexts, EncodingDict & srcEncoding,
-                 std::istream & in, std::ostream & out)
+  void codedWith(TextDict & srcTexts, EncodingDict & srcEncoding, std::istream & in, std::ostream & out)
   {
     using namespace std::placeholders;
     in >> std::noskipws >> DelimiterIO{' '} >> std::skipws;
@@ -114,7 +112,11 @@ namespace zhukova
       in >> encodingName;
       std::vector< std::string > texts;
       std::vector<std::pair< std::string, TextNode >> temp;
-      std::copy_if(srcTexts.dict.begin(), srcTexts.dict.end(), std::back_inserter(temp), std::bind(wasCoded, _1, encodingName, true));
+      std::copy_if(
+          srcTexts.dict.begin(),
+          srcTexts.dict.end(),
+          std::back_inserter(temp),
+          std::bind(wasCoded, _1, encodingName, true));
       std::transform(
         temp.begin(),
         temp.end(),
@@ -130,7 +132,11 @@ namespace zhukova
       in.clear();
       std::vector< std::string > texts;
       std::vector<std::pair< std::string, TextNode >> temp;
-      std::copy_if(srcTexts.dict.begin(), srcTexts.dict.end(), std::back_inserter(temp), std::bind(wasCoded, _1, "", false));
+      std::copy_if(
+          srcTexts.dict.begin(),
+          srcTexts.dict.end(),
+          std::back_inserter(temp),
+          std::bind(wasCoded, _1, "", false));
       std::transform(
           temp.begin(),
           temp.end(),
@@ -148,33 +154,18 @@ namespace zhukova
   {
     std::string textName, codedTextName, encodingName;
     in >> textName >> codedTextName >> encodingName;
-    
-    try
-    {
-      TextNode text = getTextNode(srcTexts, textName);
-      codeText(srcTexts, srcEncoding, text, codedTextName, encodingName, true);
-      out << "text was coded successfully\n";
-    }
-    catch (const std::invalid_argument& e)
-    {
-        std::cout << e.what();
-    }
+    TextNode text = getTextNode(srcTexts, textName);
+    codeText(srcTexts, srcEncoding, text, codedTextName, encodingName, true);
+    out << "text was coded successfully\n";
   }
   void codeWith(TextDict & srcTexts, EncodingDict & srcEncoding,
                 std::istream & in, std::ostream & out)
   {
     std::string textName, codedTextName, encodingName;
     in >> textName >> codedTextName >> encodingName;
-    try
-    {
-        TextNode text = getTextNode(srcTexts, textName);
-        codeText(srcTexts, srcEncoding, text, codedTextName, encodingName, false);
-        out << "text was coded successfully\n";
-    }
-    catch (const std::invalid_argument& e)
-    {
-        std::cout << e.what();
-    }
+    TextNode text = getTextNode(srcTexts, textName);
+    codeText(srcTexts, srcEncoding, text, codedTextName, encodingName, false);
+    out << "text was coded successfully\n";
   }
   void decode(TextDict & srcTexts, EncodingDict & srcEncoding,
               std::istream & in, std::ostream & out)
@@ -183,22 +174,15 @@ namespace zhukova
     in >> codedTextName >> decodedTextName >> encodingName;
     Encoding encoding = Encoding();
     TextNode coded = TextNode();
-    try
-    {
-        encoding = srcEncoding.dict.at(encodingName);
-        coded = srcTexts.dict.at(codedTextName);
-        if ((coded.isCoded == true) && (coded.encodingName != encodingName)) {
-            throw std::invalid_argument("<this text was coded in another encoding>");
-        }
-        decodeText(srcTexts, encoding, coded.text, decodedTextName);
-        out << "text was decoded successfully\n";
+    encoding = srcEncoding.dict.at(encodingName);
+    coded = srcTexts.dict.at(codedTextName);
+    if ((coded.isCoded == true) && (coded.encodingName != encodingName)) {
+      throw std::invalid_argument("<this text was coded in another encoding>");
     }
-    catch (const std::invalid_argument& e)
-    {
-        std::cout << e.what();
-    }
+    decodeText(srcTexts, encoding, coded.text, decodedTextName);
+    out << "text was decoded successfully\n";
   }
-  void concatText(const TextDict& srcTexts, TextNode & lhs, std::string & rhs, 
+  void concatText(const TextDict& srcTexts, TextNode & lhs, std::string & rhs,
     std::string& encodingName, bool isExactEncoding) {
     auto rhsTextNode = getTextNode(srcTexts, rhs);
       if ((rhsTextNode.encodingName == encodingName) || (!isExactEncoding)) {
@@ -226,13 +210,13 @@ namespace zhukova
       if (destText.isCoded) {
           std::for_each(names.begin() + 1, names.end(),
               std::bind(concatText, std::ref(srcTexts),
-                 std::ref(destText), _1, destText.encodingName, true));
-      } 
+                        std::ref(destText), _1, destText.encodingName, true));
+      }
       else
       {
           std::for_each(names.begin() + 1, names.end(),
               std::bind(concatText, std::ref(srcTexts),
-                  std::ref(destText), _1, std::string(), false));
+                        std::ref(destText), _1, std::string(), false));
       }
     }
     catch (const std::runtime_error& e) {
@@ -243,8 +227,7 @@ namespace zhukova
         std::cout << e.what();
     }
   }
-  void saveText(TextDict & srcTexts,
-                std::istream & in, std::ostream & out)
+  void saveText(TextDict & srcTexts, std::istream & in, std::ostream & out)
   {
     std::string filename, textName;
     in >> filename >> textName;

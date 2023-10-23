@@ -12,11 +12,11 @@ namespace zhukova
   struct CommandSystem
   {
     std::map< std::string, void (*)(std::istream & in, std::ostream & out) > common;
-    std::map< std::string, void (*)(TextDict & srcTexts, 
+    std::map< std::string, void (*)(TextDict & srcTexts,
                                     std::istream & in, std::ostream & out) > textCommands;
-    std::map< std::string, void (*)(EncodingDict & srcEncoding, 
+    std::map< std::string, void (*)(EncodingDict & srcEncoding,
                                     std::istream & in, std::ostream & out) > encodingCommands;
-    std::map< std::string, void (*)(TextDict & srcTexts, EncodingDict & srcEncoding, 
+    std::map< std::string, void (*)(TextDict & srcTexts, EncodingDict & srcEncoding,
                                     std::istream & in, std::ostream & out) > bothCommands;
   };
   CommandSystem makeCommandSystem();
