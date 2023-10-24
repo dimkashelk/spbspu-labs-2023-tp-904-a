@@ -19,7 +19,7 @@ namespace aristarkhov
    {"readFile", readFile},
    {"complement", complementDictionary},
    {"intersect", intersectDictionary},
-   {"union", unionDictionary} 
+   {"union", unionDictionary}
   };
 
   void processCommand(dictionaryOfNames& dictionaries, std::string cmd, std::istream& in, std::ostream& out)

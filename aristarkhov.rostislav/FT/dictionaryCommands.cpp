@@ -321,9 +321,9 @@ namespace aristarkhov
     std::string tmp = "";
     in >> tmp;
 
-    if (tmp == "Skip") 
+    if (tmp == "Skip")
     {
-      return; 
+      return;
     }
     else if (tmp == "All")
     {
