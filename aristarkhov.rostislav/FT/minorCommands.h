@@ -16,4 +16,5 @@ namespace aristarkhov
   void printError(std::ostream& out);
   void skipUntilNewLine(std::istream& in);
 }
+
 #endif
