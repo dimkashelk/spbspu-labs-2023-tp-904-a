@@ -231,4 +231,85 @@ namespace aristarkhov
     }
   }
 
+  void complementDictionary(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out)
+  {
+    std::string new_dict_name, dict_name1, dict_name2;
+    in >> new_dict_name >> dict_name1 >> dict_name2;
+    if (!searchDict(dictionaries, dict_name1) || !searchDict(dictionaries, dict_name2))
+    {
+      out << "One or both dictionaries do not exist.\n";
+      return;
+    }
+
+    Dictionary new_dict;
+
+    for (const auto& word : dictionaries[dict_name1])
+    {
+      if (!searchWrd(dictionaries[dict_name2], word.first))
+      {
+        new_dict[word.first] = word.second;
+      }
+      else
+      {
+        if (word.second > dictionaries[dict_name2][word.first])
+        {
+          new_dict[word.first] = word.second - dictionaries[dict_name2][word.first];
+        }
+      }
+    }
+
+    dictionaries[new_dict_name] = new_dict;
+    out << "New dictionary \"" << new_dict_name << "\" has been created.\n";
+  }
+
+  void intersectDictionary(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out)
+  {
+    std::string new_dict_name, dict_name1, dict_name2;
+    in >> new_dict_name >> dict_name1 >> dict_name2;
+    if (!searchDict(dictionaries, dict_name1) || !searchDict(dictionaries, dict_name2))
+    {
+      out << "One or both dictionaries do not exist.\n";
+      return;
+    }
+
+    Dictionary new_dict;
+
+    for (const auto& word : dictionaries[dict_name1])
+    {
+      if (searchWrd(dictionaries[dict_name2], word.first))
+      {
+        new_dict[word.first] = std::min(word.second, dictionaries[dict_name2][word.first]);
+      }
+    }
+
+    dictionaries[new_dict_name] = new_dict;
+    out << "New dictionary \"" << new_dict_name << "\" has been created.\n";
+  }
+
+  void unionDictionary(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out)
+  {
+    std::string new_dict_name, dict_name1, dict_name2;
+    in >> new_dict_name >> dict_name1 >> dict_name2;
+    if (!searchDict(dictionaries, dict_name1) || !searchDict(dictionaries, dict_name2))
+    {
+      out << "One or both dictionaries do not exist.\n";
+      return;
+    }
+
+    Dictionary new_dict;
+
+    for (const auto& word : dictionaries[dict_name1])
+    {
+      new_dict[word.first] = word.second;
+    }
+
+    for (const auto& word : dictionaries[dict_name2])
+    {
+      new_dict[word.first] += word.second;
+    }
+
+    dictionaries[new_dict_name] = new_dict;
+    out << "New dictionary \"" << new_dict_name << "\" has been created.\n";
+  }
+
 }

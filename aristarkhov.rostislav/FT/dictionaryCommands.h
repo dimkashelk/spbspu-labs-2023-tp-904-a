@@ -1,7 +1,7 @@
 #ifndef DICTIONARYCOMMANDS_H
 #define DICTIONARYCOMMANDS_H
 
-#include "minorCommands.hpp"
+#include "minorCommands.h"
 
 namespace aristarkhov
 {
@@ -19,6 +19,10 @@ namespace aristarkhov
 
   void removeText(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out);
   void clearDictionary(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out);
+
+  void complementDictionary(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out);
+  void intersectDictionary(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out);
+  void unionDictionary(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out);
 }
 
 #endif
