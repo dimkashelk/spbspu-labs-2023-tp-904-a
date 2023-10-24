@@ -312,4 +312,44 @@ namespace aristarkhov
     out << "New dictionary \"" << new_dict_name << "\" has been created.\n";
   }
 
+  void printHelp(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out)
+  {
+    out << "Select which command you need: \n";
+    out << "Write down \"All\" to get full info: \n";
+    out << "Write down \"Skip\" to skip this function: \n";
+
+    std::string tmp = "";
+    in >> tmp;
+
+    if (tmp == "Skip") 
+    {
+      return; 
+    }
+    else if (tmp == "All")
+    {
+      out << "create \"name\" - Create a new dictionary with the given name.\n";
+      out << "deleteWord \"dictionary name\" \"word\" - Delete a word from a specified dictionary.\n";
+      out << "deleteDataset \"name\" - Delete the specified dictionary.\n";
+      out << "findWord \"dictionary name\" \"word\" - Check if the word exists in the specified dictionary.\n";
+      out << "getWordCount \"dictionary name\" - Get the total count of words in the specified dictionary.\n";
+      out << "readFile \"dictionary name\" \"file name\" - Load words from a file into the specified dictionary.\n";
+      out << "readText \"dictionary name\" - Load words from a single line of text into the specified dictionary.\n";
+      out << "clear \"dictionary name\" - Remove all words from the specified dictionary.\n";
+      out << "getFrequency \"dictionary name\" \"word\" - Get the frequency of the word in the specified dictionary.\n";
+      out << "getMostUseWord \"dictionary name\" \"n\" - Get the top n words in terms of usage from the specified "
+        "dictionary.\n";
+      out << "remove \"text\" - Remove given text from all dictionaries.\n";
+      out << "complement \"new_dict\" \"dict1\" \"dict2\" - Create new dictionary that includes words from dict1 that "
+        "do not exist in dict2.\n";
+      out << "intersect \"new_dict\" \"dict1\" \"dict2\" - Create new dictionary that includes words that exist in "
+        "both dict1 and dict2.\n";
+      out << "union \"new_dict\" \"dict1\" \"dict2\" - Create new dictionary that includes all words from dict1 and "
+        "dict2.\n";
+      out << '\n';
+    }
+    else
+    {
+      throw std::logic_error("Wrong input");
+    }
+  }
 }

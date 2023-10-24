@@ -5,6 +5,7 @@ namespace aristarkhov
 {
   mapOfFunctions commandsList =
   {
+   {"help", printHelp},
    {"create", createDictionary},
    {"deleteWord", deleteWord},
    {"deleteDataset", deleteDictionary},

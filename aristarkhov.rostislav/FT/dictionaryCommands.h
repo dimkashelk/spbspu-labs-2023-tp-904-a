@@ -23,6 +23,8 @@ namespace aristarkhov
   void complementDictionary(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out);
   void intersectDictionary(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out);
   void unionDictionary(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out);
+
+  void printHelp(dictionaryOfNames& dictionaries, std::istream& in, std::ostream& out);
 }
 
 #endif
