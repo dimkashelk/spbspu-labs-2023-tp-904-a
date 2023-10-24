@@ -6,7 +6,7 @@
 
 namespace aristarkhov
 {
-  void processCommand(dictionaryOfNames& dictionaries, std::string cmd, std::istream& in, std::ostream& out);
+  void processCommand(dictionaryOfNames& dictionaries, const std::string cmd, std::istream& in, std::ostream& out);
   using mapOfFunctions =
     std::map< std::string,
     std::function< void(dictionaryOfNames&, std::istream&, std::ostream&) > >;

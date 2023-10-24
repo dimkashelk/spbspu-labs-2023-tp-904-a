@@ -22,7 +22,7 @@ namespace aristarkhov
    {"union", unionDictionary}
   };
 
-  void processCommand(dictionaryOfNames& dictionaries, std::string cmd, std::istream& in, std::ostream& out)
+  void processCommand(dictionaryOfNames& dictionaries, const std::string cmd, std::istream& in, std::ostream& out)
   {
     if (commandsList.count(cmd))
     {
