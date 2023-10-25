@@ -20,9 +20,9 @@ namespace aksenov
 
   void doCountVertexes(std::string command, const std::vector< Polygon > &pol)
   {
-    if (command == "0" || command == "1" || command == "2")
+    if (command == "1" || command == "2" || command == "0")
     {
-      throw std::invalid_argument("invalid argument");
+      throw std::invalid_argument("invalid input");
     }
     std::vector< Polygon > pols = pol;
     size_t amount = std::stoull(command);

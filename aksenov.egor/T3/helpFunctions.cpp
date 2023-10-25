@@ -4,10 +4,17 @@
 #include <iostream>
 #include <fstream>
 #include <limits>
+#include <numeric>
+#include <functional>
 #include "polygon.h"
 
 namespace aksenov
 {
+  size_t CountVerticesInPolygon(const Polygon& polygon)
+  {
+    return polygon.points.size();
+  }
+
   void outInvalidCommand(std::ostream &out)
   {
     out << "<INVALID COMMAND>" << "\n";
@@ -33,21 +40,31 @@ namespace aksenov
     return true;
   }
 
-  std::vector< double > getArea(const std::vector<Polygon> &pol)
+  double calculate(const Point &p1, const Point &p2)
+  {
+    return p1.x * p2.y - p2.x * p1.y;
+  }
+
+  double calculateArea(const Polygon &p)
+  {
+    const std::vector< Point > &points = p.points;
+
+    if (points.empty())
+    {
+      return 0;
+    }
+
+    std::vector< double > products;
+    std::transform(points.begin(), std::prev(points.end()), std::next(points.begin()), std::back_inserter(products), calculate);
+    products.push_back(calculate(points.back(), points.front()));
+
+    double area = std::accumulate(products.begin(), products.end(), 0.0);
+    return std::fabs(area / 2.0);
+  }
+  std::vector< double > getArea(const std::vector< Polygon > &pol)
   {
     std::vector< double > areas;
-    for (const Polygon &p: pol) {
-      const std::vector< Point > &points = p.points;
-      double firstSum = 0.0;
-      double secondSum = 0.0;
-      for (size_t i = 0; i < points.size(); i++) {
-        const Point &current = points[i];
-        const Point &next = points[(i + 1) % points.size()];
-        firstSum += (static_cast< double >(next.y * current.x));
-        secondSum += (static_cast< double >(next.x * current.y));
-      }
-      areas.push_back(std::fabs((firstSum - secondSum) / 2));
-    }
+    std::transform(pol.begin(), pol.end(), std::back_inserter(areas), calculateArea);
     return areas;
   }
 
@@ -61,14 +78,6 @@ namespace aksenov
     return !(isOdd(data));
   }
 
-  bool isInteger(const std::string & s)
-  {
-    if(s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
-    char * p = nullptr;
-    strtol(s.c_str(), &p, 10);
-    return (*p == 0);
-  }
-
   bool isEqual(const Polygon &pol, size_t amount)
   {
     return pol.points.size() == amount;
@@ -76,7 +85,8 @@ namespace aksenov
 
   bool comparePoints(const Point &lhs, const Point &rhs)
   {
-    if (lhs.x == rhs.x) {
+    if (lhs.x == rhs.x)
+    {
       return lhs.y < rhs.y;
     }
     return lhs.x < rhs.x;
@@ -97,8 +107,8 @@ namespace aksenov
       return false;
     }
 
-    std::vector<Point> lhsSorted(lhs.points);
-    std::vector<Point> rhsSorted(rhs.points);
+    std::vector< Point > lhsSorted(lhs.points);
+    std::vector< Point > rhsSorted(rhs.points);
 
     std::sort(lhsSorted.begin(), lhsSorted.end(), comparePoints);
     std::sort(rhsSorted.begin(), rhsSorted.end(), comparePoints);
@@ -106,14 +116,11 @@ namespace aksenov
     int diffX = lhsSorted[0].x - rhsSorted[0].x;
     int diffY = lhsSorted[0].y - rhsSorted[0].y;
 
-    for (size_t i = 0; i < lhsSorted.size(); i++)
-    {
-      Point translatedPoint = translatePoint(rhsSorted[i], diffX, diffY);
-      if (!(lhsSorted[i] == translatedPoint))
-      {
-        return false;
-      }
-    }
-    return true;
+    std::vector< Point > translatedPoints;
+    translatedPoints.reserve(lhsSorted.size());
+
+    std::function< Point(const Point&) > translateFunction = std::bind(translatePoint, std::placeholders::_1, diffX, diffY);
+    std::transform(rhsSorted.begin(), rhsSorted.end(), std::back_inserter(translatedPoints), translateFunction);
+    return lhsSorted == translatedPoints;
   }
 }

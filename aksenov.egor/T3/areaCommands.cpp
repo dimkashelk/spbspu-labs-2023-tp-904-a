@@ -38,9 +38,9 @@ namespace aksenov
 
   void doAreaWithVertexes(const std::vector< Polygon > &pol, std::string command)
   {
-    if (command == "0" || command == "1" || command == "2")
+    if (command == "1" || command == "2" || command == "0")
     {
-      throw std::invalid_argument("invalid argument");
+      throw std::invalid_argument("invalid input");
     }
     size_t num = std::stoul(command);
     std::vector< Polygon > pols;

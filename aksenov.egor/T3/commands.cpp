@@ -6,6 +6,7 @@
 #include <functional>
 #include <iterator>
 #include <map>
+#include <cctype>
 #include "areaCommands.h"
 #include "maxCommands.h"
 #include "minCommands.h"
@@ -16,7 +17,7 @@ namespace aksenov
 {
   void doArea(std::istream &inp, const std::vector< Polygon > &pol)
   {
-    using areaMap = std::map< std::string, void(*)(const std::vector< aksenov::Polygon >&) >;
+    using areaMap = std::map< std::string, void (*)(const std::vector< aksenov::Polygon > &) >;
     areaMap areaCommands
     {
       {"EVEN", doAreaEven},
@@ -25,16 +26,19 @@ namespace aksenov
     };
     std::string command = "";
     inp >> command;
-    if (isInteger(command))
+
+    if (command.find_first_not_of("0123456789") == std::string::npos)
     {
       doAreaWithVertexes(pol, command);
+    } else
+    {
+      areaCommands[command](pol);
     }
-    areaCommands[command](pol);
   }
 
   void doMax(std::istream &inp, const std::vector< Polygon > &pol)
   {
-    using maxMap = std::map< std::string, void(*)(const std::vector< aksenov::Polygon >&) >;
+    using maxMap = std::map< std::string, void (*)(const std::vector< aksenov::Polygon > &) >;
     maxMap maxCommands
     {
       {"AREA", doMaxArea},
@@ -47,7 +51,7 @@ namespace aksenov
 
   void doMin(std::istream &inp, const std::vector< Polygon > &pol)
   {
-    using minMap = std::map< std::string, void(*)(const std::vector< aksenov::Polygon >&) >;
+    using minMap = std::map< std::string, void (*)(const std::vector< aksenov::Polygon > &) >;
     minMap minCommands
     {
       {"AREA", doMinArea},
@@ -58,9 +62,9 @@ namespace aksenov
     minCommands[command](pol);
   }
 
-  void doCount(std::istream &inp, const std::vector< Polygon >&pol)
+  void doCount(std::istream &inp, const std::vector< Polygon > &pol)
   {
-    using countMap = std::map< std::string, void(*)(const std::vector< aksenov::Polygon >&) >;
+    using countMap = std::map< std::string, void (*)(const std::vector< aksenov::Polygon > &) >;
     countMap countCommands
     {
       {"EVEN", doCountEven},
@@ -68,50 +72,80 @@ namespace aksenov
     };
     std::string command = "";
     inp >> command;
-    if (isInteger(command))
+
+    if (command.find_first_not_of("0123456789") == std::string::npos)
     {
       doCountVertexes(command, pol);
     }
-    countCommands[command](pol);
-  }
-
-    void doSame(std::istream &inp, const std::vector< Polygon > &pol)
+    else
     {
-      if (pol.size() == 0 || pol.size() == 1)
-      {
-        throw std::invalid_argument("empty pol");
-      }
-      Polygon polygon;
-      inp >> polygon;
-      auto sort = std::bind(isEqual, std::placeholders::_1, polygon.points.size());
-      std::vector< Polygon > sorted;
-      std::copy_if(pol.begin(),pol.end(),sorted.begin(), sort);
-      auto func = std::bind(isSame, std::placeholders::_1, polygon);
-      auto counter = std::count_if(sorted.begin(), sorted.end(), func);
-      std::cout << counter << "\n";
-    }
-
-    void doRightshapes(std::istream &, const std::vector< Polygon > &pol)
-    {
-      size_t count = 0;
-      for (const Polygon& polygon : pol)
-      {
-        for (size_t i = 0; i < polygon.points.size(); i++)
-        {
-          const Point& p1 = polygon.points[i];
-          const Point& p2 = polygon.points[(i + 1) % polygon.points.size()];
-          const Point& p3 = polygon.points[(i + 2) % polygon.points.size()];
-          int x1 = p2.x - p1.x;
-          int y1 = p2.y - p1.y;
-          int x2 = p3.x - p2.x;
-          int y2 = p3.y - p2.y;
-          if (x1 * x2 + y1 * y2 == 0)
-          {
-            count++;
-            break;
-          }
-        }
-      }
-      std::cout << count << "\n";
+      countCommands[command](pol);
     }
   }
+
+  void doSame(std::istream &inp, const std::vector< Polygon > &pol)
+  {
+    if (pol.size() == 0 || pol.size() == 1)
+    {
+      throw std::invalid_argument("empty pol");
+    }
+    Polygon polygon;
+    inp >> polygon;
+    auto sort = std::bind(isEqual, std::placeholders::_1, polygon.points.size());
+    std::vector< Polygon > sorted;
+    std::copy_if(pol.begin(), pol.end(), sorted.begin(), sort);
+    auto func = std::bind(isSame, std::placeholders::_1, polygon);
+    auto counter = std::count_if(sorted.begin(), sorted.end(), func);
+    std::cout << counter << "\n";
+  }
+
+  double getDistance(const Point &p1, const Point &p2)
+  {
+    return std::sqrt(std::pow(p2.x - p1.x, 2) + std::pow(p2.y - p1.y, 2));
+  }
+
+  Polygon createAngle(int &i, const Polygon &polygon)
+  {
+    Polygon angle;
+    auto iter = polygon.points.begin() + i;
+    angle.points.insert(angle.points.cbegin(), iter, iter + 3);
+    i++;
+    return angle;
+  }
+
+  std::vector< Polygon > createVectorOfAngles(const Polygon &polygon)
+  {
+    Polygon tmp(polygon);
+    tmp.points.push_back(polygon.points.at(0));
+    tmp.points.push_back(polygon.points.at(1));
+    std::vector< Polygon > angles(polygon.points.size());
+    int i = 0;
+    auto bindFunction = std::bind(createAngle, i, tmp);
+    std::generate(angles.begin(), angles.end(), bindFunction);
+    return angles;
+  }
+
+  bool isRightAngle(const Polygon &angle)
+  {
+    if (angle.points.size() != 3)
+    {
+      return false;
+    }
+    double ab = getDistance(angle.points.at(0), angle.points.at(1));
+    double bc = getDistance(angle.points.at(1), angle.points.at(2));
+    double ca = getDistance(angle.points.at(2), angle.points.at(0));
+    return std::sqrt(ab * ab + bc * bc) == ca;
+  }
+
+  bool isThereRightAngle(const Polygon &polygon)
+  {
+    auto angles = createVectorOfAngles(polygon);
+    return std::any_of(angles.begin(), angles.end(), isRightAngle);
+  }
+
+  void doRightshapes(std::istream &, const std::vector< Polygon > &pol)
+  {
+    size_t count = std::count_if(pol.begin(), pol.end(), isThereRightAngle);
+    std::cout << count << "\n";
+  }
+}

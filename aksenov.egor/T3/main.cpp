@@ -26,7 +26,7 @@ int main(int argc, char **argv)
   commands = aksenov::makeDict();
   std::string command = "";
 
-  while(!std::cin.eof())
+  while (!std::cin.eof())
   {
     std::cin >> command;
     if (std::cin.eof())
@@ -35,24 +35,13 @@ int main(int argc, char **argv)
     }
     try
     {
-      if (commands.find(command) != commands.end())
-      {
-        commands[command](std::cin, data);
-      }
-      else
-      {
-        throw std::logic_error("error");
-      }
+      commands.at(command)(std::cin, data);
     }
     catch (const std::logic_error &e)
     {
       aksenov::outInvalidCommand(std::cout);
       std::cin.clear();
       std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
-    }
-    catch (const std::runtime_error &e)
-    {
-      break;
     }
     catch (...)
     {
