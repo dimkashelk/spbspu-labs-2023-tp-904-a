@@ -57,7 +57,7 @@ void skalisusov::areaMean(const std::vector< Polygon > &rhs, std::ostream &out)
   size_t count = 0;
   count = rhs.size();
   std::vector< double > areaVector(rhs.size());
-  std::transform(std::begin(rhs),std::end(rhs), std::begin(areaVector), getArea);
+  std::transform(std::begin(rhs), std::end(rhs), std::begin(areaVector), getArea);
   auto areaSum = std::accumulate(std::begin(areaVector), std::end(areaVector), 0.0);
   iofmtguard iofmtguard(out);
   areaSum = areaSum / count;
@@ -65,7 +65,7 @@ void skalisusov::areaMean(const std::vector< Polygon > &rhs, std::ostream &out)
 }
 void skalisusov::areaNumOfVertex(const std::vector< Polygon > &rhs, size_t vertex, std::ostream &out)
 {
-  if ( vertex < 3)
+  if (vertex < 3)
   {
     throw std::logic_error("Invalied parameter");
   }
@@ -223,7 +223,7 @@ size_t skalisusov::function_for_rmecho(std::vector< Polygon > &rhs, skalisusov::
   std::vector< Polygon > data(rhs.size());
   std::copy(std::begin(rhs), std::end(rhs), std::begin(data));
   auto it_1 = std::adjacent_find(data.begin(),data.end());
-  while ( it_1 != data.end())
+  while (it_1 != data.end())
   {
     auto next = std::adjacent_find(it_1++,data.end());
     if (next != data.end() && next->shape == it_1->shape && next->shape == lhs.shape)

@@ -1,7 +1,7 @@
 #include "iofmtguard.hpp"
 namespace skalisusov
 {
-  iofmtguard::iofmtguard(std::basic_ios< char > &s) :
+  iofmtguard::iofmtguard(std::basic_ios< char > &s):
     s_(s),
     fill_(s.fill()),
     precision_(s.precision()),
