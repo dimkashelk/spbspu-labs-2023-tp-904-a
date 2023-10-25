@@ -257,7 +257,7 @@ skalisusov::Command::Command()
   area.insert({"RMECHO", rmecho});
 }
 void skalisusov::Command::CommandPolygon(std::istream &in, std::ostream &out, std::vector<Polygon> &rhs,
-                                         std::string &command)
+  std::string &command)
 {
   using namespace std::placeholders;
   try

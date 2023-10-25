@@ -18,7 +18,7 @@ bool skalisusov::comparator(const skalisusov::Polygon &lhs, const skalisusov::Po
 int getPoint(const skalisusov::Point &rhs, const skalisusov::Point &lhs)
 {
   return rhs.x * lhs.y - rhs.y * lhs.x;
-};
+}
 double skalisusov::getArea(const Polygon &dest)
 {
   double area = 0.0;
