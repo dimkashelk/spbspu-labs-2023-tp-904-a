@@ -15,7 +15,7 @@ namespace aksenov
   void showHistory(std::ostream &out)
   {
     size_t count = 0;
-    for (const std::string &command : history)
+    for (const std::string &command: history)
     {
       out << count << ") " << command << "\n";
       ++count;
@@ -27,7 +27,7 @@ namespace aksenov
     in >> word;
     addHistory(word);
     dictOfTranslations dict;
-    std::vector<std::string> translations;
+    std::vector< std::string > translations;
     while (in)
     {
       std::string translation = "";
@@ -70,9 +70,9 @@ namespace aksenov
       {
         out << "  Word: " << word_entry.first << "\n";
         out << "  Translations: ";
-        const std::vector<std::string> &translations = word_entry.second;
+        const std::vector< std::string > &translations = word_entry.second;
 
-        for (const std::string &translation : translations)
+        for (const std::string &translation: translations)
         {
           out << translation << " ";
         }
@@ -147,7 +147,7 @@ namespace aksenov
     addHistory(newNameOfDict);
     dictOfTranslations intersectedDict;
 
-    while (true)
+    while (!std::cin.eof())
     {
       std::string dictName;
       in >> dictName;
@@ -165,7 +165,7 @@ namespace aksenov
         for (const auto &word_entry : dictionary)
         {
           const std::string &word = word_entry.first;
-          const std::vector<std::string> &translations = word_entry.second;
+          const std::vector< std::string > &translations = word_entry.second;
 
           if (intersectedDict.find(word) == intersectedDict.end())
           {
@@ -173,7 +173,7 @@ namespace aksenov
           }
           else
           {
-            std::vector<std::string> &existingTranslations = intersectedDict[word];
+            std::vector< std::string > &existingTranslations = intersectedDict[word];
             for (const std::string &translation : translations)
             {
               if (std::find(existingTranslations.begin(), existingTranslations.end(), translation) == existingTranslations.end())
@@ -201,7 +201,7 @@ namespace aksenov
     addHistory(newNameOfDict);
     dictOfTranslations unionDict;
 
-    while (true)
+    while (!std::cin.eof())
     {
       std::string dictName;
       in >> dictName;
@@ -219,7 +219,7 @@ namespace aksenov
         for (const auto &word_entry : dictionary)
         {
           const std::string &word = word_entry.first;
-          const std::vector<std::string> &translations = word_entry.second;
+          const std::vector< std::string > &translations = word_entry.second;
           unionDict[word] = translations;
         }
       }

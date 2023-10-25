@@ -5,12 +5,13 @@
 #include <iostream>
 namespace aksenov
 {
-  using dictOfTranslations = std::map<std::string, std::vector<std::string>>;
-  using dictOfDicts = std::map<std::string, dictOfTranslations>;
+  using dictOfTranslations = std::map< std::string, std::vector< std::string > >;
+  using dictOfDicts = std::map< std::string, dictOfTranslations >;
 
   std::string insertCommand(std::istream &);
 
-  class Commands{
+  class Commands
+  {
   public:
     Commands();
     void doCommand(const std::string &command, std::istream &in, dictOfDicts &dict);
