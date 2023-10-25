@@ -38,7 +38,7 @@ void skalisusov::areaEven(const std::vector<Polygon> &rhs, std::ostream &out)
   outArea(out, areaSum);
 }
 
-void skalisusov::areaOdd(const std::vector<Polygon> &rhs, std::ostream &out)
+void skalisusov::areaOdd(const std::vector< Polygon > &rhs, std::ostream &out)
 {
   std::vector< Polygon > evePoly;
   std::copy_if(std::begin(rhs), std::end(rhs), std::back_inserter(evePoly), isOdd);
@@ -80,7 +80,7 @@ void skalisusov::areaNumOfVertex(const std::vector< Polygon > &rhs, size_t verte
   iofmtguard iofmtguard(out);
   outArea(out, areaSum);
 }
-void skalisusov::maxArea(const std::vector<Polygon> &rhs, std::ostream &out)
+void skalisusov::maxArea(const std::vector< Polygon > &rhs, std::ostream &out)
 {
   if (rhs.empty())
   {
@@ -126,7 +126,7 @@ void skalisusov::minArea(const std::vector< Polygon > &rhs, std::ostream &out)
   iofmtguard iofmtguard(out);
   outArea(out, minArea);
 }
-void skalisusov::minVertex(const std::vector<Polygon> &rhs, std::ostream &out)
+void skalisusov::minVertex(const std::vector< Polygon > &rhs, std::ostream &out)
 {
   if (rhs.empty())
   {
@@ -141,7 +141,7 @@ void skalisusov::minVertex(const std::vector<Polygon> &rhs, std::ostream &out)
   iofmtguard iofmtguard(out);
   out << minVertex << '\n';
 }
-void skalisusov::countEven(const std::vector <Polygon > &rhs, std::ostream &out)
+void skalisusov::countEven(const std::vector < Polygon > &rhs, std::ostream &out)
 {
   std::vector< Polygon > polygon;
   std::copy_if(std::begin(rhs),std::end(rhs), std::back_inserter(polygon), isEven);
@@ -173,7 +173,7 @@ void skalisusov::countVertex(const std::vector< Polygon > &rhs, size_t vertex, s
   iofmtguard iofmtguard(out);
   out << shapesThisVertex << '\n';
 }
-void skalisusov::rects(const std::vector<Polygon> &rhs, std::ostream &out)
+void skalisusov::rects(const std::vector< Polygon > &rhs, std::ostream &out)
 {
   std::vector< Polygon > polygon;
   if (rhs.empty())
@@ -256,7 +256,7 @@ skalisusov::Command::Command()
   const_ver.insert({"COUNT NUM", countVertex});
   area.insert({"RMECHO", rmecho});
 }
-void skalisusov::Command::CommandPolygon(std::istream &in, std::ostream &out, std::vector<Polygon> &rhs,
+void skalisusov::Command::CommandPolygon(std::istream &in, std::ostream &out, std::vector< Polygon > &rhs,
   std::string &command)
 {
   using namespace std::placeholders;

@@ -18,7 +18,7 @@ int main(int argc, char ** argv)
     std::cerr << "Not open file\n";
     return 1;
   }
-  auto max = std::numeric_limits< std::streamsize>::max();
+  auto max = std::numeric_limits< std::streamsize >::max();
   std::vector< Polygon > data;
   while (!input.eof())
   {
