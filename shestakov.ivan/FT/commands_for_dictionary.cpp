@@ -61,8 +61,8 @@ namespace shestakov
       out << "Dictionary is empty.\n";
       return;
     }
-    std::vector< std::pair< size_t, std::string > > freq(dictionary.dict.size());
-    std::transform(dictionary.dict.cbegin(), dictionary.dict.cend(), freq.begin(), returnSet);
+    std::vector< std::pair< std::string, size_t > > freq(dictionary.dict.size());
+    std::copy(dictionary.dict.cbegin(), dictionary.dict.cend(), freq.begin());
     std::sort(freq.begin(), freq.end(), compSet);
     std::reverse(freq.begin(), freq.end());
     out << freq[0].second;
@@ -98,8 +98,6 @@ namespace shestakov
     in >> file_name;
     file_name = "../" + file_name;
     std::ofstream file(file_name);
-    std::string str = "";
-    size_t size = 0;
     for (const auto &pair: dictionary.dict)
     {
       file << pair.first << std::setw(50 - pair.first.length()) << std::setfill('.') << pair.second << '\n';

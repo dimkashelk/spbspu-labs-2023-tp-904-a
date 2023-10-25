@@ -13,7 +13,7 @@ namespace shestakov
   bool searchWrd(const Dictionary &dictionaries, const std::string &word);
   size_t countFreq(const std::pair< std::string, size_t > &dictionary);
   std::pair< size_t, std::string > returnSet(const std::pair< std::string, size_t > &pair);
-  bool compSet(const std::pair< size_t, std::string > &first, const std::pair< size_t, std::string > &second);
+  bool compSet(const std::pair< std::string, size_t > &first, const std::pair< std::string, size_t > &second);
   bool compWord(const std::pair<std::string, size_t> &pair, const Dictionary &dictionary);
 }
 #endif

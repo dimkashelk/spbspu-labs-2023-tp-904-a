@@ -19,7 +19,7 @@ namespace shestakov
   }
   bool compSet(const std::pair< size_t, std::string > &first, const std::pair< size_t, std::string > &second)
   {
-    return first.first < second.first;
+    return first.second < second.second;
   }
   bool compWord(const std::pair< std::string, size_t > &pair, const Dictionary &dictionary)
   {
