@@ -188,7 +188,7 @@ void skalisusov::rects(const std::vector<Polygon> &rhs, std::ostream &out)
 }
 bool skalisusov::isRects(const Polygon &rhs)
 {
-  if(rhs.shape.size() == 4)
+  if (rhs.shape.size() == 4)
   {
     std::vector< Point > rect(rhs.shape.size());
     std::copy(std::begin(rhs.shape),std::end(rhs.shape),std::begin(rect));

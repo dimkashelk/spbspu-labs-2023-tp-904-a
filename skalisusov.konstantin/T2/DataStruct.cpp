@@ -4,7 +4,7 @@
 std::istream & skalisusov::operator>>(std::istream &in, DataStruct &dest)
   {
     std::istream::sentry CheckSentry(in);
-    if(!CheckSentry)
+    if (!CheckSentry)
     {
       return in;
     }
@@ -17,25 +17,25 @@ std::istream & skalisusov::operator>>(std::istream &in, DataStruct &dest)
       std::string keyNum = "";
       in >> sep{'('};
       in >> sep{':'};
-      for(size_t i = 0; i < 3; i++)
+      for (size_t i = 0; i < 3; i++)
       {
         in >> keyNum;
-        if(keyNum == "key1")
+        if (keyNum == "key1")
         {
           in >> dublit {input.key1} >> sep{':'};
         }
-        else if(keyNum == "key2" )
+        else if (keyNum == "key2" )
         {
           in >> dubsci{input.key2} >> sep{':'};
         }
-        else if(keyNum == "key3" )
+        else if (keyNum == "key3" )
         {
           in >> str{input.key3} >> sep{':'};
         }
       }
       in >> sep{')'};
     }
-    if(in)
+    if (in)
     {
       dest = input;
     }
@@ -44,7 +44,7 @@ std::istream & skalisusov::operator>>(std::istream &in, DataStruct &dest)
 std::ostream & skalisusov::operator<<(std::ostream &out, const DataStruct &dest)
   {
     std::ostream::sentry CheckSentry(out);
-    if(!CheckSentry)
+    if (!CheckSentry)
     {
       return out;
     }
