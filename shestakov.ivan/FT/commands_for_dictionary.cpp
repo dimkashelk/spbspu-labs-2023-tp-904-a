@@ -99,7 +99,7 @@ namespace shestakov
     std::ofstream file(file_name);
     std::string str = "";
     size_t size = 0;
-    for (const auto &pair : dictionary.dict)
+    for (const auto &pair: dictionary.dict)
     {
       size = 50 - pair.first.length();
       str = pair.first + std::string(size, '.');
