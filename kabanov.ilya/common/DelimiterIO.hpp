@@ -1,5 +1,5 @@
-#ifndef TYPESIO_H
-#define TYPESIO_H
+#ifndef DELIMETERIO_HPP
+#define DELIMETERIO_HPP
 
 #include <string>
 

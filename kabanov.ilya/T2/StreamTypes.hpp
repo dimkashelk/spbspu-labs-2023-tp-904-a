@@ -1,5 +1,5 @@
-#ifndef TYPESIO_H
-#define TYPESIO_H
+#ifndef STREAMTYPES_HPP
+#define STREAMTYPES_HPP
 
 #include <string>
 
