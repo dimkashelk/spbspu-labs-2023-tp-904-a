@@ -1,5 +1,5 @@
-#ifndef FORMATGUARDIO_H
-#define FORMATGUARDIO_H
+#ifndef FORMATGUARDIO_HPP
+#define FORMATGUARDIO_HPP
 
 #include <iomanip>
 

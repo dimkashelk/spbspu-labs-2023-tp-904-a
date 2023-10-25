@@ -1,15 +1,10 @@
-#ifndef TYPESIO_H
-#define TYPESIO_H
+#ifndef STREAMTYPES_HPP
+#define STREAMTYPES_HPP
 
 #include <string>
 
 namespace kabanov
 {
-  struct DelimiterIO
-  {
-    char exp;
-  };
-
   struct LabelIO
   {
     std::string exp;
@@ -40,7 +35,6 @@ namespace kabanov
     unsigned long long val;
   };
 
-  std::istream& operator>>(std::istream& in, DelimiterIO&& dest);
   std::istream& operator>>(std::istream& in, LabelIO&& dest);
   std::istream& operator>>(std::istream& in, LiteralIO&& dest);
   std::istream& operator>>(std::istream& in, StringIO&& dest);
