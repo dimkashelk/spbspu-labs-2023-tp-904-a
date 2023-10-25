@@ -14,7 +14,7 @@ namespace aristarkhov
   public:
     CommandProcessor();
     void processCommand(dictionaryOfNames& dictionaries, const std::string cmd, std::istream& in, std::ostream& out);
-  
+
   private:
     mapOfFunctions commandsList;
   };
