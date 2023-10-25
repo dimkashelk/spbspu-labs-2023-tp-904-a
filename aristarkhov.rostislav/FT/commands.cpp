@@ -3,9 +3,8 @@
 
 namespace aristarkhov
 {
-  mapOfFunctions commandsList =
-  {
-   {"help", printHelp},
+  CommandProcessor::CommandProcessor(): commandsList
+  {{"help", printHelp},
    {"create", createDictionary},
    {"deleteWord", deleteWord},
    {"deleteDataset", deleteDictionary},
@@ -19,10 +18,11 @@ namespace aristarkhov
    {"readFile", readFile},
    {"complement", complementDictionary},
    {"intersect", intersectDictionary},
-   {"union", unionDictionary}
-  };
+   {"union", unionDictionary}}
+  {
+  }
 
-  void processCommand(dictionaryOfNames& dictionaries, const std::string cmd, std::istream& in, std::ostream& out)
+  void CommandProcessor::processCommand(dictionaryOfNames& dictionaries, const std::string cmd, std::istream& in, std::ostream& out)
   {
     if (commandsList.count(cmd))
     {

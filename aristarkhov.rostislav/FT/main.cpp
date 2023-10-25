@@ -9,10 +9,11 @@ int main()
 {
   using namespace aristarkhov;
   dictionaryOfNames dictionaries;
+  CommandProcessor commandProcessor;
 
   try
   {
-    printHelp(dictionaries, std::cin, std::cout);
+    commandProcessor.printHelp(dictionaries, std::cin, std::cout);
   }
   catch (const std::logic_error& e)
   {
@@ -26,7 +27,7 @@ int main()
     {
       std::string cmd = "";
       std::cin >> cmd;
-      processCommand(dictionaries, cmd, std::cin, std::cout);
+      commandProcessor.processCommand(dictionaries, cmd, std::cin, std::cout);
     }
     catch (const std::exception& e)
     {
