@@ -6,9 +6,6 @@
 
 namespace aristarkhov
 {
-  using FunctionType = std::function< void(dictionaryOfNames&, std::istream&, std::ostream&) >;
-  using mapOfFunctions = std::map< std::string, FunctionType >;
-
   class CommandProcessor
   {
   public:
@@ -16,6 +13,8 @@ namespace aristarkhov
     void processCommand(dictionaryOfNames& dictionaries, const std::string cmd, std::istream& in, std::ostream& out);
 
   private:
+    using FunctionType = std::function< void(dictionaryOfNames&, std::istream&, std::ostream&) >;
+    using mapOfFunctions = std::map< std::string, FunctionType >;
     mapOfFunctions commandsList;
   };
 }
