@@ -55,10 +55,7 @@ namespace aksenov
         out << "  Translations: ";
         const std::vector< std::string > &translations = word_entry.second;
 
-        for (const std::string &translation: translations)
-        {
-          out << translation << " ";
-        }
+        std::copy(translations.begin(), translations.end(), std::ostream_iterator< std::string >(out, " "));
         out << "\n";
       }
       out << "\n";
@@ -85,10 +82,7 @@ namespace aksenov
       {
         const std::vector<std::string>& translations = translationIter->second;
         out << word << " translations in dictionary " << nameOfDict << ":\n";
-        for (const std::string& translation : translations)
-        {
-          out << "- " << translation << "\n";
-        }
+        std::copy(translations.begin(), translations.end(), std::ostream_iterator< std::string >(out, "- "));
       }
       else
       {
