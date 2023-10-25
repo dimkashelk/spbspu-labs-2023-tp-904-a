@@ -5,7 +5,7 @@ bool litvin::findDict(const dicts_list_t & list, const std::string & dict_name)
   try
   {
     list.dict_list.at(dict_name);
-  }
+  } 
   catch (const std::out_of_range &)
   {
     return false;
@@ -20,7 +20,7 @@ litvin::translations * litvin::findWordTranslation(dicts_list_t & list,
   try
   {
     return &dictionary.at(word);
-  } 
+  }
   catch (const std::out_of_range &)
   {
     return nullptr;
@@ -142,7 +142,7 @@ void litvin::editWordTranslation(dicts_list_t & list, std::ostream & out, std::i
       try
       {
         trans_v->at(num_of_translation - 1) = new_translation;
-      } 
+      }
       catch (const std::out_of_range &)
       {
         out << "There is no translation in " << dict_name << " with number " << num_of_translation << '\n';
@@ -311,14 +311,11 @@ void litvin::searchWord(dicts_list_t & list, std::ostream & out, std::istream & 
       const translations & trans_list = dictionary.at(word);
       out << dict_name << ":\n";
       size_t translation_number = 1;
-      std::transform(trans_list.begin(),
-          trans_list.end(),
-          std::ostream_iterator<std::string>(out, "\n"), 
-          [&translation_number](const std::string& translation)
-          {
-            std::string result = "  " + std::to_string(translation_number++) + ". " + translation;
-            return result;
-          });
+      for (const std::string & translation: trans_list)
+      {
+        out << "  " << translation_number << ". " << translation << "\n";
+        translation_number++;
+      }
     }
   }
   if (quantity == 0)
