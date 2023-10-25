@@ -5,7 +5,7 @@ bool litvin::findDict(const dicts_list_t & list, const std::string & dict_name)
   try
   {
     list.dict_list.at(dict_name);
-  } 
+  }
   catch (const std::out_of_range &)
   {
     return false;
