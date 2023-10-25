@@ -213,11 +213,11 @@ void skalisusov::rmecho(std::vector< Polygon > &rhs, std::istream &in, std::ostr
     throw std::logic_error("Invalid parameters");
   }
   size_t count = 0;
-  count = implementer_rmecho(rhs, shape);
+  count = doRmecho(rhs, shape);
   iofmtguard iofmtguard(out);
   out << count;
 }
-size_t skalisusov::implementer_rmecho(std::vector< Polygon > &rhs, Polygon &lhs)
+size_t skalisusov::doRmecho(std::vector< Polygon > &rhs, Polygon &lhs)
 {
   size_t count = 0;
   std::vector< Polygon > data(rhs.size());
