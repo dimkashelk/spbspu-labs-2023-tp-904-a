@@ -7,15 +7,15 @@
 
 int main()
 {
-  dictOfDicts dict;
-  Commands commands;
+  aksenov::dictOfDicts dict;
+  aksenov::Commands commands;
   while (!std::cin.eof())
   {
     try
     {
-      std::string command = insertCommand(std::cin);
-      addHistory(command);
-      executeCommand(std::cout, std::cin, commands, dict, command);
+      std::string command = aksenov::insertCommand(std::cin);
+      aksenov::addHistory(command);
+      aksenov::executeCommand(std::cout, std::cin, commands, dict, command);
     }
     catch (...)
     {
