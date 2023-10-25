@@ -7,7 +7,7 @@ int main()
   using namespace shestakov;
   std::map< std::string, Dictionary > dicts_;
 
-  while(!std::cin.eof())
+  while (!std::cin.eof())
   {
     try
     {
