@@ -213,11 +213,11 @@ void skalisusov::rmecho(std::vector< Polygon > &rhs, std::istream &in, std::ostr
     throw std::logic_error("Invalid parameters");
   }
   size_t count = 0;
-  count = function_for_rmecho(rhs,shape);
+  count = rmecho(rhs, shape);
   iofmtguard iofmtguard(out);
   out << count;
 }
-size_t skalisusov::function_for_rmecho(std::vector< Polygon > &rhs, skalisusov::Polygon &lhs)
+size_t skalisusov::rmecho(std::vector< Polygon > &rhs, Polygon &lhs)
 {
   size_t count = 0;
   std::vector< Polygon > data(rhs.size());
@@ -240,7 +240,7 @@ size_t skalisusov::function_for_rmecho(std::vector< Polygon > &rhs, skalisusov::
   return count;
 }
 
-skalisusov::command::command()
+skalisusov::Command::Command()
 {
   const_area.insert({"AREA EVEN", areaEven});
   const_area.insert({"AREA ODD", areaOdd});
@@ -256,7 +256,7 @@ skalisusov::command::command()
   const_ver.insert({"COUNT NUM", countVertex});
   area.insert({"RMECHO", rmecho});
 }
-void skalisusov::command::CommandPolygon(std::istream &in, std::ostream &out, std::vector<Polygon> &rhs,
+void skalisusov::Command::CommandPolygon(std::istream &in, std::ostream &out, std::vector<Polygon> &rhs,
                                          std::string &command)
 {
   using namespace std::placeholders;
@@ -281,7 +281,7 @@ void skalisusov::command::CommandPolygon(std::istream &in, std::ostream &out, st
   auto vertexes = std::bind(const_ver.at(command.substr(0, space) + " NUM"), _1, num, std::ref(out));
   vertexes(rhs);
 }
-std::string skalisusov::command::listenCommand(std::istream &in)
+std::string skalisusov::Command::listenCommand(std::istream &in)
 {
   std::string comand = "0";
   in >> comand;

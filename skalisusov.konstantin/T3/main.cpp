@@ -31,7 +31,7 @@ int main(int argc, char ** argv)
     }
   }
   input.close();
-  auto mapCommand = command();
+  auto mapCommand = Command();
   while (!std::cin.eof())
   {
     try

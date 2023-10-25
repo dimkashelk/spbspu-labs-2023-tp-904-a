@@ -25,10 +25,10 @@ namespace skalisusov
   void countVertex(const std::vector< Polygon > &rhs, std::size_t vertex, std::ostream  &out);
   void rmecho(std::vector< Polygon > &rhs, std::istream &in, std::ostream &out);
 
-  class command
+  class Command
   {
   public:
-    command();
+    Command();
     void CommandPolygon(std::istream &in,std::ostream &out, std::vector< Polygon > &rhs,std::string &command);
     std::string listenCommand(std::istream &in);
   private:
@@ -39,6 +39,6 @@ namespace skalisusov
     std::map< std::string, cmd_const_vertex > const_ver;
     std::map< std::string, cmd_area > area;
   };
-  size_t function_for_rmecho(std::vector< Polygon > &rhs, Polygon &lhs);
+  size_t rmecho(std::vector< Polygon > &rhs, Polygon &lhs);
 }
 #endif
