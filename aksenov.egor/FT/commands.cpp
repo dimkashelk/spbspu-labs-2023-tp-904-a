@@ -25,7 +25,6 @@ namespace aksenov
     dict_.insert({"HELP", help});
     dict_.insert({"INTERSECTION", doIntersect});
     dict_.insert({"UNITE", unite});
-    dict_.insert({"HISTORY", showHistory});
   }
 
   void Commands::doCommand(std::string &command, std::istream &in, dictOfDicts &dict, std::ostream &out)

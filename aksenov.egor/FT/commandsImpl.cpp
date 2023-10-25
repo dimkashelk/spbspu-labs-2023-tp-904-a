@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <iterator>
+#include <functional>
 #include <algorithm>
 #include "commands.h"
 namespace aksenov
@@ -97,11 +99,15 @@ namespace aksenov
     out << "1) CREATE - creates new dictionary" << "\n";
     out << "example : CREATE eng1 hello привет здравствуйте ; eng2 car машина автомобиль" << "\n";
     out << "2) OUT - creates a list of dictionaries in console" << "\n";
-    out << "3) HISTORY - shows previous commands" << "\n";
     out << "4) TRANSLATE - shows a translation/translations of a word" << "\n";
     out << "5) INTERSECTION - create a new dict with intersection of dictionaries, which names you have inserted" << "\n";
     out << "6) INION - unite dictionaries, which names you have inserted and create new dictionary" << "\n";
     out << "7) HELP" << "\n";
+  }
+
+  std::string AddUniqueTranslation(const std::string& translation)
+  {
+    return translation;
   }
 
   void doIntersect(std::string &, std::istream &in, dictOfDicts &dicts, std::ostream &out)
@@ -156,6 +162,11 @@ namespace aksenov
     out << "New dictionary '" << newNameOfDict << "' created with intersection of dictionaries." << std::endl;
   }
 
+  std::pair< std::string, std::vector< std::string > > TransformDictionaryEntry(const std::pair< std::string, std::vector< std::string > > &wordEntry)
+  {
+    return std::make_pair(wordEntry.first, wordEntry.second);
+  }
+
   void unite(std::string &, std::istream &in, dictOfDicts &dicts, std::ostream &out)
   {
     std::string newNameOfDict;
@@ -175,13 +186,7 @@ namespace aksenov
       if (dictIter != dicts.end())
       {
         const dictOfTranslations &dictionary = dictIter->second;
-
-        for (const auto &word_entry : dictionary)
-        {
-          const std::string &word = word_entry.first;
-          const std::vector< std::string > &translations = word_entry.second;
-          unionDict[word] = translations;
-        }
+        std::transform(dictionary.begin(), dictionary.end(), std::inserter(unionDict, unionDict.begin()), TransformDictionaryEntry);
       }
       else
       {
