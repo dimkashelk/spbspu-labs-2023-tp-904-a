@@ -116,7 +116,7 @@ double getArea(const kabanov::Polygon& pol)
 bool compareAreas(const kabanov::Polygon& lnr, const kabanov::Polygon& rnl)
 {
   return fabs(getArea(lnr) - getArea(rnl)) >= std::numeric_limits< double >::epsilon()
-    && getArea(lnr) < getArea(rnl);
+    && (getArea(lnr) < getArea(rnl));
 }
 
 void printArea(const kabanov::polygons& pol, std::ostream& out)
