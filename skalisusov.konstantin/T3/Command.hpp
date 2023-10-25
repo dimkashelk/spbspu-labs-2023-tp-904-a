@@ -39,6 +39,6 @@ namespace skalisusov
     std::map< std::string, cmd_const_vertex > const_ver;
     std::map< std::string, cmd_area > area;
   };
-  size_t rmecho(std::vector< Polygon > &rhs, Polygon &lhs);
+  size_t implementer_rmecho(std::vector< Polygon > &rhs, Polygon &lhs);
 }
 #endif
