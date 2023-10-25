@@ -9,14 +9,18 @@ namespace zhukova
                 size_t & currentByteLeft, char & codedByte)
   {
     using namespace std::placeholders;
-    auto symbolIt = std::find_if(encoding.list.begin(), encoding.list.end(),
-                                 std::bind(isSymbol, _1, symbol));
-    if (symbolIt == encoding.list.end()) {
+    auto symbolIt = std::find_if(encoding.list.begin(), encoding.list.end(), std::bind(isSymbol, _1, symbol));
+    if (symbolIt == encoding.list.end())
+    {
         throw std::invalid_argument("<ENCODING IS INCORRECT>");
     }
     auto symbolCode = symbolIt->code;
-    std::for_each(symbolCode.begin(), symbolCode.end(),
-                  std::bind(addCharCode, std::ref(codedText), std::ref(currentByteLeft), std::ref(codedByte), _1));
+    auto addCode = std::bind(addCharCode,
+        std::ref(codedText),
+        std::ref(currentByteLeft),
+        std::ref(codedByte),
+        _1);
+    std::for_each(symbolCode.begin(), symbolCode.end(), addCode);
   }
   void addCharCode(std::string & codedText, size_t & currentByteLeft, char & codedByte, const bool & symbolCode)
   {
@@ -40,14 +44,20 @@ namespace zhukova
     size_t currentByteLeft = 8;
     char codedByte = 0b00000000;
     using namespace std::placeholders;
-    try {
+    try
+    {
         std::for_each(text.text.begin(), text.text.end(),
             std::bind(codeChar, encoding, _1, std::ref(codedText), std::ref(currentByteLeft), std::ref(codedByte)));
         std::vector<bool> lastBits(currentByteLeft, false);
-        std::for_each(lastBits.begin(), lastBits.end(),
-            std::bind(addCharCode, std::ref(codedText), std::ref(currentByteLeft), std::ref(codedByte), _1));
+        auto addCode = std::bind(addCharCode,
+            std::ref(codedText),
+            std::ref(currentByteLeft),
+            std::ref(codedByte),
+            _1);
+        std::for_each(lastBits.begin(), lastBits.end(), addCode);
     }
-    catch (const std::invalid_argument& e) {
+    catch (const std::invalid_argument& e)
+    {
         throw std::invalid_argument("< " + encodingName + " is incorrect>");
     }
     TextNode coded = TextNode();
