@@ -58,25 +58,25 @@ void litvin::help(const command_descriptors & cmd_desc, std::ostream & out, std:
   }
 }
 void litvin::CommandDict::executeCommand(const std::string & command,
-                                         dicts_list_t & list,
-                                         std::ostream & out,
-                                         std::istream & in) const
+    dicts_list_t & list,
+    std::ostream & out,
+    std::istream & in) const
 {
   signature_type_1 function = dict1.at(command);
   function(list, out, in);
 }
 void litvin::CommandDict::executeCommand(const std::string & command,
-                                         const command_descriptors & cmd_desc,
-                                         std::ostream & out,
-                                         std::istream & in) const
+    const command_descriptors & cmd_desc,
+    std::ostream & out,
+    std::istream & in) const
 {
   signature_type_2 function = dict2.at(command);
   function(cmd_desc, out, in);
 }
 void litvin::CommandDict::executeCommand(const std::string & command,
-                                         dicts_list_t & list,
-                                         const std::string & dict,
-                                         std::ostream & out) const
+    dicts_list_t & list,
+    const std::string & dict,
+    std::ostream & out) const
 {
   signature_type_3 function = dict3.at(command);
   function(list, dict, out);
@@ -102,13 +102,15 @@ void litvin::runCommand(const CommandDict & cmd_d,
   {
     cmd_d.executeCommand(cmd, list, out, in);
     return;
-  } catch (const std::out_of_range &)
+  } 
+  catch (const std::out_of_range &)
   {}
   try
   {
     cmd_d.executeCommand(cmd, desc_d, out, in);
     return;
-  } catch (const std::out_of_range &)
+  } 
+  catch (const std::out_of_range &)
   {}
   if (cmd == "new")
   {

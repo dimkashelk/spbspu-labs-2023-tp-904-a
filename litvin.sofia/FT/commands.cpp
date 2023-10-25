@@ -5,7 +5,8 @@ bool litvin::findDict(const dicts_list_t & list, const std::string & dict_name)
   try
   {
     list.dict_list.at(dict_name);
-  } catch (const std::out_of_range &)
+  }
+  catch (const std::out_of_range &)
   {
     return false;
   }
@@ -19,7 +20,8 @@ litvin::translations * litvin::findWordTranslation(dicts_list_t & list,
   try
   {
     return &dictionary.at(word);
-  } catch (const std::out_of_range &)
+  } 
+  catch (const std::out_of_range &)
   {
     return nullptr;
   }
@@ -140,7 +142,8 @@ void litvin::editWordTranslation(dicts_list_t & list, std::ostream & out, std::i
       try
       {
         trans_v->at(num_of_translation - 1) = new_translation;
-      } catch (const std::out_of_range &)
+      } 
+      catch (const std::out_of_range &)
       {
         out << "There is no translation in " << dict_name << " with number " << num_of_translation << '\n';
       }
