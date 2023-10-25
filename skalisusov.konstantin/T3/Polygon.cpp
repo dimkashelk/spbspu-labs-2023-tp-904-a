@@ -29,7 +29,7 @@ double skalisusov::getArea(const Polygon &dest)
   area += ( dest.shape.back()).x * dest.shape.front().y - dest.shape.front().x * (dest.shape.back()).y;
   return std::abs(area * 0.5);
 }
-std::istream & skalisusov::operator>>(std::istream &in, Point &point)
+std::istream &skalisusov::operator>>(std::istream &in, Point &point)
 {
   std::istream::sentry CheckSentry(in);
   if (!CheckSentry)
@@ -39,7 +39,7 @@ std::istream & skalisusov::operator>>(std::istream &in, Point &point)
   in >> DelimiterIO{ '(' } >> point.x >> DelimiterIO{ ';' } >> point.y >> DelimiterIO{ ')' };
   return in;
 }
-std::istream & skalisusov::operator>>(std::istream &in, Polygon &rhs)
+std::istream &skalisusov::operator>>(std::istream &in, Polygon &rhs)
 {
   std::istream::sentry CheckSentry(in);
   if (!CheckSentry)

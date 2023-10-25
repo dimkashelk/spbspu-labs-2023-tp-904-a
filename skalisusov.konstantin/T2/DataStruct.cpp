@@ -1,7 +1,7 @@
 #include "DataStruct.hpp"
 #include <StructTypes.hpp>
 #include <iomanip>
-std::istream & skalisusov::operator>>(std::istream &in, DataStruct &dest)
+std::istream &skalisusov::operator>>(std::istream &in, DataStruct &dest)
   {
     std::istream::sentry CheckSentry(in);
     if (!CheckSentry)
@@ -41,7 +41,7 @@ std::istream & skalisusov::operator>>(std::istream &in, DataStruct &dest)
     }
     return in;
   }
-std::ostream & skalisusov::operator<<(std::ostream &out, const DataStruct &dest)
+std::ostream &skalisusov::operator<<(std::ostream &out, const DataStruct &dest)
   {
     std::ostream::sentry CheckSentry(out);
     if (!CheckSentry)

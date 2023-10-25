@@ -29,11 +29,11 @@ namespace skalisusov
   {
     const double dubscienO;
   };
-  std::istream & operator>>(std::istream &in, LabelIO &&dest);
-  std::istream & operator>>(std::istream &in, DelimiterIO &&dest);
-  std::istream & operator>>(std::istream &in, DoubleLiteralFormatIO &&dest);
-  std::istream & operator>>(std::istream &in, DoubleSciencificFormatI &&dest);
-  std::ostream & operator<<(std::ostream &out, const DoubleSciencificFormatO &&dest);
-  std::istream & operator>>(std::istream &in, StringIO &&dest);
+  std::istream &operator>>(std::istream &in, LabelIO &&dest);
+  std::istream &operator>>(std::istream &in, DelimiterIO &&dest);
+  std::istream &operator>>(std::istream &in, DoubleLiteralFormatIO &&dest);
+  std::istream &operator>>(std::istream &in, DoubleSciencificFormatI &&dest);
+  std::ostream &operator<<(std::ostream &out, const DoubleSciencificFormatO &&dest);
+  std::istream &operator>>(std::istream &in, StringIO &&dest);
 }
 #endif

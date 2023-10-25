@@ -1,6 +1,6 @@
 #include <iomanip>
 #include "StructTypes.hpp"
-std::istream & skalisusov::operator>>(std::istream &in, LabelIO &&dest)
+std::istream &skalisusov::operator>>(std::istream &in, LabelIO &&dest)
 {
   std::istream::sentry sentry(in);
   if (!sentry)
@@ -17,7 +17,7 @@ std::istream & skalisusov::operator>>(std::istream &in, LabelIO &&dest)
   }
   return in;
 }
-std::istream & skalisusov::operator>>(std::istream &in, DelimiterIO &&dest)
+std::istream &skalisusov::operator>>(std::istream &in, DelimiterIO &&dest)
 {
   std::istream::sentry sentry(in);
   if (!sentry)
@@ -32,7 +32,7 @@ std::istream & skalisusov::operator>>(std::istream &in, DelimiterIO &&dest)
   }
   return in;
 }
-std::istream & skalisusov::operator>>(std::istream &in, StringIO &&dest)
+std::istream &skalisusov::operator>>(std::istream &in, StringIO &&dest)
 {
   std::istream::sentry sentry(in);
   if (!sentry)
@@ -41,7 +41,7 @@ std::istream & skalisusov::operator>>(std::istream &in, StringIO &&dest)
   }
   return std::getline(in >> DelimiterIO{ '"' },dest.str,'"');
 }
-std::istream & skalisusov::operator>>(std::istream &in, DoubleLiteralFormatIO &&dest)
+std::istream &skalisusov::operator>>(std::istream &in, DoubleLiteralFormatIO &&dest)
 {
   std::istream::sentry sentry(in);
   if (!sentry)
@@ -50,7 +50,7 @@ std::istream & skalisusov::operator>>(std::istream &in, DoubleLiteralFormatIO &&
   }
   return in >> dest.dublit >> DelimiterIO{ 'd' };
 }
-std::istream & skalisusov::operator>>(std::istream &in, DoubleSciencificFormatI &&dest)
+std::istream &skalisusov::operator>>(std::istream &in, DoubleSciencificFormatI &&dest)
 {
   std::istream::sentry sentry(in);
   if (!sentry)
@@ -64,7 +64,7 @@ std::istream & skalisusov::operator>>(std::istream &in, DoubleSciencificFormatI 
   }
   return in;
 }
-std::ostream & skalisusov::operator<<(std::ostream &out, const DoubleSciencificFormatO &&dest)
+std::ostream &skalisusov::operator<<(std::ostream &out, const DoubleSciencificFormatO &&dest)
 {
   std::ostream::sentry sentry(out);
   if (!sentry)
