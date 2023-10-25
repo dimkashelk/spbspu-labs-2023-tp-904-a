@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <bitset>
 #include <algorithm>
+#include <DelimeterIO.hpp>
 
 std::istream& kabanov::operator>>(std::istream& in, kabanov::LabelIO&& dest)
 {

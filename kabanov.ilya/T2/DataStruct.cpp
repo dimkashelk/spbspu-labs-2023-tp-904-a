@@ -1,9 +1,9 @@
 #include "DataStruct.hpp"
 
 #include <FormatGuardIO.hpp>
-#include <TypesIO.hpp>
+#include <DelimeterIO.hpp>
 
-#include <StreamTypes.hpp>
+#include "StreamTypes.hpp"
 
 std::istream& kabanov::operator>>(std::istream& in, kabanov::DataStruct& dest)
 {
