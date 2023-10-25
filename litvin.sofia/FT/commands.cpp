@@ -240,11 +240,13 @@ void litvin::printDict(dicts_list_t & list, std::ostream & out, std::istream & i
       const translations & trans_list = entry.second;
       out << word << ":\n";
       size_t translation_number = 1;
-      for (const std::string & translation: trans_list)
-      {
-        out << "  " << translation_number << ". " << translation << "\n";
-        translation_number++;
-      }
+      std::transform(trans_list.begin(),
+          trans_list.end(),
+          std::ostream_iterator<std::string>(out, "\n"),
+          [&translation_number](const std::string &translation)
+          {
+            return "  " + std::to_string(translation_number++) + ". " + translation;
+          });
     }
   }
   else
@@ -397,14 +399,13 @@ void litvin::intersectDictionaries(dicts_list_t & list, std::ostream & out, std:
           const translations & translist2 = dictionary2.at(word);
           translations combined_translations;
           combined_translations.insert(combined_translations.end(), translist1.begin(), translist1.end());
-          for (const auto & translation: translist2)
-          {
-            if (std::find(combined_translations.begin(), combined_translations.end(), translation) ==
-                combined_translations.end())
-            {
-              combined_translations.push_back(translation);
-            }
-          }
+          auto end = std::remove_if(combined_translations.begin(),
+              combined_translations.end(),
+              [&translist2](const auto &translation)
+              {
+                return std::find(translist2.begin(), translist2.end(), translation) != translist2.end();
+              });
+          combined_translations.erase(end, combined_translations.end());
           dictionary3[word] = combined_translations;
         }
       }
@@ -437,15 +438,14 @@ void litvin::subtractDictionaries(dicts_list_t & list, std::ostream & out, std::
       dict_t & dictionary1 = list.dict_list[dict1];
       dict_t & dictionary2 = list.dict_list[dict2];
       dict_t & dictionary3 = list.dict_list[dict3];
-      for (const auto & entry: dictionary1)
-      {
-        const std::string & word = entry.first;
-        if (dictionary2.count(word) == 0)
-        {
-          const translations & trans_list_1 = entry.second;
-          dictionary3[word] = trans_list_1;
-        }
-      }
+      std::copy_if(dictionary1.begin(),
+          dictionary1.end(),
+          std::inserter(dictionary3, dictionary3.end()),
+          [&dictionary2](const auto &entry)
+          {
+            const std::string &word = entry.first;
+            return dictionary2.count(word) == 0;
+          });
     }
     else
     {
