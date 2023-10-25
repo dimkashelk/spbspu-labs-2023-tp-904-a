@@ -203,13 +203,14 @@ namespace aristarkhov
   {
     std::string text = "";
     std::getline(in, text);
-    for (auto& dict : dictionaries)
+
+    const std::string alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (auto& dict: dictionaries)
     {
       size_t start = 0;
-      while ((start = text.find_first_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", start)) !=
-        std::string::npos)
+      while ((start = text.find_first_of(alphabet, start)) != std::string::npos)
       {
-        size_t end = text.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", start);
+        size_t end = text.find_first_not_of(alphabet, start);
         std::string word = text.substr(start, end - start);
         word.erase(std::remove_if(word.begin(), word.end(), ispunct), word.end());
         std::transform(word.begin(), word.end(), word.begin(), ::tolower);
@@ -243,7 +244,7 @@ namespace aristarkhov
 
     Dictionary new_dict;
 
-    for (const auto& word : dictionaries[dict_name1])
+    for (const auto& word: dictionaries[dict_name1])
     {
       if (!searchWrd(dictionaries[dict_name2], word.first))
       {
@@ -274,7 +275,7 @@ namespace aristarkhov
 
     Dictionary new_dict;
 
-    for (const auto& word : dictionaries[dict_name1])
+    for (const auto& word: dictionaries[dict_name1])
     {
       if (searchWrd(dictionaries[dict_name2], word.first))
       {
@@ -298,12 +299,12 @@ namespace aristarkhov
 
     Dictionary new_dict;
 
-    for (const auto& word : dictionaries[dict_name1])
+    for (const auto& word: dictionaries[dict_name1])
     {
       new_dict[word.first] = word.second;
     }
 
-    for (const auto& word : dictionaries[dict_name2])
+    for (const auto& word: dictionaries[dict_name2])
     {
       new_dict[word.first] += word.second;
     }

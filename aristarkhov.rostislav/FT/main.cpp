@@ -28,12 +28,7 @@ int main()
       std::cin >> cmd;
       processCommand(dictionaries, cmd, std::cin, std::cout);
     }
-    catch (const std::logic_error& e)
-    {
-      std::cout << "Error: " << e.what() << '\n';
-      skipUntilNewLine(std::cin);
-    }
-    catch (const std::runtime_error& e)
+    catch (const std::exception& e)
     {
       std::cout << "Error: " << e.what() << '\n';
       skipUntilNewLine(std::cin);
