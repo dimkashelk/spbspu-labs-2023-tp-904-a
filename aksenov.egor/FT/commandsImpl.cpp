@@ -162,7 +162,8 @@ namespace aksenov
     out << "New dictionary '" << newNameOfDict << "' created with intersection of dictionaries." << std::endl;
   }
 
-  std::pair< std::string, std::vector< std::string > > TransformDictionaryEntry(const std::pair< std::string, std::vector< std::string > > &wordEntry)
+  std::pair< std::string, std::vector< std::string > >
+    TransformDictionaryEntry(const std::pair< std::string, std::vector< std::string > > &wordEntry)
   {
     return std::make_pair(wordEntry.first, wordEntry.second);
   }
