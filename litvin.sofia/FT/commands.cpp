@@ -268,22 +268,28 @@ void litvin::printDictByLetter(dicts_list_t & list, std::ostream & out, std::ist
   {
     const dict_t & dictionary = list.dict_list[dict_name];
     size_t quantity_of_words = 0;
-    for (const auto & entry: dictionary)
-    {
-      const std::string & word = entry.first;
-      const translations & trans_list = entry.second;
-      if (word.front() == letter)
-      {
-        quantity_of_words++;
-        out << word << ":\n";
-        size_t translation_number = 1;
-        std::transform(trans_list.begin(),
-            trans_list.end(),
-            std::ostream_iterator< std::string >(out, "\n"),
-            [&translation_number](const std::string & translation)
-            {
-              return "  " + std::to_string(translation_number++) + ". " + translation;
-            });
+    quantity_of_words = std::count_if(dictionary.begin(),
+        dictionary.end(),
+        [&letter](const auto & entry)
+        {
+          return entry.first.front() == letter;
+        });
+    std::vector<std::string> words;
+    std::copy_if(dictionary.begin(),
+        dictionary.end(),
+        std::back_inserter(words),
+        [&letter](const auto &entry)
+        {
+          return entry.first.front() == letter;
+        });
+    size_t translation_number = 1;
+    std::transform(trans_list.begin(),
+        trans_list.end(),
+        std::ostream_iterator< std::string >(out, "\n"),
+        [&translation_number](const std::string & translation)
+        {
+          return "  " + std::to_string(translation_number++) + ". " + translation;
+        });
       }
     }
     if (!quantity_of_words)
