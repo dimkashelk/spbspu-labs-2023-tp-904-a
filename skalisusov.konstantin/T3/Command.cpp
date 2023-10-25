@@ -257,7 +257,7 @@ size_t skalisusov::function_for_rmecho(std::vector< Polygon > &rhs, skalisusov::
   area.insert({"RMECHO", rmecho});
 }
 void skalisusov::command::CommandPolygon(std::istream &in, std::ostream &out, std::vector<Polygon> &rhs,
-                                         std::string &command)
+  std::string &command)
 {
   using namespace std::placeholders;
   try
@@ -279,7 +279,7 @@ void skalisusov::command::CommandPolygon(std::istream &in, std::ostream &out, st
   std::size_t space = command.find(' ');
   std::size_t num = std::stoull(command.substr(space));
   auto vertexes = std::bind(const_ver.at(command.substr(0, space) + " NUM"),
-                            _1,num,std::ref(out));
+    _1,num,std::ref(out));
   vertexes(rhs);
 }
 std::string skalisusov::command::listenCommand(std::istream &in)
