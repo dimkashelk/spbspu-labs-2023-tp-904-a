@@ -1,7 +1,7 @@
 #include "DataStruct.hpp"
 
 #include <FormatGuardIO.hpp>
-#include <DelimeterIO.hpp>
+#include <DelimiterIO.hpp>
 
 #include "StreamTypes.hpp"
 
