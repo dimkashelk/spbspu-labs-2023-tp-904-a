@@ -50,7 +50,7 @@ void createDict(std::istream &in, dictOfDicts &dict)
     addHistory(name);
     if (name == "stop")
     {
-      break; // Выход из цикла createDict при вводе "stop"
+      break;
     }
     dictOfTranslations translations = createDictOftranslations(in);
     dict[name] = translations;
