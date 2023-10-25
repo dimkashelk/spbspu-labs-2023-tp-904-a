@@ -1,24 +1,9 @@
-#include "TypesIO.hpp"
+#include "StreamTypes.hpp"
 
 #include <iomanip>
 #include <bitset>
 #include <algorithm>
-
-std::istream& kabanov::operator>>(std::istream& in, kabanov::DelimiterIO&& dest)
-{
-  std::istream::sentry sentry(in);
-  if (!sentry)
-  {
-    return in;
-  }
-  char c = '0';
-  in >> c;
-  if (in && (c != dest.exp))
-  {
-    in.setstate(std::ios::failbit);
-  }
-  return in;
-}
+#include <DelimiterIO.hpp>
 
 std::istream& kabanov::operator>>(std::istream& in, kabanov::LabelIO&& dest)
 {
@@ -104,7 +89,7 @@ std::istream& kabanov::operator>>(std::istream& in, kabanov::CharIO&& dest)
   {
     return in;
   }
-  in >> kabanov::DelimiterIO{ '\'' } >> dest.ref >> kabanov::DelimiterIO{ '\'' };
+  in >> DelimiterIO{ '\'' } >> dest.ref >> DelimiterIO{ '\'' };
 
   return in;
 }
@@ -117,5 +102,5 @@ std::istream& kabanov::operator>>(std::istream& in, kabanov::StringIO&& dest)
     return in;
   }
 
-  return std::getline(in >> kabanov::DelimiterIO{ '"' }, dest.ref, '"');
+  return std::getline(in >> DelimiterIO{ '"' }, dest.ref, '"');
 }
