@@ -17,7 +17,13 @@ int main()
     }
     catch (const std::logic_error& e)
     {
-      printError(std::cout);
+      printInvalidCommand(std::cout);
+      skipUntilNewLine(std::cin);
+      std::cout << '\n';
+    }
+    catch (const std::invalid_argument& e)
+    {
+      printInvalidArgument(std::cout);
       skipUntilNewLine(std::cin);
       std::cout << '\n';
     }

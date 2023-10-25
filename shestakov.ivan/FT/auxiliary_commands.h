@@ -6,7 +6,8 @@
 
 namespace shestakov
 {
-  void printError(std::ostream& out);
+  void printInvalidCommand(std::ostream& out);
+  void printInvalidArgument(std::ostream &out);
   void skipUntilNewLine(std::istream& in);
   bool searchDict(const my_map &dictionaries, const std::string &dict_name);
 }

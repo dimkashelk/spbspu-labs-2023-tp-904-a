@@ -3,9 +3,13 @@
 
 namespace shestakov
 {
-  void printError(std::ostream &out)
+  void printInvalidCommand(std::ostream &out)
   {
     out << "<INVALID COMMAND>";
+  }
+  void printInvalidArgument(std::ostream &out)
+  {
+    out << "<INVALID ARGUMENT>";
   }
   void skipUntilNewLine(std::istream &in)
   {
