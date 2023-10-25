@@ -22,11 +22,11 @@ int main(int argc, char ** argv)
   while (!input.eof())
   {
     std::copy(std::istream_iterator< Polygon >(input),
-      std::istream_iterator< Polygon >(),std::back_inserter(data));
+      std::istream_iterator< Polygon >(), std::back_inserter(data));
     if (input.fail())
     {
       input.clear();
-      input.ignore(max,'\n');
+      input.ignore(max, '\n');
     }
   }
   input.close();
@@ -36,7 +36,7 @@ int main(int argc, char ** argv)
     try
     {
       std::string command = mapCommand.listenCommand(std::cin);
-      mapCommand.CommandPolygon(std::cin,std::cout,data,command);
+      mapCommand.CommandPolygon(std::cin, std::cout, data, command);
     }
     catch (const std::runtime_error &e)
     {
@@ -45,6 +45,7 @@ int main(int argc, char ** argv)
     catch (const std::logic_error &e)
     {
       skalisusov::errorMessage(std::cout);
+      std::cout << '\n';
       std::cin.ignore(max, '\n');
     }
   }

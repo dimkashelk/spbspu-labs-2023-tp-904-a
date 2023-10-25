@@ -5,7 +5,7 @@
 #include <numeric>
 bool skalisusov::operator ==(const skalisusov::Polygon &lhs, const skalisusov::Polygon &rhs)
 {
-  return std::equal(lhs.shape.begin(),lhs.shape.end(),rhs.shape.begin());
+  return std::equal(lhs.shape.begin(), lhs.shape.end(), rhs.shape.begin());
 }
 bool skalisusov::operator ==(const Point &lhs, const Point &rhs)
 {
@@ -24,7 +24,7 @@ double skalisusov::getArea(const Polygon &dest)
   double area = 0.0;
   std::vector< int > arr(dest.shape.size());
   std::transform(dest.shape.begin(), --dest.shape.end(), ++dest.shape.begin(),
-  std::back_inserter(arr), getPoint);
+    std::back_inserter(arr), getPoint);
   area = std::accumulate(arr.begin(), arr.end(), 0.0);
   area += ( dest.shape.back()).x * dest.shape.front().y - dest.shape.front().x * (dest.shape.back()).y;
   return std::abs(area * 0.5);
