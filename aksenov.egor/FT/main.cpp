@@ -14,7 +14,6 @@ int main()
     try
     {
       std::string command = aksenov::insertCommand(std::cin);
-      aksenov::addHistory(command);
       aksenov::executeCommand(std::cout, std::cin, commands, dict, command);
     }
     catch (...)

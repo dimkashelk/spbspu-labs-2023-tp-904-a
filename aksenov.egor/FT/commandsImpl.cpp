@@ -6,34 +6,17 @@
 #include "commands.h"
 namespace aksenov
 {
-  std::vector< std::string > history;
-  void addHistory(const std::string &command)
-  {
-    history.push_back(command);
-  }
-
-  void showHistory(std::ostream &out)
-  {
-    size_t count = 0;
-    for (const std::string &command: history)
-    {
-      out << count << ") " << command << "\n";
-      ++count;
-    }
-  }
-  dictOfTranslations createDictOftranslations(std::istream &in)
+  dictOfTranslations createDictOftranslations(std::string &, std::istream &in, dictOfDicts &, std::ostream &)
   {
     std::string word = "";
     in >> word;
-    addHistory(word);
     dictOfTranslations dict;
     std::vector< std::string > translations;
     while (in)
     {
       std::string translation = "";
       in >> translation;
-      addHistory(word);
-      if (translation == ";" || translation == ".")
+      if (translation == ";")
       {
         break;
       }
@@ -43,23 +26,23 @@ namespace aksenov
     return dict;
   }
 
-  void createDict(std::istream &in, dictOfDicts &dict)
+  void createDict(std::string &str, std::istream &in, dictOfDicts &dict, std::ostream &out)
   {
     while (in)
     {
       std::string name = "";
       in >> name;
-      addHistory(name);
       if (name == "stop")
       {
+        std::cout << "dicts created" << "\n";
         break;
       }
-      dictOfTranslations translations = createDictOftranslations(in);
+      dictOfTranslations translations = createDictOftranslations(str, in, dict, out);
       dict[name] = translations;
     }
   }
 
-  void outDictionaries(const dictOfDicts &dicts, std::ostream &out)
+  void outDictionaries(std::string &, std::istream &, dictOfDicts &dicts, std::ostream &out)
   {
     for (const auto &entry : dicts)
     {
@@ -82,52 +65,39 @@ namespace aksenov
     }
   }
 
-  void translate(std::istream &in, dictOfDicts &dicts, std::ostream &out)
+  void translate(std:: string &, std::istream& in, dictOfDicts& dicts, std::ostream& out)
   {
-    while (in)
+    std::string nameOfDict;
+    std::string word;
+
+    in >> nameOfDict >> word;
+
+    auto dictIter = dicts.find(nameOfDict);
+    if (dictIter == dicts.end())
     {
-      std::string nameOfDict = "";
-      in >> nameOfDict;
-      addHistory(nameOfDict);
-      if (nameOfDict == "stop")
+      out << "Dictionary '" << nameOfDict << "' not found." << std::endl;
+    }
+    else
+    {
+      const dictOfTranslations& dictionary = dictIter->second;
+      auto translationIter = dictionary.find(word);
+      if (translationIter != dictionary.end())
       {
-        return;
+        const std::vector<std::string>& translations = translationIter->second;
+        out << word << " translations in dictionary " << nameOfDict << ":\n";
+        for (const std::string& translation : translations)
+        {
+          out << "- " << translation << "\n";
+        }
       }
-      std::string word = "";
-      while (in)
+      else
       {
-        in >> word;
-        addHistory(word);
-        if (word == "." || word == ";")
-        {
-          break;
-        }
-        auto dictIter = dicts.find(nameOfDict);
-        if (dictIter == dicts.end())
-        {
-          out << "Dictionary '" << nameOfDict << "' not found." << std::endl;
-          return;
-        }
-        const dictOfTranslations &dictionary = dictIter->second;
-        auto translationIter = dictionary.find(word);
-        if (translationIter != dictionary.end())
-        {
-          const std::vector< std::string > translations = translationIter->second;
-          out << word << " translations in dictionary " << nameOfDict << ":" << "\n";
-          for (const std::string &translation : translations)
-          {
-            out << "- " << translation << "\n";
-          }
-        }
-        else
-        {
-          out << "word not found";
-        }
+        out << "word not found";
       }
     }
   }
 
-  void help(std::ostream &out)
+  void help(std::string &, std::istream &, dictOfDicts &, std::ostream &out)
   {
     out << "Commands that you are able to use:" << "\n";
     out << "1) CREATE - creates new dictionary" << "\n";
@@ -140,18 +110,16 @@ namespace aksenov
     out << "7) HELP" << "\n";
   }
 
-  void doIntersect(std::istream &in, dictOfDicts &dicts, std::ostream &out)
+  void doIntersect(std::string &, std::istream &in, dictOfDicts &dicts, std::ostream &out)
   {
     std::string newNameOfDict;
     in >> newNameOfDict;
-    addHistory(newNameOfDict);
     dictOfTranslations intersectedDict;
 
     while (!std::cin.eof())
     {
       std::string dictName;
       in >> dictName;
-      addHistory(dictName);
       if (dictName == "stop")
       {
         break;
@@ -194,18 +162,16 @@ namespace aksenov
     out << "New dictionary '" << newNameOfDict << "' created with intersection of dictionaries." << std::endl;
   }
 
-  void unite(std::istream &in, dictOfDicts &dicts, std::ostream &out)
+  void unite(std::string &, std::istream &in, dictOfDicts &dicts, std::ostream &out)
   {
     std::string newNameOfDict;
     in >> newNameOfDict;
-    addHistory(newNameOfDict);
     dictOfTranslations unionDict;
 
     while (!std::cin.eof())
     {
       std::string dictName;
       in >> dictName;
-      addHistory(dictName);
       if (dictName == "stop")
       {
         break;
