@@ -311,11 +311,14 @@ void litvin::searchWord(dicts_list_t & list, std::ostream & out, std::istream & 
       const translations & trans_list = dictionary.at(word);
       out << dict_name << ":\n";
       size_t translation_number = 1;
-      for (const std::string & translation: trans_list)
-      {
-        out << "  " << translation_number << ". " << translation << "\n";
-        translation_number++;
-      }
+      std::transform(trans_list.begin(),
+          trans_list.end(),
+          std::ostream_iterator<std::string>(out, "\n"), 
+          [&translation_number](const std::string& translation)
+          {
+            std::string result = "  " + std::to_string(translation_number++) + ". " + translation;
+            return result;
+          });
     }
   }
   if (quantity == 0)
