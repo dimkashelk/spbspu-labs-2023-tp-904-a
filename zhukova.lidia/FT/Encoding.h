@@ -33,6 +33,8 @@ namespace zhukova
   void addBit(EncodingNode & it, bool bit);
   size_t sumProbabilities(const std::vector< EncodingNode >& encoding);
   size_t getProbability(const EncodingNode& node);
-  void getCodesOfSymbol(Encoding& encoding, std::vector< EncodingNode >::iterator beginNode, std::vector< EncodingNode >::iterator endNode);
+  void getCodesOfSymbol(Encoding& encoding,
+      std::vector< EncodingNode >::iterator beginNode,
+      std::vector< EncodingNode >::iterator endNode);
 }
 #endif

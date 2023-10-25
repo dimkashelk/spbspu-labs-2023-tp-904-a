@@ -2,7 +2,8 @@
 #include "IOEncoding.h"
 namespace zhukova
 {
-  const Encoding& checkIfEncodingExists(const EncodingDict& src, const std::string& encodingName) {
+  const Encoding& checkIfEncodingExists(const EncodingDict& src, const std::string& encodingName)
+  {
     try
     {
       return src.dict.at(encodingName);
@@ -35,17 +36,18 @@ namespace zhukova
   }
   void increaseProbability(Encoding & listOfSymbols, std::string & text, char symbol)
   {
-      using namespace std::placeholders;
-      EncodingNode newChar = EncodingNode();
-      newChar.symbol = symbol;
-      newChar.probability = std::count(text.begin(), text.end(), symbol);
-      listOfSymbols.sumAmount += newChar.probability;
-      listOfSymbols.list.push_back(newChar);
-      auto nextSymbol = std::find_if_not(text.begin(), text.end(), std::bind(std::equal_to<char>(), _1, symbol));
-      if (text.end() == nextSymbol) {
-          return;
-      }
-      increaseProbability(listOfSymbols, text.substr(nextSymbol-text.begin()), *nextSymbol);
+    using namespace std::placeholders;
+    EncodingNode newChar = EncodingNode();
+    newChar.symbol = symbol;
+    newChar.probability = std::count(text.begin(), text.end(), symbol);
+    listOfSymbols.sumAmount += newChar.probability;
+    listOfSymbols.list.push_back(newChar);
+    auto nextSymbol = std::find_if_not(text.begin(), text.end(), std::bind(std::equal_to<char>(), _1, symbol));
+    if (text.end() == nextSymbol)
+    {
+      return;
+    }
+    increaseProbability(listOfSymbols, text.substr(nextSymbol-text.begin()), *nextSymbol);
   }
   void addBit(EncodingNode & it, bool bit)
   {
@@ -53,15 +55,18 @@ namespace zhukova
   }
   size_t sumProbabilities(const std::vector< EncodingNode >& encoding)
   {
-      std::vector<size_t> probabilities;
-      using namespace std::placeholders;
-      std::transform(encoding.begin(), encoding.end(), std::back_inserter(probabilities), getProbability);
-      return std::accumulate(probabilities.begin(), probabilities.end(), 0);
+    std::vector<size_t> probabilities;
+    using namespace std::placeholders;
+    std::transform(encoding.begin(), encoding.end(), std::back_inserter(probabilities), getProbability);
+    return std::accumulate(probabilities.begin(), probabilities.end(), 0);
   }
-  size_t getProbability(const EncodingNode& node) {
-      return node.probability;
+  size_t getProbability(const EncodingNode& node)
+  {
+    return node.probability;
   }
-  void getCodesOfSymbol(Encoding & encoding, std::vector< EncodingNode >::iterator beginNode, std::vector< EncodingNode >::iterator endNode)
+  void getCodesOfSymbol(Encoding & encoding,
+      std::vector< EncodingNode >::iterator beginNode,
+      std::vector< EncodingNode >::iterator endNode)
   {
     using namespace std::placeholders;
     if ((beginNode + 1) == endNode)
@@ -76,11 +81,12 @@ namespace zhukova
     }
     auto midIt = beginNode;
     std::vector< EncodingNode > left = { beginNode, midIt+1 };
-    std::vector< EncodingNode > right = { midIt+1 , endNode};
-    while (sumProbabilities(left) < sumProbabilities(right)) {
-        midIt++;
-        left = { beginNode, midIt+1 };
-        right = { midIt+1, endNode };
+    std::vector< EncodingNode > right = { midIt+1 , endNode };
+    while (sumProbabilities(left) < sumProbabilities(right))
+    {
+      midIt++;
+      left = { beginNode, midIt+1 };
+      right = { midIt+1, endNode };
     }
     std::for_each(beginNode, midIt, std::bind(addBit, _1, false));
     std::for_each(midIt, endNode, std::bind(addBit, _1, true));

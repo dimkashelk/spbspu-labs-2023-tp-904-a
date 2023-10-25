@@ -5,8 +5,11 @@ namespace zhukova
   {
     return src.symbol == symbol;
   }
-  void codeChar(const Encoding & encoding, char symbol, std::string & codedText,
-                size_t & currentByteLeft, char & codedByte)
+  void codeChar(const Encoding & encoding,
+      char symbol,
+      std::string & codedText,
+      size_t & currentByteLeft,
+      char & codedByte)
   {
     using namespace std::placeholders;
     auto symbolIt = std::find_if(encoding.list.begin(), encoding.list.end(), std::bind(isSymbol, _1, symbol));
@@ -33,10 +36,15 @@ namespace zhukova
       currentByteLeft = 8;
     }
   }
-  void codeText(TextDict & srcTexts, EncodingDict & srcEncodings, const TextNode & text,
-                const std::string & codedName, const std::string & encodingName, const bool newEncoding)
+  void codeText(TextDict & srcTexts,
+      EncodingDict & srcEncodings,
+      const TextNode & text,
+      const std::string & codedName,
+      const std::string & encodingName,
+      const bool newEncoding)
   {
-    if (newEncoding) {
+    if (newEncoding)
+    {
       addEncoding(srcEncodings, text.text, encodingName);
     }
     auto encoding = checkIfEncodingExists(srcEncodings, encodingName);
@@ -46,8 +54,13 @@ namespace zhukova
     using namespace std::placeholders;
     try
     {
-        std::for_each(text.text.begin(), text.text.end(),
-            std::bind(codeChar, encoding, _1, std::ref(codedText), std::ref(currentByteLeft), std::ref(codedByte)));
+        auto codeCurChar = std::bind(codeChar,
+            encoding,
+            _1,
+            std::ref(codedText),
+            std::ref(currentByteLeft),
+            std::ref(codedByte));
+        std::for_each(text.text.begin(), text.text.end(), codeCurChar);
         std::vector<bool> lastBits(currentByteLeft, false);
         auto addCode = std::bind(addCharCode,
             std::ref(codedText),
@@ -66,43 +79,60 @@ namespace zhukova
     coded.text = codedText;
     srcTexts.dict.insert(std::make_pair(codedName, coded));
   }
-  bool isBitOnPlace(const EncodingNode & node, std::vector<bool>& codedSymbol) {
+  bool isBitOnPlace(const EncodingNode & node, std::vector<bool>& codedSymbol)
+  {
       return (codedSymbol[codedSymbol.size() - 1] == node.code[codedSymbol.size() - 1]);
   }
-  void decodeChar(const std::vector< EncodingNode >& encoding, std::vector< EncodingNode >::const_iterator& dest,
-      std::string& decodedText, char symbol, size_t& bitNumberInSymbol, std::vector<bool> & codedSymbol) {
+  void decodeChar(const std::vector< EncodingNode >& encoding,
+      std::vector< EncodingNode >::const_iterator& dest,
+      std::string& decodedText, char symbol,
+      size_t& bitNumberInSymbol,
+      std::vector<bool> & codedSymbol)
+  {
       using namespace std::placeholders;
       bitNumberInSymbol = 0;
-      while ((bitNumberInSymbol < 8) && (*dest).code.size() > codedSymbol.size()) {
+      while ((bitNumberInSymbol < 8) && (*dest).code.size() > codedSymbol.size())
+      {
           bool bit = symbol & static_cast<char>(std::pow(2, 7-bitNumberInSymbol++));
           codedSymbol.push_back(bit);
           dest = std::find_if(dest, encoding.end(), std::bind(isBitOnPlace, _1, std::ref(codedSymbol)));
-          if (dest == encoding.end()) {
+          if (dest == encoding.end())
+          {
               throw std::logic_error("<wrong encoding>");
           }
-          if ((*dest).code.size() == codedSymbol.size()) {
+          if ((*dest).code.size() == codedSymbol.size())
+          {
               decodedText.push_back((*dest).symbol);
               dest = encoding.begin();
               codedSymbol.clear();
           }
       }
   }
-  void decodeText(TextDict& srcTexts, Encoding& encoding, const std::string& text,
-                  const std::string& decodedName) {
+  void decodeText(TextDict& srcTexts,
+      Encoding& encoding,
+      const std::string& text,
+      const std::string& decodedName) {
     std::string decodedText;
     size_t currentBitRead = 0;
     std::vector<bool> codedSymbol;
     std::vector< EncodingNode >::const_iterator& dest = encoding.list.begin();
     using namespace std::placeholders;
-    try {
-      std::for_each(text.begin(), text.end(),
-                    std::bind(decodeChar, std::ref(encoding.list), std::ref(dest),
-                    std::ref(decodedText), _1, std::ref(currentBitRead), std::ref(codedSymbol)));
+    try
+    {
+      auto decodeCurChar = std::bind(decodeChar,
+            std::ref(encoding.list),
+            std::ref(dest),
+            std::ref(decodedText),
+            _1,
+            std::ref(currentBitRead),
+            std::ref(codedSymbol));
+      std::for_each(text.begin(), text.end(), decodeCurChar);
       TextNode newText = TextNode();
       newText.text = decodedText;
       srcTexts.dict.insert(std::make_pair(decodedName, newText));
     }
-    catch (const std::logic_error& e) {
+    catch (const std::logic_error& e)
+    {
       std::cout << e.what();
     }
   }

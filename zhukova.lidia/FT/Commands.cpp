@@ -19,17 +19,19 @@ namespace zhukova
            "weight <filename-1> <filename-2> ... <filename-n>\n"
            "compare <text> <encoding-1> <encoding-2>\n";
   }
-  void loadText(TextDict & srcTexts, std::istream & in, std::ostream & out)
+  void loadText(TextDict& srcTexts, std::istream& in, std::ostream& out)
   {
     std::string text, filename;
     in >> std::noskipws >> DelimiterIO{' '} >> text >> DelimiterIO{ ' ' } >> filename >> std::skipws;
     TextNode newText = TextNode();
-    if (srcTexts.dict.find(text) != srcTexts.dict.end()) {
+    if (srcTexts.dict.find(text) != srcTexts.dict.end())
+    {
         throw std::invalid_argument("<encoding was already loaded>");
     }
     std::ifstream inFile;
     inFile.open(filename, std::ios::binary);
-    if (!inFile.is_open()){
+    if (!inFile.is_open())
+    {
       throw std::invalid_argument("<file was not opened>");
     }
     inFile >> std::noskipws;
@@ -43,13 +45,15 @@ namespace zhukova
   {
     std::string encoding, filename;
     in >> std::noskipws >> DelimiterIO{ ' ' } >> encoding >> DelimiterIO{ ' ' } >> filename >> std::skipws;
-    if (srcEncodings.dict.find(encoding) != srcEncodings.dict.end()) {
+    if (srcEncodings.dict.find(encoding) != srcEncodings.dict.end())
+    {
       throw std::invalid_argument("<encoding was already loaded>");
     }
     Encoding newEncoding = Encoding();
     std::ifstream inFile;
     inFile.open(filename, std::ios::binary);
-    if (!inFile.is_open()) {
+    if (!inFile.is_open())
+    {
       throw std::invalid_argument("<file was not opened>");
     }
     inFile >> std::noskipws >> newEncoding >> std::skipws;
@@ -57,16 +61,14 @@ namespace zhukova
     out << "encoding was loaded successfully\n";
   }
 
-  void getEncoding(TextDict & srcTexts, EncodingDict & srcEncoding,
-                   std::istream & in, std::ostream & out)
+  void getEncoding(TextDict & srcTexts, EncodingDict & srcEncoding, std::istream & in, std::ostream & out)
   {
     std::string encoding, text;
     in >> encoding >> text;
     addEncoding(srcEncoding, srcTexts.dict.at(text).text, encoding);
     out << "encoding was made successfully\n";
   }
-  void saveEncoding(EncodingDict & srcEncoding,
-                    std::istream & in, std::ostream & out)
+  void saveEncoding(EncodingDict & srcEncoding, std::istream & in, std::ostream & out)
   {
     std::string filename, encodingName;
     in >> filename >> encodingName;
@@ -102,7 +104,7 @@ namespace zhukova
     }
     return src.first;
   };
-  void codedWith(TextDict & srcTexts, EncodingDict & srcEncoding, std::istream & in, std::ostream & out)
+  void codedWith(TextDict& srcTexts, EncodingDict& srcEncoding, std::istream& in, std::ostream& out)
   {
     using namespace std::placeholders;
     in >> std::noskipws >> DelimiterIO{' '} >> std::skipws;
@@ -112,20 +114,17 @@ namespace zhukova
       in >> encodingName;
       std::vector< std::string > texts;
       std::vector<std::pair< std::string, TextNode >> temp;
-      std::copy_if(
-          srcTexts.dict.begin(),
+      std::copy_if(srcTexts.dict.begin(),
           srcTexts.dict.end(),
           std::back_inserter(temp),
           std::bind(wasCoded, _1, encodingName, true));
-      std::transform(
-        temp.begin(),
-        temp.end(),
-        std::back_inserter(texts),
-        std::bind(getTextNameIfEncoding, _1, true));
-      std::copy(
-        texts.begin(),
-        texts.end(),
-        std::ostream_iterator< std::string >(std::cout, "\n"));
+      std::transform(temp.begin(),
+          temp.end(),
+          std::back_inserter(texts),
+          std::bind(getTextNameIfEncoding, _1, true));
+      std::copy(texts.begin(),
+          texts.end(),
+          std::ostream_iterator< std::string >(std::cout, "\n"));
     }
     else
     {
@@ -149,8 +148,7 @@ namespace zhukova
       return;
     }
   }
-  void code(TextDict & srcTexts, EncodingDict & srcEncoding,
-            std::istream & in, std::ostream & out)
+  void code(TextDict& srcTexts, EncodingDict& srcEncoding, std::istream& in, std::ostream& out)
   {
     std::string textName, codedTextName, encodingName;
     in >> textName >> codedTextName >> encodingName;
@@ -158,8 +156,7 @@ namespace zhukova
     codeText(srcTexts, srcEncoding, text, codedTextName, encodingName, true);
     out << "text was coded successfully\n";
   }
-  void codeWith(TextDict & srcTexts, EncodingDict & srcEncoding,
-                std::istream & in, std::ostream & out)
+  void codeWith(TextDict& srcTexts, EncodingDict& srcEncoding, std::istream& in, std::ostream& out)
   {
     std::string textName, codedTextName, encodingName;
     in >> textName >> codedTextName >> encodingName;
@@ -167,8 +164,7 @@ namespace zhukova
     codeText(srcTexts, srcEncoding, text, codedTextName, encodingName, false);
     out << "text was coded successfully\n";
   }
-  void decode(TextDict & srcTexts, EncodingDict & srcEncoding,
-              std::istream & in, std::ostream & out)
+  void decode(TextDict& srcTexts, EncodingDict& srcEncoding, std::istream& in, std::ostream& out)
   {
     std::string codedTextName, decodedTextName, encodingName;
     in >> codedTextName >> decodedTextName >> encodingName;
@@ -176,25 +172,27 @@ namespace zhukova
     TextNode coded = TextNode();
     encoding = srcEncoding.dict.at(encodingName);
     coded = srcTexts.dict.at(codedTextName);
-    if ((coded.isCoded == true) && (coded.encodingName != encodingName)) {
+    if ((coded.isCoded == true) && (coded.encodingName != encodingName))
+    {
       throw std::invalid_argument("<this text was coded in another encoding>");
     }
     decodeText(srcTexts, encoding, coded.text, decodedTextName);
     out << "text was decoded successfully\n";
   }
-  void concatText(const TextDict& srcTexts, TextNode & lhs, std::string & rhs,
-    std::string& encodingName, bool isExactEncoding) {
+  void concatText(const TextDict& srcTexts, TextNode& lhs, std::string& rhs, std::string& encodingName, bool isExactEncoding)
+  {
     auto rhsTextNode = getTextNode(srcTexts, rhs);
-      if ((rhsTextNode.encodingName == encodingName) || (!isExactEncoding)) {
-        lhs.text = lhs.text + rhsTextNode.text;
-        return;
-      }
+    if ((rhsTextNode.encodingName == encodingName) || (!isExactEncoding))
+    {
+      lhs.text = lhs.text + rhsTextNode.text;
+      return;
+    }
   }
-  std::string readName(NameIO& src) {
-      return src.name;
+  std::string readName(NameIO& src)
+  {
+    return src.name;
   }
-  void concatenate(TextDict& srcTexts,
-                   std::istream & in, std::ostream & out)
+  void concatenate(TextDict& srcTexts, std::istream& in, std::ostream& out)
   {
     std::vector<NameIO> namesIO;
     std::vector<std::string> names;
@@ -205,22 +203,31 @@ namespace zhukova
     in >> std::skipws;
     std::transform(namesIO.begin(), namesIO.end(), std::back_inserter(names), readName);
     in.clear();
-    try {
+    try
+    {
       TextNode& destText = srcTexts.dict.at(names[0]);
-      if (destText.isCoded) {
-          std::for_each(names.begin() + 1, names.end(),
-              std::bind(concatText, std::ref(srcTexts),
-                        std::ref(destText), _1, destText.encodingName, true));
+      if (destText.isCoded)
+      {
+          auto concatTextToDest = std::bind(concatText,
+              std::ref(srcTexts),
+              std::ref(destText),
+              _1,
+              destText.encodingName,
+              true);
       }
       else
       {
-          std::for_each(names.begin() + 1, names.end(),
-              std::bind(concatText, std::ref(srcTexts),
-                        std::ref(destText), _1, std::string(), false));
+          auto concatTextToDest = std::bind(concatText,
+              std::ref(srcTexts),
+              std::ref(destText),
+              _1,
+              std::string(),
+              false);
       }
+      std::for_each(names.begin() + 1, names.end(), concatTextToDest);
     }
-    catch (const std::runtime_error& e) {
-
+    catch (const std::runtime_error& e)
+    {
     }
     catch (const std::invalid_argument& e)
     {
@@ -246,16 +253,18 @@ namespace zhukova
       throw e;
     }
   }
-  std::string weightFile(std::string& filename) {
-      std::fstream file(filename);
-      if (!file.is_open()) {
-        return filename + " does not exist";
-      }
-      size_t size = 0;
-      file.seekg(0, std::ios::end);
-      size = file.tellg();
-      file.close();
-      return filename + ' ' + std::to_string(size) + " bytes";
+  std::string weightFile(std::string& filename)
+  {
+    std::fstream file(filename);
+    if (!file.is_open())
+    {
+      return filename + " does not exist";
+    }
+    size_t size = 0;
+    file.seekg(0, std::ios::end);
+    size = file.tellg();
+    file.close();
+    return filename + ' ' + std::to_string(size) + " bytes";
   };
   void weight(std::istream& in, std::ostream& out)
   {
@@ -271,8 +280,7 @@ namespace zhukova
     std::ostream_iterator< std::string > out_it(out, "\n");
     std::transform(names.begin(), names.end(), out_it, weightFile);
   }
-  void compare(TextDict& srcTexts, EncodingDict& srcEncoding,
-               std::istream & in, std::ostream & out)
+  void compare(TextDict& srcTexts, EncodingDict& srcEncoding, std::istream & in, std::ostream & out)
   {
     std::string textName, encodingName1, encodingName2;
     in >> textName >> encodingName1 >> encodingName2;
@@ -286,10 +294,12 @@ namespace zhukova
     codeText(srcTexts, srcEncoding, text, textName2, encodingName2, false);
     TextNode text1 = getTextNode(srcTexts, textName1);
     TextNode text2 = getTextNode(srcTexts, textName2);
-    if (text1.text.size() < text2.text.size()) {
+    if (text1.text.size() < text2.text.size())
+    {
       out << encodingName1;
     }
-    else {
+    else
+    {
       out << encodingName2;
     }
     out << " is more effective\n";

@@ -1,8 +1,10 @@
 #include "IOEncoding.h"
 namespace zhukova
 {
-  bool checkBit(char bit) {
-    if ((bit != '1') && (bit != '0')) {
+  bool checkBit(char bit)
+  {
+    if ((bit != '1') && (bit != '0'))
+    {
       throw std::invalid_argument("<wrong file content>");
     }
     return bit == '1';
@@ -25,7 +27,8 @@ namespace zhukova
       return in;
     }
     std::string code;
-    in >> std::noskipws >> dest.symbol >> DelimiterIO{' '} >> dest.probability >> DelimiterIO{' '} >> code >> DelimiterIO{'\n'};
+    in >> std::noskipws >> dest.symbol >> DelimiterIO{ ' ' };
+    in >> dest.probability >> DelimiterIO{ ' ' } >> code >> DelimiterIO{ '\n' };
     using namespace std::placeholders;
     dest.code.clear();
     std::transform(code.begin(), code.end(), std::back_inserter(dest.code), checkBit);

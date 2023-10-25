@@ -6,7 +6,8 @@
 #include <IOfmtguard.h>
 #include "Encoding.h"
 namespace zhukova{
-  struct NameIO {
+  struct NameIO
+  {
     std::string name = "";
   }
   bool checkBit(char bit);

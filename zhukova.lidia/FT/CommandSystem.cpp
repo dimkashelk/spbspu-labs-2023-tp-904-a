@@ -32,7 +32,8 @@ namespace zhukova
     {
       cs.common.at(command)(in, out);
       return;
-    } catch (std::out_of_range & e)
+    }
+    catch (std::out_of_range & e)
     {
     }
     try
@@ -47,7 +48,8 @@ namespace zhukova
     {
       cs.encodingCommands.at(command)(encodings, in, out);
       return;
-    } catch (std::out_of_range & e)
+    }
+    catch (std::out_of_range & e)
     {
     }
     try
@@ -64,7 +66,8 @@ namespace zhukova
   {
     std::string command;
     in >> command;
-    if (!in) {
+    if (!in)
+    {
       throw std::invalid_argument("<invalid command>");
     }
     return command;
