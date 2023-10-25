@@ -5,6 +5,7 @@
 #include "Command.hpp"
 int main(int argc, char ** argv)
 {
+  using namespace skalisusov;
   if (argc < 2)
   {
     std::cerr << "Not enough CL parameters\n";
@@ -14,14 +15,14 @@ int main(int argc, char ** argv)
   if (!input)
   {
     std::cerr << "Not open file\n";
-   return 1;
+    return 1;
   }
   auto max = std::numeric_limits< std::streamsize>::max();
-  std::vector< skalisusov::Polygon > data;
+  std::vector< Polygon > data;
   while (!input.eof())
   {
-    std::copy(std::istream_iterator< skalisusov::Polygon >(input),
-      std::istream_iterator< skalisusov::Polygon >(),std::back_inserter(data));
+    std::copy(std::istream_iterator< Polygon >(input),
+      std::istream_iterator< Polygon >(),std::back_inserter(data));
     if (input.fail())
     {
       input.clear();
@@ -29,13 +30,13 @@ int main(int argc, char ** argv)
     }
   }
   input.close();
-  auto mapCommand = skalisusov::command();
+  auto mapCommand = command();
   while (!std::cin.eof())
   {
     try
     {
-      std::string com = mapCommand.listenCommand(std::cin);
-      mapCommand.CommandPolygon(std::cin,std::cout,data,com);
+      std::string command = mapCommand.listenCommand(std::cin);
+      mapCommand.CommandPolygon(std::cin,std::cout,data,command);
     }
     catch (const std::runtime_error &e)
     {

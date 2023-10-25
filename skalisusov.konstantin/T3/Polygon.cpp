@@ -17,8 +17,8 @@ bool skalisusov::comparator(const skalisusov::Polygon &lhs, const skalisusov::Po
 }
 double skalisusov::getArea(const Polygon &dest)
 {
-  double area;
-  auto getPoint = [&](Point a, Point b)
+  double area = 0.0;
+  auto getPoint = [](Point a, Point b)
   {
     return a.x * b.y - a.y * b.x;
   };
@@ -26,37 +26,36 @@ double skalisusov::getArea(const Polygon &dest)
   std::transform(dest.shape.begin(), --dest.shape.end(), ++dest.shape.begin(),
   std::back_inserter(arr), getPoint);
   area = std::accumulate(arr.begin(), arr.end(), 0.0);
-  area += (--dest.shape.end())->x * dest.shape.begin()->y - dest.shape.begin()->x * (--dest.shape.end())->y;
+  area += ( dest.shape.back()).x * dest.shape.front().y - dest.shape.front().x * (dest.shape.back()).y;
   return std::abs(area * 0.5);
 }
 std::istream &skalisusov::operator>>(std::istream &in, Point &point)
 {
   std::istream::sentry CheckSentry(in);
-  if(!CheckSentry)
+  if (!CheckSentry)
   {
     return in;
   }
-  in >> DelimiterIO{ '(' } >> point.x
-  >> DelimiterIO{ ';' } >> point.y >> DelimiterIO{ ')' };
+  in >> DelimiterIO{ '(' } >> point.x >> DelimiterIO{ ';' } >> point.y >> DelimiterIO{ ')' };
   return in;
 }
 std::istream &skalisusov::operator>>(std::istream &in, Polygon &rhs)
 {
   std::istream::sentry CheckSentry(in);
-  if(!CheckSentry)
+  if (!CheckSentry)
   {
     return in;
   }
   size_t count = 0;
   in >> count;
-  if(count < 3)
+  if (count < 3)
   {
     in.setstate(std::ios::failbit);
     return in;
   }
   std::vector< Point > input;
   std::copy_n(std::istream_iterator< Point >(in), count, std::back_inserter(input));
-  if(!in)
+  if (!in)
   {
     return in;
   }

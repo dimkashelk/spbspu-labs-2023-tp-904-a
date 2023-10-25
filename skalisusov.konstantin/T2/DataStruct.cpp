@@ -1,8 +1,7 @@
 #include "DataStruct.hpp"
 #include <StructTypes.hpp>
 #include <iomanip>
-
-  std::istream & skalisusov::operator>>(std::istream &in, DataStruct &dest)
+std::istream & skalisusov::operator>>(std::istream &in, DataStruct &dest)
   {
     std::istream::sentry CheckSentry(in);
     if(!CheckSentry)
@@ -42,7 +41,7 @@
     }
     return in;
   }
-  std::ostream & skalisusov::operator<<(std::ostream &out, const DataStruct &dest)
+std::ostream & skalisusov::operator<<(std::ostream &out, const DataStruct &dest)
   {
     std::ostream::sentry CheckSentry(out);
     if(!CheckSentry)
@@ -57,13 +56,13 @@
     out << ":)";
     return out;
   }
-  bool skalisusov::comparator(const DataStruct &firDs,const DataStruct &secDs)
+bool skalisusov::comparator(const DataStruct &firDs,const DataStruct &secDs)
   {
-    if(firDs.key1 != secDs.key1)
+    if (firDs.key1 != secDs.key1)
     {
       return firDs.key1 < secDs.key1;
     }
-    if(firDs.key1 == secDs.key1 && firDs.key2 != secDs.key2)
+    if (firDs.key1 == secDs.key1 && firDs.key2 != secDs.key2)
     {
       return firDs.key2 < secDs.key2;
     }
@@ -72,4 +71,3 @@
       return  firDs.key3.length() < secDs.key3.length();
     }
   }
-
