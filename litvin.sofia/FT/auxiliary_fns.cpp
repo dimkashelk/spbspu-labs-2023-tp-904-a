@@ -102,14 +102,14 @@ void litvin::runCommand(const CommandDict & cmd_d,
   {
     cmd_d.executeCommand(cmd, list, out, in);
     return;
-  } 
+  }
   catch (const std::out_of_range &)
   {}
   try
   {
     cmd_d.executeCommand(cmd, desc_d, out, in);
     return;
-  } 
+  }
   catch (const std::out_of_range &)
   {}
   if (cmd == "new")
