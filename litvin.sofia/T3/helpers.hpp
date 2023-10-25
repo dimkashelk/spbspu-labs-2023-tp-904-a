@@ -27,7 +27,6 @@ namespace litvin
     std::map< std::string, signature_type_2 > dict2;
     std::map< std::string, signature_type_3 > dict3;
   };
-  std::ostream & printInvalidCommand(std::ostream & out);
   std::string inputCommand(std::istream & in);
   void runCommand(const std::vector< Polygon > & data,
       const CommandDicts & dicts,

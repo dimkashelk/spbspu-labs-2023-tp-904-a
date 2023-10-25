@@ -74,3 +74,8 @@ std::istream & litvin::operator>>(std::istream & in, RationalIO && dest)
     return in;
   }
 }
+std::ostream & litvin::printInvalidCommand(std::ostream & out)
+{
+  out << "<INVALID COMMAND>";
+  return out;
+}
