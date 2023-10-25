@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <fstream>
 #include "Command.hpp"
+
 int main(int argc, char ** argv)
 {
   using namespace skalisusov;
