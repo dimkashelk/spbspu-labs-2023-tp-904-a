@@ -21,7 +21,7 @@ bool skalisusov::isOdd(const skalisusov::Polygon &rhs)
 void skalisusov::errorMessage(std::ostream &out)
 {
   iofmtguard iofmtguard(out);
-  out << "<INVALID COMMAND>\n";
+  out << "<INVALID COMMAND>";
 }
 void skalisusov::outArea(std::ostream &out, double area)
 {
