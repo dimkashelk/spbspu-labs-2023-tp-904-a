@@ -1,6 +1,7 @@
 #include "commands_for_dictionary.h"
 #include <algorithm>
 #include <fstream>
+#include <iomanip>
 #include <numeric>
 #include <vector>
 #include "auxiliary_commands.h"
@@ -101,9 +102,7 @@ namespace shestakov
     size_t size = 0;
     for (const auto &pair: dictionary.dict)
     {
-      size = 50 - pair.first.length();
-      str = pair.first + std::string(size, '.');
-      file << str << pair.second << '\n';
+      file << pair.first << std::setw(50 - pair.first.length()) << std::setfill('.') << pair.second << '\n';
     }
     file.close();
     out << "Dictionary is written to file.\n";
