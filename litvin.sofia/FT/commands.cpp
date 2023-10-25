@@ -277,11 +277,13 @@ void litvin::printDictByLetter(dicts_list_t & list, std::ostream & out, std::ist
         quantity_of_words++;
         out << word << ":\n";
         size_t translation_number = 1;
-        for (const std::string & translation: trans_list)
-        {
-          out << "  " << translation_number << ". " << translation << "\n";
-          translation_number++;
-        }
+        std::transform(trans_list.begin(),
+            trans_list.end(),
+            std::ostream_iterator< std::string >(out, "\n"),
+            [&translation_number](const std::string & translation)
+            {
+              return "  " + std::to_string(translation_number++) + ". " + translation;
+            });
       }
     }
     if (!quantity_of_words)
@@ -313,11 +315,13 @@ void litvin::searchWord(dicts_list_t & list, std::ostream & out, std::istream & 
       const translations & trans_list = dictionary.at(word);
       out << dict_name << ":\n";
       size_t translation_number = 1;
-      for (const std::string & translation: trans_list)
-      {
-        out << "  " << translation_number << ". " << translation << "\n";
-        translation_number++;
-      }
+      std::transform(trans_list.begin(),
+          trans_list.end(),
+          std::ostream_iterator< std::string >(out, "\n"),
+          [&translation_number](const std::string & translation)
+          {
+            return "  " + std::to_string(translation_number++) + ". " + translation;
+          });
     }
   }
   if (quantity == 0)
@@ -407,7 +411,7 @@ void litvin::intersectDictionaries(dicts_list_t & list, std::ostream & out, std:
               {
                 auto find_iter = std::find(combined_translations.begin(),
                     combined_translations.end(),
-                    translation) 
+                    translation)
                 return find_iter == combined_translations.end();
               });
           combined_translations.insert(combined_translations.end(), unique_translations.begin(), unique_translations.end());
