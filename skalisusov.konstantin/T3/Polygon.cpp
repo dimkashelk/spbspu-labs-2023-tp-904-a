@@ -15,13 +15,13 @@ bool skalisusov::comparator(const skalisusov::Polygon &lhs, const skalisusov::Po
 {
   return (lhs.shape.size() < rhs.shape.size());
 }
+int getPoint(const skalisusov::Point &a, const skalisusov::Point &b)
+{
+  return a.x * b.y - a.y * b.x;
+};
 double skalisusov::getArea(const Polygon &dest)
 {
   double area = 0.0;
-  auto getPoint = [](Point a, Point b)
-  {
-    return a.x * b.y - a.y * b.x;
-  };
   std::vector< int > arr(dest.shape.size());
   std::transform(dest.shape.begin(), --dest.shape.end(), ++dest.shape.begin(),
   std::back_inserter(arr), getPoint);
