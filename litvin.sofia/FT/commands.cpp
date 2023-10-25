@@ -242,8 +242,8 @@ void litvin::printDict(dicts_list_t & list, std::ostream & out, std::istream & i
       size_t translation_number = 1;
       std::transform(trans_list.begin(),
           trans_list.end(),
-          std::ostream_iterator<std::string>(out, "\n"),
-          [&translation_number](const std::string &translation)
+          std::ostream_iterator< std::string >(out, "\n"),
+          [&translation_number](const std::string & translation)
           {
             return "  " + std::to_string(translation_number++) + ". " + translation;
           });
@@ -399,13 +399,18 @@ void litvin::intersectDictionaries(dicts_list_t & list, std::ostream & out, std:
           const translations & translist2 = dictionary2.at(word);
           translations combined_translations;
           combined_translations.insert(combined_translations.end(), translist1.begin(), translist1.end());
-          auto end = std::remove_if(combined_translations.begin(),
-              combined_translations.end(),
-              [&translist2](const auto &translation)
+          translations unique_translations;
+          std::copy_if(translist2.begin(),
+              translist2.end(),
+              std::back_inserter(unique_translations),
+              [&combined_translations](const std::string & translation)
               {
-                return std::find(translist2.begin(), translist2.end(), translation) != translist2.end();
+                auto find_iter = std::find(combined_translations.begin(),
+                    combined_translations.end(),
+                    translation) 
+                return find_iter == combined_translations.end();
               });
-          combined_translations.erase(end, combined_translations.end());
+          combined_translations.insert(combined_translations.end(), unique_translations.begin(), unique_translations.end());
           dictionary3[word] = combined_translations;
         }
       }
@@ -441,9 +446,9 @@ void litvin::subtractDictionaries(dicts_list_t & list, std::ostream & out, std::
       std::copy_if(dictionary1.begin(),
           dictionary1.end(),
           std::inserter(dictionary3, dictionary3.end()),
-          [&dictionary2](const auto &entry)
+          [&dictionary2](const auto & entry)
           {
-            const std::string &word = entry.first;
+            const std::string & word = entry.first;
             return dictionary2.count(word) == 0;
           });
     }
