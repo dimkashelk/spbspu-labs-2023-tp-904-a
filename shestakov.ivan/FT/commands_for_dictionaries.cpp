@@ -75,9 +75,7 @@ namespace shestakov
     in >> name_1 >> name_2;
     if (!searchDict(dictionaries, name_1) || !searchDict(dictionaries, name_2) || name_1 == name_2)
     {
-      out << "Invalid argument\n";
-      skipUntilNewLine(in);
-      return;
+      throw std::logic_error("Invalid arguments");
     }
     const Dictionary &dict_1 = dictionaries.at(name_1);
     const Dictionary &dict_2 = dictionaries.at(name_2);
