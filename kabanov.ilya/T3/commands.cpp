@@ -77,7 +77,7 @@ double getTriangleArea(
   double p = (ab + bc + ac) / 2;
 
   return std::sqrt(p * (p - ab) * (p - bc) * (p - ac));
-};
+}
 
 double getArea(const kabanov::Polygon& pol)
 {
