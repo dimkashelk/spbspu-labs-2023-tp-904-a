@@ -15,13 +15,13 @@ int main()
     try
     {
       std::string comm = zhukova::inputCommand(std::cin);
-      zhukova::doCommand(texts, encodings, commands, comm, std::cin,std::cout);
+      zhukova::doCommand(texts, encodings, commands, comm, std::cin, std::cout);
     }
-    catch (const std::runtime_error & e)
+    catch (const std::runtime_error& e)
     {
       break;
     }
-    catch (const std::invalid_argument & e)
+    catch (const std::invalid_argument& e)
     {
       std::cout << e.what() << "\n";
     }

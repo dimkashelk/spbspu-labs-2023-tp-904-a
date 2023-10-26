@@ -3,7 +3,7 @@ namespace zhukova
 {
   bool checkBit(char bit)
   {
-    if ((bit != '1') && (bit != '0'))
+    if ((bit != '1')&& (bit != '0'))
     {
       throw std::invalid_argument("<wrong file content>");
     }
@@ -19,7 +19,7 @@ namespace zhukova
     in >> std::noskipws >> DelimiterIO{ ' ' } >> dest.name;
     return in;
   }
-  std::istream & operator>>(std::istream & in, EncodingNode & dest)
+  std::istream& operator>>(std::istream& in, EncodingNode& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -34,7 +34,7 @@ namespace zhukova
     std::transform(code.begin(), code.end(), std::back_inserter(dest.code), checkBit);
     return in;
   }
-  std::istream & operator>>(std::istream & in, Encoding & dest)
+  std::istream& operator>>(std::istream& in, Encoding& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -47,7 +47,7 @@ namespace zhukova
     in >> std::skipws;
     return in;
   }
-  std::ostream & operator<<(std::ostream & out, const EncodingNode & src)
+  std::ostream& operator<<(std::ostream& out, const EncodingNode& src)
   {
     std::ostream::sentry sentry(out);
     if (!sentry)
@@ -56,7 +56,7 @@ namespace zhukova
     }
     iofmtguard fmtguard(out);
     out << src.symbol << " " << src.probability << " ";
-    std::copy(src.code.begin(), src.code.end(), std::ostream_iterator<bool>(out, ""));
+    std::copy(src.code.begin(), src.code.end(), std::ostream_iterator< bool >(out, ""));
     return out;
   }
   std::ostream& operator<<(std::ostream& out, const std::vector<EncodingNode>& src)
@@ -70,7 +70,7 @@ namespace zhukova
     std::copy(src.begin(), src.end(), std::ostream_iterator<EncodingNode>(out, "\n"));
     return out;
   }
-  std::ostream & operator<<(std::ostream & out, const Encoding & src)
+  std::ostream& operator<<(std::ostream& out, const Encoding& src)
   {
     std::ostream::sentry sentry(out);
     if (!sentry)

@@ -26,11 +26,11 @@ namespace zhukova
   };
   const Encoding& checkIfEncodingExists(const EncodingDict& src, const std::string& encodingName);
   bool encodingProbabilityComparator(const EncodingNode& lhs, const EncodingNode& rhs);
-  bool isSameSymbol(const EncodingNode& src, const char& character);
-  bool encodingProbabilityComparator(const EncodingNode & lhs, const EncodingNode & rhs);
+  bool isSameSymbol(const EncodingNode& src, const char character);
+  bool encodingProbabilityComparator(const EncodingNode& lhs, const EncodingNode& rhs);
   void increaseProbability(Encoding& listOfSymbols, std::string& text, char symbol);
-  bool addEncoding(EncodingDict & dest, const std::string & text, const std::string & encodingName);
-  void addBit(EncodingNode & it, bool bit);
+  bool addEncoding(EncodingDict& dest, const std::string& text, const std::string& encodingName);
+  void addBit(EncodingNode& it, bool bit);
   size_t sumProbabilities(const std::vector< EncodingNode >& encoding);
   size_t getProbability(const EncodingNode& node);
   void getCodesOfSymbol(Encoding& encoding,

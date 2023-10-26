@@ -20,52 +20,45 @@ namespace zhukova
     commands.common.insert({"weight", weight});
     return commands;
   }
-  void commandWasSuccessful()
-  {
-    std::cout << "Success\n";
-  }
-  void doCommand(TextDict & texts,
-      EncodingDict & encodings,
-      const CommandSystem & cs,
-      const std::string & command,
-      std::istream & in,
-      std::ostream & out)
+  void doCommand(TextDict& texts,
+      EncodingDict& encodings,
+      const CommandSystem& cs,
+      const std::string& command,
+      std::istream& in,
+      std::ostream& out)
   {
     try
     {
       cs.common.at(command)(in, out);
       return;
     }
-    catch (std::out_of_range & e)
-    {
-    }
+    catch (std::out_of_range& e)
+    {}
     try
     {
       cs.textCommands.at(command)(texts, in, out);
       return;
     }
-    catch (std::out_of_range & e)
-    {
-    }
+    catch (std::out_of_range& e)
+    {}
     try
     {
       cs.encodingCommands.at(command)(encodings, in, out);
       return;
     }
-    catch (std::out_of_range & e)
-    {
-    }
+    catch (std::out_of_range& e)
+    {}
     try
     {
       cs.bothCommands.at(command)(texts, encodings, in, out);
       return;
     }
-    catch (std::out_of_range & e)
+    catch (std::out_of_range& e)
     {
       throw std::invalid_argument("<invalid command>");
     }
   }
-  std::string inputCommand(std::istream & in)
+  std::string inputCommand(std::istream& in)
   {
     std::string command;
     in >> command;

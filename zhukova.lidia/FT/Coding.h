@@ -8,22 +8,11 @@
 #include "Encoding.h"
 namespace zhukova
 {
-  bool isSymbol(const EncodingNode & src, char symbol);
-  void addCharCode(std::string & codedText, size_t & currentByteLeft, char & codedByte, const bool & symbolCode);
-  void codeChar(const Encoding & encoding,
-      char symbol,
-      std::string & codedText,
-      size_t & currentByteLeft,
-      char & codedByte);
-  void codeText(TextDict & srcTexts,
-      EncodingDict & srcEncodings,
-      const TextNode& text,
-      const std::string & codedName,
-      const std::string & encodingName,
-      bool newEncoding);
-  void decodeText(TextDict& srcTexts,
-      Encoding& encoding,
-      const std::string& text,
-      const std::string& decodedName);
+  using str = std::string;
+  bool isSymbol(const EncodingNode& src, char symbol);
+  void addCharCode(str& codedText, size_t& currentByteLeft, char& codedByte, const bool& symbolCode);
+  void codeChar(const Encoding& encoding, char symbol, str& cText, size_t& curByteLeft, char& cByte);
+  void codeText(TextDict& srcT, encodingDict& srcE, const TextNode& text, const str& cName, const str& eName, bool newEnco);
+  void decodeText(TextDict& srcT, encoding& encoding, const str& text, const str& dcName);
 }
 #endif
