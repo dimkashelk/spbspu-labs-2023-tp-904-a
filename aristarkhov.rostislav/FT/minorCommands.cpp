@@ -1,4 +1,4 @@
-#include "minorCommands.hpp"
+#include "minorCommands.h"
 #include <stdexcept>
 #include <limits>
 
