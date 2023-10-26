@@ -1,85 +1,73 @@
-#include "DataStruct.h"
+#include "DataStruct.hpp"
+#include <StructTypes.hpp>
 #include <iomanip>
-#include "iofmtguard.h"
-#include "StructTypes.h"
-
-std::istream & skalisusov::operator>>(std::istream &in, DataStruct &dest)
+std::istream &skalisusov::operator>>(std::istream &in, DataStruct &dest)
 {
-  std::istream::sentry sentry(in);
-  if (!sentry)
+  std::istream::sentry CheckSentry(in);
+  if (!CheckSentry)
   {
     return in;
   }
-  double key1 = 0.0;
-  double key2 = 0.0;
-  std::string key3 = "";
+  DataStruct input;
   {
-    using delim = DelimiterIO;
-    using dublit = DoubleLiteralFormatIO;
+    using sep = DelimiterIO;
     using dubsci = DoubleSciencificFormatI;
+    using dublit = DoubleLiteralFormatIO;
     using str = StringIO;
-    using label = LabelIO;
-    in >> delim{ '(' };
-    in >> delim{ ':' };
-    for (std::size_t i = 1; i <= 3; i++)
+    std::string keyNum = "";
+    in >> sep{'('};
+    in >> sep{':'};
+    for (size_t i = 0; i < 3; i++)
     {
-      std::size_t number = 0;
-      in >> label{"key"};
-      in >> number;
-      if (number == 1)
+      in >> keyNum;
+      if (keyNum == "key1")
       {
-        in >> dublit{ key1 } >> delim{ ':' };
+        in >> dublit {input.key1} >> sep{':'};
       }
-      else if (number == 2)
+      else if (keyNum == "key2" )
       {
-        in >> dubsci{ key2 } >> delim{ ':' };
+        in >> dubsci{input.key2} >> sep{':'};
       }
-      else if (number == 3)
+      else if (keyNum == "key3" )
       {
-        in >> str{ key3 } >> delim{ ':' };
+        in >> str{input.key3} >> sep{':'};
       }
     }
-    in >> delim{')'};
+    in >> sep{')'};
   }
   if (in)
   {
-    dest.key1 = key1;
-    dest.key2 = key2;
-    dest.key3 = key3;
+    dest = input;
   }
   return in;
 }
-std::ostream & skalisusov::operator<<(std::ostream &out, const DataStruct &dest)
+std::ostream &skalisusov::operator<<(std::ostream &out, const DataStruct &dest)
 {
-  std::ostream::sentry sentry(out);
-  if (!sentry)
+  std::ostream::sentry CheckSentry(out);
+  if (!CheckSentry)
   {
     return out;
   }
   iofmtguard iofmtguard(out);
-  using scien = DoubleSciencificFormatO;
   out << "(";
   out << ":key1 " << std::fixed << std::setprecision(1) << dest.key1 << 'd';
-  out << ":key2 " << scien{dest.key2};
+  out << ":key2 " << DoubleSciencificFormatO{dest.key2};
   out << ":key3 " << '"' << dest.key3 << '"';
   out << ":)";
   return out;
 }
-bool skalisusov::comparator(const skalisusov::DataStruct &firDs, const skalisusov::DataStruct &secDs)
+bool skalisusov::comparator(const DataStruct &firDs,const DataStruct &secDs)
 {
-  if (firDs.key1 == secDs.key1)
+  if (firDs.key1 != secDs.key1)
   {
-    if (firDs.key2 == secDs.key2)
-    {
-      return firDs.key3 < secDs.key3;
-    }
-    else
-    {
-      return firDs.key2 < secDs.key2;
-    }
+    return firDs.key1 < secDs.key1;
+  }
+  if (firDs.key1 == secDs.key1 && firDs.key2 != secDs.key2)
+  {
+    return firDs.key2 < secDs.key2;
   }
   else
   {
-    return firDs.key1 < secDs.key1;
+    return  firDs.key3.length() < secDs.key3.length();
   }
 }
