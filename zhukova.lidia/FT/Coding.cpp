@@ -6,10 +6,10 @@ namespace zhukova
     return src.symbol == symbol;
   }
   void codeChar(const Encoding & encoding,
-    char symbol,
-    std::string & codedText,
-    size_t & currentByteLeft,
-    char & codedByte)
+      char symbol,
+      std::string & codedText,
+      size_t & currentByteLeft,
+      char & codedByte)
   {
     using namespace std::placeholders;
     auto symbolIt = std::find_if(encoding.list.begin(), encoding.list.end(), std::bind(isSymbol, _1, symbol));
@@ -84,10 +84,10 @@ namespace zhukova
     return (codedSymbol[codedSymbol.size() - 1] == node.code[codedSymbol.size() - 1]);
   }
   void decodeChar(const std::vector< EncodingNode >& encoding,
-    std::vector< EncodingNode >::const_iterator& dest,
-    std::string& decodedText, char symbol,
-    size_t& bitNumberInSymbol,
-    std::vector<bool> & codedSymbol)
+      std::vector< EncodingNode >::const_iterator& dest,
+      std::string& decodedText, char symbol,
+      size_t& bitNumberInSymbol,
+      std::vector<bool> & codedSymbol)
   {
     using namespace std::placeholders;
     bitNumberInSymbol = 0;
@@ -111,7 +111,8 @@ namespace zhukova
   void decodeText(TextDict& srcTexts,
       Encoding& encoding,
       const std::string& text,
-      const std::string& decodedName) {
+      const std::string& decodedName)
+  {
     std::string decodedText;
     size_t currentBitRead = 0;
     std::vector<bool> codedSymbol;
