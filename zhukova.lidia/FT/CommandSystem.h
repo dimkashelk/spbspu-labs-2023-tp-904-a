@@ -9,7 +9,7 @@
 #include "Encoding.h"
 namespace zhukova
 {
-  using str = std;:string;
+  using str = std::string;
   struct CommandSystem
   {
     std::map< str, void (*)(std::istream& in, std::ostream& out) > common;

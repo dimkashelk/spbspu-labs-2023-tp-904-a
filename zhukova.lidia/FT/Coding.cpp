@@ -102,12 +102,12 @@ namespace zhukova
         throw std::logic_error("<wrong encoding>");
       }
       if ((*dest).code.size() == codedSymbol.size())
-        {
-          decodedText.push_back((*dest).symbol);
-          dest = encoding.begin();
-          codedSymbol.clear();
-        }
+      {
+        decodedText.push_back((*dest).symbol);
+        dest = encoding.begin();
+        codedSymbol.clear();
       }
+    }
   }
   void decodeText(TextDict& srcTexts, Encoding& encoding, const str& text, const str& decodedName)
   {
@@ -132,7 +132,7 @@ namespace zhukova
     }
     catch (const std::logic_error& e)
     {
-      std::cout << e.what();
+      std::cout << e.what() << ''\n';
     }
   }
 }

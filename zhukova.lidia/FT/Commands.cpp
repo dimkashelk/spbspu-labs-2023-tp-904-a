@@ -119,6 +119,8 @@ namespace zhukova
       std::copy_if(srcTexts.dict.begin(), srcTexts.dict.end(), std::back_inserter(temp), trueWasCoded);
       auto getName = std::bind(getTextNameIfEncoding, _1, true);
       std::transform(temp.begin(), temp.end(), std::back_inserter(texts), getName);
+      auto outIt = std::ostream_iterator< std::string >(std::cout, "\n");
+      std::copy(texts.begin(), texts.end(), outIt);
     }
     else
     {
@@ -129,9 +131,9 @@ namespace zhukova
       std::copy_if(srcTexts.dict.begin(), srcTexts.dict.end(), std::back_inserter(temp), wasNotCoded);
       auto getName = std::bind(getTextNameIfEncoding, _1, false);
       std::transform(temp.begin(), temp.end(), std::back_inserter(texts), getName);
+      auto outIt = std::ostream_iterator< std::string >(std::cout, "\n");
+      std::copy(texts.begin(), texts.end(), outIt);
     }
-    auto outIt = std::ostream_iterator< std::string >(std::cout, "\n");
-    std::copy(texts.begin(), texts.end(), outIt);
   }
   void code(TextDict& srcTexts, EncodingDict& srcEncoding, std::istream& in, std::ostream& out)
   {
@@ -172,6 +174,7 @@ namespace zhukova
       lhs.text = lhs.text + rhsTextNode.text;
       return;
     }
+    throw std::invalid_argument("<different encoding>");
   }
   std::string readName(NameIO& src)
   {
@@ -190,7 +193,7 @@ namespace zhukova
     in.clear();
     try
     {
-      TextNode& destText = srcTexts.dict.at(names[0]);
+      TextNode destText = srcTexts.dict.at(names[0]);
       if (destText.isCoded)
       {
         auto concatTextToDest = std::bind(concatText,
@@ -199,6 +202,7 @@ namespace zhukova
             _1,
             destText.encodingName,
             true);
+        std::for_each(names.begin() + 1, names.end(), concatTextToDest);
       }
       else
       {
@@ -208,8 +212,9 @@ namespace zhukova
             _1,
             std::string(),
             false);
+        std::for_each(names.begin() + 1, names.end(), concatTextToDest);
       }
-      std::for_each(names.begin() + 1, names.end(), concatTextToDest);
+      srcTexts.dict.at(names[0]) = destText;
     }
     catch (const std::runtime_error& e)
     {
