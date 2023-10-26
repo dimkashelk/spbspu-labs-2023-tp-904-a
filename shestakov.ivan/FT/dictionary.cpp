@@ -17,7 +17,7 @@ namespace shestakov
     ret_pair.second = pair.first;
     return ret_pair;
   }
-  bool compSet(const std::pair< size_t, std::string > &first, const std::pair< size_t, std::string > &second)
+  bool compSet(const std::pair< std::string, size_t > &first, const std::pair< std::string, size_t > &second)
   {
     return first.second < second.second;
   }
