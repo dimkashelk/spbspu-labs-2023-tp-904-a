@@ -16,7 +16,7 @@ namespace zhukova
     {
       return in;
     }
-    in >> std::noskipws >> DelimiterIO{' ' } >> dest.name;
+    in >> std::noskipws >> DelimiterIO{' '} >> dest.name;
     return in;
   }
   std::istream& operator>>(std::istream& in, EncodingNode& dest)
@@ -27,8 +27,8 @@ namespace zhukova
       return in;
     }
     std::string code;
-    in >> std::noskipws >> dest.symbol >> DelimiterIO{' ' };
-    in >> dest.probability >> DelimiterIO{' ' } >> code >> DelimiterIO{'\n' };
+    in >> std::noskipws >> dest.symbol >> DelimiterIO{' '};
+    in >> dest.probability >> DelimiterIO{' '} >> code >> DelimiterIO{'\n'};
     using namespace std::placeholders;
     dest.code.clear();
     std::transform(code.begin(), code.end(), std::back_inserter(dest.code), checkBit);
@@ -41,7 +41,7 @@ namespace zhukova
     {
       return in;
     }
-    in >> std::noskipws >> dest.sumAmount >> DelimiterIO{'\n' };
+    in >> std::noskipws >> dest.sumAmount >> DelimiterIO{'\n'};
     using in_iter = std::istream_iterator< EncodingNode >;
     std::copy(in_iter(in), in_iter(), std::back_inserter(dest.list));
     in >> std::skipws;
