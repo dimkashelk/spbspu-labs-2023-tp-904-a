@@ -5,7 +5,8 @@
 #include <DelimiterIO.h>
 #include <IOfmtguard.h>
 #include "Encoding.h"
-namespace zhukova{
+namespace zhukova
+{
   struct NameIO
   {
     std::string name = "";

@@ -1,5 +1,6 @@
 #include "TextDict.h"
-namespace zhukova {
+namespace zhukova
+{
   TextNode getTextNode(const TextDict & src, std::string & textName)
   {
     try
