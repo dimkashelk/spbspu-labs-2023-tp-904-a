@@ -9,7 +9,7 @@ namespace zhukova{
   struct NameIO
   {
     std::string name = "";
-  }
+  };
   bool checkBit(char bit);
   std::istream& operator>>(std::istream& in, NameIO& dest);
   std::istream& operator>>(std::istream & in, EncodingNode & dest);

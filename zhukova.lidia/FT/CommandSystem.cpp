@@ -24,9 +24,12 @@ namespace zhukova
   {
     std::cout << "Success\n";
   }
-  void doCommand(TextDict & texts, EncodingDict & encodings,
-                 const CommandSystem & cs, const std::string & command,
-                 std::istream & in, std::ostream & out)
+  void doCommand(TextDict & texts,
+      EncodingDict & encodings,
+      const CommandSystem & cs,
+      const std::string & command,
+      std::istream & in,
+      std::ostream & out)
   {
     try
     {

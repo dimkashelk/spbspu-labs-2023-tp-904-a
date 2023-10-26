@@ -9,7 +9,6 @@ int main()
   setlocale(LC_ALL, "Russian");
   zhukova::TextDict texts;
   zhukova::EncodingDict encodings;
-
   zhukova::CommandSystem commands = zhukova::makeCommandSystem();
   while (!std::cin.eof())
   {

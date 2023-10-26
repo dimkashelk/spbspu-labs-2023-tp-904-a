@@ -6,16 +6,16 @@ namespace zhukova
     return src.symbol == symbol;
   }
   void codeChar(const Encoding & encoding,
-      char symbol,
-      std::string & codedText,
-      size_t & currentByteLeft,
-      char & codedByte)
+    char symbol,
+    std::string & codedText,
+    size_t & currentByteLeft,
+    char & codedByte)
   {
     using namespace std::placeholders;
     auto symbolIt = std::find_if(encoding.list.begin(), encoding.list.end(), std::bind(isSymbol, _1, symbol));
     if (symbolIt == encoding.list.end())
     {
-        throw std::invalid_argument("<ENCODING IS INCORRECT>");
+      throw std::invalid_argument("<ENCODING IS INCORRECT>");
     }
     auto symbolCode = symbolIt->code;
     auto addCode = std::bind(addCharCode,
@@ -54,24 +54,24 @@ namespace zhukova
     using namespace std::placeholders;
     try
     {
-        auto codeCurChar = std::bind(codeChar,
-            encoding,
-            _1,
-            std::ref(codedText),
-            std::ref(currentByteLeft),
-            std::ref(codedByte));
-        std::for_each(text.text.begin(), text.text.end(), codeCurChar);
-        std::vector<bool> lastBits(currentByteLeft, false);
-        auto addCode = std::bind(addCharCode,
-            std::ref(codedText),
-            std::ref(currentByteLeft),
-            std::ref(codedByte),
-            _1);
-        std::for_each(lastBits.begin(), lastBits.end(), addCode);
+      auto codeCurChar = std::bind(codeChar,
+          encoding,
+          _1,
+          std::ref(codedText),
+          std::ref(currentByteLeft),
+          std::ref(codedByte));
+      std::for_each(text.text.begin(), text.text.end(), codeCurChar);
+      std::vector<bool> lastBits(currentByteLeft, false);
+      auto addCode = std::bind(addCharCode,
+          std::ref(codedText),
+          std::ref(currentByteLeft),
+          std::ref(codedByte),
+          _1);
+      std::for_each(lastBits.begin(), lastBits.end(), addCode);
     }
     catch (const std::invalid_argument& e)
     {
-        throw std::invalid_argument("< " + encodingName + " is incorrect>");
+      throw std::invalid_argument("< " + encodingName + " is incorrect>");
     }
     TextNode coded = TextNode();
     coded.isCoded = 1;
@@ -81,31 +81,31 @@ namespace zhukova
   }
   bool isBitOnPlace(const EncodingNode & node, std::vector<bool>& codedSymbol)
   {
-      return (codedSymbol[codedSymbol.size() - 1] == node.code[codedSymbol.size() - 1]);
+    return (codedSymbol[codedSymbol.size() - 1] == node.code[codedSymbol.size() - 1]);
   }
   void decodeChar(const std::vector< EncodingNode >& encoding,
-      std::vector< EncodingNode >::const_iterator& dest,
-      std::string& decodedText, char symbol,
-      size_t& bitNumberInSymbol,
-      std::vector<bool> & codedSymbol)
+    std::vector< EncodingNode >::const_iterator& dest,
+    std::string& decodedText, char symbol,
+    size_t& bitNumberInSymbol,
+    std::vector<bool> & codedSymbol)
   {
-      using namespace std::placeholders;
-      bitNumberInSymbol = 0;
-      while ((bitNumberInSymbol < 8) && (*dest).code.size() > codedSymbol.size())
+    using namespace std::placeholders;
+    bitNumberInSymbol = 0;
+    while ((bitNumberInSymbol < 8) && (*dest).code.size() > codedSymbol.size())
+    {
+      bool bit = symbol & static_cast<char>(std::pow(2, 7-bitNumberInSymbol++));
+      codedSymbol.push_back(bit);
+      dest = std::find_if(dest, encoding.end(), std::bind(isBitOnPlace, _1, std::ref(codedSymbol)));
+      if (dest == encoding.end())
       {
-          bool bit = symbol & static_cast<char>(std::pow(2, 7-bitNumberInSymbol++));
-          codedSymbol.push_back(bit);
-          dest = std::find_if(dest, encoding.end(), std::bind(isBitOnPlace, _1, std::ref(codedSymbol)));
-          if (dest == encoding.end())
-          {
-              throw std::logic_error("<wrong encoding>");
-          }
-          if ((*dest).code.size() == codedSymbol.size())
-          {
-              decodedText.push_back((*dest).symbol);
-              dest = encoding.begin();
-              codedSymbol.clear();
-          }
+        throw std::logic_error("<wrong encoding>");
+      }
+      if ((*dest).code.size() == codedSymbol.size())
+        {
+          decodedText.push_back((*dest).symbol);
+          dest = encoding.begin();
+          codedSymbol.clear();
+        }
       }
   }
   void decodeText(TextDict& srcTexts,
@@ -120,12 +120,12 @@ namespace zhukova
     try
     {
       auto decodeCurChar = std::bind(decodeChar,
-            std::ref(encoding.list),
-            std::ref(dest),
-            std::ref(decodedText),
-            _1,
-            std::ref(currentBitRead),
-            std::ref(codedSymbol));
+          std::ref(encoding.list),
+          std::ref(dest),
+          std::ref(decodedText),
+          _1,
+          std::ref(currentBitRead),
+          std::ref(codedSymbol));
       std::for_each(text.begin(), text.end(), decodeCurChar);
       TextNode newText = TextNode();
       newText.text = decodedText;
