@@ -5,14 +5,14 @@ namespace zhukova
   {
     out << "help\n";
     out << "load <text> <filename>\n";
-    out << "getEncoding <encoding> <text>\n";
-    out << "saveEncoding <filename> <encoding>\n";
-    out << "loadEncoding <encoding> <filename>\n";
+    out << "getEncoding < Encoding > <text>\n";
+    out << "saveEncoding <filename> < Encoding >\n";
+    out << "loadEncoding < Encoding > <filename>\n";
     out << "codedWith\n";
-    out << "codedWith <encoding>\n";
-    out << "code <text> <coded-text> <encoding>\n";
-    out << "codeWith <text> <coded-text> <encoding>\n";
-    out << "decode <coded-text> <text> <encoding>\n";
+    out << "codedWith < Encoding >\n";
+    out << "code <text> <coded-text> < Encoding >\n";
+    out << "codeWith <text> <coded-text> < Encoding >\n";
+    out << "decode <coded-text> <text> < Encoding >\n";
     out << "concat <text-1> <text-2> ... <text-n> <dest-text>\n";
     out << "concat <coded-text-1> <coded-text-2> ... <coded-text-n> <dest-text>\n";
     out << "save <filename> <text>\n";

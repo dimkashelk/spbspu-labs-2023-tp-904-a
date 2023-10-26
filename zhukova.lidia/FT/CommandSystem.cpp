@@ -9,7 +9,7 @@ namespace zhukova
     commands.textCommands.insert({"load", loadText});
     commands.bothCommands.insert({"getEncoding", getEncoding});
     commands.encodingCommands.insert({"saveEncoding", saveEncoding});
-    commands.encodingCommands.insert({ "loadEncoding", loadEncoding });
+    commands.encodingCommands.insert({"loadEncoding", loadEncoding });
     commands.bothCommands.insert({"codedWith", codedWith});
     commands.bothCommands.insert({"code", code});
     commands.bothCommands.insert({"codeWith", codeWith});

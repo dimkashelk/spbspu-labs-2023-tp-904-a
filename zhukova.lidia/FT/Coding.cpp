@@ -94,7 +94,7 @@ namespace zhukova
     bitNumberInSymbol = 0;
     while ((bitNumberInSymbol < 8)&& (*dest).code.size() > codedSymbol.size())
     {
-      bool bit = symbol& static_cast<char>(std::pow(2, 7 - bitNumberInSymbol++));
+      bool bit = symbol& static_cast< char >(std::pow(2, 7 - bitNumberInSymbol++));
       codedSymbol.push_back(bit);
       dest = std::find_if(dest, encoding.end(), std::bind(isBitOnPlace, _1, std::ref(codedSymbol)));
       if (dest == encoding.end())
