@@ -3,21 +3,6 @@
 #include <iostream>
 namespace zhukova
 {
-  std::istream & operator>>(std::istream & in, DelimiterIO && dest)
-  {
-    std::istream::sentry sentry(in);
-    if (!sentry)
-    {
-      return in;
-    }
-    char c = '\0';
-    in >> c;
-    if (in && (c != dest.value))
-    {
-      in.setstate(std::ios::failbit);
-    }
-    return in;
-  }
   std::istream & operator>>(std::istream & in, ComplexIO && dest)
   {
     std::istream::sentry sentry(in);
@@ -149,18 +134,5 @@ namespace zhukova
     out << ":key3 \"" << src.key3 << '\"';
     out << ":)";
     return out;
-  }
-  iofmtguard::iofmtguard(std::basic_ios< char > & s):
-    s_(s),
-    fill_(s.fill()),
-    precision_(s.precision()),
-    fmt_(s.flags())
-  {
-  }
-  iofmtguard::~iofmtguard()
-  {
-    s_.fill(fill_);
-    s_.precision(precision_);
-    s_.flags(fmt_);
   }
 }

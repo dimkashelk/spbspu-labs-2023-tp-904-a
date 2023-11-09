@@ -3,13 +3,11 @@
 #include <string>
 #include <complex>
 #include <iomanip>
+#include <DelimiterIO.h>
+#include <IOfmtguard.h>
 #include "DataStruct.h"
 namespace zhukova
 {
-  struct DelimiterIO
-  {
-    char value;
-  };
   struct LabelIO
   {
     std::string value;
@@ -26,18 +24,6 @@ namespace zhukova
   {
     std::string & value;
   };
-  class iofmtguard
-  {
-   public:
-    iofmtguard(std::basic_ios< char > & s);
-    ~iofmtguard();
-   private:
-    std::basic_ios< char > & s_;
-    char fill_;
-    std::streamsize precision_;
-    std::basic_ios< char >::fmtflags fmt_;
-  };
-  std::istream & operator>>(std::istream & in, DelimiterIO && dest);
   std::istream & operator>>(std::istream & in, ComplexIO && dest);
   std::istream & operator>>(std::istream & in, RationalIO && dest);
   std::istream & operator>>(std::istream & in, StringIO && dest);
